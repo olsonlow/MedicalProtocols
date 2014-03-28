@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
+		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
+		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
+		A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A324B2DD18E24A4600261C57 /* InfoPlist.strings */; };
+		A324B2E118E24A4600261C57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B2E018E24A4600261C57 /* main.m */; };
+		A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B2E418E24A4600261C57 /* AppDelegate.m */; };
+		A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A324B2E618E24A4600261C57 /* Main_iPhone.storyboard */; };
+		A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A324B2E918E24A4600261C57 /* Main_iPad.storyboard */; };
+		A324B2F318E24A4600261C57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A324B2F218E24A4600261C57 /* Images.xcassets */; };
+		A324B2FA18E24A4600261C57 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2F918E24A4600261C57 /* XCTest.framework */; };
+		A324B2FB18E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
+		A324B2FC18E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
+		A324B30418E24A4600261C57 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A324B30218E24A4600261C57 /* InfoPlist.strings */; };
+		A324B30618E24A4600261C57 /* MedicalProtocolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B30518E24A4600261C57 /* MedicalProtocolsTests.m */; };
+		A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */; };
+		A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */; };
+		A324B32718E4E08000261C57 /* Protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32618E4E08000261C57 /* Protocol.m */; };
+		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A324B2FD18E24A4600261C57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A324B2C918E24A4600261C57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A324B2D018E24A4600261C57;
+			remoteInfo = MedicalProtocols;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A324B2D818E24A4600261C57 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A324B2DC18E24A4600261C57 /* MedicalProtocols-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MedicalProtocols-Info.plist"; sourceTree = "<group>"; };
+		A324B2DE18E24A4600261C57 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A324B2E018E24A4600261C57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A324B2E218E24A4600261C57 /* MedicalProtocols-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MedicalProtocols-Prefix.pch"; sourceTree = "<group>"; };
+		A324B2E318E24A4600261C57 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A324B2E418E24A4600261C57 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A324B2E718E24A4600261C57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		A324B2EA18E24A4600261C57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		A324B2F218E24A4600261C57 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A324B2F818E24A4600261C57 /* MedicalProtocolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedicalProtocolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A324B2F918E24A4600261C57 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A324B30118E24A4600261C57 /* MedicalProtocolsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MedicalProtocolsTests-Info.plist"; sourceTree = "<group>"; };
+		A324B30318E24A4600261C57 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A324B30518E24A4600261C57 /* MedicalProtocolsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedicalProtocolsTests.m; sourceTree = "<group>"; };
+		A324B31D18E4D29000261C57 /* ProtocolMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolMasterViewController.h; sourceTree = "<group>"; };
+		A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolMasterViewController.m; sourceTree = "<group>"; };
+		A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDetailViewController.h; sourceTree = "<group>"; };
+		A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDetailViewController.m; sourceTree = "<group>"; };
+		A324B32518E4E08000261C57 /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
+		A324B32618E4E08000261C57 /* Protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Protocol.m; sourceTree = "<group>"; };
+		A324B32818E4E4E000261C57 /* ProtocolDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDataController.h; sourceTree = "<group>"; };
+		A324B32918E4E4E000261C57 /* ProtocolDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDataController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A324B2CE18E24A4600261C57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */,
+				A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */,
+				A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A324B2F518E24A4600261C57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B2FA18E24A4600261C57 /* XCTest.framework in Frameworks */,
+				A324B2FC18E24A4600261C57 /* UIKit.framework in Frameworks */,
+				A324B2FB18E24A4600261C57 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A324B2C818E24A4600261C57 = {
+			isa = PBXGroup;
+			children = (
+				A324B2DA18E24A4600261C57 /* MedicalProtocols */,
+				A324B2FF18E24A4600261C57 /* MedicalProtocolsTests */,
+				A324B2D318E24A4600261C57 /* Frameworks */,
+				A324B2D218E24A4600261C57 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A324B2D218E24A4600261C57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A324B2D118E24A4600261C57 /* MedicalProtocols.app */,
+				A324B2F818E24A4600261C57 /* MedicalProtocolsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A324B2D318E24A4600261C57 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A324B2D418E24A4600261C57 /* Foundation.framework */,
+				A324B2D618E24A4600261C57 /* CoreGraphics.framework */,
+				A324B2D818E24A4600261C57 /* UIKit.framework */,
+				A324B2F918E24A4600261C57 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A324B2DA18E24A4600261C57 /* MedicalProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				A324B31118E24ADB00261C57 /* Data */,
+				A324B31018E24AD200261C57 /* MasterViews */,
+				A324B30F18E24AC600261C57 /* DetailViews */,
+				A324B2E318E24A4600261C57 /* AppDelegate.h */,
+				A324B2E418E24A4600261C57 /* AppDelegate.m */,
+				A324B2E618E24A4600261C57 /* Main_iPhone.storyboard */,
+				A324B2E918E24A4600261C57 /* Main_iPad.storyboard */,
+				A324B2F218E24A4600261C57 /* Images.xcassets */,
+				A324B2DB18E24A4600261C57 /* Supporting Files */,
+			);
+			path = MedicalProtocols;
+			sourceTree = "<group>";
+		};
+		A324B2DB18E24A4600261C57 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A324B32B18E4EA5C00261C57 /* DataFiles */,
+				A324B2DC18E24A4600261C57 /* MedicalProtocols-Info.plist */,
+				A324B2DD18E24A4600261C57 /* InfoPlist.strings */,
+				A324B2E018E24A4600261C57 /* main.m */,
+				A324B2E218E24A4600261C57 /* MedicalProtocols-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A324B2FF18E24A4600261C57 /* MedicalProtocolsTests */ = {
+			isa = PBXGroup;
+			children = (
+				A324B30518E24A4600261C57 /* MedicalProtocolsTests.m */,
+				A324B30018E24A4600261C57 /* Supporting Files */,
+			);
+			path = MedicalProtocolsTests;
+			sourceTree = "<group>";
+		};
+		A324B30018E24A4600261C57 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A324B30118E24A4600261C57 /* MedicalProtocolsTests-Info.plist */,
+				A324B30218E24A4600261C57 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A324B30F18E24AC600261C57 /* DetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */,
+				A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */,
+			);
+			name = DetailViews;
+			sourceTree = "<group>";
+		};
+		A324B31018E24AD200261C57 /* MasterViews */ = {
+			isa = PBXGroup;
+			children = (
+				A324B31D18E4D29000261C57 /* ProtocolMasterViewController.h */,
+				A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */,
+			);
+			name = MasterViews;
+			sourceTree = "<group>";
+		};
+		A324B31118E24ADB00261C57 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A324B32818E4E4E000261C57 /* ProtocolDataController.h */,
+				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
+				A324B32518E4E08000261C57 /* Protocol.h */,
+				A324B32618E4E08000261C57 /* Protocol.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		A324B32B18E4EA5C00261C57 /* DataFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DataFiles;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A324B2D018E24A4600261C57 /* MedicalProtocols */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A324B30918E24A4600261C57 /* Build configuration list for PBXNativeTarget "MedicalProtocols" */;
+			buildPhases = (
+				A324B2CD18E24A4600261C57 /* Sources */,
+				A324B2CE18E24A4600261C57 /* Frameworks */,
+				A324B2CF18E24A4600261C57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MedicalProtocols;
+			productName = MedicalProtocols;
+			productReference = A324B2D118E24A4600261C57 /* MedicalProtocols.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A324B2F718E24A4600261C57 /* MedicalProtocolsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A324B30C18E24A4600261C57 /* Build configuration list for PBXNativeTarget "MedicalProtocolsTests" */;
+			buildPhases = (
+				A324B2F418E24A4600261C57 /* Sources */,
+				A324B2F518E24A4600261C57 /* Frameworks */,
+				A324B2F618E24A4600261C57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A324B2FE18E24A4600261C57 /* PBXTargetDependency */,
+			);
+			name = MedicalProtocolsTests;
+			productName = MedicalProtocolsTests;
+			productReference = A324B2F818E24A4600261C57 /* MedicalProtocolsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A324B2C918E24A4600261C57 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Luke Vergos";
+				TargetAttributes = {
+					A324B2F718E24A4600261C57 = {
+						TestTargetID = A324B2D018E24A4600261C57;
+					};
+				};
+			};
+			buildConfigurationList = A324B2CC18E24A4600261C57 /* Build configuration list for PBXProject "MedicalProtocols" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A324B2C818E24A4600261C57;
+			productRefGroup = A324B2D218E24A4600261C57 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A324B2D018E24A4600261C57 /* MedicalProtocols */,
+				A324B2F718E24A4600261C57 /* MedicalProtocolsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A324B2CF18E24A4600261C57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
+				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
+				A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */,
+				A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A324B2F618E24A4600261C57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B30418E24A4600261C57 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A324B2CD18E24A4600261C57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
+				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
+				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
+				A324B2E118E24A4600261C57 /* main.m in Sources */,
+				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
+				A324B32718E4E08000261C57 /* Protocol.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A324B2F418E24A4600261C57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A324B30618E24A4600261C57 /* MedicalProtocolsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A324B2FE18E24A4600261C57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A324B2D018E24A4600261C57 /* MedicalProtocols */;
+			targetProxy = A324B2FD18E24A4600261C57 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A324B2DD18E24A4600261C57 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A324B2DE18E24A4600261C57 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A324B2E618E24A4600261C57 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A324B2E718E24A4600261C57 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		A324B2E918E24A4600261C57 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A324B2EA18E24A4600261C57 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		A324B30218E24A4600261C57 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A324B30318E24A4600261C57 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A324B30718E24A4600261C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A324B30818E24A4600261C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A324B30A18E24A4600261C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MedicalProtocols/MedicalProtocols-Prefix.pch";
+				INFOPLIST_FILE = "MedicalProtocols/MedicalProtocols-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A324B30B18E24A4600261C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MedicalProtocols/MedicalProtocols-Prefix.pch";
+				INFOPLIST_FILE = "MedicalProtocols/MedicalProtocols-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A324B30D18E24A4600261C57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MedicalProtocols.app/MedicalProtocols";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MedicalProtocols/MedicalProtocols-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MedicalProtocolsTests/MedicalProtocolsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A324B30E18E24A4600261C57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MedicalProtocols.app/MedicalProtocols";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MedicalProtocols/MedicalProtocols-Prefix.pch";
+				INFOPLIST_FILE = "MedicalProtocolsTests/MedicalProtocolsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A324B2CC18E24A4600261C57 /* Build configuration list for PBXProject "MedicalProtocols" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A324B30718E24A4600261C57 /* Debug */,
+				A324B30818E24A4600261C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A324B30918E24A4600261C57 /* Build configuration list for PBXNativeTarget "MedicalProtocols" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A324B30A18E24A4600261C57 /* Debug */,
+				A324B30B18E24A4600261C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A324B30C18E24A4600261C57 /* Build configuration list for PBXNativeTarget "MedicalProtocolsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A324B30D18E24A4600261C57 /* Debug */,
+				A324B30E18E24A4600261C57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A324B2C918E24A4600261C57 /* Project object */;
+}
