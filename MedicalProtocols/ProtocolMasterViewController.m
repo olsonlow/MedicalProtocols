@@ -37,15 +37,15 @@
     //testObject[@"foo"] = @"bar";
     //[testObject saveInBackground];
    
-    PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
+    PFObject *patientObject2 = [PFObject objectWithClassName:@"patientObject"];
     
-    patientObject[@"id"] = @"0001";
-    patientObject[@"FNAME"] = @"Zach";
-    patientObject[@"LNAME"] = @"Dahlgren";
-    patientObject[@"age"] = @"22";
-    patientObject[@"address"] = @"123 Easy Street";
-    [patientObject saveInBackground];
-    NSString *idList = [patientObject valueForKey:@"id"];
+    patientObject2[@"id"] = @"0001";
+    patientObject2[@"FNAME"] = @"Zach";
+    patientObject2[@"LNAME"] = @"Dahlgren";
+    patientObject2[@"age"] = @"22";
+    patientObject2[@"address"] = @"123 Easy Street";
+    [patientObject2 saveInBackground];
+    NSString *idList = [patientObject2 valueForKey:@"id"];
     PFQuery *patientQuery = [PFQuery queryWithClassName:@"patientObject"];
    [patientQuery whereKey:@"id" equalTo:idList];
     PFObject *patientProtocolObject = [PFObject objectWithClassName:@"patientProtocols"];
