@@ -33,10 +33,25 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    //testObject[@"foo"] = @"bar";
+    //[testObject saveInBackground];
+   
+    PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
     
+    patientObject[@"id"] = @"0001";
+    patientObject[@"FNAME"] = @"Zach";
+    patientObject[@"LNAME"] = @"Dahlgren";
+    patientObject[@"age"] = @"22";
+    patientObject[@"address"] = @"123 Easy Street";
+    [patientObject saveInBackground];
+    NSString *idList = [patientObject valueForKey:@"id"];
+    PFQuery *patientQuery = [PFQuery queryWithClassName:@"patientObject"];
+   [patientQuery whereKey:@"id" equalTo:idList];
+    PFObject *patientProtocolObject = [PFObject objectWithClassName:@"patientProtocols"];
+    patientProtocolObject[@"pID"]=idList;
+    [patientProtocolObject saveInBackground];
+
     //Navigation Button Items removed
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
