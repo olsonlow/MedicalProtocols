@@ -20,7 +20,14 @@
     self = [super init];
     
     if (self) {
+        PFObject *componentObject = [PFObject objectWithClassName:@"TextBlock"];
         
+        PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
+        
+        stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
+        stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
+        stepObject[@"Components"] = [];
+        [stepObject saveInBackground];
         
     }
     return self;
