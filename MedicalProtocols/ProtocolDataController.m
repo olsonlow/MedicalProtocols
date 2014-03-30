@@ -9,6 +9,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
+
 @interface ProtocolDataController()
 @property(nonatomic,strong) NSMutableArray* protocols;
 
@@ -20,7 +21,14 @@
     self = [super init];
     
     if (self) {
-        //
+        _protocols = [[NSMutableArray alloc] init];
+        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+            for (PFObject* parseProtocol in results) {
+                [_protocols addObject:[[MedProtocol alloc] initWithName:parseProtocol[@"name"] steps:parseProtocol[@"steps"]]];
+            }
+        }];
+        
 //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
 //        protocol[@"name"] = @"Atrial Fibrillation";
 //        
@@ -43,7 +51,7 @@
 //        selectionComponent[@"choiceB"] = @"F";
 //        PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
 //        selectionComponent2[@"label"] = @"EF(%)";
-//        formNumberComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
+//        selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
 //        PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
 //        selectionComponent3[@"label"] = @"PM";
 //        selectionComponent3[@"choiceA"] = @"Y";
@@ -58,9 +66,10 @@
 //        stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
 //        stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
 //        stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
-//        [stepObject saveInBackground];
-//        
+//
 //        protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
+//        
+//        [protocol saveInBackground];
         
     }
     return self;

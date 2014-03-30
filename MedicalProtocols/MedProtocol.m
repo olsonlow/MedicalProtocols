@@ -7,7 +7,34 @@
 //
 
 #import "MedProtocol.h"
+#import <Parse/Parse.h>
+#import "ProtocolStep.h"
+
+@interface MedProtocol()
+@property (nonatomic,strong) NSMutableArray* steps;
+
+@end
 
 @implementation MedProtocol
+- (id)initWithName:(NSString*)name steps:(NSMutableArray*)steps
+{
+    self = [super init];
+    if (self) {
+        _name = name;
+        _steps = steps;
+    }
+    return self;
+}
 
+-(id)initWithParseObject:(PFObject*)parseObject{
+    self = [super init];
+    if (self) {
+        _name = parseObject[@"name"];
+        _steps = [[NSMutableArray alloc] init];
+        [parseObject[@"steps"] enumerateObjectsUsingBlock:^(id parseStepObject,NSUInteger index, BOOL *stop){
+            [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
+        }];
+    }
+    return self;
+}
 @end
