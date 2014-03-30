@@ -35,12 +35,12 @@
     
     
     //This object is specifically for testing connectivity to the parse database  LDO
-    PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
-    patientObject[@"LName"] = @"Johnson";
-    patientObject[@"FName"] = @"Davie";
-    patientObject[@"AddressLine1"] = @"2112 Boulder Creek Lane";
-    patientObject[@"AddressLine2"] = @"Rohnert Park CA, 99922";
-    [patientObject saveInBackground];
+//    PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
+//    patientObject[@"LName"] = @"Johnson";
+//    patientObject[@"FName"] = @"Davie";
+//    patientObject[@"AddressLine1"] = @"2112 Boulder Creek Lane";
+//    patientObject[@"AddressLine2"] = @"Rohnert Park CA, 99922";
+//    [patientObject saveInBackground];
     
     //Navigation Button Items removed
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
