@@ -22,7 +22,7 @@
     if (self) {
         PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         textBlockObject[@"title"] = @"AFIB Anticoagulation";
-        textBlockObject[@"printable"] = NO;
+        textBlockObject[@"printable"] = [NSNumber numberWithBool: NO];
         
         PFObject *component= [PFObject objectWithClassName:@"Component"];
         component[@"color"] = @"0, 214, 132";
