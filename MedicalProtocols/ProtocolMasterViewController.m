@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.protocolDataController = [[ProtocolDataController alloc] init];
 	// Do any additional setup after loading the view, typically from a nib.
     
     
