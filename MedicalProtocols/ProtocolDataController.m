@@ -60,7 +60,7 @@
         stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
         
         protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
-                [protocol saveInBackground];
+        [protocol saveInBackground];
     }
     return self;
 }
