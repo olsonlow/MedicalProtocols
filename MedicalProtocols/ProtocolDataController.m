@@ -27,6 +27,13 @@
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
         protocol[@"name"] = @"Atrial Fibrillation";
         
+        PFFile *userImageFile = protocol[@"protocolImage"];
+        [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:imageData];
+            }
+        }];
+        
 //        PFObject *component= [PFObject objectWithClassName:@"Component"];
 //        component[@"color"] = @"0, 214, 132";
         
