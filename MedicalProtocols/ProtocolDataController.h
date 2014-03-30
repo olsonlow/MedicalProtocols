@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class MedProtocol;
 @interface ProtocolDataController : NSObject
 
 -(int)countProtocols;
--(Protocol*)protocolAtIndex:(int)index;
+-(MedProtocol*)protocolAtIndex:(int)index;
 
 @end

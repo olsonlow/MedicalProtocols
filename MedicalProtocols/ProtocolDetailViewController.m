@@ -7,7 +7,7 @@
 //
 
 #import "ProtocolDetailViewController.h"
-
+#import "MedProtocol.h"
 @interface ProtocolDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
@@ -17,7 +17,7 @@
 
 #pragma mark - Managing the detail item
 
--(void)setProtocol:(Protocol *)protocol{
+-(void)setProtocol:(MedProtocol *)protocol{
     if (_protocol != protocol) {
         _protocol = protocol;
         
