@@ -40,6 +40,7 @@
 		A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */; };
 		A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */; };
 		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
+		A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */; };
 		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,8 @@
 		A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDetailViewController.m; sourceTree = "<group>"; };
 		A324B32818E4E4E000261C57 /* ProtocolDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDataController.h; sourceTree = "<group>"; };
 		A324B32918E4E4E000261C57 /* ProtocolDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDataController.m; sourceTree = "<group>"; };
+		A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolStep.h; sourceTree = "<group>"; };
+		A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolStep.m; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,6 +273,8 @@
 				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
 				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
 				A3FA341318E8AEBA000D64F8 /* MedProtocol.m */,
+				A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */,
+				A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */,
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
