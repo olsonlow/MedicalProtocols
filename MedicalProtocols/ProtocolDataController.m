@@ -20,6 +20,9 @@
     self = [super init];
     
     if (self) {
+        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        textBlockObject[@"title"] = @"AFIB Anticoagulation";
+        textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
         
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
         protocol[@"name"] = @"Atrial Fibrillation";
@@ -27,9 +30,6 @@
 //        PFObject *component= [PFObject objectWithClassName:@"Component"];
 //        component[@"color"] = @"0, 214, 132";
         
-        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
-        textBlockObject[@"title"] = @"AFIB Anticoagulation";
-        textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
         
         PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
         
