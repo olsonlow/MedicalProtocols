@@ -5,7 +5,7 @@
 //  Created by Luke Vergos on 27/03/14.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
-
+#import <Parse/Parse.h>
 #import "ProtocolMasterViewController.h"
 #import "ProtocolDetailViewController.h"
 #import "ProtocolDataController.h"
@@ -33,10 +33,20 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    
+    //This object is specifically for testing connectivity to the parse database  LDO
+//    PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
+//    patientObject[@"LName"] = @"Johnson";
+//    patientObject[@"FName"] = @"Davie";
+//    patientObject[@"AddressLine1"] = @"2112 Boulder Creek Lane";
+//    patientObject[@"AddressLine2"] = @"Rohnert Park CA, 99922";
+//    [patientObject saveInBackground];
+    
     //Navigation Button Items removed
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     //self.navigationItem.rightBarButtonItem = addButton;
+
     self.detailViewController = (ProtocolDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -64,6 +74,7 @@
     
     Protocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
     cell.textLabel.text = protocol.name;
+    
     return cell;
 }
 
