@@ -20,10 +20,15 @@
     self = [super init];
     
     if (self) {
-        PFObject *componentObject = [PFObject objectWithClassName:@"TextBlock"];
+        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        textBlockObject[@"title"] = @"AFIB Anticoagulation";
+        textBlockObject[@"printable"] = NO;
+        
+        PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
+        linkObject[@"label"] = @"Calculator link";
+        linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
         
         PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
-        
         stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
         stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
         stepObject[@"Components"] = [];
