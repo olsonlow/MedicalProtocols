@@ -20,17 +20,26 @@
     self = [super init];
     
     if (self) {
+        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        textBlockObject[@"title"] = @"AFIB Anticoagulation";
+        textBlockObject[@"printable"] = NO;
+        
         PFObject *component= [PFObject objectWithClassName:@"Component"];
         component[@"color"] = @"0, 214, 132";
         PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
         PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
         PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
-        
-        formComponent[@"fields"] =
+        formNumberComponent[@"label"] = @"Age";
+        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
+        PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
+        formNumberComponent[@"label"] = @"Age";
+        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
         
         PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
         linkObject[@"label"] = @"Calculator link";
         linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
+        
+        formComponent[@"fields"] =
         
         PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
         stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
