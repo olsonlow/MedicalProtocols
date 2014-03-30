@@ -36,7 +36,7 @@
     
     //This object is specifically for testing connectivity to the parse database  LDO
     PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
-    patientObject[@"LName"] = @"Jones";
+    patientObject[@"LName"] = @"Johnson";
     patientObject[@"FName"] = @"Davie";
     patientObject[@"AddressLine1"] = @"2112 Boulder Creek Lane";
     patientObject[@"AddressLine2"] = @"Rohnert Park CA, 99922";
