@@ -20,13 +20,17 @@
     self = [super init];
     
     if (self) {
+        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        textBlockObject[@"title"] = @"AFIB Anticoagulation";
+        textBlockObject[@"printable"] = NO;
+        
         PFObject *component= [PFObject objectWithClassName:@"Component"];
         component[@"color"] = @"0, 214, 132";
         PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
         PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
         PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
         
-        formComponent[@"fields"] =
+        //formComponent[@"fields"] =
         
         PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
         linkObject[@"label"] = @"Calculator link";
@@ -35,7 +39,7 @@
         PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
         stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
         stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
-        stepObject[@"Components"] = [NSArray arrayWithObjects:calculatorComponent, nil];
+        stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
         [stepObject saveInBackground];
         
     }
