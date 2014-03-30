@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Protocol : NSObject
+@interface MedProtocol : NSObject
 @property(nonatomic, copy) NSString* name;
 
 @end

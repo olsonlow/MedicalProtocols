@@ -26,7 +26,7 @@
         PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
         PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
         
-        formComponent[@"fields"] =
+        //formComponent[@"fields"] =
         
         PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
         linkObject[@"label"] = @"Calculator link";
@@ -35,7 +35,7 @@
         PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
         stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
         stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
-        stepObject[@"Components"] = [];
+        //stepObject[@"Components"] = [];
         [stepObject saveInBackground];
         
     }
