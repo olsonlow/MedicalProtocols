@@ -7,6 +7,7 @@
 //
 
 #import "ProtocolDataController.h"
+#import "MedProtocol.h"
 @interface ProtocolDataController()
 @property(nonatomic,strong) NSMutableArray* protocols;
 
@@ -22,7 +23,7 @@
 -(int)countProtocols{
     return [self.protocols count];
 }
--(Protocol*)protocolAtIndex:(int)index{
+-(MedProtocol*)protocolAtIndex:(int)index{
     return [self.protocols objectAtIndex:index];
 }
 @end
