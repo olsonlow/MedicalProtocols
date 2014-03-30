@@ -17,6 +17,12 @@
 		360ABCF218E6129F004C815D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF118E6129F004C815D /* Security.framework */; };
 		360ABCF418E612AA004C815D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF318E612AA004C815D /* StoreKit.framework */; };
 		360ABCF618E612B5004C815D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF518E612B5004C815D /* SystemConfiguration.framework */; };
+		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
+		89C6501018E8DCFD004553E9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500618E8DCFD004553E9 /* FMDatabase.m */; };
+		89C6501118E8DCFD004553E9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */; };
+		89C6501218E8DCFD004553E9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500A18E8DCFD004553E9 /* FMDatabasePool.m */; };
+		89C6501318E8DCFD004553E9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500C18E8DCFD004553E9 /* FMDatabaseQueue.m */; };
+		89C6501418E8DCFD004553E9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500F18E8DCFD004553E9 /* FMResultSet.m */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
 		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
@@ -58,6 +64,18 @@
 		360ABCF118E6129F004C815D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		360ABCF318E612AA004C815D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		360ABCF518E612B5004C815D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		89C6500518E8DCFD004553E9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		89C6500618E8DCFD004553E9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		89C6500718E8DCFD004553E9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		89C6500918E8DCFD004553E9 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		89C6500A18E8DCFD004553E9 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		89C6500B18E8DCFD004553E9 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		89C6500C18E8DCFD004553E9 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		89C6500D18E8DCFD004553E9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		89C6500E18E8DCFD004553E9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		89C6500F18E8DCFD004553E9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */,
 				360ABCF618E612B5004C815D /* SystemConfiguration.framework in Frameworks */,
 				360ABCF418E612AA004C815D /* StoreKit.framework in Frameworks */,
 				360ABCF218E6129F004C815D /* Security.framework in Frameworks */,
@@ -120,6 +139,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		89C64FFF18E8DB06004553E9 /* LocalDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				89C6500518E8DCFD004553E9 /* FMDatabase.h */,
+				89C6500618E8DCFD004553E9 /* FMDatabase.m */,
+				89C6500718E8DCFD004553E9 /* FMDatabaseAdditions.h */,
+				89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */,
+				89C6500918E8DCFD004553E9 /* FMDatabasePool.h */,
+				89C6500A18E8DCFD004553E9 /* FMDatabasePool.m */,
+				89C6500B18E8DCFD004553E9 /* FMDatabaseQueue.h */,
+				89C6500C18E8DCFD004553E9 /* FMDatabaseQueue.m */,
+				89C6500D18E8DCFD004553E9 /* FMDB.h */,
+				89C6500E18E8DCFD004553E9 /* FMResultSet.h */,
+				89C6500F18E8DCFD004553E9 /* FMResultSet.m */,
+			);
+			name = LocalDatabase;
+			sourceTree = "<group>";
+		};
 		A324B2C818E24A4600261C57 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +179,7 @@
 		A324B2D318E24A4600261C57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89C6500018E8DB81004553E9 /* libsqlite3.dylib */,
 				360ABCE318E61181004C815D /* Parse.framework */,
 				360ABCF518E612B5004C815D /* SystemConfiguration.framework */,
 				360ABCF318E612AA004C815D /* StoreKit.framework */,
@@ -163,6 +201,7 @@
 		A324B2DA18E24A4600261C57 /* MedicalProtocols */ = {
 			isa = PBXGroup;
 			children = (
+				89C64FFF18E8DB06004553E9 /* LocalDatabase */,
 				A324B31118E24ADB00261C57 /* Data */,
 				A324B31018E24AD200261C57 /* MasterViews */,
 				A324B30F18E24AC600261C57 /* DetailViews */,
@@ -343,9 +382,14 @@
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
+				89C6501018E8DCFD004553E9 /* FMDatabase.m in Sources */,
+				89C6501218E8DCFD004553E9 /* FMDatabasePool.m in Sources */,
+				89C6501318E8DCFD004553E9 /* FMDatabaseQueue.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
+				89C6501418E8DCFD004553E9 /* FMResultSet.m in Sources */,
 				A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */,
+				89C6501118E8DCFD004553E9 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
