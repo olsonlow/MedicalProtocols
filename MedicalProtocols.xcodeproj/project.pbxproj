@@ -123,7 +123,6 @@
 		A324B2C818E24A4600261C57 = {
 			isa = PBXGroup;
 			children = (
-				360ABCE318E61181004C815D /* Parse.framework */,
 				A324B2DA18E24A4600261C57 /* MedicalProtocols */,
 				A324B2FF18E24A4600261C57 /* MedicalProtocolsTests */,
 				A324B2D318E24A4600261C57 /* Frameworks */,
@@ -143,6 +142,7 @@
 		A324B2D318E24A4600261C57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				360ABCE318E61181004C815D /* Parse.framework */,
 				360ABCF518E612B5004C815D /* SystemConfiguration.framework */,
 				360ABCF318E612AA004C815D /* StoreKit.framework */,
 				360ABCF118E6129F004C815D /* Security.framework */,
