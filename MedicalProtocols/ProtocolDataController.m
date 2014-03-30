@@ -42,7 +42,7 @@
 //        selectionComponent[@"choiceB"] = @"F";
 //        PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
 //        selectionComponent2[@"label"] = @"EF(%)";
-//        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
+//        formNumberComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
 //        PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
 //        selectionComponent3[@"label"] = @"PM";
 //        selectionComponent3[@"choiceA"] = @"Y";
