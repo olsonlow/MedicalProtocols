@@ -9,7 +9,7 @@
 #import "ProtocolMasterViewController.h"
 #import "ProtocolDetailViewController.h"
 #import "ProtocolDataController.h"
-#import "Protocol.h"
+#import "MedProtocol.h"
 
 @interface ProtocolMasterViewController ()
 
@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.protocolDataController = [[ProtocolDataController alloc] init];
 	// Do any additional setup after loading the view, typically from a nib.
     
    
@@ -66,7 +67,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    Protocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
+    MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
     cell.textLabel.text = protocol.name;
     
     return cell;
@@ -104,7 +105,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        Protocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
+        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
         self.detailViewController.protocol = protocol;
     }
 }
@@ -113,7 +114,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Protocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
+        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
         ((ProtocolDetailViewController*)[segue destinationViewController]).protocol = protocol;
     }
 }

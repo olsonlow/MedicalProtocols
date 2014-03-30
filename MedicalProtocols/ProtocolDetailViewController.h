@@ -7,8 +7,8 @@
 //
 #import <UIKit/UIKit.h>
 
-@class Protocol;
+@class MedProtocol;
 @interface ProtocolDetailViewController : UIViewController <UISplitViewControllerDelegate>
-@property (strong, nonatomic) Protocol* protocol;
+@property (strong, nonatomic) MedProtocol* protocol;
 
 @end

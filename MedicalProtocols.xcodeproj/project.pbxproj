@@ -33,8 +33,8 @@
 		A324B30618E24A4600261C57 /* MedicalProtocolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B30518E24A4600261C57 /* MedicalProtocolsTests.m */; };
 		A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */; };
 		A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */; };
-		A324B32718E4E08000261C57 /* Protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32618E4E08000261C57 /* Protocol.m */; };
 		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
+		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,10 +80,10 @@
 		A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolMasterViewController.m; sourceTree = "<group>"; };
 		A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDetailViewController.h; sourceTree = "<group>"; };
 		A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDetailViewController.m; sourceTree = "<group>"; };
-		A324B32518E4E08000261C57 /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
-		A324B32618E4E08000261C57 /* Protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Protocol.m; sourceTree = "<group>"; };
 		A324B32818E4E4E000261C57 /* ProtocolDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDataController.h; sourceTree = "<group>"; };
 		A324B32918E4E4E000261C57 /* ProtocolDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDataController.m; sourceTree = "<group>"; };
+		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
+		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +123,6 @@
 		A324B2C818E24A4600261C57 = {
 			isa = PBXGroup;
 			children = (
-				360ABCE318E61181004C815D /* Parse.framework */,
 				A324B2DA18E24A4600261C57 /* MedicalProtocols */,
 				A324B2FF18E24A4600261C57 /* MedicalProtocolsTests */,
 				A324B2D318E24A4600261C57 /* Frameworks */,
@@ -143,6 +142,7 @@
 		A324B2D318E24A4600261C57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				360ABCE318E61181004C815D /* Parse.framework */,
 				360ABCF518E612B5004C815D /* SystemConfiguration.framework */,
 				360ABCF318E612AA004C815D /* StoreKit.framework */,
 				360ABCF118E6129F004C815D /* Security.framework */,
@@ -229,8 +229,8 @@
 			children = (
 				A324B32818E4E4E000261C57 /* ProtocolDataController.h */,
 				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
-				A324B32518E4E08000261C57 /* Protocol.h */,
-				A324B32618E4E08000261C57 /* Protocol.m */,
+				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
+				A3FA341318E8AEBA000D64F8 /* MedProtocol.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
-				A324B32718E4E08000261C57 /* Protocol.m in Sources */,
+				A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
