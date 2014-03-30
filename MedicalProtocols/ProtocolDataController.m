@@ -18,13 +18,18 @@
 - (id)init
 {
     self = [super init];
+    
     if (self) {
-        PFObject *patientObject = [PFObject objectWithClassName:@"patientObject"];
-        patientObject[@"LName"] = @"Johnson";
-        patientObject[@"FName"] = @"Davie";
-        patientObject[@"AddressLine1"] = @"2112 Boulder Creek Lane";
-        patientObject[@"AddressLine2"] = @"Rohnert Park CA, 99922";
-        [patientObject saveInBackground];
+        
+        PFObject *componentObject = [PFObject objectWithClassName:@"TextBlock"];
+        
+        PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
+        
+        stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
+        stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
+        stepObject[@"Components"] = []
+        
+        [stepObject saveInBackground];
     }
     return self;
 }
