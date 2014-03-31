@@ -9,6 +9,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
+#import "LocalDB.h"
 
 @interface ProtocolDataController()
 @property(nonatomic,strong) NSMutableArray* protocols;
@@ -19,7 +20,9 @@
 - (id)init
 {
     self = [super init];
-    
+    NSLog(@"CREATING LOCALDB");
+    LocalDB *pDB;
+    [pDB createDB];
     if (self) {
         _protocols = [[NSMutableArray alloc] init];
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
@@ -28,7 +31,8 @@
                 [_protocols addObject:[[MedProtocol alloc] initWithName:parseProtocol[@"name"] steps:parseProtocol[@"steps"]]];
             }
         }];
-        
+    }
+    
 //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
 //        protocol[@"name"] = @"Atrial Fibrillation";
 //        
@@ -70,7 +74,7 @@
 //        protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
 //        
 //        [protocol saveInBackground];
-        
+   /*
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
         protocol[@"name"] = @"Atrial Fibrillation";
         
@@ -108,9 +112,11 @@
         
         protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
         [protocol saveInBackground];
-    }
+    */
+  //  }
     return self;
 }
+
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];
