@@ -11,6 +11,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 
+
 @interface ProtocolMasterViewController ()
 
 @property (strong,nonatomic) ProtocolDataController* protocolDataController;
@@ -32,6 +33,7 @@
 {
     [super viewDidLoad];
     self.protocolDataController = [[ProtocolDataController alloc] init];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     
    

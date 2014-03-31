@@ -12,6 +12,8 @@
 
 @interface MedProtocol : NSObject
 @property(nonatomic,copy) NSString* name;
+@property(nonatomic) UIImage* image;
 -(id)initWithName:(NSString*)name steps:(NSMutableArray*)steps;
 -(id)initWithParseObject:(PFObject*)parseObject;
+
 @end
