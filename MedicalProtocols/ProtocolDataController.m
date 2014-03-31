@@ -20,25 +20,36 @@
 - (id)init
 {
     self = [super init];
+    __block int protoCount = 0;
     NSLog(@"CREATING LOCALDB");
     LocalDB *pDB;
     [pDB createDB];
     if (self) {
         _protocols = [[NSMutableArray alloc] init];
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
+        [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+            if (!error) {
+                protoCount = count;
+                NSLog(@"There are %d protocols in parse", count);
+            } else {
+                // The request failed
+            }
+        }];
+        
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
             for (PFObject* parseProtocol in results) {
                 [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
             }
         }];
-        //TODO update parse backend by re-running below code
         
+        
+        //TODO update parse backend by re-running below code
         
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
         protocol[@"name"] = @"Atrial Fibrillation";
         
-        ////        PFObject *component= [PFObject objectWithClassName:@"Component"];
-        ////        component[@"color"] = @"0, 214, 132";
+        //        PFObject *component= [PFObject objectWithClassName:@"Component"];
+        //        component[@"color"] = @"0, 214, 132";
         
         
         PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
@@ -75,7 +86,10 @@
         stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
         
         protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
-        [protocol saveInBackground];
+        //Test to see if objects are already in Parse
+        if(protoCount == 0){
+            [protocol saveInBackground];
+        }
     }
     return self;
 }

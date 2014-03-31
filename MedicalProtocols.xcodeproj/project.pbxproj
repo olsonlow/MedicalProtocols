@@ -17,7 +17,6 @@
 		360ABCF218E6129F004C815D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF118E6129F004C815D /* Security.framework */; };
 		360ABCF418E612AA004C815D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF318E612AA004C815D /* StoreKit.framework */; };
 		360ABCF618E612B5004C815D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF518E612B5004C815D /* SystemConfiguration.framework */; };
-		365526D218E8EC77009E276D /* afibImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 365526D118E8EC77009E276D /* afibImage.png */; };
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
 		89C6501018E8DCFD004553E9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500618E8DCFD004553E9 /* FMDatabase.m */; };
 		89C6501118E8DCFD004553E9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */; };
@@ -175,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				89C6500518E8DCFD004553E9 /* FMDatabase.h */,
+				89C6500618E8DCFD004553E9 /* FMDatabase.m */,
 				89C6501518E8DE66004553E9 /* LocalDB.h */,
 				89C6501618E8DE66004553E9 /* LocalDB.m */,
-				89C6500618E8DCFD004553E9 /* FMDatabase.m */,
 				89C6500718E8DCFD004553E9 /* FMDatabaseAdditions.h */,
 				89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */,
 				89C6500918E8DCFD004553E9 /* FMDatabasePool.h */,
