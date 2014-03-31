@@ -28,9 +28,10 @@
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
             for (PFObject* parseProtocol in results) {
-                [_protocols addObject:[[MedProtocol alloc] initWithName:parseProtocol[@"name"] steps:parseProtocol[@"steps"]]];
+                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
             }
         }];
+        //TODO update parse backend by re-running below code
         
         
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
