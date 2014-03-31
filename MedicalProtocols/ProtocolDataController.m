@@ -41,8 +41,8 @@
 //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
 //        protocol[@"name"] = @"Atrial Fibrillation";
 //        
-////        PFObject *component= [PFObject objectWithClassName:@"Component"];
-////        component[@"color"] = @"0, 214, 132";
+//        PFObject *component= [PFObject objectWithClassName:@"Component"];
+//        component[@"color"] = @"0, 214, 132";
 //        
 //        
 //        PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
