@@ -23,6 +23,9 @@
 		89C6501218E8DCFD004553E9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500A18E8DCFD004553E9 /* FMDatabasePool.m */; };
 		89C6501318E8DCFD004553E9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500C18E8DCFD004553E9 /* FMDatabaseQueue.m */; };
 		89C6501418E8DCFD004553E9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500F18E8DCFD004553E9 /* FMResultSet.m */; };
+		89C6501718E8DE66004553E9 /* LocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6501618E8DE66004553E9 /* LocalDB.m */; };
+		89C6501918E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
+		89C6501A18E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
 		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
@@ -76,6 +79,9 @@
 		89C6500D18E8DCFD004553E9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		89C6500E18E8DCFD004553E9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		89C6500F18E8DCFD004553E9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
+		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
+		89C6501818E8E7B1004553E9 /* protocols.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = protocols.db; sourceTree = "<group>"; };
 		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				89C6500518E8DCFD004553E9 /* FMDatabase.h */,
+				89C6501518E8DE66004553E9 /* LocalDB.h */,
+				89C6501618E8DE66004553E9 /* LocalDB.m */,
 				89C6500618E8DCFD004553E9 /* FMDatabase.m */,
 				89C6500718E8DCFD004553E9 /* FMDatabaseAdditions.h */,
 				89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */,
@@ -153,6 +161,7 @@
 				89C6500D18E8DCFD004553E9 /* FMDB.h */,
 				89C6500E18E8DCFD004553E9 /* FMResultSet.h */,
 				89C6500F18E8DCFD004553E9 /* FMResultSet.m */,
+				89C6501818E8E7B1004553E9 /* protocols.db */,
 			);
 			name = LocalDatabase;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
 				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
 				A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */,
+				89C6501918E8E7B1004553E9 /* protocols.db in Resources */,
 				A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A324B30418E24A4600261C57 /* InfoPlist.strings in Resources */,
+				89C6501A18E8E7B1004553E9 /* protocols.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +395,7 @@
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				89C6501018E8DCFD004553E9 /* FMDatabase.m in Sources */,
 				89C6501218E8DCFD004553E9 /* FMDatabasePool.m in Sources */,
+				89C6501718E8DE66004553E9 /* LocalDB.m in Sources */,
 				89C6501318E8DCFD004553E9 /* FMDatabaseQueue.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
