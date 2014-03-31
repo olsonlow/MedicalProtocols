@@ -32,12 +32,14 @@
             }
         }];
         
+        
         PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
         protocol[@"name"] = @"Atrial Fibrillation";
-       
-////        PFObject *component= [PFObject objectWithClassName:@"Component"];
-////        component[@"color"] = @"0, 214, 132";
-       
+        
+        ////        PFObject *component= [PFObject objectWithClassName:@"Component"];
+        ////        component[@"color"] = @"0, 214, 132";
+        
+        
         PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         textBlockObject[@"title"] = @"AFIB Anticoagulation";
         textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
@@ -73,11 +75,9 @@
         
         protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,stepObject,stepObject, nil];
         [protocol saveInBackground];
-    */
-  //  }
+    }
     return self;
 }
-
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];

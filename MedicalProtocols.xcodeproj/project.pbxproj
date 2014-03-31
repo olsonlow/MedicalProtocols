@@ -377,7 +377,7 @@
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
 				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
 				A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */,
-				365526D218E8EC77009E276D /* afibImage.png in Resources */,
+				89C6501918E8E7B1004553E9 /* protocols.db in Resources */,
 				A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
