@@ -21,11 +21,18 @@
     self = [super init];
     
     if (self) {
-        
-        
+        _protocols = [[NSMutableArray alloc] init];
+        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+            for (PFObject* parseProtocol in results) {
+                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
+            }
+        }];
+        //TODO update parse backend by re-running below code
         
 //        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
 //        textBlockObject[@"title"] = @"AFIB Anticoagulation";
+//        textBlockObject[@"content"] = @"";
 //        textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
 //        
 //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
@@ -41,6 +48,8 @@
 //        PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
 //        formNumberComponent[@"label"] = @"Age";
 //        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
+//        formNumberComponent[@"minValue"] = [NSNumber numberWithInt:0];
+//        formNumberComponent[@"maxValue"] = [NSNumber numberWithInt:120];
 //        PFObject *selectionComponent = [PFObject objectWithClassName:@"FormSelection"];
 //        selectionComponent[@"label"] = @"Gender";
 //        selectionComponent[@"choiceA"] = @"M";
@@ -48,6 +57,8 @@
 //        PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
 //        selectionComponent2[@"label"] = @"EF(%)";
 //        selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
+//        formNumberComponent[@"minValue"] = [NSNumber numberWithInt:0];
+//        formNumberComponent[@"maxValue"] = [NSNumber numberWithInt:100];
 //        PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
 //        selectionComponent3[@"label"] = @"PM";
 //        selectionComponent3[@"choiceA"] = @"Y";
@@ -68,6 +79,7 @@
     }
     return self;
 }
+
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];
