@@ -33,7 +33,7 @@
         _steps = [[NSMutableArray alloc] init];
         _image = parseObject[@"protocolImage"];
         [parseObject[@"steps"] enumerateObjectsUsingBlock:^(id parseStepObject,NSUInteger index, BOOL *stop){
-            [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
+            //[_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
         }];
     }
     return self;

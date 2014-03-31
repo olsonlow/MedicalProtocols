@@ -31,6 +31,7 @@
                 [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
             }
         }];
+        
         //TODO update parse backend by re-running below code
         
 //        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
