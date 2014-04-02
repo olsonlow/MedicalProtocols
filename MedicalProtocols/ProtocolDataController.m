@@ -34,6 +34,12 @@
             }
         }];
         
+        //set up in-app database (medRef.db)
+        self.databaseName = @"medRef.db";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDir = [documentPaths objectAtIndex:0];
+        self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
+        [self createAndCheckDatabase];
         
 //        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
 //        textBlockObject[@"title"] = @"AFIB Anticoagulation";
@@ -142,6 +148,18 @@
     }
     return self;
 }
+
+-(void) createAndCheckDatabase
+{
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+        return;
+    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
+    [fileManager copyItemAtPath:databasePathFromApp toPath:self.databasePath error:nil];
+}
+
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];
