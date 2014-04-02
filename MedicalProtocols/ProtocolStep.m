@@ -8,6 +8,7 @@
 
 #import "ProtocolStep.h"
 #import <Parse/Parse.h>
+#import "Component.h"
 #import "Link.h"
 #import "TextBlock.h"
 #import "Form.h"
@@ -22,23 +23,49 @@
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
-        _stepNumber = [parseObject[@"stepNumber"] intValue];
         _description = parseObject[@"description"];
+        _stepNumber = [parseObject[@"stepNumber"] intValue];
         _components = [[NSMutableArray alloc] init];
-        [parseObject[@"steps"] enumerateObjectsUsingBlock:^(PFObject* parseStepObject,NSUInteger index, BOOL *stop){
-            id component = nil;
-            
-            if([parseStepObject.parseClassName isEqualToString:@"TextBlock"]) {
-                component = [[TextBlock alloc] initWithParseObject:parseStepObject];
-            } else if([parseStepObject.parseClassName isEqualToString:@"Link"]){
-                component = [[Link alloc] initWithParseObject:parseStepObject];
-            } else if([parseStepObject.parseClassName isEqualToString:@"Calculator"]){
-                component = [[Calculator alloc] initWithParseObject:parseStepObject];
-            } else if([parseStepObject.parseClassName isEqualToString:@"Form"]){
-                component = [[Form alloc] initWithParseObject:parseStepObject];
-            }
-            [_components addObject:component];
+        
+        NSLog(@"%@",parseObject);
+        
+        [parseObject[@"components"] enumerateObjectsUsingBlock:^(id parseComponentObject,NSUInteger index, BOOL *stop){
+            [_components addObject:[[ProtocolStep alloc] initWithParseObject:parseComponentObject]];
         }];
+        
+//        PFQuery *query = [PFQuery queryWithClassName:@"Component"];
+//        [query whereKey:@"protocol" equalTo:parseObject];
+//        [PFObject fetchAllIfNeededInBackground:parseObject[@"components"] block:^(NSArray *objects, NSError *error){
+//            [objects enumerateObjectsUsingBlock:^(PFObject* parseStepObject,NSUInteger index, BOOL *stop){
+//                id component = nil;
+//                if([parseStepObject.parseClassName isEqualToString:@"TextBlock"]) {
+//                    component = [[TextBlock alloc] initWithParseObject:parseStepObject];
+//                } else if([parseStepObject.parseClassName isEqualToString:@"Link"]){
+//                    component = [[Link alloc] initWithParseObject:parseStepObject];
+//                } else if([parseStepObject.parseClassName isEqualToString:@"Calculator"]){
+//                    component = [[Calculator alloc] initWithParseObject:parseStepObject];
+//                } else if([parseStepObject.parseClassName isEqualToString:@"Form"]){
+//                    component = [[Form alloc] initWithParseObject:parseStepObject];
+//                }
+//                [_components addObject:component];
+//            }];
+//        }];
+
+        
+//        [parseObject[@"components"] enumerateObjectsUsingBlock:^(PFObject* parseStepObject,NSUInteger index, BOOL *stop){
+//            id component = nil;
+//            
+//            if([parseStepObject.parseClassName isEqualToString:@"TextBlock"]) {
+//                component = [[TextBlock alloc] initWithParseObject:parseStepObject];
+//            } else if([parseStepObject.parseClassName isEqualToString:@"Link"]){
+//                component = [[Link alloc] initWithParseObject:parseStepObject];
+//            } else if([parseStepObject.parseClassName isEqualToString:@"Calculator"]){
+//                component = [[Calculator alloc] initWithParseObject:parseStepObject];
+//            } else if([parseStepObject.parseClassName isEqualToString:@"Form"]){
+//                component = [[Form alloc] initWithParseObject:parseStepObject];
+//            }
+//            [_components addObject:component];
+//        }];
     }
     return self;
 }
