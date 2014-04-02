@@ -30,9 +30,11 @@
     self = [super init];
     if (self) {
         _name = parseObject[@"name"];
-        _steps = [[NSMutableArray alloc] init];
         _image = parseObject[@"protocolImage"];
+        _steps = [[NSMutableArray alloc] init];
+        NSLog(@"%@",parseObject[@"steps"]);
         [parseObject[@"steps"] enumerateObjectsUsingBlock:^(id parseStepObject,NSUInteger index, BOOL *stop){
+            [parseStepObject fetch];
             [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
         }];
     }
