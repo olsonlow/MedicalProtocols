@@ -17,6 +17,7 @@
 		360ABCF218E6129F004C815D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF118E6129F004C815D /* Security.framework */; };
 		360ABCF418E612AA004C815D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF318E612AA004C815D /* StoreKit.framework */; };
 		360ABCF618E612B5004C815D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360ABCF518E612B5004C815D /* SystemConfiguration.framework */; };
+		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
 		89C6501018E8DCFD004553E9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500618E8DCFD004553E9 /* FMDatabase.m */; };
 		89C6501118E8DCFD004553E9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500818E8DCFD004553E9 /* FMDatabaseAdditions.m */; };
@@ -24,8 +25,6 @@
 		89C6501318E8DCFD004553E9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500C18E8DCFD004553E9 /* FMDatabaseQueue.m */; };
 		89C6501418E8DCFD004553E9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6500F18E8DCFD004553E9 /* FMResultSet.m */; };
 		89C6501718E8DE66004553E9 /* LocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6501618E8DE66004553E9 /* LocalDB.m */; };
-		89C6501918E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
-		89C6501A18E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
 		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
@@ -76,6 +75,8 @@
 		360ABCF318E612AA004C815D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		360ABCF518E612B5004C815D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
+		89756D4C18ECCB2C0006321C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
+		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		89C6500518E8DCFD004553E9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		89C6500618E8DCFD004553E9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
@@ -90,7 +91,6 @@
 		89C6500F18E8DCFD004553E9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
-		89C6501818E8E7B1004553E9 /* protocols.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = protocols.db; sourceTree = "<group>"; };
 		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,7 +186,6 @@
 				89C6500D18E8DCFD004553E9 /* FMDB.h */,
 				89C6500E18E8DCFD004553E9 /* FMResultSet.h */,
 				89C6500F18E8DCFD004553E9 /* FMResultSet.m */,
-				89C6501818E8E7B1004553E9 /* protocols.db */,
 			);
 			name = LocalDatabase;
 			sourceTree = "<group>";
@@ -252,6 +251,8 @@
 		A324B2DB18E24A4600261C57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				89756D4D18ECCBB20006321C /* medRef.sql */,
+				89756D4C18ECCB2C0006321C /* medRef.db */,
 				365526D118E8EC77009E276D /* afibImage.png */,
 				A324B32B18E4EA5C00261C57 /* DataFiles */,
 				A324B2DC18E24A4600261C57 /* MedicalProtocols-Info.plist */,
@@ -425,9 +426,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
+				89756D4E18ECCBB20006321C /* medRef.sql in Resources */,
 				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
 				A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */,
-				89C6501918E8E7B1004553E9 /* protocols.db in Resources */,
 				A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +438,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A324B30418E24A4600261C57 /* InfoPlist.strings in Resources */,
-				89C6501A18E8E7B1004553E9 /* protocols.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

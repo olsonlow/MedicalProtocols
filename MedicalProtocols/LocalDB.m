@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
+
+
+//NOTE: TO RECREATE medRef.db FROM COMMAND LINE:  cat medRef.sql | sqlite3 medRef.db
 #import "LocalDB.h"
 #import "FMDB.h"
 #import <Parse/Parse.h>
