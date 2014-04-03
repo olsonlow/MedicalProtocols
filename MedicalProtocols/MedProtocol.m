@@ -32,12 +32,21 @@
         _name = parseObject[@"name"];
         _image = parseObject[@"protocolImage"];
         _steps = [[NSMutableArray alloc] init];
-        NSLog(@"%@",parseObject[@"steps"]);
-        [parseObject[@"steps"] enumerateObjectsUsingBlock:^(id parseStepObject,NSUInteger index, BOOL *stop){
-            [parseStepObject fetch];
-            [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
+
+        PFQuery *query = [PFQuery queryWithClassName:@"Step"];
+        [query whereKey:@"protocol" equalTo:parseObject];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+            for (PFObject* parseStepObject in results) {
+                [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
+            }
         }];
     }
     return self;
+}
+-(int)countSteps{
+    return [self.steps count];
+}
+-(ProtocolStep*)stepAtIndex:(int)index{
+    return [self.steps objectAtIndex:index];
 }
 @end

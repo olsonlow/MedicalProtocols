@@ -14,7 +14,7 @@
     self = [super init];
     if (self) {
         _label = parseObject[@"label"];
-        _url = parseObject[@"url"];
+        _url = parseObject[@"URL"];
     }
     return self;
 }

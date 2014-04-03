@@ -10,7 +10,7 @@
 #import "ProtocolDetailViewController.h"
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
-
+#import "StepMasterViewController.h"
 
 @interface ProtocolMasterViewController ()
 
@@ -35,9 +35,6 @@
     self.protocolDataController = [[ProtocolDataController alloc] init];
     
 	// Do any additional setup after loading the view, typically from a nib.
-    
-   
-
 
     //Navigation Button Items removed
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -67,7 +64,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProtocolCell" forIndexPath:indexPath];
     
     MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
     cell.textLabel.text = protocol.name;
@@ -118,6 +115,12 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
         ((ProtocolDetailViewController*)[segue destinationViewController]).protocol = protocol;
+    } else if([[segue identifier] isEqualToString:@"MasterViewProtocolToStep"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
+        StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)[segue destinationViewController]);
+        stepMasterViewController.protocolData = protocol;
+        stepMasterViewController.detailViewController = self.detailViewController;
     }
 }
 

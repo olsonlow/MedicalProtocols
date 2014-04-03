@@ -26,6 +26,7 @@
 		89C6501718E8DE66004553E9 /* LocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6501618E8DE66004553E9 /* LocalDB.m */; };
 		89C6501918E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
 		89C6501A18E8E7B1004553E9 /* protocols.db in Resources */ = {isa = PBXBuildFile; fileRef = 89C6501818E8E7B1004553E9 /* protocols.db */; };
+		A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A302F60718ECDC830065D42E /* StepMasterViewController.m */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
 		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
@@ -91,6 +92,8 @@
 		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
 		89C6501818E8E7B1004553E9 /* protocols.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = protocols.db; sourceTree = "<group>"; };
+		A302F60618ECDC830065D42E /* StepMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepMasterViewController.h; sourceTree = "<group>"; };
+		A302F60718ECDC830065D42E /* StepMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepMasterViewController.m; sourceTree = "<group>"; };
 		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -294,6 +297,8 @@
 			children = (
 				A324B31D18E4D29000261C57 /* ProtocolMasterViewController.h */,
 				A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */,
+				A302F60618ECDC830065D42E /* StepMasterViewController.h */,
+				A302F60718ECDC830065D42E /* StepMasterViewController.m */,
 			);
 			name = MasterViews;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
 				A3689B8218E94EF00040D6F2 /* Link.m in Sources */,
+				A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */,
 				89C6501418E8DCFD004553E9 /* FMResultSet.m in Sources */,
 				A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */,
 				89C6501118E8DCFD004553E9 /* FMDatabaseAdditions.m in Sources */,

@@ -9,10 +9,6 @@
 #import "ProtocolStep.h"
 #import <Parse/Parse.h>
 #import "Component.h"
-#import "Link.h"
-#import "TextBlock.h"
-#import "Form.h"
-#import "Calculator.h"
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
@@ -25,14 +21,12 @@
     if (self) {
         _description = parseObject[@"description"];
         _stepNumber = [parseObject[@"stepNumber"] intValue];
-        _components = [[NSMutableArray alloc] init];
+        _components = [Component componentsForStepParseObject:parseObject];
         
-        NSLog(@"%@",parseObject);
-        
-        [parseObject[@"components"] enumerateObjectsUsingBlock:^(id parseComponentObject,NSUInteger index, BOOL *stop){
-            [_components addObject:[[ProtocolStep alloc] initWithParseObject:parseComponentObject]];
-        }];
-        
+//        [parseObject[@"components"] enumerateObjectsUsingBlock:^(id parseComponentObject,NSUInteger index, BOOL *stop){
+//            [_components addObject:[[ProtocolStep alloc] initWithParseObject:parseComponentObject]];
+//        }];
+//        
 //        PFQuery *query = [PFQuery queryWithClassName:@"Component"];
 //        [query whereKey:@"protocol" equalTo:parseObject];
 //        [PFObject fetchAllIfNeededInBackground:parseObject[@"components"] block:^(NSArray *objects, NSError *error){

@@ -8,6 +8,8 @@
 
 #import "Form.h"
 #import <Parse/Parse.h>
+#import "FormNumber.h"
+#import "FormSelection.h"
 
 @interface Form()
 @property(nonatomic,strong) NSMutableArray* fields;
@@ -18,15 +20,23 @@
     self = [super init];
     if (self) {
         _fields = [[NSMutableArray alloc] init];
-        [parseObject[@"fields"] enumerateObjectsUsingBlock:^(PFObject* parseStepObject,NSUInteger index, BOOL *stop){
-            id component = nil;
-            
-            if([parseStepObject.parseClassName isEqualToString:@"FormNumber"]) {
-                //component = [[TextBlock alloc] initWithParseObject:parseStepObject];
-            } else if([parseStepObject.parseClassName isEqualToString:@"FormSelection"]){
-                //component = [[Link alloc] initWithParseObject:parseStepObject];
+        
+        PFQuery* query = [PFQuery queryWithClassName:@"FormNumber"];
+        [query whereKey:@"step" equalTo:parseObject];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+            for (PFObject* parseComponentObject in results) {
+                [_fields addObject:[[FormNumber alloc] initWithParseObject:parseComponentObject]];
             }
-            [_fields addObject:component];
+        }];
+        
+        query = [PFQuery queryWithClassName:@"FormSelection"];
+        [query whereKey:@"step" equalTo:parseObject];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+            for (PFObject* parseComponentObject in results) {
+                [_fields addObject:[[FormSelection alloc] initWithParseObject:parseComponentObject]];
+            }
         }];
     }
     return self;

@@ -29,11 +29,10 @@
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
 
         [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-            for (PFObject* parseProtocol in results) {
-                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
+            for (PFObject* parseProtocolObject in results) {
+                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocolObject]];
             }
         }];
-        
         
 //        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
 //        textBlockObject[@"title"] = @"AFIB Anticoagulation";

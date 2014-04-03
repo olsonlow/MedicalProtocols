@@ -10,6 +10,7 @@
 @class PFObject;
 
 @interface Component : NSObject
++(NSMutableArray*)componentsForStepParseObject:(PFObject*)parseObject;
 -(id)initWithParseObject:(PFObject*)parseObject;
 
 @end
