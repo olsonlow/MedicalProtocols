@@ -68,7 +68,7 @@
     
     return self;
 }
-//-(void)initComponentsFromDBForStepID:(NSString*)objectID{
+//-(NSMutableArray*)components{
 //    NSString *dbPath = @"medRef.db";
 //    self.components = [[NSMutableArray alloc] init];
 //    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
@@ -82,5 +82,6 @@
 //        [self.steps addObject:step];
 //    }
 //    [db close];
+//    return self;
 //}
 @end

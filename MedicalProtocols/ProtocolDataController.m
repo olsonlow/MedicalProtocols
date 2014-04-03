@@ -294,8 +294,9 @@
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
         NSLog(@"PROTOCOL NAME: %@", protocol.name);
-        [protocol stepAtIndex:0];
-        //[protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
+        //[protocol stepAtIndex:0];
+        [protocol initdbPath:self.databasePath];
+        self.protocol = [protocol initWithName:protocol.name steps:protocol.steps];
         [self.protocols addObject:protocol];
     }
     [db close];
