@@ -11,5 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) NSString *databaseName;
+@property (nonatomic) NSString *databasePath;
+
 
 @end

@@ -9,9 +9,13 @@
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
 #import "ProtocolStep.h"
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface MedProtocol()
 @property (nonatomic,strong) NSMutableArray* steps;
+@property (nonatomic) ProtocolStep* step;
 
 @end
 
@@ -40,4 +44,23 @@
     }
     return self;
 }
+
+-(void)initStepsFromDBForProtocolID:(NSString*)protocolName
+{
+    
+    NSString *dbPath = @"protocols.db";
+    self.steps = [[NSMutableArray alloc] init];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    [db open];
+    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
+    while([results next])
+    {
+        ProtocolStep *step = [[ProtocolStep alloc] init];
+        step.stepNumber = [results intForColumn:@"stepNumber"];
+        //[step getComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+        [self.steps addObject:step];
+    }
+    [db close];
+}
+
 @end

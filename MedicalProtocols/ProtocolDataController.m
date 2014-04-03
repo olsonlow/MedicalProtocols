@@ -10,9 +10,12 @@
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
 #import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface ProtocolDataController()
 @property(nonatomic,strong) NSMutableArray* protocols;
+@property(nonatomic) MedProtocol* protocol;
 
 @end
 
@@ -26,13 +29,14 @@
         [pDB createDB];
         _protocols = [[NSMutableArray alloc] init];
         
-        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
-
-        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-            for (PFObject* parseProtocol in results) {
-                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
-            }
-        }];
+        
+//        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
+//
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+//            for (PFObject* parseProtocol in results) {
+//                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
+//            }
+//        }];
         
         
 //        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
@@ -139,6 +143,8 @@
 //        linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
 //        linkObject[@"step"] = stepObject;
 //        [linkObject saveInBackground];
+        //[self populateFromDatabase]; //This function call initializes an array of protocols LDO
+    
     }
     return self;
 }
@@ -146,6 +152,25 @@
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];
     return _protocols;
+}
+
+//Create a method that builds a protocol from the onboard database
+-(void)populateFromDatabase
+{
+    NSString *dbPath = @"protocols.db";
+    self.protocols = [[NSMutableArray alloc] init];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    //FMDatabase *db = [FMDatabase databaseWithPath:[Utility getDatabasePath]];
+    [db open];
+    FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
+    while([results next])
+    {
+        MedProtocol *protocol = [[MedProtocol alloc] init];
+        protocol.name = [results stringForColumn:@"pName"];
+        [protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
+        [self.protocols addObject:protocol];
+    }
+    [db close];
 }
 
 -(int)countProtocols{

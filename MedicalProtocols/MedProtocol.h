@@ -15,5 +15,6 @@
 @property(nonatomic) UIImage* image;
 -(id)initWithName:(NSString*)name steps:(NSMutableArray*)steps;
 -(id)initWithParseObject:(PFObject*)parseObject;
+-(void)getStepsFromDBForProtocolID:(NSString*)protocolName;
 
 @end
