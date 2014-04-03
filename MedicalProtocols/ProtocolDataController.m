@@ -87,12 +87,27 @@
         
         //set up in-app database (medRef.db)
         self.databaseName = @"medRef.db";
-        NSString* path = [NSSearchPathForDirectoriesInDomains(
-                                                              NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol"];
-        self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
-        [self createAndCheckDatabase];
-        //load the database
+        path = [path stringByAppendingPathComponent:@"medRef.db"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL success = [fileManager fileExistsAtPath:path];
+        if(!success)
+        {
+            NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
+            NSString *npath = [[NSBundle mainBundle] bundlePath];
+            NSString *finalPath = [npath stringByAppendingPathComponent:@"medRef.db"];
+            self.databasePath = finalPath;
+            [self createAndCheckDatabase];
+        }
+        
+        else
+        {
+            self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
+            [self createAndCheckDatabase];
+        }
+        
+        //load the database from self.protocols
         //NSLog(@"NUM. PROTOCOLS: %d", [self.protocols count]);
         for(int i = 0; i < [self.protocols count]; i++)
         {
@@ -110,6 +125,10 @@
         mp.createdAt = [calendar dateFromComponents:components];
         mp.updatedAt = [calendar dateFromComponents:components];
         [self insertProtocol:mp];
+        [self populateFromDatabase]; //test to see if we can query the table
+        
+    
+        
         //PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         //textBlockObject[@"title"] = @"AFIB Anticoagulation";
         //textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
@@ -241,7 +260,7 @@
 
 -(BOOL) insertProtocol:(MedProtocol *) mp
 {
-    //NSLog(@"INSERT PROTOCOL");
+   //NSLog(@"INSERT PROTOCOL");
     FMDatabase *db = [FMDatabase databaseWithPath: self.databasePath];
     [db open];
     BOOL success = [db executeUpdate:@"INSERT INTO protocol (objectID, createdAt, updatedAt, pName) VALUES (?,?,?,?);", mp.idStr ,mp.createdAt, mp.updatedAt, mp.name, nil];
@@ -266,16 +285,15 @@
 //Create a method that builds a protocol from the onboard database
 -(void)populateFromDatabase
 {
-    NSString *dbPath = @"medRef.db";
     self.protocols = [[NSMutableArray alloc] init];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    //FMDatabase *db = [FMDatabase databaseWithPath:[Utility getDatabasePath]];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath]; //Lowell: I changed this line to use our property databasePath -Zach
     [db open];
     FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
     while([results next])
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
+        NSLog(@"PROTOCOL NAME: %@", protocol.name);
         //[protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
         [self.protocols addObject:protocol];
     }
