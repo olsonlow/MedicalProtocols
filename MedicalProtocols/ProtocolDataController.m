@@ -87,9 +87,10 @@
         
         //set up in-app database (medRef.db)
         self.databaseName = @"medRef.db";
-        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentDir = [documentPaths objectAtIndex:0];
-        self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
+        NSString* path = [NSSearchPathForDirectoriesInDomains(
+                                                              NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol"];
+        self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
         [self createAndCheckDatabase];
         //load the database
         //NSLog(@"NUM. PROTOCOLS: %d", [self.protocols count]);
@@ -224,11 +225,13 @@
     BOOL success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
-       // NSLog(@"FILE PATH: %@ EXISTS", self.databasePath);
+        NSLog(@"FILE PATH: %@ EXISTS", self.databasePath);
         return;
-    }
+    } else {
+        [NSException raise:@"database not found" format:@"we might have to create it programmatically :( tell Luke"];
         NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
     [fileManager copyItemAtPath:databasePathFromApp toPath:self.databasePath error:nil];
+    }
 }
 
 -(NSMutableArray *) getProtocols
@@ -273,7 +276,7 @@
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
-        [protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
+        //[protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
         [self.protocols addObject:protocol];
     }
     [db close];
