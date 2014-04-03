@@ -269,14 +269,13 @@
     NSString *dbPath = @"medRef.db";
     self.protocols = [[NSMutableArray alloc] init];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    //FMDatabase *db = [FMDatabase databaseWithPath:[Utility getDatabasePath]];
     [db open];
     FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
     while([results next])
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
-        //[protocol getStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
+        [self.protocol initStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
         [self.protocols addObject:protocol];
     }
     [db close];
