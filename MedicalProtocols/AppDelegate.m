@@ -7,7 +7,6 @@
 //
 
 #import <Parse/Parse.h>
-#import "FMDB.h"
 #import "FMDatabase.h"
 #import "AppDelegate.h"
 
@@ -26,25 +25,8 @@
                   clientKey:@"mdFku5EbsXU6D5pGd2nYG62zaFewptNrbjqd4aWt"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    self.databaseName = @"MedRef.db";
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDir = [documentPaths objectAtIndex:0];
-    self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
-    [self createAndCheckDatabase];
     
     return YES;
-}
-
--(void) createAndCheckDatabase
-{
-    BOOL success;
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    success = [fileManager fileExistsAtPath:self.databasePath];
-    
-    if(success) return;
-    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
-    [fileManager copyItemAtPath:databasePathFromApp toPath:self.databasePath error:nil];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
