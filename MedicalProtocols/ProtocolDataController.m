@@ -9,6 +9,9 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
+#import "FMDB.h"
+#import "FMResultSet.h"
+#import "FMDatabase.h"
 #import "LocalDB.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
@@ -24,9 +27,6 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"CREATING LOCALDB");
-        LocalDB *pDB;
-        [pDB createDB];
         _protocols = [[NSMutableArray alloc] init];
         
         
@@ -38,55 +38,78 @@
 //            }
 //        }];
         
+        //set up in-app database (medRef.db)
+        self.databaseName = @"medRef.db";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDir = [documentPaths objectAtIndex:0];
+        self.databasePath = [documentDir stringByAppendingPathComponent:self.databaseName];
+        [self createAndCheckDatabase];
+        //load the database
+        //NSLog(@"NUM. PROTOCOLS: %d", [self.protocols count]);
+        for(int i = 0; i < [self.protocols count]; i++)
+        {
+            MedProtocol *mp = [self.protocols objectAtIndex:i];
+            [self insertProtocol:mp];
+        }
         
-//        PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
-//        textBlockObject[@"title"] = @"AFIB Anticoagulation";
-//        textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
-//        [textBlockObject save];
-//        
-//        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
-//        protocol[@"name"] = @"Atrial Fibrillation";
-//        [protocol saveInBackground];
-//
-//        PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
-//        
-//        PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
-//        PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
-//        formNumberComponent[@"label"] = @"Age";
-//        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
-//        PFObject *selectionComponent = [PFObject objectWithClassName:@"FormSelection"];
-//        selectionComponent[@"label"] = @"Gender";
-//        selectionComponent[@"choiceA"] = @"M";
-//        selectionComponent[@"choiceB"] = @"F";
-//        PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
-//        selectionComponent2[@"label"] = @"EF(%)";
-//        selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
-//        selectionComponent2[@"minValue"] = [NSNumber numberWithInt:0];
-//        selectionComponent2[@"maxValue"] = [NSNumber numberWithInt:100];
-//        PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
-//        selectionComponent3[@"label"] = @"PM";
-//        selectionComponent3[@"choiceA"] = @"Y";
-//        selectionComponent3[@"choiceB"] = @"N";
-//        formComponent[@"fields"] = [NSArray arrayWithObjects:formNumberComponent,selectionComponent,selectionComponent2,selectionComponent3, nil];
-//        
-//        PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
-//        linkObject[@"label"] = @"Calculator link";
-//        linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
-//        
-//        PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
-//        stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
-//        stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
-//        
-//        PFRelation *relation = [stepObject relationforKey:@"components"];
-//        [relation addObject:textBlockObject];
-//
-//
-//        stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
-//        
-//        protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,nil];
-//        [protocol saveInBackground];
-
-    
+        //dummy test
+        MedProtocol *mp = [[MedProtocol alloc] init];
+        mp.idStr = @"obj49djec";
+        mp.name = @"Myocarditis";
+        NSDate *now = [[NSDate alloc]init];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+        mp.createdAt = [calendar dateFromComponents:components];
+        mp.updatedAt = [calendar dateFromComponents:components];
+        [self insertProtocol:mp];
+        //PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        //textBlockObject[@"title"] = @"AFIB Anticoagulation";
+        //textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];
+        //        [textBlockObject save];
+        //
+        //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
+        //        protocol[@"name"] = @"Atrial Fibrillation";
+        //        [protocol saveInBackground];
+        //
+        //        PFObject *calculatorComponent = [PFObject objectWithClassName:@"Calculator"];
+        //
+        //        PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
+        //        PFObject *formNumberComponent = [PFObject objectWithClassName:@"FormNumber"];
+        //        formNumberComponent[@"label"] = @"Age";
+        //        formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
+        //        PFObject *selectionComponent = [PFObject objectWithClassName:@"FormSelection"];
+        //        selectionComponent[@"label"] = @"Gender";
+        //        selectionComponent[@"choiceA"] = @"M";
+        //        selectionComponent[@"choiceB"] = @"F";
+        //        PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
+        //        selectionComponent2[@"label"] = @"EF(%)";
+        //        selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
+        //        selectionComponent2[@"minValue"] = [NSNumber numberWithInt:0];
+        //        selectionComponent2[@"maxValue"] = [NSNumber numberWithInt:100];
+        //        PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
+        //        selectionComponent3[@"label"] = @"PM";
+        //        selectionComponent3[@"choiceA"] = @"Y";
+        //        selectionComponent3[@"choiceB"] = @"N";
+        //        formComponent[@"fields"] = [NSArray arrayWithObjects:formNumberComponent,selectionComponent,selectionComponent2,selectionComponent3, nil];
+        //
+        //        PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
+        //        linkObject[@"label"] = @"Calculator link";
+        //        linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
+        //
+        //        PFObject *stepObject = [PFObject objectWithClassName:@"Step"];
+        //        stepObject[@"stepNumber"] = [NSNumber numberWithInt:1];
+        //        stepObject[@"description"] = @"Decision Regarding Anticoagulation:";
+        //
+        //        PFRelation *relation = [stepObject relationforKey:@"components"];
+        //        [relation addObject:textBlockObject];
+        //
+        //
+        //        stepObject[@"Components"] = [NSArray arrayWithObjects:textBlockObject, calculatorComponent, formComponent, linkObject, nil];
+        //
+        //        protocol[@"steps"] = [NSArray arrayWithObjects:stepObject,nil];
+        //        [protocol saveInBackground];
+        
+        
         //TODO update parse backend by re-running below code
         
 //        PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
@@ -148,6 +171,44 @@
     }
     return self;
 }
+
+-(void) createAndCheckDatabase
+{
+    //NSLog(@"CREATE AND CHECK DATABASE");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+       // NSLog(@"FILE PATH: %@ EXISTS", self.databasePath);
+        return;
+    }
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
+    [fileManager copyItemAtPath:databasePathFromApp toPath:self.databasePath error:nil];
+}
+
+-(NSMutableArray *) getProtocols
+{
+    return  self.protocols;
+}
+
+-(BOOL) insertProtocol:(MedProtocol *) mp
+{
+    //NSLog(@"INSERT PROTOCOL");
+    FMDatabase *db = [FMDatabase databaseWithPath: self.databasePath];
+    [db open];
+    BOOL success = [db executeUpdate:@"INSERT INTO protocol (objectID, createdAt, updatedAt, pName) VALUES (?,?,?,?);", mp.idStr ,mp.createdAt, mp.updatedAt, mp.name, nil];
+    return success;
+}
+
+-(BOOL) updateProtocol: (MedProtocol *) mp
+{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
+    [db close];
+    return success;
+}
+
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
         _protocols = [[NSMutableArray alloc] init];

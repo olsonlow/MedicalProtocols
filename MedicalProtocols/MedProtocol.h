@@ -11,7 +11,10 @@
 @class PFObject;
 
 @interface MedProtocol : NSObject
-@property(nonatomic,copy) NSString* name;
+@property(nonatomic,copy) NSString* name; //corresponds to pName
+@property(nonatomic, copy) NSString* idStr; //corresponds to objectID
+@property(nonatomic, copy) NSDate* createdAt;
+@property(nonatomic, copy) NSDate* updatedAt;
 @property(nonatomic) UIImage* image;
 -(id)initWithName:(NSString*)name steps:(NSMutableArray*)steps;
 -(id)initWithParseObject:(PFObject*)parseObject;
