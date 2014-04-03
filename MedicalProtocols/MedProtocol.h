@@ -20,5 +20,4 @@
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
--(void)initStepsFromDBForProtocolID:(NSString*)objectID;
 @end

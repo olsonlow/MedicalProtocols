@@ -59,14 +59,14 @@
 
     return components;
 }
-+(NSMutableArray*)componentsForStepDBObject:(NSObject*)dbObject{
-    NSMutableArray* components = [[NSMutableArray alloc] init];
-    NSString *dbPath = @"medRef.db";
-    
-    
-    
-    [components addObject:[[TextBlock alloc] initWithDBObject:<#(NSObject *)#>]]
-}
+//+(NSMutableArray*)componentsForStepDBObject:(NSObject*)dbObject{
+//    NSMutableArray* components = [[NSMutableArray alloc] init];
+//    NSString *dbPath = @"medRef.db";
+//    
+//    
+//    
+//    [components addObject:[[TextBlock alloc] initWithDBObject:<#(NSObject *)#>]]
+//}
 
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
