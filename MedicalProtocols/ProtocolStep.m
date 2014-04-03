@@ -9,9 +9,13 @@
 #import "ProtocolStep.h"
 #import <Parse/Parse.h>
 #import "Component.h"
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
+@property (nonatomic) Component* component;
 
 @end
 
@@ -61,6 +65,10 @@
 //            [_components addObject:component];
 //        }];
     }
+    
     return self;
+}
+-(void)initComponentsFromDBForStepID:(NSString*)objectID{
+
 }
 @end

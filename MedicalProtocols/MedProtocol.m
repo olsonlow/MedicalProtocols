@@ -47,6 +47,24 @@
     }
     return self;
 }
+
+-(id)initStepsFromDBForProtocolID:(NSString*)objectID{
+    NSString *dbPath = @"medRef.db";
+    self.steps = [[NSMutableArray alloc] init];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    [db open];
+    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
+    while([results next])
+    {
+        ProtocolStep *step = [[ProtocolStep alloc] init];
+        step.stepNumber = [results intForColumn:@"stepNumber"];
+        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+        [self.steps addObject:step];
+    }
+    [db close];
+}
+
+
 -(int)countSteps{
     return [self.steps count];
 }
