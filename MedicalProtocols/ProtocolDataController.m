@@ -37,6 +37,7 @@
 //                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocol]];
 //            }
 //        }];
+        
         //set up in-app database (medRef.db)
         self.databaseName = @"medRef.db";
         NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -215,7 +216,7 @@
 //Create a method that builds a protocol from the onboard database
 -(void)populateFromDatabase
 {
-    NSString *dbPath = @"protocols.db";
+    NSString *dbPath = @"medRef.db";
     self.protocols = [[NSMutableArray alloc] init];
     FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
     //FMDatabase *db = [FMDatabase databaseWithPath:[Utility getDatabasePath]];
