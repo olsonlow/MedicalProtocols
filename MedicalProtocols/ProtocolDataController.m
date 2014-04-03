@@ -48,6 +48,16 @@
             [self insertProtocol:mp];
         }
         
+        //dummy test
+        MedProtocol *mp = [[MedProtocol alloc] init];
+        mp.idStr = @"obj49djec";
+        mp.name = @"Myocarditis";
+        NSDate *now = [[NSDate alloc]init];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+        mp.createdAt = [calendar dateFromComponents:components];
+        mp.updatedAt = [calendar dateFromComponents:components];
+        [self insertProtocol:mp];
         //PFObject *textBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         //textBlockObject[@"title"] = @"AFIB Anticoagulation";
         //textBlockObject[@"printable"] = [NSNumber numberWithBool:NO];

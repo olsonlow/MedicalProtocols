@@ -75,7 +75,7 @@
 		360ABCF318E612AA004C815D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		360ABCF518E612B5004C815D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
-		89756D4C18ECCB2C0006321C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
+		89756D4C18ECCB2C0006321C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = medRef.db; path = MedicalProtocols/medRef.db; sourceTree = SOURCE_ROOT; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		89C6500518E8DCFD004553E9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
