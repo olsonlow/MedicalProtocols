@@ -9,9 +9,13 @@
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
 #import "ProtocolStep.h"
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface MedProtocol()
 @property (nonatomic,strong) NSMutableArray* steps;
+@property (nonatomic) ProtocolStep* step;
 
 @end
 

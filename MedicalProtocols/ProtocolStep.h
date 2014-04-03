@@ -10,7 +10,11 @@
 
 @class PFObject;
 @interface ProtocolStep : NSObject
+@property(nonatomic,strong) NSString* objectID;
 @property(nonatomic,assign) int stepNumber;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic) NSString *protocolID; //foreign key from protocol (idStr)
 @property(nonatomic,strong) NSString* description;
 
 -(id)initWithParseObject:(PFObject*)parseObject;

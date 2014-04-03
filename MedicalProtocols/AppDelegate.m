@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "FMDatabase.h"
 #import "AppDelegate.h"
 
 @implementation AppDelegate
@@ -23,6 +24,7 @@
     [Parse setApplicationId:@"dPZh0fgDg0NMoIitsS0nbsvkr6LRCRmFfUnVOvuC"
                   clientKey:@"mdFku5EbsXU6D5pGd2nYG62zaFewptNrbjqd4aWt"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     
     return YES;
 }

@@ -10,7 +10,8 @@
 
 @class MedProtocol;
 @interface ProtocolDataController : NSObject
-
+@property (strong, nonatomic) NSString *databaseName;
+@property (strong, nonatomic) NSString *databasePath;
 -(int)countProtocols;
 -(MedProtocol*)protocolAtIndex:(int)index;
 
