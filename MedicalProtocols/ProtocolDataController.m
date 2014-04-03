@@ -275,11 +275,14 @@
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
-        [self.protocol initStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
+        [protocol stepAtIndex:0];
+        //[self.protocol initStepsFromDBForProtocolID:[results stringForColumn:@"objectID"]];
         [self.protocols addObject:protocol];
     }
     [db close];
 }
+
+
 
 -(int)countProtocols{
     return [self.protocols count];

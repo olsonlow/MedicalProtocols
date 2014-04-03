@@ -11,5 +11,5 @@
 
 @interface Calculator : NSObject
 -(id)initWithParseObject:(PFObject*)parseObject;
-
+-(id)initWithDBObject:(NSObject*)DBObject;
 @end

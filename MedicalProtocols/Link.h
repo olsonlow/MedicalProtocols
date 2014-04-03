@@ -14,5 +14,6 @@
 @property(nonatomic,copy) NSString* url;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
+-(id)initWithDBObject:(NSObject*)DBObject;
 
 @end

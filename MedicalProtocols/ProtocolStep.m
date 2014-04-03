@@ -69,6 +69,18 @@
     return self;
 }
 -(void)initComponentsFromDBForStepID:(NSString*)objectID{
-
+    NSString *dbPath = @"medRef.db";
+    self.components = [[NSMutableArray alloc] init];
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+    [db open];
+    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
+    while([results next])
+    {
+        ProtocolStep *step = [[ProtocolStep alloc] init];
+        step.stepNumber = [results intForColumn:@"stepNumber"];
+        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+        [self.steps addObject:step];
+    }
+    [db close];
 }
 @end

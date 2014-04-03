@@ -48,22 +48,58 @@
     return self;
 }
 
--(id)initStepsFromDBForProtocolID:(NSString*)objectID{
-    NSString *dbPath = @"medRef.db";
-    self.steps = [[NSMutableArray alloc] init];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    [db open];
-    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
-    while([results next])
-    {
-        ProtocolStep *step = [[ProtocolStep alloc] init];
-        step.stepNumber = [results intForColumn:@"stepNumber"];
-        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
-        [self.steps addObject:step];
-    }
-    [db close];
-}
+//-(void)initStepsFromDBForProtocolID:(NSString*)objectID{
+//    NSString *dbPath = @"medRef.db";
+//    self.steps = [[NSMutableArray alloc] init];
+//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+//    [db open];
+//    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
+//    while([results next])
+//    {
+//        ProtocolStep *step = [[ProtocolStep alloc] init];
+//        step.stepNumber = [results intForColumn:@"stepNumber"];
+//        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+//        [self.steps addObject:step];
+//    }
+//    [db close];
+//}
 
+-(id)initWithDBProtocolObject:(NSObject*)DBProtocolObject{
+    self = [super init];
+    if (self) {
+        NSString *dbPath = @"medRef.db";
+        _steps = [[NSMutableArray alloc] init];
+        
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+        [db open];
+        FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
+        while([results next])
+        {
+            _name = [results stringForColumn:@"name"];
+            ProtocolStep *step = [[ProtocolStep alloc] init];
+            step.stepNumber = [results intForColumn:@"stepNumber"];
+            [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+            [self.steps addObject:step];
+        }
+        
+        [db close];
+    }
+    return self;
+}
+-(NSMutableArray *)steps{
+    if(_steps == nil){
+        if(db exists){
+            NSArray* stepIds = [db getStepIDsForProtocolID:self.protocolID];
+            for(NSString* stepId in stepIds){
+                [_steps addObject:[ProtocolStep initWithID]];
+            }
+            _steps = [db getStepsForProtocol:];
+        } else {
+            // some error or get data from parse
+        }
+        
+    }
+}
 
 -(int)countSteps{
     return [self.steps count];

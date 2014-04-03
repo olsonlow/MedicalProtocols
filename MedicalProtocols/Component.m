@@ -63,18 +63,9 @@
     NSMutableArray* components = [[NSMutableArray alloc] init];
     NSString *dbPath = @"medRef.db";
     
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    [db open];
-    FMResultSet *results = [db executeQuery:@"SELECT * FROM textblock"];
-    while([results next])
-    {
-        ProtocolStep *step = [[ProtocolStep alloc] init];
-        step.stepNumber = [results intForColumn:@"stepNumber"];
-        [self.component initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
-        [self.components addObject:step];
-    }
     
-    [db close];
+    
+    [components addObject:[[TextBlock alloc] initWithDBObject:<#(NSObject *)#>]]
 }
 
 -(id)initWithParseObject:(PFObject*)parseObject{

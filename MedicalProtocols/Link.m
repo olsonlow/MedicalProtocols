@@ -8,6 +8,9 @@
 
 #import "Link.h"
 #import <Parse/Parse.h>
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @implementation Link
 -(id)initWithParseObject:(PFObject*)parseObject{
@@ -15,6 +18,26 @@
     if (self) {
         _label = parseObject[@"label"];
         _url = parseObject[@"URL"];
+    }
+    return self;
+}
+
+-(id)initWithDBObject:(NSObject*)DBObject{
+    self = [super init];
+    if (self) {
+        NSString *dbPath = @"medRef.db";
+        
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+        [db open];
+        FMResultSet *results = [db executeQuery:@"SELECT * FROM link"];
+        while([results next])
+        {
+            _label = [results stringForColumn:@"label"];
+            _url = [results stringForColumn:@"url"];
+            
+        }
+        
+        [db close];
     }
     return self;
 }
