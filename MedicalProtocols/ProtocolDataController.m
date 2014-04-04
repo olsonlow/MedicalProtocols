@@ -58,6 +58,7 @@
                     //[_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
                     MedProtocol *mp = [[MedProtocol alloc]init];
                     mp.idStr = object.objectId;
+                    mp.name = object[@"name"];
                     mp.createdAt = object.createdAt;
                     mp.updatedAt = object.updatedAt;
                     [_protocols addObject:mp];
