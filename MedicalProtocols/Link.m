@@ -22,14 +22,14 @@
     return self;
 }
 
--(id)initWithDBObject:(NSObject*)DBObject{
+-(id)initFromDBWithStepID:(NSObject*)DBObject{
     self = [super init];
     if (self) {
         NSString *dbPath = @"medRef.db";
         
         FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
         [db open];
-        FMResultSet *results = [db executeQuery:@"SELECT * FROM link"];
+        FMResultSet *results = [db executeQuery:@"SELECT * FROM link where stepID = ?"];
         while([results next])
         {
             _label = [results stringForColumn:@"label"];
