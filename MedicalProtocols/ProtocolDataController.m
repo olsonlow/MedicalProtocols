@@ -55,19 +55,25 @@
                 NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
                 // Do something with the found objects
                 for (PFObject *object in objects) {
-                    [_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
-                    MedProtocol *mp = (MedProtocol*) object;
+                    //[_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
+                    MedProtocol *mp = [[MedProtocol alloc]init];
+                    mp.idStr = object.objectId;
+                    mp.createdAt = object.createdAt;
+                    mp.updatedAt = object.updatedAt;
+                    [_protocols addObject:mp];
                     [self insertProtocol:mp];
-                    NSLog(@"%@", object.objectId);
+                   
                 }
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-//        //set up in-app database (medRef.db)
-//        [_lDB LocalDBInit];
-//       //dummy test
+        
+        //set up in-app shared instance of database (medRef.db)
+        _lDB = [[LocalDB alloc]LocalDBInit];
+        
+       //dummy test
 //        MedProtocol *mp = [[MedProtocol alloc] init];
 //        mp.idStr = @"obj49djec";
 //        mp.name = @"Myocarditis";
