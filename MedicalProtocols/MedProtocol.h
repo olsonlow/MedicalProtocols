@@ -16,9 +16,11 @@
 @property(nonatomic, copy) NSDate* createdAt;
 @property(nonatomic, copy) NSDate* updatedAt;
 @property(nonatomic) UIImage* image;
+@property(nonatomic) NSString* dbPath;
+-(void)initdbPath:(NSString*)path;
 -(id)initWithName:(NSString*)name steps:(NSMutableArray*)steps;
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
-
+-(NSMutableArray*)steps;
 @end

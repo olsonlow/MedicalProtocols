@@ -9,9 +9,13 @@
 #import "ProtocolStep.h"
 #import <Parse/Parse.h>
 #import "Component.h"
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
+@property (nonatomic) Component* component;
 
 @end
 
@@ -61,6 +65,23 @@
 //            [_components addObject:component];
 //        }];
     }
+    
     return self;
 }
+//-(NSMutableArray*)components{
+//    NSString *dbPath = @"medRef.db";
+//    self.components = [[NSMutableArray alloc] init];
+//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+//    [db open];
+//    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
+//    while([results next])
+//    {
+//        ProtocolStep *step = [[ProtocolStep alloc] init];
+//        step.stepNumber = [results intForColumn:@"stepNumber"];
+//        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
+//        [self.steps addObject:step];
+//    }
+//    [db close];
+//    return self;
+//}
 @end

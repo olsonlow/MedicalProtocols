@@ -15,5 +15,6 @@
 @property(nonatomic,assign) Boolean printable;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
+-(id)initWithDBObject:(NSObject*)DBObject;
 
 @end

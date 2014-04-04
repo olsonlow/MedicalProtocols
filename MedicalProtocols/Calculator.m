@@ -8,12 +8,33 @@
 
 #import "Calculator.h"
 #import <Parse/Parse.h>
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @implementation Calculator
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
         //        _name = parseObject[@"name"];
+    }
+    return self;
+}
+
+-(id)initWithDBObject:(NSObject*)DBObject{
+    self = [super init];
+    if (self) {
+        NSString *dbPath = @"medRef.db";
+        
+        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
+        [db open];
+        FMResultSet *results = [db executeQuery:@"SELECT * FROM calculator"];
+        while([results next])
+        {
+            //_name = [results stringForColumn:@"name"];            
+        }
+        
+        [db close];
     }
     return self;
 }

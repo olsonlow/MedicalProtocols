@@ -13,6 +13,10 @@
 #import "TextBlock.h"
 #import "Form.h"
 #import "Calculator.h"
+#import "LocalDB.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
+
 
 @implementation Component
 +(NSMutableArray*)componentsForStepParseObject:(PFObject*)parseObject{
@@ -55,6 +59,15 @@
 
     return components;
 }
+//+(NSMutableArray*)componentsForStepDBObject:(NSObject*)dbObject{
+//    NSMutableArray* components = [[NSMutableArray alloc] init];
+//    NSString *dbPath = @"medRef.db";
+//    
+//    
+//    
+//    [components addObject:[[TextBlock alloc] initWithDBObject:<#(NSObject *)#>]]
+//}
+
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
