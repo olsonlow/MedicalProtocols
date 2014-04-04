@@ -118,6 +118,7 @@
 		A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDetailViewController.m; sourceTree = "<group>"; };
 		A324B32818E4E4E000261C57 /* ProtocolDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolDataController.h; sourceTree = "<group>"; };
 		A324B32918E4E4E000261C57 /* ProtocolDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDataController.m; sourceTree = "<group>"; };
+		A362A68718EE38DB00148BD6 /* parseCreationScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parseCreationScript.h; sourceTree = "<group>"; };
 		A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolStep.h; sourceTree = "<group>"; };
 		A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolStep.m; sourceTree = "<group>"; };
 		A3689B7818E94D0A0040D6F2 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
@@ -315,6 +316,7 @@
 		A324B31118E24ADB00261C57 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A362A68718EE38DB00148BD6 /* parseCreationScript.h */,
 				A324B32818E4E4E000261C57 /* ProtocolDataController.h */,
 				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
 				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
