@@ -41,13 +41,6 @@
     if (self) {
         _protocols = [[NSMutableArray alloc] init];
         
-//        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
-//
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-//            for (PFObject* parseProtocolObject in results) {
-//                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocolObject]];
-//            }
-//        }];
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
