@@ -10,7 +10,7 @@
 
 @interface LocalDB : NSObject
 +(LocalDB *) sharedInstance;
--(void) LocalDBInit;
+-(id) LocalDBInit;
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
 

@@ -9,12 +9,12 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
-//#import "FMDB.h"
-//#import "FMResultSet.h"
-//#import "FMDatabase.h"
+#import "FMDB.h"
+#import "FMResultSet.h"
+#import "FMDatabase.h"
 #import "LocalDB.h"
-//#import "FMDatabase.h"
-//#import "FMResultSet.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface ProtocolDataController()
 {
@@ -40,19 +40,20 @@
             }
         }];
         
-        //set up in-app database (medRef.db)
-        [_lDB LocalDBInit];
+        //set up in-app shared instance of database (medRef.db)
+        _lDB = [[LocalDB alloc]LocalDBInit];
+        
        //dummy test
-        MedProtocol *mp = [[MedProtocol alloc] init];
-        mp.idStr = @"obj49djec";
-        mp.name = @"Myocarditis";
-        NSDate *now = [[NSDate alloc]init];
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-       mp.createdAt = [calendar dateFromComponents:components];
-        mp.updatedAt = [calendar dateFromComponents:components];
-        //[self insertProtocol:mp];
-        //[self populateFromDatabase]; //test to see if we can query the table
+//        MedProtocol *mp = [[MedProtocol alloc] init];
+//        mp.idStr = @"efvnejbvoenvowenfvowenvowejnvowefnvet";
+//        mp.name = @"Myocarditis";
+//        NSDate *now = [[NSDate alloc]init];
+//        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+//       mp.createdAt = [calendar dateFromComponents:components];
+//        mp.updatedAt = [calendar dateFromComponents:components];
+//        [self insertProtocol:mp];
+//        [self populateFromDatabase]; //test to see if we can query the table
     }
     return self;
 }
@@ -71,7 +72,7 @@
     return  self.protocols;
 }
 
-/*-(BOOL) insertProtocol:(MedProtocol *) mp
+-(BOOL) insertProtocol:(MedProtocol *) mp
 {
    //NSLog(@"INSERT PROTOCOL");
     FMDatabase *db = [FMDatabase databaseWithPath: _lDB.databasePath];
@@ -87,7 +88,7 @@
     BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
     [db close];
     return success;
-}*/
+}
 
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
@@ -96,7 +97,7 @@
 }
 
 //Create a method that builds a protocol from the onboard database
-/*-(void)populateFromDatabase
+-(void)populateFromDatabase
 {
     _protocols = [[NSMutableArray alloc] init];
     FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
@@ -106,6 +107,7 @@
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
+        NSLog(@"NAME: %@", protocol.name);
         protocol.protocolId = [results stringForColumn:@"objectID"];
         protocol.createdAt = [results dateForColumn:@"createdAt"];
         protocol.updatedAt = [results dateForColumn:@"updatedAt"];
@@ -113,7 +115,7 @@
     }
     [db close];
 }
-*/
+
 
 
 -(int)countProtocols{
