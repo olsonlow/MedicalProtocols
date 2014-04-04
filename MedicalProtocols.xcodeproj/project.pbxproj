@@ -26,7 +26,6 @@
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
 		89C6501418E8DCFD004553E9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A302F60718ECDC830065D42E /* StepMasterViewController.m */; };
-		A302F61718ED0E2A0065D42E /* medRef.db in Resources */ = {isa = PBXBuildFile; fileRef = A302F61618ED0E2A0065D42E /* medRef.db */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
 		A324B2D918E24A4600261C57 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D818E24A4600261C57 /* UIKit.framework */; };
@@ -95,7 +94,6 @@
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
 		A302F60618ECDC830065D42E /* StepMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepMasterViewController.h; sourceTree = "<group>"; };
 		A302F60718ECDC830065D42E /* StepMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepMasterViewController.m; sourceTree = "<group>"; };
-		A302F61618ED0E2A0065D42E /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
 		A324B2D118E24A4600261C57 /* MedicalProtocols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicalProtocols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A324B2D418E24A4600261C57 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A324B2D618E24A4600261C57 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -206,7 +204,6 @@
 		A324B2C818E24A4600261C57 = {
 			isa = PBXGroup;
 			children = (
-				A302F61618ED0E2A0065D42E /* medRef.db */,
 				A324B2DA18E24A4600261C57 /* MedicalProtocols */,
 				A324B2FF18E24A4600261C57 /* MedicalProtocolsTests */,
 				A324B2D318E24A4600261C57 /* Frameworks */,
@@ -441,7 +438,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A302F61718ED0E2A0065D42E /* medRef.db in Resources */,
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
 				89756D4E18ECCBB20006321C /* medRef.sql in Resources */,
 				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
