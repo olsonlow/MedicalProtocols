@@ -41,48 +41,43 @@
     if (self) {
         _protocols = [[NSMutableArray alloc] init];
         
+//        PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
+//
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+//            for (PFObject* parseProtocolObject in results) {
+//                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocolObject]];
+//            }
+//        }];
         PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
-
-        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-            for (PFObject* parseProtocolObject in results) {
-                [_protocols addObject:[[MedProtocol alloc] initWithParseObject:parseProtocolObject]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                // The find succeeded.
+                NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
+                // Do something with the found objects
+                for (PFObject *object in objects) {
+                    [_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
+                    MedProtocol *mp = (MedProtocol*) object;
+                    [self insertProtocol:mp];
+                    NSLog(@"%@", object.objectId);
+                }
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-        
-        //set up in-app database (medRef.db)
-        self.databaseName = @"medRef.db";
-        NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
-        self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        BOOL success = [fileManager fileExistsAtPath:self.databasePath];
-        if(!success)
-        {
-            NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
-            NSString *fromPath = [[NSBundle mainBundle] bundlePath];
-            fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
-            NSError *createFileError = nil;
-            if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
-                NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
-            }
-            NSError *copyError = nil;
-            if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
-                NSLog(@"Error copying files: %@", [copyError localizedDescription]);
-            }
-        }
-        
-        
-        //dummy test
+//        //set up in-app database (medRef.db)
+//        [_lDB LocalDBInit];
+//       //dummy test
 //        MedProtocol *mp = [[MedProtocol alloc] init];
 //        mp.idStr = @"obj49djec";
 //        mp.name = @"Myocarditis";
 //        NSDate *now = [[NSDate alloc]init];
 //        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 //        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-//        mp.createdAt = [calendar dateFromComponents:components];
+//       mp.createdAt = [calendar dateFromComponents:components];
 //        mp.updatedAt = [calendar dateFromComponents:components];
-//        [self insertProtocol:mp];
-//        [self populateFromDatabase]; //test to see if we can query the table
+        //[self insertProtocol:mp];
+        //[self populateFromDatabase]; //test to see if we can query the table
     }
     return self;
 }
@@ -101,7 +96,7 @@
     return  self.protocols;
 }
 
-/*-(BOOL) insertProtocol:(MedProtocol *) mp
+-(BOOL) insertProtocol:(MedProtocol *) mp
 {
    //NSLog(@"INSERT PROTOCOL");
     FMDatabase *db = [FMDatabase databaseWithPath: _lDB.databasePath];
@@ -117,7 +112,7 @@
     BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
     [db close];
     return success;
-}*/
+}
 
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
