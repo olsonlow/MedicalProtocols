@@ -24,4 +24,5 @@
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
 -(NSMutableArray*)steps;
+
 @end

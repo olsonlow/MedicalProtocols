@@ -16,6 +16,7 @@
 @property(nonatomic) NSString* stepId;
 @property(nonatomic) NSDate *createdAt;
 @property(nonatomic) NSDate *updatedAt;
+@property(nonatomic) BOOL printable;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(id)initWithDBObject:(NSObject*)DBObject;

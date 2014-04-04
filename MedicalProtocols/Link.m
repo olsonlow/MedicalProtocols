@@ -41,4 +41,8 @@
     }
     return self;
 }
+-(BOOL)printable{
+    return NO;
+}
+
 @end
