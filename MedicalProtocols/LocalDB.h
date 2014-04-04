@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface LocalDB : NSObject
--(BOOL) createDB;
++(LocalDB *) sharedInstance;
+-(void) LocalDBInit;
+@property (strong, nonatomic) NSString *databaseName;
+@property (strong, nonatomic) NSString *databasePath;
+
+
 @end

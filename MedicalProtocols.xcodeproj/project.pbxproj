@@ -89,6 +89,7 @@
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
 		89756D4C18ECCB2C0006321C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = medRef.db; path = MedicalProtocols/medRef.db; sourceTree = SOURCE_ROOT; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
+		89A41F3F18EF5C9A00CA871F /* sqlObjectCreateDummyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sqlObjectCreateDummyCode.h; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
@@ -317,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				A362A68718EE38DB00148BD6 /* parseCreationScript.h */,
+				89A41F3F18EF5C9A00CA871F /* sqlObjectCreateDummyCode.h */,
 				A324B32818E4E4E000261C57 /* ProtocolDataController.h */,
 				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
 				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
