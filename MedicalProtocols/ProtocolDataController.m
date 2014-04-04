@@ -9,12 +9,12 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
-//#import "FMDB.h"
-//#import "FMResultSet.h"
-//#import "FMDatabase.h"
+#import "FMDB.h"
+#import "FMResultSet.h"
+#import "FMDatabase.h"
 #import "LocalDB.h"
-//#import "FMDatabase.h"
-//#import "FMResultSet.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 #import "ProtocolStep.h"
 #import "TextBlock.h"
@@ -121,7 +121,7 @@
 }
 
 //Create a method that builds a protocol from the onboard database
-/*-(void)populateFromDatabase
+-(void)populateFromDatabase
 {
     _protocols = [[NSMutableArray alloc] init];
     FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
@@ -131,6 +131,7 @@
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
+        NSLog(@"NAME: %@", protocol.name);
         protocol.protocolId = [results stringForColumn:@"objectID"];
         protocol.createdAt = [results dateForColumn:@"createdAt"];
         protocol.updatedAt = [results dateForColumn:@"updatedAt"];
@@ -138,7 +139,7 @@
     }
     [db close];
 }
-*/
+
 
 
 -(int)countProtocols{

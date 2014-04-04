@@ -14,7 +14,7 @@
 #import <Parse/Parse.h>
 @implementation LocalDB
 
--(void) LocalDBInit
+-(id) LocalDBInit
 {
    // self.databaseName = nil;
    // self.databasePath = nil;
@@ -39,13 +39,14 @@
             NSLog(@"Error copying files: %@", [copyError localizedDescription]);
         }
     }
+    return self;
 }
 
 +(LocalDB *) sharedInstance
 {
     static LocalDB* sharedObject = nil;
     if(sharedObject == nil)
-        sharedObject = [[LocalDB alloc]init];
+        sharedObject = [[LocalDB alloc]LocalDBInit];
     return sharedObject;
 }
 
