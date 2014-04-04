@@ -57,6 +57,7 @@
                 for (PFObject *object in objects) {
                     //[_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
                     MedProtocol *mp = [[MedProtocol alloc]init];
+                    mp.name =object[@"name"];
                     mp.idStr = object.objectId;
                     mp.createdAt = object.createdAt;
                     mp.updatedAt = object.updatedAt;
