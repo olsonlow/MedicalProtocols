@@ -14,32 +14,42 @@
 #import <Parse/Parse.h>
 @implementation LocalDB
 
--(BOOL) createDB
+-(void) LocalDBInit
 {
-    NSLog(@"CREATEDB");
-    NSString *dbPath = @"protocols.db";
-    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-    if(![db open])
+   // self.databaseName = nil;
+   // self.databasePath = nil;
+    NSLog(@"INITIALIZING LOCAL DB");
+    self.databaseName = @"medRef.db";
+    NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
+    self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    if(!success)
     {
-        return NO;
-    }
-    else
-    {
-        [self loadDB];
-        return YES;
+        NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
+        NSString *fromPath = [[NSBundle mainBundle] bundlePath];
+        fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
+        NSError *createFileError = nil;
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
+            NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
+        }
+        NSError *copyError = nil;
+        if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
+            NSLog(@"Error copying files: %@", [copyError localizedDescription]);
+        }
     }
 }
 
--(void) loadDB
++(LocalDB *) sharedInstance
 {
-    PFQuery *protocolQuery = [PFQuery queryWithClassName:@"Protocol"];
-    [protocolQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error)
-            NSLog(@"ERROR QUERYING PARSE: UNABLE TO PULL DOWN PROTOCOL DATA");
-        for (PFObject *object in objects) {
-            NSLog(@"%@", object.objectId);
-        }}];
+    static LocalDB* sharedObject = nil;
+    if(sharedObject == nil)
+        sharedObject = [[LocalDB alloc]init];
+    return sharedObject;
 }
+
+
 
 
 @end

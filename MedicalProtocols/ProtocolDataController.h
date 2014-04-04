@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @class MedProtocol;
 @interface ProtocolDataController : NSObject
 @property (strong, nonatomic) NSString *databaseName;

@@ -9,12 +9,12 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
-#import "FMDB.h"
-#import "FMResultSet.h"
-#import "FMDatabase.h"
+//#import "FMDB.h"
+//#import "FMResultSet.h"
+//#import "FMDatabase.h"
 #import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
+//#import "FMDatabase.h"
+//#import "FMResultSet.h"
 
 #import "ProtocolStep.h"
 #import "TextBlock.h"
@@ -26,9 +26,13 @@
 
 
 @interface ProtocolDataController()
-@property(nonatomic,strong) NSMutableArray* protocols;
+{
 
+}
+@property(nonatomic,strong) NSMutableArray* protocols;
+@property (nonatomic, strong) LocalDB *lDB;
 @end
+
 
 @implementation ProtocolDataController
 - (id)init
@@ -83,15 +87,24 @@
     return self;
 }
 
+
+
+-(LocalDB *) lDB
+{
+    if(! _lDB)
+        _lDB = [LocalDB sharedInstance];
+    return _lDB;
+}
+
 -(NSMutableArray *) getProtocols
 {
     return  self.protocols;
 }
 
--(BOOL) insertProtocol:(MedProtocol *) mp
+/*-(BOOL) insertProtocol:(MedProtocol *) mp
 {
    //NSLog(@"INSERT PROTOCOL");
-    FMDatabase *db = [FMDatabase databaseWithPath: self.databasePath];
+    FMDatabase *db = [FMDatabase databaseWithPath: _lDB.databasePath];
     [db open];
     BOOL success = [db executeUpdate:@"INSERT INTO protocol (objectID, createdAt, updatedAt, pName) VALUES (?,?,?,?);", mp.idStr ,mp.createdAt, mp.updatedAt, mp.name, nil];
     return success;
@@ -99,12 +112,12 @@
 
 -(BOOL) updateProtocol: (MedProtocol *) mp
 {
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
     [db open];
     BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
     [db close];
     return success;
-}
+}*/
 
 -(NSMutableArray *)protocols{
     if (_protocols == nil)
@@ -113,10 +126,10 @@
 }
 
 //Create a method that builds a protocol from the onboard database
--(void)populateFromDatabase
+/*-(void)populateFromDatabase
 {
     _protocols = [[NSMutableArray alloc] init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath]; //Lowell: I changed this line to use our property databasePath -Zach
+    FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
     [db open];
     FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
     while([results next])
@@ -130,7 +143,7 @@
     }
     [db close];
 }
-
+*/
 
 
 -(int)countProtocols{
