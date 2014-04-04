@@ -74,9 +74,15 @@
         if(success)
         {
             [db open];
-            FMResultSet *pID = [db executeQuery:@"Select objectID FROM protocol WHERE pName = '%@'", self.name];
-            FMResultSet *results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = '%@'", pID];
-            NSLog(@"pID = %@", [pID stringForColumn:@"pName"]);
+            FMResultSet *pID = [db executeQuery:@"Select * FROM protocol WHERE pName = ?", self.name];
+            if([pID next])
+            {
+                NSLog(@"pID = %@", [pID stringForColumn:@"pName"]);
+            }
+            FMResultSet *results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", pID];
+            if ([db hadError]) {
+                NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+            }
             while([results next])
             {
                 ProtocolStep *step = [[ProtocolStep alloc] init];

@@ -49,20 +49,14 @@
             NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
             NSString *fromPath = [[NSBundle mainBundle] bundlePath];
             fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
-            NSError *copyError = nil;
-            if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&copyError]) {
-                NSLog(@"Error copying files: %@", [copyError localizedDescription]);
+            NSError *createFileError = nil;
+            if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
+                NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
             }
+            NSError *copyError = nil;
             if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
                 NSLog(@"Error copying files: %@", [copyError localizedDescription]);
             }
-
-            [self createAndCheckDatabase];
-        }
-        
-        else
-        {
-            [self createAndCheckDatabase];
         }
         
         //load the database from self.protocols
@@ -86,22 +80,6 @@
         [self populateFromDatabase]; //test to see if we can query the table
     }
     return self;
-}
-
--(void) createAndCheckDatabase
-{
-    //NSLog(@"CREATE AND CHECK DATABASE");
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        NSLog(@"FILE PATH: %@ EXISTS", self.databasePath);
-        return;
-    } else {
-        [NSException raise:@"database not found" format:@"we might have to create it programmatically :( tell Luke"];
-        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseName];
-    [fileManager copyItemAtPath:databasePathFromApp toPath:self.databasePath error:nil];
-    }
 }
 
 -(NSMutableArray *) getProtocols
