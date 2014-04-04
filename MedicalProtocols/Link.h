@@ -12,6 +12,10 @@
 @interface Link : NSObject
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* url;
+@property(nonatomic) NSString* linkId;
+@property(nonatomic) NSString* stepId;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(id)initWithDBObject:(NSObject*)DBObject;

@@ -18,7 +18,6 @@
 
 @interface ProtocolDataController()
 @property(nonatomic,strong) NSMutableArray* protocols;
-@property(nonatomic) MedProtocol* protocol;
 
 @end
 
@@ -59,25 +58,18 @@
             }
         }
         
-        //load the database from self.protocols
-        //NSLog(@"NUM. PROTOCOLS: %d", [self.protocols count]);
-        for(int i = 0; i < [self.protocols count]; i++)
-        {
-            MedProtocol *mp = [self.protocols objectAtIndex:i];
-            [self insertProtocol:mp];
-        }
         
-        //dummy test
-        MedProtocol *mp = [[MedProtocol alloc] init];
-        mp.idStr = @"obj49djec";
-        mp.name = @"Myocarditis";
-        NSDate *now = [[NSDate alloc]init];
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-        mp.createdAt = [calendar dateFromComponents:components];
-        mp.updatedAt = [calendar dateFromComponents:components];
-        [self insertProtocol:mp];
-        [self populateFromDatabase]; //test to see if we can query the table
+//        //dummy test
+//        MedProtocol *mp = [[MedProtocol alloc] init];
+//        mp.idStr = @"obj49djec";
+//        mp.name = @"Myocarditis";
+//        NSDate *now = [[NSDate alloc]init];
+//        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+//        mp.createdAt = [calendar dateFromComponents:components];
+//        mp.updatedAt = [calendar dateFromComponents:components];
+//        [self insertProtocol:mp];
+//        [self populateFromDatabase]; //test to see if we can query the table
     }
     return self;
 }
@@ -114,7 +106,7 @@
 //Create a method that builds a protocol from the onboard database
 -(void)populateFromDatabase
 {
-    self.protocols = [[NSMutableArray alloc] init];
+    _protocols = [[NSMutableArray alloc] init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath]; //Lowell: I changed this line to use our property databasePath -Zach
     [db open];
     FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
@@ -122,11 +114,10 @@
     {
         MedProtocol *protocol = [[MedProtocol alloc] init];
         protocol.name = [results stringForColumn:@"pName"];
-        NSLog(@"PROTOCOL NAME: %@", protocol.name);
-        //[protocol stepAtIndex:0];
-        [protocol initdbPath:self.databasePath];
-        self.protocol = [protocol initWithName:protocol.name steps:protocol.steps];
-        [self.protocols addObject:protocol];
+        protocol.protocolId = [results stringForColumn:@"objectID"];
+        protocol.createdAt = [results dateForColumn:@"createdAt"];
+        protocol.updatedAt = [results dateForColumn:@"updatedAt"];
+        [_protocols addObject:protocol];
     }
     [db close];
 }

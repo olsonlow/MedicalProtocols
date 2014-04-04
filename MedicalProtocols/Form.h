@@ -10,5 +10,10 @@
 @class PFObject;
 
 @interface Form : NSObject
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic) NSString *stepId;
+@property(nonatomic) NSString *formId;
+
 -(id)initWithParseObject:(PFObject*)parseObject;
 @end

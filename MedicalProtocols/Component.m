@@ -8,7 +8,6 @@
 
 #import "Component.h"
 #import <Parse/Parse.h>
-
 #import "Link.h"
 #import "TextBlock.h"
 #import "Form.h"
@@ -16,6 +15,13 @@
 #import "LocalDB.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+
+@interface Component()
+{
+ NSString* dbPath;
+}
+
+@end
 
 
 @implementation Component
@@ -59,15 +65,11 @@
 
     return components;
 }
-//+(NSMutableArray*)componentsForStepDBObject:(NSObject*)dbObject{
-//    NSMutableArray* components = [[NSMutableArray alloc] init];
-//    NSString *dbPath = @"medRef.db";
+//-(id)initWithDatabaseObject:(NSObject*) databaseObject{
 //    
 //    
-//    
-//    [components addObject:[[TextBlock alloc] initWithDBObject:<#(NSObject *)#>]]
+//    return self;
 //}
-
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {

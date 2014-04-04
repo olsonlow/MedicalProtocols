@@ -13,6 +13,10 @@
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* choiceA;
 @property(nonatomic,copy) NSString* choiceB;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic) NSString *formSeletionId;
+@property(nonatomic) NSString *formId;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 

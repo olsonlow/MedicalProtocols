@@ -31,7 +31,9 @@
         FMResultSet *results = [db executeQuery:@"SELECT * FROM calculator"];
         while([results next])
         {
-            //_name = [results stringForColumn:@"name"];            
+            _calculatorId = [results stringForColumn:@"objectID"];
+            _stepId = [results stringForColumn:@"stepID"];
+            
         }
         
         [db close];

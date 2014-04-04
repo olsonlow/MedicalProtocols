@@ -10,6 +10,7 @@
 
 @class PFObject;
 @interface ProtocolStep : NSObject
+@property(nonatomic) NSString* dbPath;
 @property(nonatomic,strong) NSString* objectID;
 @property(nonatomic,assign) int stepNumber;
 @property(nonatomic) NSDate *createdAt;

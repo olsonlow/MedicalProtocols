@@ -10,6 +10,12 @@
 @class PFObject;
 
 @interface Calculator : NSObject
+
+@property(nonatomic) NSString* calculatorId;
+@property(nonatomic) NSString* stepId;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
+
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(id)initWithDBObject:(NSObject*)DBObject;
 @end

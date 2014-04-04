@@ -13,6 +13,10 @@
 @property(nonatomic,copy) NSString* title;
 @property(nonatomic,copy) NSString* content;
 @property(nonatomic,assign) Boolean printable;
+@property(nonatomic) NSString* textBlockId;
+@property(nonatomic) NSString* stepId;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 -(id)initWithDBObject:(NSObject*)DBObject;

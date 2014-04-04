@@ -15,7 +15,6 @@
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
-@property (nonatomic) Component* component;
 
 @end
 
@@ -68,20 +67,28 @@
     
     return self;
 }
-//-(NSMutableArray*)components{
-//    NSString *dbPath = @"medRef.db";
-//    self.components = [[NSMutableArray alloc] init];
-//    FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-//    [db open];
-//    FMResultSet *results = [db executeQuery:@"SELECT * FROM step"];
-//    while([results next])
-//    {
-//        ProtocolStep *step = [[ProtocolStep alloc] init];
-//        step.stepNumber = [results intForColumn:@"stepNumber"];
-//        [self.step initComponentsFromDBForStepID:[results stringForColumn:@"objectID"]];
-//        [self.steps addObject:step];
-//    }
-//    [db close];
-//    return self;
-//}
+-(NSMutableArray*)components{
+    if(_components == nil){
+        _components = [[NSMutableArray alloc] init];
+        FMDatabase *db = [FMDatabase databaseWithPath:self.dbPath];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        BOOL success = [fileManager fileExistsAtPath:self.dbPath];
+        if(success)
+        {
+            [db open];
+            FMResultSet *results = [db executeQuery:@"", self.objectID];
+            while([results next])
+            {
+                Component *component = [[Component alloc] init];
+                [_components addObject:component];
+            }
+            if ([db hadError]) {
+                NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+            }
+            
+            [db close];
+        }
+    }
+    return _components;
+}
 @end

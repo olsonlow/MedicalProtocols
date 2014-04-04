@@ -14,6 +14,10 @@
 @property(nonatomic,strong) NSNumber* defaultValue;
 @property(nonatomic,strong) NSNumber* maxValue;
 @property(nonatomic,strong) NSNumber* minValue;
+@property(nonatomic) NSDate *createdAt;
+@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic) NSString *formNumberId;
+@property(nonatomic) NSString *formId;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 
