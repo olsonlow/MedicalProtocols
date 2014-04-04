@@ -48,7 +48,6 @@
     return self;
 }
 -(void)initdbPath:(NSString*)path{
-    NSLog(@"It's getting called");
     self.dbPath = path;
 //    NSFileManager *fileManager = [NSFileManager defaultManager];
 //    BOOL success = [fileManager fileExistsAtPath:self.dbPath];
@@ -76,7 +75,6 @@
             [db open];
             FMResultSet *pID = [db executeQuery:@"Select objectID FROM protocol WHERE pName = '%@'", self.name];
             FMResultSet *results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = '%@'", pID];
-            NSLog(@"pID = %@", [pID stringForColumn:@"pName"]);
             while([results next])
             {
                 ProtocolStep *step = [[ProtocolStep alloc] init];
