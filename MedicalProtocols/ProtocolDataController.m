@@ -59,7 +59,7 @@
 
 
 
--(LocalDB *) lDB //THIS FUNCTION IS WHERE THE ERROR IS GETTING EXPOSED
+-(LocalDB *) lDB
 {
     if(! _lDB)
         _lDB = [LocalDB sharedInstance];

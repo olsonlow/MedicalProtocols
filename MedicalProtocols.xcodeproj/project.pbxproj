@@ -23,6 +23,7 @@
 		361A2D8818ECDFC20030D688 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7B18ECDF5F0030D688 /* FMDatabaseQueue.m */; };
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
 		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
+		89A41F4118EF627C00CA871F /* LocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6501618E8DE66004553E9 /* LocalDB.m */; };
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
 		89C6501418E8DCFD004553E9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A302F60718ECDC830065D42E /* StepMasterViewController.m */; };
@@ -465,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A41F4118EF627C00CA871F /* LocalDB.m in Sources */,
 				361A2D8518ECDFC20030D688 /* FMDatabase.m in Sources */,
 				361A2D8618ECDFC20030D688 /* FMDatabaseAdditions.m in Sources */,
 				361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */,
