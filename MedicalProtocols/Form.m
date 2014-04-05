@@ -60,9 +60,9 @@
                     if([formComponent isEqualToString:@"formNumber"]){
                         FormNumber *formNumber = [[FormNumber alloc]init];
                         formNumber.formNumberId = [formResults stringForColumn:@"objectID"];
-                        formNumber.defaultValue = [NSNumber numberWithInt:[formResults intForColumn:@"defaultValue"]];
-                        formNumber.minValue = [NSNumber numberWithInt:[formResults intForColumn:@"minValue"]];
-                        formNumber.maxValue = [NSNumber numberWithInt:[formResults intForColumn:@"maxValue"]];
+                        formNumber.defaultValue = [formResults intForColumn:@"defaultValue"];
+                        formNumber.minValue = [formResults intForColumn:@"minValue"];
+                        formNumber.maxValue = [formResults intForColumn:@"maxValue"];
                         formNumber.label = [formResults stringForColumn:@"label"];
                         formNumber.createdAt = [formResults dateForColumn:@"createdAt"];
                         formNumber.updatedAt = [formResults dateForColumn:@"updatesAt"];

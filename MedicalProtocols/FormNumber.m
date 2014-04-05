@@ -14,9 +14,9 @@
     self = [super init];
     if (self) {
         _label = parseObject[@"label"];
-        _defaultValue = parseObject[@"defaultValue"];
-        _maxValue = parseObject[@"maxValue"];
-        _minValue = parseObject[@"minValue"];
+        _defaultValue = [parseObject[@"defaultValue"] intValue];
+        _maxValue = [parseObject[@"maxValue"]intValue];
+        _minValue = [parseObject[@"minValue"]intValue];
     }
     return self;
 }
