@@ -8,18 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, DataType) {
+    DataTypeProtocol,
+    DataTypeStep,
+    DataTypeComponent,
+};
+
 @protocol medRefDataSource<NSObject>
-
--(NSArray*)getAllProtocols;
--(NSArray*)getStepsForProtocolId:(NSString*)protocolId;
--(NSArray*)getComponentsForStepId:(NSString*)stepId;
-
+-(NSArray*)getAll:(DataType)dataType;
 @end
 
 @interface DataSource : NSObject <medRefDataSource>
--(NSArray*)getAllProtocols;
--(NSArray*)getStepsForProtocolId:(NSString*)protocolId;
--(NSArray*)getComponentsForStepId:(NSString*)stepId;
 
 @end
 
