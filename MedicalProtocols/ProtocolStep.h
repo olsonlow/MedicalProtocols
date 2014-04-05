@@ -19,6 +19,5 @@
 @property(nonatomic,strong) NSString* description;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
--(void)initWithStepID;
 
 @end

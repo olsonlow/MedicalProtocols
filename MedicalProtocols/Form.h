@@ -14,6 +14,7 @@
 @property(nonatomic) NSDate *updatedAt;
 @property(nonatomic) NSString *stepId;
 @property(nonatomic) NSString *formId;
+@property(nonatomic) NSString* dbPath;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
 @end

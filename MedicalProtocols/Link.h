@@ -19,6 +19,5 @@
 @property(nonatomic) BOOL printable;
 
 -(id)initWithParseObject:(PFObject*)parseObject;
--(id)initWithDBObject:(NSObject*)DBObject;
 
 @end
