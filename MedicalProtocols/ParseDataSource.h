@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSource.h"
 
-@interface ParseDataSource : NSObject
 
+@interface ParseDataSource : NSObject<medRefDataSource>
++(ParseDataSource *) sharedInstance;
 @end
