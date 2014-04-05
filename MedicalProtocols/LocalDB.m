@@ -130,15 +130,47 @@
     
     return NULL;
 }
+
+//NEED TO COMPLETE
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+    NSArray *tableName = [self tableNamesForDataType:dataType];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    FMResultSet * result;
+    if(success)
+    {
+        [db open];
+        result = [db executeQuery:@"UPDATE"];
+    }
+    if ([db hadError]) {
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+    [db close];
+    return result;
+    
     return NULL;
 }
 -(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
 
--(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
-    return NULL;
+-(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
+    NSArray *tableName = [self tableNamesForDataType:dataType];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    FMResultSet * result;
+    if(success)
+    {
+        [db open];
+        result = [db executeQuery:@"SELECT * FROM ? WHERE objectID = ?", tableName, idString];
+    }
+    if ([db hadError]) {
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+    [db close];
+    return result;
 }
 
 -(NSArray*)getAll:(DataType)dataType{
@@ -155,7 +187,7 @@
     if(success)
     {
         [db open];
-        FMResultSet *fsResults;//
+        FMResultSet *fsResults;
         if(parentId)
             fsResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formID = ?", parentId];
         else
@@ -190,8 +222,13 @@
             [formComponents addObject:fn];
         }
     }
-    return formComponents;
+    if ([db hadError])
+    {
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
     
+    [db close];
+    return formComponents;
 }
 
 -(NSArray *) getAllFormComponents
@@ -208,7 +245,6 @@
     if(success)
     {
         [db open];
-        
         FMResultSet *tbResults;
         if(parentId)
             tbResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepID = ?", parentId];
@@ -269,7 +305,6 @@
     return components;
 }
 
-
 -(NSArray*)getAllComponents
 {
     return [self getAllComponentsWithParentID:nil];
@@ -282,7 +317,6 @@
     BOOL success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
-        
         FMResultSet *results;
         results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", protocolId];
         
@@ -327,7 +361,7 @@
             t.stepId = [tbResults stringForColumn:@"stepID"];
             [components addObject:t];
         }
-        FMResultSet *cResults = [db executeQuery:@"SELECT * FROM calculator  WHEE stepID = ?", stepId];
+        FMResultSet *cResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepID = ?", stepId];
         while([tbResults next])
         {
             Calculator *c = [[Calculator alloc]init];
@@ -355,18 +389,11 @@
             NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         }
         [db close];
-        
     }
     return components;
 }
 
-//-(LocalDB *) lDB
-//{
-//    if(! _lDB)
-//        _lDB = [LocalDB sharedInstance];
-//    return _lDB;
-//}
-
+//NEED TO COMPLETE
 -(bool)insertDataType:(DataType)dataType withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
@@ -383,26 +410,6 @@
     [db close];
     return success;
 }
-//Create a method that builds a protocol from the onboard database
-//-(void)populateFromDatabase : (NSMutableArray *) protocolArr
-//{
-//    protocolArr = [[NSMutableArray alloc] init];
-//    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-//    [db open];
-//    FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
-//    while([results next])
-//    {
-//        MedProtocol *protocol = [[MedProtocol alloc] init];
-//        protocol.name = [results stringForColumn:@"pName"];
-//        NSLog(@"NAME: %@", protocol.name);
-//        protocol.protocolId = [results stringForColumn:@"objectID"];
-//        protocol.createdAt = [results dateForColumn:@"createdAt"];
-//        protocol.updatedAt = [results dateForColumn:@"updatedAt"];
-//        [protocolArr addObject:protocol];
-//    }
-//    [db close];
-//}
-
 
 -(NSArray*)tableNamesForDataType:(DataType)dataType{
     NSArray* tableNames = nil;
