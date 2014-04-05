@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-
-
 //NOTE: TO RECREATE medRef.db FROM COMMAND LINE:  cat medRef.sql | sqlite3 medRef.db
 #import "LocalDB.h"
 #import "FMDB.h"
@@ -133,7 +131,7 @@
 
 //NEED TO COMPLETE
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
-    NSArray *tableName = [self tableNamesForDataType:dataType];
+    //NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL success = [fileManager fileExistsAtPath:self.databasePath];
@@ -151,6 +149,17 @@
     
     return NULL;
 }
+
+//NEED TO COMPLETE
+-(bool)insertDataType:(DataType)dataType withObject:(id)object{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    NSArray *type = [self tableNamesForDataType: dataType];
+    BOOL success = [db executeUpdate:@"INSERT INTO ? VALUES(?)", type, object];
+    return success;
+}
+
+//NEED TO COMPLETE
 -(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
@@ -391,15 +400,6 @@
         [db close];
     }
     return components;
-}
-
-//NEED TO COMPLETE
--(bool)insertDataType:(DataType)dataType withObject:(id)object{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    [db open];
-    NSArray *type = [self tableNamesForDataType: dataType];
-    BOOL success = [db executeUpdate:@"INSERT INTO ? VALUES(?)", type, object];
-    return success;
 }
 
 -(BOOL) updateProtocol: (MedProtocol *) mp
