@@ -13,6 +13,6 @@
 +(LocalDB *) sharedInstance;
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
-
+-(NSArray*)tableNamesForDataType:(DataType)dataType;
 
 @end
