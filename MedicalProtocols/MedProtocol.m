@@ -47,22 +47,6 @@
     }
     return self;
 }
-//-(void)initdbPath:(NSString*)path{
-//    self.dbPath = path;
-////    NSFileManager *fileManager = [NSFileManager defaultManager];
-////    BOOL success = [fileManager fileExistsAtPath:self.dbPath];
-////    if(success)
-////    {
-////        NSLog(@"FILE PATH: %@ EXISTS", self.dbPath);
-////        return;
-////    } else {
-////        [NSException raise:@"database not found" format:@"we might have to create it programmatically :( tell Luke"];
-////        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"medRef.db"];
-////        [fileManager copyItemAtPath:databasePathFromApp toPath:self.dbPath error:nil];
-////    }
-//    
-//}
-
 
 -(NSMutableArray *)steps{
     if(_steps == nil){

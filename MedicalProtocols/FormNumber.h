@@ -11,9 +11,9 @@
 @class PFObject;
 @interface FormNumber : NSObject
 @property(nonatomic,copy) NSString* label;
-@property(nonatomic,strong) NSNumber* defaultValue;
-@property(nonatomic,strong) NSNumber* maxValue;
-@property(nonatomic,strong) NSNumber* minValue;
+@property(nonatomic,assign) int defaultValue;
+@property(nonatomic,assign) int maxValue;
+@property(nonatomic,assign) int minValue;
 @property(nonatomic) NSDate *createdAt;
 @property(nonatomic) NSDate *updatedAt;
 @property(nonatomic) NSString *formNumberId;

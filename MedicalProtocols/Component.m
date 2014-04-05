@@ -18,7 +18,7 @@
 
 @interface Component()
 {
- NSString* dbPath;
+    
 }
 
 @end
@@ -65,11 +65,7 @@
 
     return components;
 }
-//-(id)initWithDatabaseObject:(NSObject*) databaseObject{
-//    
-//    
-//    return self;
-//}
+
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
