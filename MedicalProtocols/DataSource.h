@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, DataType) {
     DataTypeProtocol,
     DataTypeStep,
     DataTypeComponent,
-    DataTypeFormComponent
+    DataTypeFormComponent,
 };
 
 @protocol medRefDataSource<NSObject>
