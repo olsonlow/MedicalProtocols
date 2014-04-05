@@ -10,6 +10,10 @@
 #import "LocalDB.h"
 #import "ParseDataSource.h"
 
+@interface DataSource()
+-(id<medRefDataSource>)getDataSource;
+@end
+
 @implementation DataSource
 - (instancetype)init
 {
@@ -19,7 +23,24 @@
     }
     return self;
 }
+-(id<medRefDataSource>)getDataSource{
+    return NULL;
+}
+
 -(NSArray*)getAll:(DataType)dataType{
+    id<medRefDataSource> dataSource = [self getDataSource];
+    return [dataSource getAll:dataType];
+}
+-(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+    return NULL;
+}
+-(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
+    return NULL;
+}
+-(bool)insertDataType:(DataType)dataType withObject:(id)object{
+    return NULL;
+}
+-(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
 
