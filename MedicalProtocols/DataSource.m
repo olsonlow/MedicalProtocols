@@ -10,15 +10,19 @@
 #import "LocalDB.h"
 #import "ParseDataSource.h"
 
-@interface DataSource()
-@property(nonatomic,strong) LocalDB* localDatabase;
-
-@end
-
 @implementation DataSource
--(NSArray*)getAllProtocols{
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+-(NSArray*)getAll:(DataType)dataType{
     return NULL;
 }
+
 //-(NSArray*)getAllProtocols{
 //    NSMutableArray* protocols = [[NSMutableArray alloc] init];
 //    PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
@@ -48,13 +52,6 @@
 //    _lDB = [[LocalDB alloc]LocalDBInit];
 //    return protocols;
 //}
-
--(NSArray*)getStepsForProtocolId:(NSString*)protocolId{
-    return NULL;
-}
--(NSArray*)getComponentsForStepId:(NSString*)stepId{
-    return NULL;
-}
 
 //-(LocalDB *) lDB
 //{
