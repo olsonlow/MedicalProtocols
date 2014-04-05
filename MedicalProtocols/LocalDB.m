@@ -14,29 +14,30 @@
 #import <Parse/Parse.h>
 @implementation LocalDB
 
--(id) LocalDBInit
+-(id)init
 {
-   // self.databaseName = nil;
-   // self.databasePath = nil;
-    NSLog(@"INITIALIZING LOCAL DB");
-    self.databaseName = @"medRef.db";
-    NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
-    self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
-    if(!success)
-    {
-        NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
-        NSString *fromPath = [[NSBundle mainBundle] bundlePath];
-        fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
-        NSError *createFileError = nil;
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
-            NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
-        }
-        NSError *copyError = nil;
-        if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
-            NSLog(@"Error copying files: %@", [copyError localizedDescription]);
+    self = [super init];
+    if (self) {
+        NSLog(@"INITIALIZING LOCAL DB");
+        self.databaseName = @"medRef.db";
+        NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
+        self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if([fileManager fileExistsAtPath:self.databasePath])
+        {
+            NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
+            NSString *fromPath = [[NSBundle mainBundle] bundlePath];
+            fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
+            NSError *createFileError = nil;
+            if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
+                NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
+            }
+            NSError *copyError = nil;
+            if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
+                NSLog(@"Error copying files: %@", [copyError localizedDescription]);
+            }
         }
     }
     return self;
@@ -46,7 +47,7 @@
 {
     static LocalDB* sharedObject = nil;
     if(sharedObject == nil)
-        sharedObject = [[LocalDB alloc]LocalDBInit];
+        sharedObject = [[LocalDB alloc] init];
     return sharedObject;
 }
 

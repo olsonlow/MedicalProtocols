@@ -52,6 +52,8 @@
 		A3689B8818E94F0D0040D6F2 /* Form.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8718E94F0D0040D6F2 /* Form.m */; };
 		A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8B18E952BA0040D6F2 /* FormNumber.m */; };
 		A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8E18E952C90040D6F2 /* FormSelection.m */; };
+		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
+		A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE518F08F610016613C /* ParseDataSource.m */; };
 		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +139,10 @@
 		A3689B8B18E952BA0040D6F2 /* FormNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormNumber.m; sourceTree = "<group>"; };
 		A3689B8D18E952C90040D6F2 /* FormSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormSelection.h; sourceTree = "<group>"; };
 		A3689B8E18E952C90040D6F2 /* FormSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormSelection.m; sourceTree = "<group>"; };
+		A3EBEAE118F08F380016613C /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
+		A3EBEAE218F08F380016613C /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		A3EBEAE418F08F610016613C /* ParseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDataSource.h; sourceTree = "<group>"; };
+		A3EBEAE518F08F610016613C /* ParseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDataSource.m; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,7 +254,6 @@
 		A324B2DA18E24A4600261C57 /* MedicalProtocols */ = {
 			isa = PBXGroup;
 			children = (
-				89C64FFF18E8DB06004553E9 /* LocalDatabase */,
 				A324B31118E24ADB00261C57 /* Data */,
 				A324B31018E24AD200261C57 /* MasterViews */,
 				A324B30F18E24AC600261C57 /* DetailViews */,
@@ -322,11 +327,8 @@
 				89A41F3F18EF5C9A00CA871F /* sqlObjectCreateDummyCode.h */,
 				A324B32818E4E4E000261C57 /* ProtocolDataController.h */,
 				A324B32918E4E4E000261C57 /* ProtocolDataController.m */,
-				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
-				A3FA341318E8AEBA000D64F8 /* MedProtocol.m */,
-				A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */,
-				A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */,
-				A3689B7B18E94EB70040D6F2 /* Components */,
+				A3EBEADD18F08EF10016613C /* DataSource */,
+				A3EBEADB18F08ECF0016613C /* DataObjects */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -365,6 +367,38 @@
 				A3689B8E18E952C90040D6F2 /* FormSelection.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		A3EBEADB18F08ECF0016613C /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A3FA341218E8AEBA000D64F8 /* MedProtocol.h */,
+				A3FA341318E8AEBA000D64F8 /* MedProtocol.m */,
+				A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */,
+				A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */,
+				A3689B7B18E94EB70040D6F2 /* Components */,
+			);
+			name = DataObjects;
+			sourceTree = "<group>";
+		};
+		A3EBEADC18F08ED70016613C /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				A3EBEAE418F08F610016613C /* ParseDataSource.h */,
+				A3EBEAE518F08F610016613C /* ParseDataSource.m */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
+		A3EBEADD18F08EF10016613C /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				A3EBEAE118F08F380016613C /* DataSource.h */,
+				A3EBEAE218F08F380016613C /* DataSource.m */,
+				89C64FFF18E8DB06004553E9 /* LocalDatabase */,
+				A3EBEADC18F08ED70016613C /* Parse */,
+			);
+			name = DataSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,7 +445,7 @@
 		A324B2C918E24A4600261C57 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Luke Vergos";
 				TargetAttributes = {
 					A324B2F718E24A4600261C57 = {
@@ -467,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A41F4118EF627C00CA871F /* LocalDB.m in Sources */,
+				A3EBEAE318F08F380016613C /* DataSource.m in Sources */,
 				361A2D8518ECDFC20030D688 /* FMDatabase.m in Sources */,
 				361A2D8618ECDFC20030D688 /* FMDatabaseAdditions.m in Sources */,
 				361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */,
@@ -483,6 +518,7 @@
 				A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
+				A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */,
 				A3689B8218E94EF00040D6F2 /* Link.m in Sources */,
 				A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */,
 				89C6501418E8DCFD004553E9 /* (null) in Sources */,
