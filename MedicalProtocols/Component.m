@@ -18,7 +18,7 @@
 
 @interface Component()
 {
-
+    
 }
 
 @end
