@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, DataType) {
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object;
 -(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString;
 -(bool)insertDataType:(DataType)dataType withObject:(id)object;
--(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString;
+-(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString;
 @end
 
 @interface DataSource : NSObject <medRefDataSource>
