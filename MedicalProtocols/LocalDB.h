@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSource.h"
+@interface LocalDB : NSObject <medRefDataSource>
 
-@interface LocalDB : NSObject
 +(LocalDB *) sharedInstance;
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
