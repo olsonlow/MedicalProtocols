@@ -43,7 +43,7 @@
 -(bool)insertDataType:(DataType)dataType withObject:(id)object{
     return NULL;
 }
--(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
+-(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
 
