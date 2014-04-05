@@ -34,8 +34,9 @@
     return [LocalDB sharedInstance];
 }
 -(void)populateLocalDbFromParse{
-//    ParseDataSource* parseDataSource = [ParseDataSource sharedInstance];
-//    NSArray* protocols = [parseDataSource];
+    ParseDataSource* parseDataSource = [ParseDataSource sharedInstance];
+    NSArray* protocols = [parseDataSource getAll:DataTypeProtocol];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:YES forKey:@"dbinitialized"];
     [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
