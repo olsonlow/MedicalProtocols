@@ -31,6 +31,9 @@
     id<medRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAll:dataType];
 }
+-(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+    return NULL;
+}
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     return NULL;
 }
