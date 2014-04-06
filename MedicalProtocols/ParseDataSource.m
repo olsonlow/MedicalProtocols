@@ -26,10 +26,6 @@
 
 -(NSArray*)getAll:(DataType)dataType{
     
-//    DataTypeProtocol,
-//    DataTypeStep,
-//    DataTypeComponent,
-//    DataTypeFormComponent
     NSMutableArray* dataTypes = nil;
 
     switch (dataType) {
@@ -42,7 +38,7 @@
             break;
             
         case DataTypeComponent:
-            dataTypes = [self getAllFromParseClassNamed:@"Component"];
+            dataTypes = [self getStepComponents];
             break;
             
         case DataTypeFormComponent:
@@ -54,6 +50,44 @@
     }
     return dataTypes;
 }
+
+-(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className{
+    NSMutableArray* parseObjects = [[NSMutableArray alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:className];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                if([className isEqual:@"Protocol"])
+                    [parseObjects addObject:[[MedProtocol alloc] initWithParseObject:object]];
+                else if([className isEqual:@"Step"])
+                    [parseObjects addObject:[[ProtocolStep alloc] initWithParseObject:object]];
+                else if([className isEqual:@"Form"])
+                    [parseObjects addObject:[[Form alloc]initWithParseObject:object]];
+                else if([className isEqual:@"Link"])
+                    [parseObjects addObject:[[Link alloc]initWithParseObject:object]];
+                else if([className isEqual:@"Calculator"])
+                    [parseObjects addObject:[[Calculator alloc]initWithParseObject:object]];
+                else if([className isEqual:@"TextBlock"])
+                    [parseObjects addObject:[[TextBlock alloc]initWithParseObject:object]];
+            }
+        }
+    }];
+    return parseObjects;
+}
+
+-(NSMutableArray*)getStepComponents{
+    NSArray *parseClassNames = @[@"Form", @"Link", @"Calculator", @"TextBlock"];
+    NSMutableArray* stepComponents = [[NSMutableArray alloc]  init];
+    for(NSString* className in parseClassNames){
+        [stepComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
+    }
+    return stepComponents;
+    
+}
+
 -(NSMutableArray*)getFormComponents{
     NSArray* parseClassNames = @[@"FromNumber",@"FormSelection"];
     NSMutableArray* formComponents = [[NSMutableArray alloc]  init];
@@ -62,52 +96,25 @@
     }
     return formComponents;
 }
+
 -(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
     return NULL;
 }
+
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     return NULL;
 }
+
 -(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
+
 -(bool)insertDataType:(DataType)dataType withObject:(id)object{
     return NULL;
 }
+
 -(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
-}
-
--(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className{
-    NSMutableArray* protocols = [[NSMutableArray alloc] init];
-    PFQuery *query = [PFQuery queryWithClassName:className];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                [protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
-            }
-        }
-    }];
-    return protocols;
-}
-
--(NSMutableArray*)getAllStepsFromParseClassNamed:(NSString*)className{
-    NSMutableArray* steps = [[NSMutableArray alloc] init];
-    PFQuery *query = [PFQuery queryWithClassName:className];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                [steps addObject:[[ProtocolStep alloc] initWithParseObject:object]];
-            }
-        }
-    }];
-    return steps;
 }
 
 +(ParseDataSource *)sharedInstance
