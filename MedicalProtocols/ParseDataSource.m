@@ -24,6 +24,14 @@
 
 @implementation ParseDataSource
 
++(ParseDataSource *)sharedInstance
+{
+    static ParseDataSource* sharedObject = nil;
+    if(sharedObject == nil)
+        sharedObject = [[ParseDataSource alloc] init];
+    return sharedObject;
+}
+
 -(NSArray*)getAll:(DataType)dataType{
     
     NSMutableArray* dataTypes = nil;
@@ -60,18 +68,84 @@
             NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
             // Do something with the found objects
             for (PFObject *object in objects) {
-                if([className isEqual:@"Protocol"])
-                    [parseObjects addObject:[[MedProtocol alloc] initWithParseObject:object]];
-                else if([className isEqual:@"Step"])
-                    [parseObjects addObject:[[ProtocolStep alloc] initWithParseObject:object]];
-                else if([className isEqual:@"Form"])
-                    [parseObjects addObject:[[Form alloc]initWithParseObject:object]];
-                else if([className isEqual:@"Link"])
-                    [parseObjects addObject:[[Link alloc]initWithParseObject:object]];
-                else if([className isEqual:@"Calculator"])
-                    [parseObjects addObject:[[Calculator alloc]initWithParseObject:object]];
-                else if([className isEqual:@"TextBlock"])
-                    [parseObjects addObject:[[TextBlock alloc]initWithParseObject:object]];
+                if([className isEqual:@"Protocol"]){
+                    MedProtocol *protocol = [[MedProtocol alloc]init];
+                    protocol.name = object[@"name"];
+                    protocol.createdAt = object[@"createdAt"];
+                    protocol.updatedAt = object[@"updatedAt"];
+                    protocol.idStr = object[@"objectID"];
+                    [parseObjects addObject:protocol];
+                }
+                else if([className isEqual:@"Step"]){
+                    ProtocolStep *step = [[ProtocolStep alloc]init];
+                    step.objectID = object[@"objectId"];
+                    step.stepNumber = [object[@"stepNumber"]intValue];
+                    step.createdAt = object[@"createdAt"];
+                    step.updatedAt = object[@"updatedAt"];
+                    step.protocolID = object[@"protocol"];
+                    step.description = object[@"description"];
+                    [parseObjects addObject:step];
+                }
+                else if([className isEqual:@"Form"]){
+                    Form *form = [[Form alloc]init];
+                    form.formId = object[@"objectId"];
+                    form.stepId = object[@"stepId"];
+                    form.createdAt = object[@"createdAt"];
+                    form.updatedAt = object[@"updatedAt"];
+                    [parseObjects addObject:form];
+                }
+                else if([className isEqual:@"Link"]){
+                    Link *link = [[Link alloc]init];
+                    link.label = object[@"label"];
+                    link.url = object[@"url"];
+                    link.linkId = object[@"objectId"];
+                    link.stepId = object[@"stepId"];
+                    link.createdAt = object[@"createdAt"];
+                    link.updatedAt = object[@"updatedAt"];
+                    link.printable = [object[@"printable"]boolValue];
+                    [parseObjects addObject:link];
+                }
+                else if([className isEqual:@"Calculator"]){
+                    Calculator *calculator = [[Calculator alloc]init];
+                    calculator.calculatorId = object[@"objectId"];
+                    calculator.stepId = object[@"stepId"];
+                    calculator.createdAt = object[@"createdAt"];
+                    calculator.updatedAt = object[@"updatedAt"];
+                    [parseObjects addObject:calculator];
+                }
+                else if([className isEqual:@"TextBlock"]){
+                    TextBlock *textBlock = [[TextBlock alloc]init];
+                    textBlock.title = object[@"title"];
+                    textBlock.content = object[@"content"];
+                    textBlock.printable = [object[@"printable"]boolValue];
+                    textBlock.textBlockId = object[@"objectId"];
+                    textBlock.stepId = object[@"stepId"];
+                    textBlock.createdAt = object[@"createdAt"];
+                    textBlock.updatedAt = object[@"updatedAt"];
+                    [parseObjects addObject:textBlock];
+                }
+                else if([className isEqual:@"FormNumber"]){
+                    FormNumber *formNumber = [[FormNumber alloc]init];
+                    formNumber.label = object[@"label"];
+                    formNumber.defaultValue = [object[@"defaultValue"]intValue];
+                    formNumber.maxValue= [object[@"maxValue"]intValue];
+                    formNumber.minValue = [object[@"minValue"]intValue];
+                    formNumber.createdAt = object[@"createdAt"];
+                    formNumber.updatedAt = object[@"updatedAt"];
+                    formNumber.formNumberId = object[@"objectId"];
+                    formNumber.formId = object[@"formId"];
+                    [parseObjects addObject:formNumber];
+                }else{
+                    FormSelection *formSelection = [[FormSelection alloc]init];
+                    formSelection.label = object[@"label"];
+                    formSelection.choiceA = object[@"choiceA"];
+                    formSelection.choiceB = object[@"choiceB"];
+                    formSelection.createdAt = object[@"createdAt"];
+                    formSelection.updatedAt = object[@"updatedAt"];
+                    formSelection.formSelectionId = object[@"objectId"];
+                    formSelection.formId = object[@"formId"];
+                    [parseObjects addObject:formSelection];
+                }
             }
         }
     }];
@@ -115,13 +189,5 @@
 
 -(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
-}
-
-+(ParseDataSource *)sharedInstance
-{
-    static ParseDataSource* sharedObject = nil;
-    if(sharedObject == nil)
-        sharedObject = [[ParseDataSource alloc] init];
-    return sharedObject;
 }
 @end
