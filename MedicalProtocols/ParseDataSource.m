@@ -152,6 +152,34 @@
     return parseObjects;
 }
 
+-(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+    NSMutableArray *objectsWithParentId = nil;
+    switch (dataType) {
+        case DataTypeProtocol:
+            objectsWithParentId = [self getAllFromParseClassNamed:@"Protocol"];
+            break;
+        case DataTypeStep:
+            if(true){
+                NSMutableArray *steps = [[NSMutableArray alloc]init];
+                steps = [self getAllFromParseClassNamed:@"Step"];
+                for(ProtocolStep* step in steps){
+                    if([step.protocolID isEqual:parentId])
+                        [objectsWithParentId addObject:step];
+                }
+            }
+            break;
+        case DataTypeComponent:
+            objectsWithParentId = [self getStepComponentsWithParentId:parentId];
+            break;
+        case DataTypeFormComponent:
+            objectsWithParentId = [self getFormComponentsWithParentId:parentId];
+            break;
+        default:
+            break;
+    }
+    return objectsWithParentId;
+}
+
 -(NSMutableArray*)getStepComponents{
     NSArray *parseClassNames = @[@"Form", @"Link", @"Calculator", @"TextBlock"];
     NSMutableArray* stepComponents = [[NSMutableArray alloc]  init];
@@ -162,19 +190,75 @@
     
 }
 
+-(NSMutableArray*)getStepComponentsWithParentId:(NSString*)parentId{
+    NSArray *parseClassNames = @[@"Form", @"Link", @"Calculator", @"TextBlock"];
+    NSMutableArray* stepComponents = [[NSMutableArray alloc]init];
+    NSMutableArray* componentsWithParentId = [[NSMutableArray alloc]init];
+    for(NSString* className in parseClassNames){
+        [stepComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
+        if([className isEqual: @"Form"]){
+            for(Form* form in stepComponents){
+                if([form.stepId isEqual:parentId])
+                    [componentsWithParentId addObject:form];
+                    }
+        }
+        else if([className isEqual:@"Link"]){
+            for(Link *link in stepComponents){
+                if([link.stepId isEqual:parentId])
+                    [componentsWithParentId addObject:link];
+            }
+        }
+        else if([className isEqual:@"Calculator"]){
+            for(Calculator* calculator in stepComponents){
+                if([calculator.stepId isEqual:parentId])
+                    [componentsWithParentId addObject:calculator];
+            }
+        }else{
+            for(TextBlock* textBlock in stepComponents){
+                if([textBlock.stepId isEqual:parentId])
+                    [componentsWithParentId addObject:textBlock];
+            }
+        }
+    }
+    return componentsWithParentId;
+
+}
+
 -(NSMutableArray*)getFormComponents{
     NSArray* parseClassNames = @[@"FromNumber",@"FormSelection"];
     NSMutableArray* formComponents = [[NSMutableArray alloc]  init];
     for(NSString* className in parseClassNames){
         [formComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
+        
     }
     return formComponents;
 }
 
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
-    return NULL;
+-(NSMutableArray*)getFormComponentsWithParentId:(NSString*)parentId{
+    NSArray* parseClassNames = @[@"FromNumber",@"FormSelection"];
+    NSMutableArray* formComponents = [[NSMutableArray alloc]  init];
+    NSMutableArray* formComponentsWithParentId = [[NSMutableArray alloc]init];
+    for(NSString* className in parseClassNames){
+        [formComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
+        if([className isEqual: @"FormNumber"]){
+            for(FormNumber* formNumber in formComponents){
+                if([formNumber.formId isEqual:parentId])
+                    [formComponentsWithParentId addObject:formNumber];
+            }
+        }else{
+            for(FormSelection* formSelection in formComponents){
+                if([formSelection.formId isEqual:parentId])
+                    [formComponentsWithParentId addObject:formSelection];
+            }
+        }
+
+    }
+    return formComponentsWithParentId;
 }
 
+-(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
+    return NULL;
+}
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     return NULL;
 }
@@ -184,10 +268,6 @@
 }
 
 -(bool)insertDataType:(DataType)dataType withObject:(id)object{
-    return NULL;
-}
-
--(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
 @end
