@@ -255,10 +255,43 @@
     }
     return formComponentsWithParentId;
 }
+    
+    -(NSArray*)tableNamesForDataType:(DataType)dataType{
+    NSArray* tableNames = nil;
+    switch (dataType) {
+        case DataTypeProtocol:
+            tableNames =@[@"protocol"];
+            break;
+        case DataTypeStep:
+            tableNames =@[@"step"];
+        case DataTypeComponent:
+            tableNames =@[@"form", @"link", @"calculator", @"textBlock"];
+        case DataTypeFormComponent:
+            tableNames = @[@"formNumber", @"formSelection"];
+        default:
+            break;
+    }
+    return tableNames;
+}
+
+
 
 -(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
-    return NULL;
+    __block id obj;
+    PFQuery *query;
+    NSArray *tableName = [self tableNamesForDataType:dataType];
+    //this needs to be refined since some type (eg: component) have more than one associated table
+    query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
+    [query whereKey:@"objectID" equalTo:idString];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        {
+            if(!error)
+                obj= [objects objectAtIndex:0];
+        }
+    }];
+    return obj;
 }
+
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     return NULL;
 }
