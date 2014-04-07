@@ -29,7 +29,14 @@
     }
     return self;
 }
-
+-(id)initWithName:(NSString*)name objectId:(NSString*)objectId{
+    self = [super init];
+    if (self) {
+        _name = name;
+        _objectId = objectId;
+    }
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {

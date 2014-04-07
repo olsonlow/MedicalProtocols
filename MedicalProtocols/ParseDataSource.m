@@ -69,59 +69,29 @@
             // Do something with the found objects
             for (PFObject *object in objects) {
                 if([className isEqualToString:@"Protocol"]){
-                    MedProtocol *protocol = [[MedProtocol alloc]init];
-                    protocol.name = object[@"name"];
-                    protocol.createdAt = object[@"createdAt"];
-                    protocol.updatedAt = object[@"updatedAt"];
-                    protocol.idStr = object[@"objectID"];
+                    MedProtocol *protocol = [[MedProtocol alloc] initWithName:object[@"name"] objectId:object[@"objectID"]];
+//                    protocol.createdAt = object[@"createdAt"];
+//                    protocol.updatedAt = object[@"updatedAt"];
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
-                    ProtocolStep *step = [[ProtocolStep alloc]init];
-                    step.objectID = object[@"objectId"];
-                    step.stepNumber = [object[@"stepNumber"]intValue];
-                    step.createdAt = object[@"createdAt"];
-                    step.updatedAt = object[@"updatedAt"];
-                    step.protocolID = object[@"protocol"];
-                    step.description = object[@"description"];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"objectId"] stepNumber:[object[@"stepNumber"]intValue] description:object[@"description"] protocolId:object[@"protocol"]];
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
-                    Form *form = [[Form alloc]init];
-                    form.formId = object[@"objectId"];
-                    form.stepId = object[@"stepId"];
-                    form.createdAt = object[@"createdAt"];
-                    form.updatedAt = object[@"updatedAt"];
+                    Form *form = [[Form alloc] initWithObjectId:object[@"objectId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:form];
                 }
                 else if([className isEqualToString:@"Link"]){
-                    Link *link = [[Link alloc]init];
-                    link.label = object[@"label"];
-                    link.url = object[@"url"];
-                    link.linkId = object[@"objectId"];
-                    link.stepId = object[@"stepId"];
-                    link.createdAt = object[@"createdAt"];
-                    link.updatedAt = object[@"updatedAt"];
-                    link.printable = [object[@"printable"]boolValue];
+                    Link *link = [[Link alloc]initWithLabel:object[@"label"] url:object[@"url"] objectId:object[@"objectId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:link];
                 }
                 else if([className isEqualToString:@"Calculator"]){
-                    Calculator *calculator = [[Calculator alloc]init];
-                    calculator.calculatorId = object[@"objectId"];
-                    calculator.stepId = object[@"stepId"];
-                    calculator.createdAt = object[@"createdAt"];
-                    calculator.updatedAt = object[@"updatedAt"];
+                    Calculator *calculator = [[Calculator alloc] initWithObjectId:object[@"objectId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:calculator];
                 }
                 else if([className isEqualToString:@"TextBlock"]){
-                    TextBlock *textBlock = [[TextBlock alloc]init];
-                    textBlock.title = object[@"title"];
-                    textBlock.content = object[@"content"];
-                    textBlock.printable = [object[@"printable"]boolValue];
-                    textBlock.textBlockId = object[@"objectId"];
-                    textBlock.stepId = object[@"stepId"];
-                    textBlock.createdAt = object[@"createdAt"];
-                    textBlock.updatedAt = object[@"updatedAt"];
+                    TextBlock *textBlock = [[TextBlock alloc] initWithTitle:object[@"title"] content:object[@"content"] printable:[object[@"printable"]boolValue] objectId:object[@"objectId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:textBlock];
                 }
                 else if([className isEqualToString:@"FormNumber"]){
