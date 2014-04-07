@@ -35,7 +35,9 @@
 }
 -(void)populateLocalDbFromParse{
     ParseDataSource* parseDataSource = [ParseDataSource sharedInstance];
-    NSArray* protocols = [parseDataSource getAll:DataTypeProtocol];
+    NSArray* protocols = [parseDataSource getAllObjectsWithDataType:DataTypeProtocol];
+    
+    //Luke work from here, put parse objects into local db.
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:YES forKey:@"dbinitialized"];
@@ -47,26 +49,25 @@
 }
 -(NSArray*)getAll:(DataType)dataType{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource getAll:dataType];
+    return [dataSource getAllObjectsWithDataType:dataType];
 }
 -(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource getAll:dataType withParentId:parentId];
+    return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
 }
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource updateDataType:dataType withId:idString withObject:object];
+    return [dataSource updateObjectWithDataType:dataType withId:idString withObject:object];
 }
--(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource deleteDataType:dataType withId:idString];
+    return [dataSource deleteObjectWithDataType:dataType withId:idString];
 }
--(bool)insertDataType:(DataType)dataType withObject:(id)object{
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource insertDataType:dataType withObject:object];
+    return [dataSource insertObjectWithDataType:dataType withObject:object];
 }
--(bool)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
-    id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource getObjectDataType:dataType withId:idString];
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+    return NULL;
 }
 @end

@@ -21,7 +21,13 @@
 #import "Calculator.h"
 #import "DataSource.h"
 @implementation LocalDB
-
++(LocalDB *) sharedInstance
+{
+    static LocalDB* sharedObject = nil;
+    if(sharedObject == nil)
+        sharedObject = [[LocalDB alloc] init];
+    return sharedObject;
+}
 -(id)init
 {
     self = [super init];
@@ -32,7 +38,7 @@
         path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
         self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        if([fileManager fileExistsAtPath:self.databasePath])
+        if(![fileManager fileExistsAtPath:self.databasePath])
         {
             NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
             NSString *fromPath = [[NSBundle mainBundle] bundlePath];
@@ -50,16 +56,7 @@
     return self;
 }
 
-+(LocalDB *) sharedInstance
-{
-    static LocalDB* sharedObject = nil;
-    if(sharedObject == nil)
-        sharedObject = [[LocalDB alloc] init];
-    return sharedObject;
-}
-
-
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL success = [fileManager fileExistsAtPath:self.databasePath];
@@ -130,7 +127,7 @@
 }
 
 //NEED TO COMPLETE
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     //NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -151,7 +148,7 @@
 }
 
 //NEED TO COMPLETE
--(bool)insertDataType:(DataType)dataType withObject:(id)object{
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     NSArray *type = [self tableNamesForDataType: dataType];
@@ -159,7 +156,7 @@
     return success;
 }
 
--(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     switch (dataType) {
@@ -195,7 +192,7 @@
     return fn && fs;
 }
 
--(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -213,8 +210,8 @@
     return result;
 }
 
--(NSArray*)getAll:(DataType)dataType{
-    return [self getAll:dataType withParentId:nil];
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
+    return [self getAllObjectsWithDataType:dataType withParentId:nil];
 }
 
 -(NSArray *) getAllFormComponentsWithParentID: (NSString *)parentId

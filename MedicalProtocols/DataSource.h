@@ -16,12 +16,12 @@ typedef NS_ENUM(NSUInteger, DataType) {
 };
 
 @protocol medRefDataSource<NSObject>
--(NSArray*)getAll:(DataType)dataType;
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId;
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object;
--(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString;
--(bool)insertDataType:(DataType)dataType withObject:(id)object;
--(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString;
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType;
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId;
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object;
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString;
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString;
 @end
 
 @interface DataSource : NSObject <medRefDataSource>
