@@ -131,7 +131,7 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *mp = (MedProtocol*) object;
-        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ?, createdAt = ?, updatedAt = ? WHERE objectID = ? ",mp.idStr, mp.name, mp.createdAt, mp.updatedAt, idString];
+        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ?, createdAt = ?, updatedAt = ? WHERE objectID = ? ",mp.objectId, mp.name, mp.createdAt, mp.updatedAt, idString];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
@@ -141,22 +141,22 @@
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form *) object;
-        success = [db executeUpdate:@"UPDATE form SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", form.formId, form.createdAt, form.updatedAt, form.stepId, idString];
+        success = [db executeUpdate:@"UPDATE form SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", form.objectId, form.createdAt, form.updatedAt, form.stepId, idString];
     }
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, createdAt = ?, updatedAt = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.textBlockId, textBlock.createdAt, textBlock.updatedAt, textBlock.printable, textBlock.stepId, idString];
+        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, createdAt = ?, updatedAt = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.objectId, textBlock.createdAt, textBlock.updatedAt, textBlock.printable, textBlock.stepId, idString];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.linkId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId, idString];
+        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId, idString];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator*)object;
-        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", calculator.calculatorId, calculator.createdAt, calculator.updatedAt, calculator.stepId, idString];
+        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", calculator.objectId, calculator.createdAt, calculator.updatedAt, calculator.stepId, idString];
     }
     return success;
 }
@@ -168,7 +168,7 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *mp = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?,?)", mp.idStr, mp.name,  mp.createdAt, mp.updatedAt];
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?,?)", mp.objectId, mp.name,  mp.createdAt, mp.updatedAt];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
@@ -179,25 +179,25 @@
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?,?)", form.formId, form.createdAt, form.updatedAt, form.stepId];
+        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?,?)", form.objectId, form.createdAt, form.updatedAt, form.stepId];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *tb = (TextBlock *) object;
-        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?,?,?)", tb.textBlockId, tb.createdAt, tb.updatedAt, tb.printable, tb.title, tb.stepId];
+        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?,?,?)", tb.objectId, tb.createdAt, tb.updatedAt, tb.printable, tb.title, tb.stepId];
     }
     
     else if([object isKindOfClass:[Link class]])
     {
         Link *l = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", l.linkId, l.url, l.createdAt, l.updatedAt, l.printable, l.label, l.stepId];
+        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", l.objectId, l.url, l.createdAt, l.updatedAt, l.printable, l.label, l.stepId];
     }
     
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *c = (Calculator *)object;
-        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?,?,?)",c.calculatorId, c.createdAt, c.updatedAt, c.stepId];
+        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?,?,?)",c.objectId, c.createdAt, c.updatedAt, c.stepId];
     }
     return success;
 }
@@ -207,9 +207,9 @@
     [db open];
     switch (dataType) {
         case DataTypeProtocol:
-            return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ", idString];
+            return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ?", idString];
         case DataTypeStep:
-            return [db executeUpdate:@"DELETE FROM step WHERE objectID = ", idString];
+            return [db executeUpdate:@"DELETE FROM step WHERE objectID = ?", idString];
         case DataTypeComponent:
             return [self deleteComponentsWithObject:idString];
         case DataTypeFormComponent:
