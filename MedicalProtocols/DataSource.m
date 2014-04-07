@@ -11,113 +11,63 @@
 #import "ParseDataSource.h"
 
 @interface DataSource()
+@property(nonatomic,strong) NSDate* lastUpdated;
 -(id<medRefDataSource>)getDataSource;
+-(void)populateLocalDbFromParse;
+-(void)getParseUpdates;
 @end
 
 @implementation DataSource
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
 -(id<medRefDataSource>)getDataSource{
-    return NULL;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults boolForKey:@"dbinitialized"]){
+        [LocalDB sharedInstance];
+        [self populateLocalDbFromParse];
+    } else {
+        NSCalendar *calender = [NSCalendar currentCalendar];
+        NSDateComponents *dateComparison = [calender components:NSHourCalendarUnit fromDate:[defaults objectForKey:@"dbLastUpdated"]];
+        if([dateComparison day] > 0) {
+            [self getParseUpdates];
+        }
+    }
+    
+    return [LocalDB sharedInstance];
 }
-
+-(void)populateLocalDbFromParse{
+    ParseDataSource* parseDataSource = [ParseDataSource sharedInstance];
+    NSArray* protocols = [parseDataSource getAllObjectsWithDataType:DataTypeProtocol];
+    
+    //Luke work from here, put parse objects into local db.
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:@"dbinitialized"];
+    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
+    [defaults synchronize];
+}
+-(void)getParseUpdates{
+    
+}
 -(NSArray*)getAll:(DataType)dataType{
     id<medRefDataSource> dataSource = [self getDataSource];
-    return [dataSource getAll:dataType];
+    return [dataSource getAllObjectsWithDataType:dataType];
 }
 -(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+    id<medRefDataSource> dataSource = [self getDataSource];
+    return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
+}
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+    id<medRefDataSource> dataSource = [self getDataSource];
+    return [dataSource updateObjectWithDataType:dataType withId:idString withObject:object];
+}
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+    id<medRefDataSource> dataSource = [self getDataSource];
+    return [dataSource deleteObjectWithDataType:dataType withId:idString];
+}
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
+    id<medRefDataSource> dataSource = [self getDataSource];
+    return [dataSource insertObjectWithDataType:dataType withObject:object];
+}
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
-    return NULL;
-}
--(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
-    return NULL;
-}
--(bool)insertDataType:(DataType)dataType withObject:(id)object{
-    return NULL;
-}
--(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
-    return NULL;
-}
-
-//-(NSArray*)getAllProtocols{
-//    NSMutableArray* protocols = [[NSMutableArray alloc] init];
-//    PFQuery *query = [PFQuery queryWithClassName:@"Protocol"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            // The find succeeded.
-//            NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
-//            // Do something with the found objects
-//            for (PFObject *object in objects) {
-//                //[_protocols addObject:[[MedProtocol alloc] initWithParseObject:object]];
-//                MedProtocol *mp = [[MedProtocol alloc]init];
-//                mp.name =object[@"name"];
-//                mp.idStr = object.objectId;
-//                mp.createdAt = object.createdAt;
-//                mp.updatedAt = object.updatedAt;
-//                [protocols addObject:mp];
-//                //[self insertProtocol:mp];
-//
-//            }
-//        } else {
-//            // Log details of the failure
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
-//
-//    //set up in-app shared instance of database (medRef.db)
-//    _lDB = [[LocalDB alloc]LocalDBInit];
-//    return protocols;
-//}
-
-//-(LocalDB *) lDB
-//{
-//    if(! _lDB)
-//        _lDB = [LocalDB sharedInstance];
-//    return _lDB;
-//}
-//-(BOOL) insertProtocol:(MedProtocol *) mp
-//{
-//    //NSLog(@"INSERT PROTOCOL");
-//    FMDatabase *db = [FMDatabase databaseWithPath: _lDB.databasePath];
-//    [db open];
-//    BOOL success = [db executeUpdate:@"INSERT INTO protocol (objectID, createdAt, updatedAt, pName) VALUES (?,?,?,?);", mp.idStr ,mp.createdAt, mp.updatedAt, mp.name, nil];
-//    return success;
-//}
-//
-//-(BOOL) updateProtocol: (MedProtocol *) mp
-//{
-//    FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
-//    [db open];
-//    BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
-//    [db close];
-//    return success;
-//}
-////Create a method that builds a protocol from the onboard database
-//-(void)populateFromDatabase
-//{
-//    _protocols = [[NSMutableArray alloc] init];
-//    FMDatabase *db = [FMDatabase databaseWithPath:_lDB.databasePath];
-//    [db open];
-//    FMResultSet *results = [db executeQuery:@"SELECT * FROM protocol"];
-//    while([results next])
-//    {
-//        MedProtocol *protocol = [[MedProtocol alloc] init];
-//        protocol.name = [results stringForColumn:@"pName"];
-//        NSLog(@"NAME: %@", protocol.name);
-//        protocol.protocolId = [results stringForColumn:@"objectID"];
-//        protocol.createdAt = [results dateForColumn:@"createdAt"];
-//        protocol.updatedAt = [results dateForColumn:@"updatedAt"];
-//        [_protocols addObject:protocol];
-//    }
-//    [db close];
-//}
-
 @end

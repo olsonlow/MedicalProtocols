@@ -32,7 +32,7 @@
     return sharedObject;
 }
 
--(NSArray*)getAll:(DataType)dataType{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
     
     NSMutableArray* dataTypes = nil;
 
@@ -68,7 +68,7 @@
             NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
             // Do something with the found objects
             for (PFObject *object in objects) {
-                if([className isEqual:@"Protocol"]){
+                if([className isEqualToString:@"Protocol"]){
                     MedProtocol *protocol = [[MedProtocol alloc]init];
                     protocol.name = object[@"name"];
                     protocol.createdAt = object[@"createdAt"];
@@ -76,7 +76,7 @@
                     protocol.idStr = object[@"objectID"];
                     [parseObjects addObject:protocol];
                 }
-                else if([className isEqual:@"Step"]){
+                else if([className isEqualToString:@"Step"]){
                     ProtocolStep *step = [[ProtocolStep alloc]init];
                     step.objectID = object[@"objectId"];
                     step.stepNumber = [object[@"stepNumber"]intValue];
@@ -86,7 +86,7 @@
                     step.description = object[@"description"];
                     [parseObjects addObject:step];
                 }
-                else if([className isEqual:@"Form"]){
+                else if([className isEqualToString:@"Form"]){
                     Form *form = [[Form alloc]init];
                     form.formId = object[@"objectId"];
                     form.stepId = object[@"stepId"];
@@ -94,7 +94,7 @@
                     form.updatedAt = object[@"updatedAt"];
                     [parseObjects addObject:form];
                 }
-                else if([className isEqual:@"Link"]){
+                else if([className isEqualToString:@"Link"]){
                     Link *link = [[Link alloc]init];
                     link.label = object[@"label"];
                     link.url = object[@"url"];
@@ -105,7 +105,7 @@
                     link.printable = [object[@"printable"]boolValue];
                     [parseObjects addObject:link];
                 }
-                else if([className isEqual:@"Calculator"]){
+                else if([className isEqualToString:@"Calculator"]){
                     Calculator *calculator = [[Calculator alloc]init];
                     calculator.calculatorId = object[@"objectId"];
                     calculator.stepId = object[@"stepId"];
@@ -113,7 +113,7 @@
                     calculator.updatedAt = object[@"updatedAt"];
                     [parseObjects addObject:calculator];
                 }
-                else if([className isEqual:@"TextBlock"]){
+                else if([className isEqualToString:@"TextBlock"]){
                     TextBlock *textBlock = [[TextBlock alloc]init];
                     textBlock.title = object[@"title"];
                     textBlock.content = object[@"content"];
@@ -124,7 +124,7 @@
                     textBlock.updatedAt = object[@"updatedAt"];
                     [parseObjects addObject:textBlock];
                 }
-                else if([className isEqual:@"FormNumber"]){
+                else if([className isEqualToString:@"FormNumber"]){
                     FormNumber *formNumber = [[FormNumber alloc]init];
                     formNumber.label = object[@"label"];
                     formNumber.defaultValue = [object[@"defaultValue"]intValue];
@@ -152,7 +152,7 @@
     return parseObjects;
 }
 
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     NSMutableArray *objectsWithParentId = nil;
     switch (dataType) {
         case DataTypeProtocol:
@@ -163,7 +163,7 @@
                 NSMutableArray *steps = [[NSMutableArray alloc]init];
                 steps = [self getAllFromParseClassNamed:@"Step"];
                 for(ProtocolStep* step in steps){
-                    if([step.protocolID isEqual:parentId])
+                    if([step.protocolID isEqualToString:parentId])
                         [objectsWithParentId addObject:step];
                 }
             }
@@ -196,26 +196,26 @@
     NSMutableArray* componentsWithParentId = [[NSMutableArray alloc]init];
     for(NSString* className in parseClassNames){
         [stepComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
-        if([className isEqual: @"Form"]){
+        if([className isEqualToString: @"Form"]){
             for(Form* form in stepComponents){
-                if([form.stepId isEqual:parentId])
+                if([form.stepId isEqualToString:parentId])
                     [componentsWithParentId addObject:form];
                     }
         }
-        else if([className isEqual:@"Link"]){
+        else if([className isEqualToString:@"Link"]){
             for(Link *link in stepComponents){
-                if([link.stepId isEqual:parentId])
+                if([link.stepId isEqualToString:parentId])
                     [componentsWithParentId addObject:link];
             }
         }
-        else if([className isEqual:@"Calculator"]){
+        else if([className isEqualToString:@"Calculator"]){
             for(Calculator* calculator in stepComponents){
-                if([calculator.stepId isEqual:parentId])
+                if([calculator.stepId isEqualToString:parentId])
                     [componentsWithParentId addObject:calculator];
             }
         }else{
             for(TextBlock* textBlock in stepComponents){
-                if([textBlock.stepId isEqual:parentId])
+                if([textBlock.stepId isEqualToString:parentId])
                     [componentsWithParentId addObject:textBlock];
             }
         }
@@ -240,14 +240,14 @@
     NSMutableArray* formComponentsWithParentId = [[NSMutableArray alloc]init];
     for(NSString* className in parseClassNames){
         [formComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
-        if([className isEqual: @"FormNumber"]){
+        if([className isEqualToString: @"FormNumber"]){
             for(FormNumber* formNumber in formComponents){
-                if([formNumber.formId isEqual:parentId])
+                if([formNumber.formId isEqualToString:parentId])
                     [formComponentsWithParentId addObject:formNumber];
             }
         }else{
             for(FormSelection* formSelection in formComponents){
-                if([formSelection.formId isEqual:parentId])
+                if([formSelection.formId isEqualToString:parentId])
                     [formComponentsWithParentId addObject:formSelection];
             }
         }
@@ -276,7 +276,7 @@
 
 
 
--(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     __block id obj;
     PFQuery *query;
     NSArray *tableName = [self tableNamesForDataType:dataType];
@@ -302,11 +302,11 @@
     return NULL;
 }
 
--(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
 
--(bool)insertDataType:(DataType)dataType withObject:(id)object{
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     return NULL;
 }
 @end
