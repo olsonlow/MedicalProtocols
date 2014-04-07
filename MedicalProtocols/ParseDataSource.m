@@ -256,7 +256,7 @@
     return formComponentsWithParentId;
 }
     
-    -(NSArray*)tableNamesForDataType:(DataType)dataType{
+-(NSArray*)tableNamesForDataType:(DataType)dataType{
     NSArray* tableNames = nil;
     switch (dataType) {
         case DataTypeProtocol:
@@ -282,7 +282,7 @@
     NSArray *tableName = [self tableNamesForDataType:dataType];
     //this needs to be refined since some type (eg: component) have more than one associated table
     query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
-    [query whereKey:@"objectID" equalTo:idString];
+    [query whereKey:@"objectId" equalTo:idString];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         {
             if(!error)
@@ -293,6 +293,12 @@
 }
 
 -(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+    PFQuery *query;
+    NSArray *tableName = [self tableNamesForDataType:dataType];
+    query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
+    [query whereKey:@"objectId" equalTo:idString];
+    
+    
     return NULL;
 }
 
