@@ -23,9 +23,9 @@ CREATE TABLE step (
     FOREIGN KEY (protocolID) REFERENCES protocol(objectID)
 );
    
-DROP TABLE IF EXISTS textblock;
+DROP TABLE IF EXISTS textBlock;
 
-CREATE TABLE textblock (
+CREATE TABLE textBlock (
     objectID        varchar(20)	NOT NULL PRIMARY KEY,
     createdAt       date		NOT NULL,
     updatedAt       date		NOT NULL,
