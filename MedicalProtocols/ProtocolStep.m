@@ -23,8 +23,18 @@
 @property (nonatomic,strong) NSMutableArray* components;
 
 @end
-
 @implementation ProtocolStep
+-(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId{
+    self = [super init];
+    if (self) {
+        _description = description;
+        _stepNumber = stepNumber;
+        _objectID = objectId;
+        _protocolID = protocolId;
+    }
+    
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
@@ -89,39 +99,18 @@
                 while([results next])
                 {
                     if ([componentName isEqualToString: @"textblock"]) {
-                        TextBlock *textBlock = [[TextBlock alloc] init];
-                        textBlock.title = [results stringForColumn:@"title"];
-                        textBlock.textBlockId = [results stringForColumn:@"objectID"];
-                        textBlock.stepId = [results stringForColumn:@"stepID"];
-                        textBlock.updatedAt = [results dateForColumn:@"updatedAt"];
-                        textBlock.createdAt = [results dateForColumn:@"createdAt"];
-                        textBlock.printable = [results boolForColumn:@"printable"];
+                        TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"]  printable:[results boolForColumn:@"printable"] objectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
                         [_components addObject:textBlock];
                     }
                     else if([componentName isEqualToString:@"calculator"]){
-                        Calculator *calculator = [[Calculator alloc] init];
-                        calculator.calculatorId = [results stringForColumn:@"objectID"];
-                        calculator.createdAt = [results dateForColumn:@"createdAt"];
-                        calculator.updatedAt = [results dateForColumn:@"updatedAt"];
-                        calculator.stepId = [results stringForColumn:@"stepID"];
+                        Calculator *calculator = [[Calculator alloc] initWithObjectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
                         [_components addObject:calculator];
                     }
                     else if([componentName isEqualToString:@"link"]){
-                        Link *link = [[Link alloc] init];
-                        link.linkId = [results stringForColumn:@"objectID"];
-                        link.url = [results stringForColumn:@"url"];
-                        link.createdAt = [results dateForColumn:@"createdAt"];
-                        link.updatedAt = [results dateForColumn:@"updatedAt"];
-                        link.printable = [results boolForColumn:@"printable"];
-                        link.label = [results stringForColumn:@"label"];
-                        link.stepId = [results stringForColumn:@"stepID"];
+                        Link *link = [[Link alloc] initWithLabel:[results stringForColumn:@"label"] url:[results stringForColumn:@"url"] objectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
                         [_components addObject:link];
                     }else{
-                        Form *form = [[Form alloc]init];
-                        form.formId = [results stringForColumn:@"objectID"];
-                        form.createdAt = [results dateForColumn:@"createdAt"];
-                        form.updatedAt = [results dateForColumn:@"updatedAt"];
-                        form.stepId = [results stringForColumn:@"stepID"];
+                        Form *form = [[Form alloc]initWithObjectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
                         [_components addObject:form];
                         
                     }

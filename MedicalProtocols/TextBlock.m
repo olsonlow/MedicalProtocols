@@ -13,6 +13,17 @@
 #import "FMResultSet.h"
 
 @implementation TextBlock
+-(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId{
+    self = [super init];
+    if (self) {
+        _title = title;
+        _content = content;
+        _objectId = objectId;
+        _stepId = stepId;
+        _printable = printable;
+    }
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {

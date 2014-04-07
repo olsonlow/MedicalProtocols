@@ -13,6 +13,16 @@
 #import "FMResultSet.h"
 
 @implementation Link
+-(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId{
+    self = [super init];
+    if (self) {
+        _label = label;
+        _url = url;
+        _objectId = objectId;
+        _stepId = stepId;
+    }
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {

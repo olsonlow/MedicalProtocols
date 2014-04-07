@@ -18,6 +18,7 @@
 @property(nonatomic) NSString *protocolID; //foreign key from protocol (idStr)
 @property(nonatomic,strong) NSString* description;
 
+-(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId;
 -(id)initWithParseObject:(PFObject*)parseObject;
 
 @end

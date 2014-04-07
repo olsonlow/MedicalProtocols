@@ -13,6 +13,14 @@
 #import "FMResultSet.h"
 
 @implementation Calculator
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId{
+    self = [super init];
+    if (self) {
+        _objectId = objectId;
+        _stepId = stepId;
+    }
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {
@@ -31,7 +39,7 @@
         FMResultSet *results = [db executeQuery:@"SELECT * FROM calculator"];
         while([results next])
         {
-            _calculatorId = [results stringForColumn:@"objectID"];
+            _objectId = [results stringForColumn:@"objectID"];
             _stepId = [results stringForColumn:@"stepID"];
             
         }

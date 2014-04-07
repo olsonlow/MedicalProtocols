@@ -73,11 +73,9 @@
                     results = [db executeQuery:@"SELECT * FROM protocol"];
                 while([results next])
                 {
-                    MedProtocol *mp = [[MedProtocol alloc]init];
-                    mp.idStr = [results stringForColumn:@"objectID"];
-                    mp.name = [results stringForColumn:@"pName"];
-                    mp.updatedAt = [results dateForColumn:@"updatedAt"];
-                    mp.createdAt = [results dateForColumn:@"createdAt"];
+                    MedProtocol *mp = [[MedProtocol alloc]initWithName:[results stringForColumn:@"pName"] objectId:[results stringForColumn:@"objectID"]];
+//                    mp.updatedAt = [results dateForColumn:@"updatedAt"];
+//                    mp.createdAt = [results dateForColumn:@"createdAt"];
                     [protocols addObject:mp];
                 }
                 if ([db hadError]) {
@@ -282,22 +280,15 @@
     if(success)
     {
         [db open];
-        FMResultSet *tbResults;
+        FMResultSet *results;
         if(parentId)
-            tbResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepID = ?", parentId];
+            results= [db executeQuery:@"SELECT * FROM textblock WHERE stepID = ?", parentId];
         else
-            tbResults= [db executeQuery:@"SELECT * FROM textblock"];
-        while([tbResults next])
+            results = [db executeQuery:@"SELECT * FROM textblock"];
+        while([results next])
         {
-            TextBlock *t = [[TextBlock alloc]init];
-            t.title = [tbResults stringForColumn:@"title"];
-            t.content = [tbResults stringForColumn:@"content"];
-            t.printable = [tbResults boolForColumn:@"printable"];
-            t.textBlockId = [tbResults stringForColumn:@"objectID"];
-            t.updatedAt = [tbResults dateForColumn:@"updatedAt"];
-            t.createdAt = [tbResults dateForColumn:@"createdAt"];
-            t.stepId = [tbResults stringForColumn:@"stepID"];
-            [components addObject:t];
+            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"] printable:[results boolForColumn:@"printable"] objectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
+            [components addObject:textBlock];
         }
         
         FMResultSet *cResults;
@@ -308,12 +299,8 @@
         
         while([cResults next])
         {
-            Calculator *c = [[Calculator alloc]init];
-            c.calculatorId = [cResults stringForColumn:@"objectID"];
-            c.updatedAt = [cResults dateForColumn:@"updatedAt"];
-            c.createdAt = [cResults dateForColumn:@"createdAt"];
-            c.stepId = [cResults stringForColumn:@"stepID"];
-            [components addObject:c];
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[cResults stringForColumn:@"objectID"] stepId:[cResults stringForColumn:@"stepID"]];
+            [components addObject:calculator];
         }
         
         FMResultSet *lResults;
@@ -324,14 +311,7 @@
         
         while([lResults next])
         {
-            Link *l = [[Link alloc]init];
-            l.linkId = [lResults stringForColumn:@"objectID"];
-            l.url = [lResults stringForColumn:@"url"];
-            l.updatedAt = [lResults dateForColumn:@"updatedAt"];
-            l.createdAt = [lResults dateForColumn:@"createdAt"];
-            l.label = [lResults stringForColumn:@"label"];
-            l.printable = [lResults boolForColumn:@"printable"];
-            l.stepId = [lResults stringForColumn:@"stepID"];
+            Link *l = [[Link alloc] initWithLabel:[lResults stringForColumn:@"label"] url:[lResults stringForColumn:@"url"] objectId:[lResults stringForColumn:@"objectID"] stepId:[lResults stringForColumn:@"stepID"]];
             [components addObject:l];
         }
         if ([db hadError]) {
@@ -388,39 +368,21 @@
         tbResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepID = ?", stepId];
         while([tbResults next])
         {
-            TextBlock *t = [[TextBlock alloc]init];
-            t.title = [tbResults stringForColumn:@"title"];
-            t.content = [tbResults stringForColumn:@"content"];
-            t.printable = [tbResults boolForColumn:@"printable"];
-            t.textBlockId = [tbResults stringForColumn:@"objectID"];
-            t.updatedAt = [tbResults dateForColumn:@"updatedAt"];
-            t.createdAt = [tbResults dateForColumn:@"createdAt"];
-            t.stepId = [tbResults stringForColumn:@"stepID"];
+            TextBlock *t = [[TextBlock alloc] initWithTitle:[tbResults stringForColumn:@"title"] content:[tbResults stringForColumn:@"content"] printable:[tbResults boolForColumn:@"printable"] objectId:[tbResults stringForColumn:@"objectID"] stepId:[tbResults stringForColumn:@"stepID"]];
             [components addObject:t];
         }
         FMResultSet *cResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepID = ?", stepId];
         while([tbResults next])
         {
-            Calculator *c = [[Calculator alloc]init];
-            c.calculatorId = [cResults stringForColumn:@"objectID"];
-            c.updatedAt = [cResults dateForColumn:@"updatedAt"];
-            c.createdAt = [cResults dateForColumn:@"createdAt"];
-            c.stepId = [cResults stringForColumn:@"stepID"];
-            [components addObject:c];
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[cResults stringForColumn:@"objectID"] stepId:[cResults stringForColumn:@"stepID"]];
+            [components addObject:calculator];
         }
         
         FMResultSet *lResults = [db executeQuery:@"SELECT * FROM link WHERE stepID = ? ", stepId];
         while([lResults next])
         {
-            Link *l = [[Link alloc]init];
-            l.linkId = [lResults stringForColumn:@"objectID"];
-            l.url = [lResults stringForColumn:@"url"];
-            l.updatedAt = [lResults dateForColumn:@"updatedAt"];
-            l.createdAt = [lResults dateForColumn:@"createdAt"];
-            l.label = [lResults stringForColumn:@"label"];
-            l.printable = [lResults boolForColumn:@"printable"];
-            l.stepId = [lResults stringForColumn:@"stepID"];
-            [components addObject:l];
+            Link *link = [[Link alloc] initWithLabel:[lResults stringForColumn:@"label"] url:[lResults stringForColumn:@"url"] objectId:[lResults stringForColumn:@"objectID"] stepId:[lResults stringForColumn:@"stepID"]];
+            [components addObject:link];
         }
         if ([db hadError]) {
             NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -434,7 +396,7 @@
 {
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.idStr]];
+    BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.objectId]];
     [db close];
     return success;
 }

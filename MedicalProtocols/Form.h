@@ -13,8 +13,8 @@
 @property(nonatomic) NSDate *createdAt;
 @property(nonatomic) NSDate *updatedAt;
 @property(nonatomic) NSString *stepId;
-@property(nonatomic) NSString *formId;
-@property(nonatomic) NSString* dbPath;
+@property(nonatomic) NSString *objectId;
 
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
 -(id)initWithParseObject:(PFObject*)parseObject;
 @end
