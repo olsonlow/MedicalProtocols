@@ -130,22 +130,46 @@
 }
 
 //NEED TO COMPLETE
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     //NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
-    FMResultSet * result;
-    if(success)
+    [db open];
+    BOOL success = NO;
+    if([object isKindOfClass:[MedProtocol class]])
     {
-        [db open];
-        result = [db executeQuery:@"UPDATE"];
+        MedProtocol *mp = (MedProtocol*) object;
+        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ?, createdAt = ?, updatedAt = ? WHERE objectID = ? ",mp.idStr, mp.name, mp.createdAt, mp.updatedAt, idString];
     }
-    if ([db hadError]) {
-        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        ProtocolStep *ps = (ProtocolStep *)object;
+        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, createdAt = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", ps.objectID, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description, idString];
     }
-    [db close];
-    return result;
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        
+    }
+    else if([object isKindOfClass:[Link class]])
+    {
+        
+    }
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        
+    }
+    //NSFileManager *fileManager = [NSFileManager defaultManager];
+    //BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    //FMResultSet * result;
+    //if(success)
+   // {
+    //    [db open];
+    //    result = [db executeQuery:@"UPDATE"];
+    //}
+   /// if ([db hadError]) {
+      //  NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+   // }
+    //[db close];
+    //return result;
     
     return NULL;
 }
@@ -154,8 +178,35 @@
 -(bool)insertDataType:(DataType)dataType withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    NSArray *type = [self tableNamesForDataType: dataType];
-    BOOL success = [db executeUpdate:@"INSERT INTO ? VALUES(?)", type, object];
+    BOOL success = NO;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        MedProtocol *mp = (MedProtocol *)object;
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?,?)", mp.idStr, mp.name,  mp.createdAt, mp.updatedAt];
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        ProtocolStep *ps = (ProtocolStep*)object;
+        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?,?)",ps.objectID, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description];
+    }
+    
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        TextBlock *tb = (TextBlock *) object;
+        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?,?,?)", tb.textBlockId, tb.createdAt, tb.updatedAt, tb.printable, tb.title, tb.stepId];
+    }
+    
+    else if([object isKindOfClass:[Link class]])
+    {
+        Link *l = (Link *)object;
+        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", l.linkId, l.url, l.createdAt, l.updatedAt, l.printable, l.label, l.stepId];
+    }
+    
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        Calculator *c = (Calculator *)object;
+        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?,?,?)",c.calculatorId, c.createdAt, c.updatedAt, c.stepId];
+    }
     return success;
 }
 
