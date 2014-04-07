@@ -126,9 +126,7 @@
     return NULL;
 }
 
-//NEED TO COMPLETE
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
-    //NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     BOOL success = NO;
@@ -142,36 +140,29 @@
         ProtocolStep *ps = (ProtocolStep *)object;
         success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, createdAt = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", ps.objectID, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description, idString];
     }
+    else if([object isKindOfClass:[Form class]])
+    {
+        Form* form = (Form *) object;
+        success = [db executeUpdate:@"UPDATE form SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", form.formId, form.createdAt, form.updatedAt, form.stepId, idString];
+    }
     else if([object isKindOfClass:[TextBlock class]])
     {
-        
+        TextBlock *textBlock = (TextBlock *) object;
+        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, createdAt = ?, updatedAt = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.textBlockId, textBlock.createdAt, textBlock.updatedAt, textBlock.printable, textBlock.stepId, idString];
     }
     else if([object isKindOfClass:[Link class]])
     {
-        
+        Link *link = (Link *) object;
+        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.linkId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId, idString];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
-        
+        Calculator *calculator = (Calculator*)object;
+        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", calculator.calculatorId, calculator.createdAt, calculator.updatedAt, calculator.stepId, idString];
     }
-    //NSFileManager *fileManager = [NSFileManager defaultManager];
-    //BOOL success = [fileManager fileExistsAtPath:self.databasePath];
-    //FMResultSet * result;
-    //if(success)
-   // {
-    //    [db open];
-    //    result = [db executeQuery:@"UPDATE"];
-    //}
-   /// if ([db hadError]) {
-      //  NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-   // }
-    //[db close];
-    //return result;
-    
-    return NULL;
+    return success;
 }
 
-//NEED TO COMPLETE
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
@@ -185,6 +176,12 @@
     {
         ProtocolStep *ps = (ProtocolStep*)object;
         success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?,?)",ps.objectID, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description];
+    }
+    
+    else if([object isKindOfClass:[Form class]])
+    {
+        Form *form = (Form *) object;
+        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?,?)", form.formId, form.createdAt, form.updatedAt, form.stepId];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
@@ -228,11 +225,12 @@
 -(bool) deleteComponentsWithObject:(NSString*) idString{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL tb = [db executeUpdate:@"DELETE FROM textBlock WHERE objectID = ", idString];
-    BOOL f = [db executeUpdate:@"DELETE FROM form WHERE objectID = ", idString];
-    BOOL c = [db executeUpdate:@"DELETE FROM calculator WHERE objectID = ", idString];
-    BOOL l =[db executeUpdate:@"DELETE FROM link WHERE objectID = ", idString];
-    return tb && f && c && l;
+    BOOL textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectID = ?", idString];
+    BOOL form = [db executeUpdate:@"DELETE FROM form WHERE objectID = ?", idString];
+   
+    BOOL calculator = [db executeUpdate:@"DELETE FROM calculator WHERE objectID = ?", idString];
+    BOOL link =[db executeUpdate:@"DELETE FROM link WHERE objectID = ?", idString];
+    return textBlock || form || calculator || link;
 }
 
 -(bool) deleteFormComponentsWithObject: (NSString *) idString{
@@ -490,6 +488,32 @@
     return success;
 }
 
+-(NSString *) tableNameForObject:(id) object
+{
+    NSString *className = nil;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        className = @"MedProtocol";
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        className = @"ProtocolStep";
+    }
+    else if([object isKindOfClass:[Link class]])
+    {
+        className = @"Link";
+    }
+    else if([object isKindOfClass:[Form class]])
+    {
+        className = @"Form";
+    }
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        className = @"Calculator";
+    }
+    return className;
+}
+
 -(NSArray*)tableNamesForDataType:(DataType)dataType{
     NSArray* tableNames = nil;
     switch (dataType) {
@@ -507,7 +531,4 @@
     }
     return tableNames;
 }
-
-
-
 @end
