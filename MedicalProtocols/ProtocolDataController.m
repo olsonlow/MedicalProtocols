@@ -33,7 +33,7 @@
     if (self) {
         _dataSource = [[DataSource alloc] init];
         _protocols = [[NSMutableArray alloc] init];
-        [_protocols addObjectsFromArray:[_dataSource getAll:DataTypeProtocol]];
+        [_protocols addObjectsFromArray:[_dataSource getAllObjectsWithDataType:DataTypeProtocol]];
     }
     return self;
 }
