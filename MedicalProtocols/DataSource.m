@@ -47,11 +47,11 @@
 -(void)getParseUpdates{
     
 }
--(NSArray*)getAll:(DataType)dataType{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
     id<medRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType];
 }
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     id<medRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
 }
