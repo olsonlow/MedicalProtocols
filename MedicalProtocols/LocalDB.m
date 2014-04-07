@@ -159,9 +159,40 @@
     return success;
 }
 
-//NEED TO COMPLETE
 -(bool)deleteDataType:(DataType)dataType withId:(NSString*)idString{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    switch (dataType) {
+        case DataTypeProtocol:
+            return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ", idString];
+        case DataTypeStep:
+            return [db executeUpdate:@"DELETE FROM step WHERE objectID = ", idString];
+        case DataTypeComponent:
+            return [self deleteComponentsWithObject:idString];
+        case DataTypeFormComponent:
+            return [self deleteFormComponentsWithObject:idString];
+        default:
+            break;
+    }
     return NULL;
+}
+
+-(bool) deleteComponentsWithObject:(NSString*) idString{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    BOOL tb = [db executeUpdate:@"DELETE FROM textBlock WHERE objectID = ", idString];
+    BOOL f = [db executeUpdate:@"DELETE FROM form WHERE objectID = ", idString];
+    BOOL c = [db executeUpdate:@"DELETE FROM calculator WHERE objectID = ", idString];
+    BOOL l =[db executeUpdate:@"DELETE FROM link WHERE objectID = ", idString];
+    return tb && f && c && l;
+}
+
+-(bool) deleteFormComponentsWithObject: (NSString *) idString{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    BOOL fn = [db executeUpdate:@"DELETE FROM formNumber WHERE objectID = ", idString];
+    BOOL fs = [db executeUpdate:@"DELETE FROM formSelection WHERE objectID = ", idString];
+    return fn && fs;
 }
 
 -(id)getObjectDataType:(DataType)dataType withId:(NSString*)idString{
