@@ -290,14 +290,15 @@
     __block BOOL success = NO;
     if([object isKindOfClass:[MedProtocol class]])
     {
+        MedProtocol *protocol = (MedProtocol*)object;
         query = [PFQuery queryWithClassName:@"Protocol"];
         [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
             {
                 if(!error){
-                    protocol[@"objectId"] = [object objectId];
-                    protocol[@"name"] = [object name];
-                    protocol[@"createdAt"] = [object createdAt];
-                    protocol[@"updatedAt"] = [object updatedAt];
+                    protocol[@"objectId"] = [protocol objectId];
+                    protocol[@"name"] = [protocol name];
+                    protocol[@"createdAt"] = [protocol createdAt];
+                    protocol[@"updatedAt"] = [protocol updatedAt];
                     [protocol saveInBackground];
                     success = YES;
                 }
@@ -307,21 +308,21 @@
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
+        MedProtocol *protocol = (MedProtocol*)object;
         query = [PFQuery queryWithClassName:@"Step"];
         [query getObjectInBackgroundWithId:idString block:^(PFObject *step, NSError *error) {
             {
                 if(!error){
-                    step[@"objectId"] = [object objectId];
-                    step[@"stepNumber"]intValue] = [object stepNumber];
+                    step[@"objectId"] = protocol.objectId;
+                    step[@"stepNumber"] = protocol.;
                     step[@"createdAt"] = [object createdAt];
                     step[@"updatedAt"] = [object updatedAt];
                     step[@"protocolId"] = [object protocolId];
                     [step saveInBackground];
                     success = YES;
                 }
-            }
-        }];
-    }
+            }];
+        }
     else if([object isKindOfClass:[Form class]])
     {
         query = [PFQuery queryWithClassName:@"Form"];

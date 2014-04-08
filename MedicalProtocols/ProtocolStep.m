@@ -29,7 +29,7 @@
     if (self) {
         _description = description;
         _stepNumber = stepNumber;
-        _objectID = objectId;
+        _objectId = objectId;
         _protocolID = protocolId;
     }
     
