@@ -20,37 +20,12 @@
 @end
 
 @implementation MedProtocol
-- (id)initWithName:(NSString*)name steps:(NSMutableArray*)steps
-{
-    self = [super init];
-    if (self) {
-        _name = name;
-        _steps = steps;
-    }
-    return self;
-}
+
 -(id)initWithName:(NSString*)name objectId:(NSString*)objectId{
     self = [super init];
     if (self) {
         _name = name;
         _objectId = objectId;
-    }
-    return self;
-}
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-        _name = parseObject[@"name"];
-        _image = parseObject[@"protocolImage"];
-        _steps = [[NSMutableArray alloc] init];
-
-        PFQuery *query = [PFQuery queryWithClassName:@"Step"];
-        [query whereKey:@"protocol" equalTo:parseObject];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-            for (PFObject* parseStepObject in results) {
-                [_steps addObject:[[ProtocolStep alloc] initWithParseObject:parseStepObject]];
-            }
-        }];
     }
     return self;
 }

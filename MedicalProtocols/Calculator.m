@@ -21,31 +21,5 @@
     }
     return self;
 }
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-        //        _name = parseObject[@"name"];
-    }
-    return self;
-}
 
--(id)initWithDBObject:(NSObject*)DBObject{
-    self = [super init];
-    if (self) {
-        NSString *dbPath = @"medRef.db";
-        
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-        [db open];
-        FMResultSet *results = [db executeQuery:@"SELECT * FROM calculator"];
-        while([results next])
-        {
-            _objectId = [results stringForColumn:@"objectID"];
-            _stepId = [results stringForColumn:@"stepID"];
-            
-        }
-        
-        [db close];
-    }
-    return self;
-}
 @end

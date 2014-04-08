@@ -66,11 +66,4 @@
     return components;
 }
 
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-//        _name = parseObject[@"name"];
-    }
-    return self;
-}
 @end
