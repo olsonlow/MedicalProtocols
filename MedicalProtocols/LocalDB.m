@@ -122,32 +122,32 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol*) object;
-        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ?, createdAt = ?, updatedAt = ? WHERE objectID = ? ",medProtocol.objectId, medProtocol.name, medProtocol.createdAt, medProtocol.updatedAt, idString];
+        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ?, updatedAt = ? WHERE objectID = ? ",medProtocol.objectId, medProtocol.name, medProtocol.updatedAt, idString];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, createdAt = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", step.objectId, step.stepNumber, step.createdAt, step.updatedAt, step.protocolId, step.description, idString];
+        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", step.objectId, step.stepNumber, step.updatedAt, step.protocolId, step.description, idString];
     }
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form *) object;
-        success = [db executeUpdate:@"UPDATE form SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", form.objectId, form.createdAt, form.updatedAt, form.stepId, idString];
+        success = [db executeUpdate:@"UPDATE form SET objectID = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", form.objectId, form.updatedAt, form.stepId, idString];
     }
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, createdAt = ?, updatedAt = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.objectId, textBlock.createdAt, textBlock.updatedAt, textBlock.printable, textBlock.stepId, idString];
+        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, updatedAt = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.objectId, textBlock.updatedAt, textBlock.printable, textBlock.stepId, idString];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId, idString];
+        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.updatedAt, link.printable, link.label, link.stepId, idString];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator*)object;
-        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, createdAt = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", calculator.objectId, calculator.createdAt, calculator.updatedAt, calculator.stepId, idString];
+        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, updatedAt = ?, stepID = ? WHERE objectID = ?", calculator.objectId, calculator.updatedAt, calculator.stepId, idString];
     }
     return success;
 }
@@ -159,36 +159,36 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?,?)", medProtocol.objectId, medProtocol.name,  medProtocol.createdAt, medProtocol.updatedAt];
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?)", medProtocol.objectId, medProtocol.name, medProtocol.updatedAt];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?,?)",step.objectId, step.stepNumber, step.createdAt, step.updatedAt, step.protocolId, step.description];
+        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?)",step.objectId, step.stepNumber, step.updatedAt, step.protocolId, step.description];
     }
     
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?,?)", form.objectId, form.createdAt, form.updatedAt, form.stepId];
+        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?)", form.objectId, form.updatedAt, form.stepId];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?,?,?)", textBlock.objectId, textBlock.createdAt, textBlock.updatedAt, textBlock.printable, textBlock.title, textBlock.stepId];
+        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?,?)", textBlock.objectId, textBlock.updatedAt, textBlock.printable, textBlock.title, textBlock.stepId];
     }
     
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", link.objectId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId];
+        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?)", link.objectId, link.url, link.updatedAt, link.printable, link.label, link.stepId];
     }
     
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator *)object;
-        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?,?,?)",calculator.objectId, calculator.createdAt, calculator.updatedAt, calculator.stepId];
+        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?,?)",calculator.objectId, calculator.updatedAt, calculator.stepId];
     }
     return success;
 }
