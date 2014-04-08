@@ -151,7 +151,7 @@
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.stepId, idString];
+        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?, createdAt = ?, updatedAt = ?, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.createdAt, link.updatedAt, link.printable, link.label, link.objectId, idString];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
@@ -191,7 +191,7 @@
     else if([object isKindOfClass:[Link class]])
     {
         Link *l = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", l.objectId, l.url, l.createdAt, l.updatedAt, l.printable, l.label, l.stepId];
+        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?,?,?)", l.objectId, l.url, l.createdAt, l.updatedAt, l.printable, l.label, l.objectId];
     }
     
     else if([object isKindOfClass:[Calculator class]])
