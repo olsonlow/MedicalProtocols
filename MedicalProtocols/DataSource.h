@@ -19,6 +19,7 @@ typedef NS_ENUM(NSUInteger, DataType) {
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType;
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId;
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object;
+-(bool)deleteObjectWithDataType:(DataType)dataType withParentId: (NSString *)idString;
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString;
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString;

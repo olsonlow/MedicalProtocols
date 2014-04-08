@@ -59,7 +59,7 @@
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     switch (dataType) {
         case DataTypeProtocol:
             if(success)
@@ -74,8 +74,8 @@
                 while([results next])
                 {
                     MedProtocol *mp = [[MedProtocol alloc]initWithName:[results stringForColumn:@"pName"] objectId:[results stringForColumn:@"objectID"]];
-//                    mp.updatedAt = [results dateForColumn:@"updatedAt"];
-//                    mp.createdAt = [results dateForColumn:@"createdAt"];
+                    //                    mp.updatedAt = [results dateForColumn:@"updatedAt"];
+                    //                    mp.createdAt = [results dateForColumn:@"createdAt"];
                     [protocols addObject:mp];
                 }
                 if ([db hadError]) {
@@ -121,7 +121,7 @@
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL success = NO;
+    bool success = NO;
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *mp = (MedProtocol*) object;
@@ -158,7 +158,7 @@
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL success = NO;
+    bool success = NO;
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *mp = (MedProtocol *)object;
@@ -196,15 +196,48 @@
     return success;
 }
 
+-(bool)deleteObjectWithDataType:(DataType)dataType withParentId: (NSString *)idString
+{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    bool textBlock = NO;
+    bool form = NO;
+    bool link = NO;
+    bool calculator = NO;
+    bool formNumber = NO;
+    bool formSelection = NO;
+    switch (dataType) {
+        case DataTypeProtocol:
+            return YES;
+        case DataTypeStep:
+            return [db executeUpdate:@"DELETE FROM step WHERE protocolID = ?", idString];
+        case DataTypeComponent:
+            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepID = ?", idString];
+            form = [db executeUpdate:@"DELETE FROM form WHERE stepID = ?", idString];
+            link = [db executeUpdate:@"DELETE FROM link WHERE stepID = ?", idString];
+            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepID = ?", idString];
+            return textBlock || form || link || calculator;
+        case DataTypeFormComponent:
+            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formID = ?", idString];
+            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formID = ?", idString];
+            return formNumber || formSelection;
+        default:
+            return NO;
+    }
+}
+
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     switch (dataType) {
         case DataTypeProtocol:
+            [self deleteObjectWithDataType:DataTypeStep withParentId:idString];
             return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ?", idString];
         case DataTypeStep:
+            [self deleteObjectWithDataType:DataTypeComponent withParentId:idString];
             return [db executeUpdate:@"DELETE FROM step WHERE objectID = ?", idString];
         case DataTypeComponent:
+            [self deleteObjectWithDataType:DataTypeFormComponent withParentId:idString];
             return [self deleteComponentsWithObject:idString];
         case DataTypeFormComponent:
             return [self deleteFormComponentsWithObject:idString];
@@ -217,19 +250,18 @@
 -(bool) deleteComponentsWithObject:(NSString*) idString{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectID = ?", idString];
-    BOOL form = [db executeUpdate:@"DELETE FROM form WHERE objectID = ?", idString];
-   
-    BOOL calculator = [db executeUpdate:@"DELETE FROM calculator WHERE objectID = ?", idString];
-    BOOL link =[db executeUpdate:@"DELETE FROM link WHERE objectID = ?", idString];
+    bool textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectID = ?", idString];
+    bool form = [db executeUpdate:@"DELETE FROM form WHERE objectID = ?", idString];
+    bool calculator = [db executeUpdate:@"DELETE FROM calculator WHERE objectID = ?", idString];
+    bool link =[db executeUpdate:@"DELETE FROM link WHERE objectID = ?", idString];
     return textBlock || form || calculator || link;
 }
 
 -(bool) deleteFormComponentsWithObject: (NSString *) idString{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL fn = [db executeUpdate:@"DELETE FROM formNumber WHERE objectID = ", idString];
-    BOOL fs = [db executeUpdate:@"DELETE FROM formSelection WHERE objectID = ", idString];
+    bool fn = [db executeUpdate:@"DELETE FROM formNumber WHERE objectID = ", idString];
+    bool fs = [db executeUpdate:@"DELETE FROM formSelection WHERE objectID = ", idString];
     return fn && fs;
 }
 
@@ -237,7 +269,7 @@
     NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     FMResultSet * result;
     if(success)
     {
@@ -261,7 +293,7 @@
     NSMutableArray *formComponents = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
         [db open];
@@ -304,7 +336,7 @@
     NSMutableArray *components = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
         [db open];
@@ -359,7 +391,7 @@
     NSMutableArray *steps = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
         FMResultSet *results;
@@ -382,7 +414,7 @@
     NSMutableArray *components = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:self.databasePath];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
         [db open];
@@ -414,11 +446,11 @@
     return components;
 }
 
--(BOOL) updateProtocol: (MedProtocol *) mp
+-(bool) updateProtocol: (MedProtocol *) mp
 {
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
-    BOOL success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.objectId]];
+    bool success = [db executeUpdate:[NSString stringWithFormat:@"UPDATE protocol SET pName = '%@', updatedAt = '%@' where id = %@",mp.name, mp.updatedAt,mp.objectId]];
     [db close];
     return success;
 }
