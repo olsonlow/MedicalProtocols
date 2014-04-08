@@ -39,10 +39,10 @@
     
     //Luke work from here, put parse objects into local db.
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"dbinitialized"];
-    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
-    [defaults synchronize];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setBool:YES forKey:@"dbinitialized"];
+//    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
+//    [defaults synchronize];
 }
 -(void)getParseUpdates{
     
