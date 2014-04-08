@@ -39,19 +39,19 @@
     
     //Luke work from here, put parse objects into local db.
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"dbinitialized"];
-    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
-    [defaults synchronize];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setBool:YES forKey:@"dbinitialized"];
+//    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
+//    [defaults synchronize];
 }
 -(void)getParseUpdates{
     
 }
--(NSArray*)getAll:(DataType)dataType{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
     id<medRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType];
 }
--(NSArray*)getAll:(DataType)dataType withParentId:(NSString*)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     id<medRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
 }

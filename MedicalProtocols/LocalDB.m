@@ -207,9 +207,9 @@
     [db open];
     switch (dataType) {
         case DataTypeProtocol:
-            return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ", idString];
+            return [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ?", idString];
         case DataTypeStep:
-            return [db executeUpdate:@"DELETE FROM step WHERE objectID = ", idString];
+            return [db executeUpdate:@"DELETE FROM step WHERE objectID = ?", idString];
         case DataTypeComponent:
             return [self deleteComponentsWithObject:idString];
         case DataTypeFormComponent:

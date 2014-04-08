@@ -54,6 +54,7 @@
 		A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8E18E952C90040D6F2 /* FormSelection.m */; };
 		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
 		A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE518F08F610016613C /* ParseDataSource.m */; };
+		A3EBEAE818F378E40016613C /* medRef.db in Resources */ = {isa = PBXBuildFile; fileRef = A3EBEAE718F378E40016613C /* medRef.db */; };
 		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
 /* End PBXBuildFile section */
 
@@ -90,7 +91,6 @@
 		361A2D7D18ECDF5F0030D688 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		361A2D7E18ECDF5F0030D688 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
-		89756D4C18ECCB2C0006321C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = medRef.db; path = MedicalProtocols/medRef.db; sourceTree = SOURCE_ROOT; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		89A41F3F18EF5C9A00CA871F /* sqlObjectCreateDummyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sqlObjectCreateDummyCode.h; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -143,6 +143,7 @@
 		A3EBEAE218F08F380016613C /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
 		A3EBEAE418F08F610016613C /* ParseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDataSource.h; sourceTree = "<group>"; };
 		A3EBEAE518F08F610016613C /* ParseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDataSource.m; sourceTree = "<group>"; };
+		A3EBEAE718F378E40016613C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -270,8 +271,8 @@
 		A324B2DB18E24A4600261C57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3EBEAE718F378E40016613C /* medRef.db */,
 				89756D4D18ECCBB20006321C /* medRef.sql */,
-				89756D4C18ECCB2C0006321C /* medRef.db */,
 				365526D118E8EC77009E276D /* afibImage.png */,
 				A324B32B18E4EA5C00261C57 /* DataFiles */,
 				A324B2DC18E24A4600261C57 /* MedicalProtocols-Info.plist */,
@@ -477,6 +478,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3EBEAE818F378E40016613C /* medRef.db in Resources */,
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
 				89756D4E18ECCBB20006321C /* medRef.sql in Resources */,
 				A324B2F318E24A4600261C57 /* Images.xcassets in Resources */,
