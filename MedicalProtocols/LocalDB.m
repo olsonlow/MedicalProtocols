@@ -159,7 +159,7 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?)", medProtocol.objectId, medProtocol.name, medProtocol.updatedAt];
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?)", medProtocol.objectId, medProtocol.updatedAt, medProtocol.name];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {

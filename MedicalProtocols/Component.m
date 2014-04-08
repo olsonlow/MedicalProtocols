@@ -25,45 +25,4 @@
 
 
 @implementation Component
-+(NSMutableArray*)componentsForStepParseObject:(PFObject*)parseObject{
-    NSMutableArray* components = [[NSMutableArray alloc] init];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"TextBlock"];
-    [query whereKey:@"step" equalTo:parseObject];
-
-    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-        for (PFObject* parseComponentObject in results) {
-            [components addObject:[[TextBlock alloc] initWithParseObject:parseComponentObject]];
-        }
-    }];
-
-    query = [PFQuery queryWithClassName:@"Form"];
-    [query whereKey:@"step" equalTo:parseObject];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-        for (PFObject* parseComponentObject in results) {
-            [components addObject:[[Form alloc] initWithParseObject:parseComponentObject]];
-        }
-    }];
-
-    query = [PFQuery queryWithClassName:@"Calculator"];
-    [query whereKey:@"step" equalTo:parseObject];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-        for (PFObject* parseComponentObject in results) {
-            [components addObject:[[Calculator alloc] initWithParseObject:parseComponentObject]];
-        }
-    }];
-
-    query = [PFQuery queryWithClassName:@"Link"];
-    [query whereKey:@"step" equalTo:parseObject];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
-        for (PFObject* parseComponentObject in results) {
-            [components addObject:[[Link alloc] initWithParseObject:parseComponentObject]];
-        }
-    }];
-
-    return components;
-}
-
 @end

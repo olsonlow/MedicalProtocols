@@ -11,7 +11,5 @@
 
 @interface Component : NSObject
 @property(nonatomic) NSString* dbPath;
-+(NSMutableArray*)componentsForStepParseObject:(PFObject*)parseObject;
-
 
 @end
