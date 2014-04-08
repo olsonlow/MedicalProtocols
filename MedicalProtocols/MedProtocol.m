@@ -64,14 +64,14 @@
         if(success)
         {
             [db open];
-            FMResultSet *results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", self.protocolId];
+            FMResultSet *results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", self.objectId];
             while([results next])
             {
                 ProtocolStep *step = [[ProtocolStep alloc] init];
                 step.stepNumber = [results intForColumn:@"stepNumber"];
                 step.description = [results stringForColumn:@"description"];
                 step.objectId = [results stringForColumn:@"objectID"];
-                step.protocolID = [results stringForColumn:@"protocolID"];
+                step.protocolId = [results stringForColumn:@"protocolID"];
                 step.updatedAt = [results dateForColumn:@"updatedAt"];
                 step.createdAt = [results dateForColumn:@"createdAt"];
                 [_steps addObject:step];

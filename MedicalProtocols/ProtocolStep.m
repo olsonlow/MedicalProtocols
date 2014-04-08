@@ -30,7 +30,7 @@
         _description = description;
         _stepNumber = stepNumber;
         _objectId = objectId;
-        _protocolID = protocolId;
+        _protocolId = protocolId;
     }
     
     return self;

@@ -10,6 +10,17 @@
 #import <Parse/Parse.h>
 
 @implementation FormSelection
+-(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId formId:(NSString*)formId{
+    self = [super init];
+    if (self) {
+        _label = label;
+        _choiceA = choiceA;
+        _choiceB = choiceB;
+        _objectId = objectId;
+        _formId = formId;
+    }
+    return self;
+}
 -(id)initWithParseObject:(PFObject*)parseObject{
     self = [super init];
     if (self) {

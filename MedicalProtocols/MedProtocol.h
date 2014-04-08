@@ -17,7 +17,6 @@
 @property(nonatomic, copy) NSDate* updatedAt;
 @property(nonatomic) UIImage* image;
 @property(nonatomic) NSString* dbPath;
-@property(nonatomic) NSString* protocolId;
 -(id)initWithName:(NSString*)name objectId:(NSString*)objectId;
 -(id)initWithName:(NSString*)name steps:(NSMutableArray*)steps;
 -(id)initWithParseObject:(PFObject*)parseObject;

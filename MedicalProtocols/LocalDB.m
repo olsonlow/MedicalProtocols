@@ -98,13 +98,7 @@
                 }
                 while([results next])
                 {
-                    ProtocolStep *step = [[ProtocolStep alloc] init];
-                    step.stepNumber = [results intForColumn:@"stepNumber"];
-                    step.description = [results stringForColumn:@"description"];
-                    step.objectId = [results stringForColumn:@"objectID"];
-                    step.protocolID = [results stringForColumn:@"protocolID"];
-                    step.updatedAt = [results dateForColumn:@"updatedAt"];
-                    step.createdAt = [results dateForColumn:@"createdAt"];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectID"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolID"]];
                     [steps addObject:step];
                 }
                 if ([db hadError]) {
@@ -136,7 +130,7 @@
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *ps = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, createdAt = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", ps.objectId, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description, idString];
+        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, createdAt = ?, updatedAt = ?, protocolID = ? , description = ? WHERE objectID = ?", ps.objectId, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolId, ps.description, idString];
     }
     else if([object isKindOfClass:[Form class]])
     {
@@ -173,7 +167,7 @@
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *ps = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?,?)",ps.objectId, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolID, ps.description];
+        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?,?)",ps.objectId, ps.stepNumber, ps.createdAt, ps.updatedAt, ps.protocolId, ps.description];
     }
     
     else if([object isKindOfClass:[Form class]])
@@ -278,14 +272,7 @@
             fsResults = [db executeQuery:@"SELECT * FROM formSelection"];
         while([fsResults next])
         {
-            FormSelection *fs = [[FormSelection alloc]init];
-            fs.formSelectionId = [fsResults stringForColumn:@"objectID"];
-            fs.choiceA = [fsResults stringForColumn:@"choiceA"];
-            fs.choiceB = [fsResults stringForColumn:@"choiceB"];
-            fs.label = [fsResults stringForColumn:@"label"];
-            fs.updatedAt = [fsResults dateForColumn:@"updatedAt"];
-            fs.createdAt = [fsResults dateForColumn:@"createdAt"];
-            fs.formId = [fsResults stringForColumn:@"formID"];
+            FormSelection *fs = [[FormSelection alloc] initWithLabel:[fsResults stringForColumn:@"label"] choiceA:[fsResults stringForColumn:@"choiceA"] choiceB:[fsResults stringForColumn:@"choiceB"] objectId:[fsResults stringForColumn:@"objectID"] formId:[fsResults stringForColumn:@"formID"]];
             [formComponents addObject:fs];
         }
         FMResultSet *fnResults;
@@ -294,15 +281,7 @@
         else
             fnResults = [db executeQuery:@"SELECT * from formNumber"];
         while ([fnResults next]) {
-            FormNumber *fn = [[FormNumber alloc]init];
-            fn.formNumberId = [fnResults stringForColumn:@"objectID"];
-            fn.defaultValue = [fnResults intForColumn:@"defaultValue"];
-            fn.minValue = [fnResults intForColumn:@"minValue"];
-            fn.maxValue = [fnResults intForColumn:@"maxValue"];
-            fn.label = [fnResults stringForColumn:@"label"];
-            fn.updatedAt = [fnResults dateForColumn:@"updatedAt"];
-            fn.createdAt = [fnResults dateForColumn:@"createdAt"];
-            fn.formId = [fnResults stringForColumn:@"formID"];
+            FormNumber *fn = [[FormNumber alloc] initWithLabel:[fnResults stringForColumn:@"label"] defaultValue:[fnResults intForColumn:@"defaultValue"] minValue:[fnResults intForColumn:@"minValue"] maxValue:[fnResults intForColumn:@"maxValue"] objectId:[fnResults stringForColumn:@"objectID"] formId:[fnResults stringForColumn:@"formID"]];
             [formComponents addObject:fn];
         }
     }
@@ -388,13 +367,7 @@
         
         while([results next])
         {
-            ProtocolStep *step = [[ProtocolStep alloc] init];
-            step.stepNumber = [results intForColumn:@"stepNumber"];
-            step.description = [results stringForColumn:@"description"];
-            step.objectId = [results stringForColumn:@"objectID"];
-            step.protocolID = [results stringForColumn:@"protocolID"];
-            step.updatedAt = [results dateForColumn:@"updatedAt"];
-            step.createdAt = [results dateForColumn:@"createdAt"];
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectID"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolID"]];
             [steps addObject:step];
         }
         if ([db hadError]) {
