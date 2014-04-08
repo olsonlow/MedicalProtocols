@@ -70,7 +70,7 @@
                 ProtocolStep *step = [[ProtocolStep alloc] init];
                 step.stepNumber = [results intForColumn:@"stepNumber"];
                 step.description = [results stringForColumn:@"description"];
-                step.objectID = [results stringForColumn:@"objectID"];
+                step.objectId = [results stringForColumn:@"objectID"];
                 step.protocolID = [results stringForColumn:@"protocolID"];
                 step.updatedAt = [results dateForColumn:@"updatedAt"];
                 step.createdAt = [results dateForColumn:@"createdAt"];

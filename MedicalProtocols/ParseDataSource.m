@@ -243,8 +243,31 @@
     }
     return tableNames;
 }
-
-
+-(NSString *) tableNameForObject:(id) object
+{
+    NSString *className = nil;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        className = @"MedProtocol";
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        className = @"ProtocolStep";
+    }
+    else if([object isKindOfClass:[Link class]])
+    {
+        className = @"Link";
+    }
+    else if([object isKindOfClass:[Form class]])
+    {
+        className = @"Form";
+    }
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        className = @"Calculator";
+    }
+    return className;
+}
 
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     __block id obj;
@@ -262,14 +285,104 @@
     return obj;
 }
 
--(bool)updateDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
-    PFQuery *query;
-    NSArray *tableName = [self tableNamesForDataType:dataType];
-    query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
-    [query whereKey:@"objectId" equalTo:idString];
-    
-    
-    return NULL;
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+    PFQuery* query;
+    __block BOOL success = NO;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        query = [PFQuery queryWithClassName:@"Protocol"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+            {
+                if(!error){
+                    protocol[@"objectId"] = [object objectId];
+                    protocol[@"name"] = [object name];
+                    protocol[@"createdAt"] = [object createdAt];
+                    protocol[@"updatedAt"] = [object updatedAt];
+                    [protocol saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        query = [PFQuery queryWithClassName:@"Step"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *step, NSError *error) {
+            {
+                if(!error){
+                    step[@"objectId"] = [object objectId];
+                    step[@"stepNumber"]intValue] = [object stepNumber];
+                    step[@"createdAt"] = [object createdAt];
+                    step[@"updatedAt"] = [object updatedAt];
+                    step[@"protocolId"] = [object protocolId];
+                    [step saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    else if([object isKindOfClass:[Form class]])
+    {
+        query = [PFQuery queryWithClassName:@"Form"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+            {
+                if(!error){
+                    protocol[@"objectId"] = [object objectId];
+                    protocol[@"createdAt"] = [object createdAt];
+                    protocol[@"updatedAt"] = [object updatedAt];
+                    [protocol saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        query = [PFQuery queryWithClassName:@"TextBlock"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+            {
+                if(!error){
+                    protocol[@"objectId"] = [object objectId];
+                    protocol[@"createdAt"] = [object createdAt];
+                    protocol[@"updatedAt"] = [object updatedAt];
+                    [protocol saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    else if([object isKindOfClass:[Link class]])
+    {
+        query = [PFQuery queryWithClassName:@"Link"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+            {
+                if(!error){
+                    protocol[@"objectId"] = [object objectId];
+                    protocol[@"createdAt"] = [object createdAt];
+                    protocol[@"updatedAt"] = [object updatedAt];
+                    [protocol saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        query = [PFQuery queryWithClassName:@"Calculator"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+            {
+                if(!error){
+                    protocol[@"objectId"] = [object objectId];
+                    protocol[@"createdAt"] = [object createdAt];
+                    protocol[@"updatedAt"] = [object updatedAt];
+                    [protocol saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    return success;
 }
 
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{

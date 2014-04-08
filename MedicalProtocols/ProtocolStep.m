@@ -95,7 +95,7 @@
         {
             [db open];
             for(NSString* componentName in componentList){
-                FMResultSet *results = [db executeQuery:@"Select * from ? where stepID = ?",componentName, self.objectID];
+                FMResultSet *results = [db executeQuery:@"Select * from ? where stepID = ?",componentName, self.objectId];
                 while([results next])
                 {
                     if ([componentName isEqualToString: @"textblock"]) {
