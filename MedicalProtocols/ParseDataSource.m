@@ -266,6 +266,14 @@
     {
         className = @"Calculator";
     }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        className = @"FormSelection";
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        className = @"FormNumber";
+    }
     return className;
 }
 
@@ -326,13 +334,13 @@
     else if([object isKindOfClass:[Form class]])
     {
         query = [PFQuery queryWithClassName:@"Form"];
-        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *form, NSError *error) {
             {
                 if(!error){
-                    protocol[@"objectId"] = [object objectId];
-                    protocol[@"createdAt"] = [object createdAt];
-                    protocol[@"updatedAt"] = [object updatedAt];
-                    [protocol saveInBackground];
+                    form[@"objectId"] = [object objectId];
+                    form[@"updatedAt"] = [object updatedAt];
+                    form[@"stepId"] = [object stepId];
+                    [form saveInBackground];
                     success = YES;
                 }
             }
@@ -341,13 +349,15 @@
     else if([object isKindOfClass:[TextBlock class]])
     {
         query = [PFQuery queryWithClassName:@"TextBlock"];
-        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *textBlock, NSError *error) {
             {
                 if(!error){
-                    protocol[@"objectId"] = [object objectId];
-                    protocol[@"createdAt"] = [object createdAt];
-                    protocol[@"updatedAt"] = [object updatedAt];
-                    [protocol saveInBackground];
+                    textBlock[@"objectId"] = [object objectId];
+                    textBlock[@"updatedAt"] = [object updatedAt];
+                    textBlock[@"printable"] = [NSNumber numberWithBool:[object printable]];
+                    textBlock[@"title"] = [object title];
+                    textBlock[@"stepId"] = [object stepId];
+                    [textBlock saveInBackground];
                     success = YES;
                 }
             }
@@ -356,13 +366,16 @@
     else if([object isKindOfClass:[Link class]])
     {
         query = [PFQuery queryWithClassName:@"Link"];
-        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *link, NSError *error) {
             {
                 if(!error){
-                    protocol[@"objectId"] = [object objectId];
-                    protocol[@"createdAt"] = [object createdAt];
-                    protocol[@"updatedAt"] = [object updatedAt];
-                    [protocol saveInBackground];
+                    link[@"objectId"] = [object objectId];
+                    link[@"updatedAt"] = [object updatedAt];
+                    link[@"url"] = [object url];
+                    link[@"printable"] = [NSNumber numberWithBool:[object printable]];
+                    link[@"label"] = [object label];
+                    link[@"stepId"] = [object stepId];
+                    [link saveInBackground];
                     success = YES;
                 }
             }
@@ -371,18 +384,56 @@
     else if([object isKindOfClass:[Calculator class]])
     {
         query = [PFQuery queryWithClassName:@"Calculator"];
-        [query getObjectInBackgroundWithId:idString block:^(PFObject *protocol, NSError *error) {
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *calculator, NSError *error) {
             {
                 if(!error){
-                    protocol[@"objectId"] = [object objectId];
-                    protocol[@"createdAt"] = [object createdAt];
-                    protocol[@"updatedAt"] = [object updatedAt];
-                    [protocol saveInBackground];
+                    calculator[@"objectId"] = [object objectId];
+                    calculator[@"updatedAt"] = [object updatedAt];
+                    calculator[@"stepId"] = [object stepId];
+                    [calculator saveInBackground];
                     success = YES;
                 }
             }
         }];
     }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        query = [PFQuery queryWithClassName:@"FormSelection"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *formSelection, NSError *error) {
+            {
+                if(!error){
+                    formSelection[@"objectId"] = [object objectId];
+                    formSelection[@"updatedAt"] = [object updatedAt];
+                    formSelection[@"formId"] = [object formId];
+                    formSelection[@"label"] = [object label];
+                    formSelection[@"choiceA"] = [object choiceA];
+                    formSelection[@"choiceB"] = [object choiceB];
+                    [formSelection saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        query = [PFQuery queryWithClassName:@"FormNumber"];
+        [query getObjectInBackgroundWithId:idString block:^(PFObject *formNumber, NSError *error) {
+            {
+                if(!error){
+                    formNumber[@"objectId"] = [object objectId];
+                    formNumber[@"updatedAt"] = [object updatedAt];
+                    formNumber[@"formId"] = [object formId];
+                    formNumber[@"defaultValue"] = [NSNumber numberWithInt:[object defaultValue]];
+                    formNumber[@"minValue"] = [NSNumber numberWithInt:[object minValue]];
+                    formNumber[@"maxValue"] = [NSNumber numberWithInt:[object maxValue]];
+                    formNumber[@"label"] = [object label];
+                    [formNumber saveInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    
     return success;
 }
 
