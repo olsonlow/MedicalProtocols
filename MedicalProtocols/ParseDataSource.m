@@ -312,7 +312,7 @@
             {
                 if(!error){
                     step[@"objectId"] = [object objectId];
-                    step[@"stepNumber"]intValue] = [object stepNumber];
+                    step[@"stepNumber"] = [NSNumber numberWithInt:[object stepNumber]];
                     step[@"createdAt"] = [object createdAt];
                     step[@"updatedAt"] = [object updatedAt];
                     step[@"protocolId"] = [object protocolId];
