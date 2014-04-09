@@ -310,7 +310,7 @@
                     parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
 //                    parseStepData[@"createdAt"] = step.createdAt;
 //                    parseStepData[@"updatedAt"] = step.updatedAt;
-                    parseStepObject[@"protocolId"] = step.protocolId;
+                    parseStepObject[@"protocol"] = step.protocolId;
                     [parseStepObject saveInBackground];
                     success = YES;
                 }
@@ -325,7 +325,7 @@
                 if(!error){
                     parseFormObject[@"objectId"] = form.objectId;
 //                    parseFormObject[@"updatedAt"] = [form updatedAt];
-                    parseFormObject[@"stepId"] = form.stepId;
+                    parseFormObject[@"step"] = form.stepId;
                     [parseFormObject saveInBackground];
                     success = YES;
                 }
@@ -343,7 +343,7 @@
 //                    parseTextBlockObject[@"updatedAt"] = [textBlock updatedAt];
                     parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:[textBlock printable]];
                     parseTextBlockObject[@"title"] = textBlock.title;
-                    parseTextBlockObject[@"stepId"] = textBlock.stepId;
+                    parseTextBlockObject[@"step"] = textBlock.stepId;
                     [parseTextBlockObject saveInBackground];
                     success = YES;
                 }
@@ -362,7 +362,7 @@
                     parseLinkObject[@"url"] = link.url;
                     parseLinkObject[@"printable"] = [NSNumber numberWithBool:[link printable]];
                     parseLinkObject[@"label"] = link.label;
-                    parseLinkObject[@"stepId"] = link.stepId;
+                    parseLinkObject[@"step"] = link.stepId;
                     [parseLinkObject saveInBackground];
                     success = YES;
                 }
@@ -378,7 +378,7 @@
                 if(!error){
                     parseCalculatorObject[@"objectId"] = calculator.objectId;
                     parseCalculatorObject[@"updatedAt"] = calculator.updatedAt;
-                    parseCalculatorObject[@"stepId"] = calculator.stepId;
+                    parseCalculatorObject[@"step"] = calculator.stepId;
                     [parseCalculatorObject saveInBackground];
                     success = YES;
                 }
@@ -394,7 +394,7 @@
                 if(!error){
                     parseFormSelectionObject[@"objectId"] = formSelection.objectId;
                     parseFormSelectionObject[@"updatedAt"] = formSelection.updatedAt;
-                    parseFormSelectionObject[@"formId"] = formSelection.formId;
+                    parseFormSelectionObject[@"form"] = formSelection.formId;
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
                     parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
@@ -413,7 +413,7 @@
                 if(!error){
                     parseFormNumberObject[@"objectId"] = formNumber.objectId;
                     parseFormNumberObject[@"updatedAt"] = formNumber.updatedAt;
-                    parseFormNumberObject[@"formId"] = formNumber.formId;
+                    parseFormNumberObject[@"form"] = formNumber.formId;
                     parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
                     parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
                     parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
@@ -434,7 +434,6 @@
     success = NO;
     PFQuery *query;
     NSArray *tableNames = [self tableNamesForDataType:dataType];
-    //this needs to be refined since some type (eg: component) have more than one associated table
     for(NSString* tableName in tableNames){
         query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -461,7 +460,7 @@
         ProtocolStep* step = (ProtocolStep*)object;
         PFObject *parseStepObject = [PFObject objectWithClassName:@"Step"];
         parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
-        parseStepObject[@"protocolId"] = step.protocolId;
+        parseStepObject[@"protocol"] = step.protocolId;
         parseStepObject[@"description"] = step.description;
         success = YES;
     }
@@ -470,13 +469,13 @@
         PFObject *parseTextBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
         parseTextBlockObject[@"title"] = textBlock.title;
-        parseTextBlockObject[@"stepId"] = textBlock.stepId;
+        parseTextBlockObject[@"step"] = textBlock.stepId;
         success = YES;
     }
     if([object isKindOfClass:[Calculator class]]){
         Calculator* calculator = (Calculator*)object;
         PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
-        parseCalculatorObject[@"stepId"] = calculator.stepId;
+        parseCalculatorObject[@"step"] = calculator.stepId;
         success = YES;
     }
     if([object isKindOfClass:[Link class]]){
@@ -485,20 +484,20 @@
         parseLinkObject[@"url"] = link.url;
         parseLinkObject[@"label"] = link.label;
         parseLinkObject[@"printable"] = [NSNumber numberWithBool:link.printable];
-        parseLinkObject[@"stepId"] = link.stepId;
+        parseLinkObject[@"step"] = link.stepId;
         success = YES;
     }
     if([object isKindOfClass:[Form class]]){
         Form* form = (Form*)object;
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
-        parseFormObject[@"stepId"] = form.stepId;
+        parseFormObject[@"step"] = form.stepId;
         success = YES;
     }
     if([object isKindOfClass:[FormSelection class]]){
         FormSelection* formSelection = (FormSelection*)object;
         PFObject *parseFormSelectionObject = [PFObject objectWithClassName:@"FormSelection"];
         parseFormSelectionObject[@"label"] = formSelection.label;
-        parseFormSelectionObject[@"formId"] = formSelection.formId;
+        parseFormSelectionObject[@"form"] = formSelection.formId;
         parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
         parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
         success = YES;
@@ -510,7 +509,7 @@
         parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
         parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
         parseFormNumberObject[@"label"] = formNumber.label;
-        parseFormNumberObject[@"formId"] = formNumber.formId;
+        parseFormNumberObject[@"form"] = formNumber.formId;
         success = YES;
     }
     
