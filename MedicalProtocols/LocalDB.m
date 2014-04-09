@@ -20,12 +20,24 @@
 #import "Link.h"
 #import "Calculator.h"
 #import "DataSource.h"
+
+@interface LocalDB()
+@property (strong, nonatomic) NSString *databaseName;
+@property (strong, nonatomic) NSString *databasePath;
+-(NSArray*)tableNamesForDataType:(DataType)dataType;
+@end
+
 @implementation LocalDB
-+(LocalDB *) sharedInstance
++(LocalDB *) sharedInstance{
+    return [LocalDB sharedInstanceWithDelegate:nil];
+}
++(LocalDB *) sharedInstanceWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
 {
     static LocalDB* sharedObject = nil;
-    if(sharedObject == nil)
+    if(sharedObject == nil){
         sharedObject = [[LocalDB alloc] init];
+        sharedObject.delegate = delegate;
+    }
     return sharedObject;
 }
 -(id)init

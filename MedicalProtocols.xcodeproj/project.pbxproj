@@ -144,6 +144,7 @@
 		A3EBEAE418F08F610016613C /* ParseDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDataSource.h; sourceTree = "<group>"; };
 		A3EBEAE518F08F610016613C /* ParseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDataSource.m; sourceTree = "<group>"; };
 		A3EBEAE718F378E40016613C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
+		A3EBEAED18F4921A0016613C /* DataSourceProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataSourceProtocols.h; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -394,6 +395,7 @@
 		A3EBEADD18F08EF10016613C /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				A3EBEAED18F4921A0016613C /* DataSourceProtocols.h */,
 				A3EBEAE118F08F380016613C /* DataSource.h */,
 				A3EBEAE218F08F380016613C /* DataSource.m */,
 				89C64FFF18E8DB06004553E9 /* LocalDatabase */,

@@ -7,24 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSourceProtocols.h"
 
-typedef NS_ENUM(NSUInteger, DataType) {
-    DataTypeProtocol,
-    DataTypeStep,
-    DataTypeComponent,
-    DataTypeFormComponent,
-};
+@interface DataSource : NSObject <MedRefDataSource,ParseDataDownloadedDelegate,LocalDBReadyForUseDelegate>
 
-@protocol medRefDataSource<NSObject>
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType;
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId;
--(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object;
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString;
--(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
--(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString;
-@end
-
-@interface DataSource : NSObject <medRefDataSource>
+@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,assign) id<MedRefDataSourceDelegate> medRefDataSourceDelegate;
 
 @end
 

@@ -19,54 +19,38 @@
 
 @interface ParseDataSource()
 -(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className;
-
+@property (nonatomic,assign) int runningQueries;
 @end
 
 @implementation ParseDataSource
-
-+(ParseDataSource *)sharedInstance
++(ParseDataSource *) sharedInstance{
+    return [ParseDataSource sharedInstanceWithDelegate:nil];
+}
++(ParseDataSource *) sharedInstanceWithDelegate:(id<ParseDataDownloadedDelegate,ParseDataDownloadedDelegate>)delegate
 {
     static ParseDataSource* sharedObject = nil;
-    if(sharedObject == nil)
+    if(sharedObject == nil){
         sharedObject = [[ParseDataSource alloc] init];
+        sharedObject.delegate = delegate;
+        sharedObject.runningQueries = 0;
+    }
     return sharedObject;
 }
-
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
-    
-    NSMutableArray* dataTypes = nil;
-
-    switch (dataType) {
-        case DataTypeProtocol:
-            dataTypes = [self getAllFromParseClassNamed:@"Protocol"];
-            break;
-            
-        case DataTypeStep:
-            dataTypes = [self getAllFromParseClassNamed:@"Step"];
-            break;
-            
-        case DataTypeComponent:
-            dataTypes = [self getStepComponents];
-            break;
-            
-        case DataTypeFormComponent:
-            dataTypes = [self getFormComponents];
-            break;
-            
-        default:
-            break;
+-(void)setRunningQueries:(int)runningQueries{
+    _runningQueries = runningQueries;
+    if(runningQueries == 0){
+        [self.delegate ParseDataFinishedDownloading];
     }
-    return dataTypes;
 }
-
+#pragma mark Parse Methods
 -(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className{
-    NSMutableArray* parseObjects = [[NSMutableArray alloc] init];
     PFQuery *query = [PFQuery queryWithClassName:className];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
             NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
             // Do something with the found objects
+            NSMutableArray* parseObjects = [[NSMutableArray alloc] init];
             for (PFObject *object in objects) {
                 if([className isEqualToString:@"Protocol"]){
                     MedProtocol *protocol = [[MedProtocol alloc] initWithName:object[@"name"] objectId:object[@"objectID"]];
@@ -102,37 +86,10 @@
                     [parseObjects addObject:formSelection];
                 }
             }
+            [self.delegate downloadedParseObjects:parseObjects withDataType:DataTypeProtocol];
         }
     }];
-    return parseObjects;
-}
-
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
-    NSMutableArray *objectsWithParentId = nil;
-    switch (dataType) {
-        case DataTypeProtocol:
-            objectsWithParentId = [self getAllFromParseClassNamed:@"Protocol"];
-            break;
-        case DataTypeStep:
-            if(true){
-                NSMutableArray *steps = [[NSMutableArray alloc]init];
-                steps = [self getAllFromParseClassNamed:@"Step"];
-                for(ProtocolStep* step in steps){
-                    if([step.protocolId isEqualToString:parentId])
-                        [objectsWithParentId addObject:step];
-                }
-            }
-            break;
-        case DataTypeComponent:
-            objectsWithParentId = [self getStepComponentsWithParentId:parentId];
-            break;
-        case DataTypeFormComponent:
-            objectsWithParentId = [self getFormComponentsWithParentId:parentId];
-            break;
-        default:
-            break;
-    }
-    return objectsWithParentId;
+    return nil;
 }
 
 -(NSMutableArray*)getStepComponents{
@@ -184,7 +141,6 @@
     NSMutableArray* formComponents = [[NSMutableArray alloc]  init];
     for(NSString* className in parseClassNames){
         [formComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
-        
     }
     return formComponents;
 }
@@ -258,10 +214,71 @@
     else if([object isKindOfClass:[FormNumber class]])
     {
         className = @"FormNumber";
+    }    else if([object isKindOfClass:[FormSelection class]])
+    {
+        className = @"FormSelection";
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        className = @"FormNumber";
     }
     return className;
 }
 
+#pragma mark MedRefDataSource
+
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
+    NSMutableArray* dataTypes = nil;
+    switch (dataType) {
+        case DataTypeProtocol:
+            dataTypes = [self getAllFromParseClassNamed:@"Protocol"];
+            break;
+            
+        case DataTypeStep:
+            dataTypes = [self getAllFromParseClassNamed:@"Step"];
+            break;
+            
+        case DataTypeComponent:
+            dataTypes = [self getStepComponents];
+            break;
+            
+        case DataTypeFormComponent:
+            dataTypes = [self getFormComponents];
+            break;
+            
+        default:
+            break;
+    }
+    return dataTypes;
+}
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
+    NSMutableArray *objectsWithParentId = nil;
+    switch (dataType) {
+        case DataTypeProtocol:
+            objectsWithParentId = [self getAllFromParseClassNamed:@"Protocol"];
+            break;
+        case DataTypeStep:
+            if(true){
+                //TODO fix this so the parse query is smaller and takes into accoun parent id
+                NSMutableArray *steps = [[NSMutableArray alloc]init];
+                steps = [self getAllFromParseClassNamed:@"Step"];
+                for(ProtocolStep* step in steps){
+                    if([step.protocolId isEqualToString:parentId])
+                        [objectsWithParentId addObject:step];
+                }
+            }
+            break;
+        case DataTypeComponent:
+            objectsWithParentId = [self getStepComponentsWithParentId:parentId];
+            break;
+        case DataTypeFormComponent:
+            objectsWithParentId = [self getFormComponentsWithParentId:parentId];
+            break;
+        default:
+            break;
+    }
+    return objectsWithParentId;
+}
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     __block id obj;
     PFQuery *query;
@@ -271,8 +288,9 @@
     [query whereKey:@"objectId" equalTo:idString];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         {
-            if(!error)
-                obj= [objects objectAtIndex:0];
+            if(!error){
+                [self.delegate downloadedParseObjects:[objects objectAtIndex:0] withDataType:dataType];
+            }
         }
     }];
     return obj;
@@ -297,24 +315,24 @@
                 }
             }
         }];
-
+        
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
         query = [PFQuery queryWithClassName:@"Step"];
         [query getObjectInBackgroundWithId:idString block:^(PFObject *parseStepObject, NSError *error) {
-                if(!error){
-                    parseStepObject[@"objectId"] = step.objectId;
-                    parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
+            if(!error){
+                parseStepObject[@"objectId"] = step.objectId;
+                parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
 //                    parseStepData[@"createdAt"] = step.createdAt;
 //                    parseStepData[@"updatedAt"] = step.updatedAt;
-                    parseStepObject[@"protocolId"] = step.protocolId;
-                    [parseStepObject saveInBackground];
-                    success = YES;
-                }
-            }];
-        }
+                parseStepObject[@"protocolId"] = step.protocolId;
+                [parseStepObject saveInBackground];
+                success = YES;
+            }
+        }];
+    }
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form*)object;
@@ -426,12 +444,11 @@
     
     return success;
 }
-
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     return NULL;
 }
-
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     return NULL;
 }
+
 @end
