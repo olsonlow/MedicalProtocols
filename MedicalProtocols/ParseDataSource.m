@@ -291,8 +291,6 @@
                 if(!error){
                     parseProtocolObject[@"objectId"] = protocol.objectId;
                     parseProtocolObject[@"name"] = protocol.name;
-//                    parseProtocolData[@"createdAt"] = protocol.createdAt;
-//                    parseProtocolData[@"updatedAt"] = protocol.updatedAt;
                     [parseProtocolObject saveInBackground];
                     success = YES;
                 }
@@ -308,8 +306,6 @@
                 if(!error){
                     parseStepObject[@"objectId"] = step.objectId;
                     parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
-//                    parseStepData[@"createdAt"] = step.createdAt;
-//                    parseStepData[@"updatedAt"] = step.updatedAt;
                     parseStepObject[@"protocol"] = step.protocolId;
                     [parseStepObject saveInBackground];
                     success = YES;
@@ -324,7 +320,6 @@
             {
                 if(!error){
                     parseFormObject[@"objectId"] = form.objectId;
-//                    parseFormObject[@"updatedAt"] = [form updatedAt];
                     parseFormObject[@"step"] = form.stepId;
                     [parseFormObject saveInBackground];
                     success = YES;
@@ -358,7 +353,6 @@
             {
                 if(!error){
                     parseLinkObject[@"objectId"] = link.objectId;
-//                    parseLinkObject[@"updatedAt"] = [link updatedAt];
                     parseLinkObject[@"url"] = link.url;
                     parseLinkObject[@"printable"] = [NSNumber numberWithBool:[link printable]];
                     parseLinkObject[@"label"] = link.label;
@@ -454,6 +448,7 @@
         MedProtocol* protocol = (MedProtocol*)object;
         PFObject *parseProtocolObject = [PFObject objectWithClassName:@"Protocol"];
         parseProtocolObject[@"name"] = protocol.name;
+        [parseProtocolObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[ProtocolStep class]]){
@@ -462,6 +457,7 @@
         parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
         parseStepObject[@"protocol"] = step.protocolId;
         parseStepObject[@"description"] = step.description;
+        [parseStepObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[TextBlock class]]){
@@ -470,12 +466,14 @@
         parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
         parseTextBlockObject[@"title"] = textBlock.title;
         parseTextBlockObject[@"step"] = textBlock.stepId;
+        [parseTextBlockObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[Calculator class]]){
         Calculator* calculator = (Calculator*)object;
         PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
         parseCalculatorObject[@"step"] = calculator.stepId;
+        [parseCalculatorObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[Link class]]){
@@ -485,12 +483,14 @@
         parseLinkObject[@"label"] = link.label;
         parseLinkObject[@"printable"] = [NSNumber numberWithBool:link.printable];
         parseLinkObject[@"step"] = link.stepId;
+        [parseLinkObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[Form class]]){
         Form* form = (Form*)object;
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
         parseFormObject[@"step"] = form.stepId;
+        [parseFormObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[FormSelection class]]){
@@ -500,6 +500,7 @@
         parseFormSelectionObject[@"form"] = formSelection.formId;
         parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
         parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
+        [parseFormSelectionObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[FormNumber class]]){
@@ -510,6 +511,7 @@
         parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
         parseFormNumberObject[@"label"] = formNumber.label;
         parseFormNumberObject[@"form"] = formNumber.formId;
+        [parseFormNumberObject saveInBackground];
         success = YES;
     }
     
