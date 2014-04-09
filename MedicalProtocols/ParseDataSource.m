@@ -265,16 +265,17 @@
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     __block id obj;
     PFQuery *query;
-    NSArray *tableName = [self tableNamesForDataType:dataType];
+    NSArray *tableNames = [self tableNamesForDataType:dataType];
     //this needs to be refined since some type (eg: component) have more than one associated table
-    query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
-    [query whereKey:@"objectId" equalTo:idString];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        {
-            if(!error)
-                obj= [objects objectAtIndex:0];
-        }
-    }];
+    for(NSString* tableName in tableNames){
+        query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            {
+                if(!error)
+                    obj = [objects objectAtIndex:[tableNames indexOfObject:tableName]];
+            }
+        }];
+    }
     return obj;
 }
 
@@ -428,10 +429,91 @@
 }
 
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
-    return NULL;
+    __block id obj;
+    __block BOOL success;
+    success = NO;
+    PFQuery *query;
+    NSArray *tableNames = [self tableNamesForDataType:dataType];
+    //this needs to be refined since some type (eg: component) have more than one associated table
+    for(NSString* tableName in tableNames){
+        query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            {
+                if(!error){
+                    [obj deleteInBackground];
+                    success = YES;
+                }
+            }
+        }];
+    }
+    return success;
 }
 
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
-    return NULL;
+    BOOL success = NO;
+    if([object isKindOfClass:[MedProtocol class]]){
+        MedProtocol* protocol = (MedProtocol*)object;
+        PFObject *parseProtocolObject = [PFObject objectWithClassName:@"Protocol"];
+        parseProtocolObject[@"name"] = protocol.name;
+        success = YES;
+    }
+    if([object isKindOfClass:[ProtocolStep class]]){
+        ProtocolStep* step = (ProtocolStep*)object;
+        PFObject *parseStepObject = [PFObject objectWithClassName:@"Step"];
+        parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
+        parseStepObject[@"protocolId"] = step.protocolId;
+        parseStepObject[@"description"] = step.description;
+        success = YES;
+    }
+    if([object isKindOfClass:[TextBlock class]]){
+        TextBlock* textBlock = (TextBlock*)object;
+        PFObject *parseTextBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
+        parseTextBlockObject[@"title"] = textBlock.title;
+        parseTextBlockObject[@"stepId"] = textBlock.stepId;
+        success = YES;
+    }
+    if([object isKindOfClass:[Calculator class]]){
+        Calculator* calculator = (Calculator*)object;
+        PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
+        parseCalculatorObject[@"stepId"] = calculator.stepId;
+        success = YES;
+    }
+    if([object isKindOfClass:[Link class]]){
+        Link* link = (Link*)object;
+        PFObject *parseLinkObject = [PFObject objectWithClassName:@"Link"];
+        parseLinkObject[@"url"] = link.url;
+        parseLinkObject[@"label"] = link.label;
+        parseLinkObject[@"printable"] = [NSNumber numberWithBool:link.printable];
+        parseLinkObject[@"stepId"] = link.stepId;
+        success = YES;
+    }
+    if([object isKindOfClass:[Form class]]){
+        Form* form = (Form*)object;
+        PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
+        parseFormObject[@"stepId"] = form.stepId;
+        success = YES;
+    }
+    if([object isKindOfClass:[FormSelection class]]){
+        FormSelection* formSelection = (FormSelection*)object;
+        PFObject *parseFormSelectionObject = [PFObject objectWithClassName:@"FormSelection"];
+        parseFormSelectionObject[@"label"] = formSelection.label;
+        parseFormSelectionObject[@"formId"] = formSelection.formId;
+        parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
+        parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
+        success = YES;
+    }
+    if([object isKindOfClass:[FormNumber class]]){
+        FormNumber* formNumber = (FormNumber*)object;
+        PFObject *parseFormNumberObject = [PFObject objectWithClassName:@"FormNumber"];
+        parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
+        parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
+        parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
+        parseFormNumberObject[@"label"] = formNumber.label;
+        parseFormNumberObject[@"formId"] = formNumber.formId;
+        success = YES;
+    }
+    
+    return success;
 }
 @end
