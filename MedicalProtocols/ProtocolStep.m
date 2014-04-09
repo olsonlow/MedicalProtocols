@@ -24,7 +24,7 @@
 
 @end
 @implementation ProtocolStep
--(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId{
+-(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId{
     self = [super init];
     if (self) {
         _description = description;
@@ -52,18 +52,18 @@
                 while([results next])
                 {
                     if ([componentName isEqualToString: @"textblock"]) {
-                        TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"]  printable:[results boolForColumn:@"printable"] objectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
+                        TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"]  printable:[results boolForColumn:@"printable"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
                         [_components addObject:textBlock];
                     }
                     else if([componentName isEqualToString:@"calculator"]){
-                        Calculator *calculator = [[Calculator alloc] initWithObjectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
+                        Calculator *calculator = [[Calculator alloc] initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
                         [_components addObject:calculator];
                     }
                     else if([componentName isEqualToString:@"link"]){
-                        Link *link = [[Link alloc] initWithLabel:[results stringForColumn:@"label"] url:[results stringForColumn:@"url"] objectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
+                        Link *link = [[Link alloc] initWithLabel:[results stringForColumn:@"label"] url:[results stringForColumn:@"url"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
                         [_components addObject:link];
                     }else{
-                        Form *form = [[Form alloc]initWithObjectId:[results stringForColumn:@"objectID"] stepId:[results stringForColumn:@"stepID"]];
+                        Form *form = [[Form alloc]initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
                         [_components addObject:form];
                         
                     }

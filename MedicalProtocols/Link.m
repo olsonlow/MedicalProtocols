@@ -13,7 +13,7 @@
 #import "FMResultSet.h"
 
 @implementation Link
--(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId{
+-(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(int)objectId stepId:(int)stepId{
     self = [super init];
     if (self) {
         _label = label;

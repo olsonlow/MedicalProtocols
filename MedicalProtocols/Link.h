@@ -12,12 +12,10 @@
 @interface Link : NSObject
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* url;
-@property(nonatomic) NSString* objectId;
-@property(nonatomic) NSString* stepId;
-@property(nonatomic) NSDate *createdAt;
-@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic, assign) int objectId;
+@property(nonatomic, assign) int stepId;
 @property(nonatomic) BOOL printable;
 
--(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(int)objectId stepId:(int)stepId;
 
 @end

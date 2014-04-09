@@ -11,14 +11,14 @@
 @class PFObject;
 @interface ProtocolStep : NSObject
 @property(nonatomic) NSString* dbPath;
-@property(nonatomic,strong) NSString* objectId;
+@property(nonatomic,assign) int objectId;
 @property(nonatomic,assign) int stepNumber;
 @property(nonatomic) NSDate *createdAt;
 @property(nonatomic) NSDate *updatedAt;
-@property(nonatomic) NSString *protocolId; //foreign key from protocol (idStr)
+@property(nonatomic,assign) int protocolId; //foreign key from protocol (idStr)
 @property(nonatomic,strong) NSString* description;
 
--(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId;
+-(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId;
 
 
 @end

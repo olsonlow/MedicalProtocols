@@ -21,7 +21,7 @@
 
 @implementation MedProtocol
 
--(id)initWithName:(NSString*)name objectId:(NSString*)objectId{
+-(id)initWithName:(NSString*)name objectId:(int)objectId{
     self = [super init];
     if (self) {
         _name = name;
@@ -45,8 +45,8 @@
                 ProtocolStep *step = [[ProtocolStep alloc] init];
                 step.stepNumber = [results intForColumn:@"stepNumber"];
                 step.description = [results stringForColumn:@"description"];
-                step.objectId = [results stringForColumn:@"objectID"];
-                step.protocolId = [results stringForColumn:@"protocolID"];
+                step.objectId = [results intForColumn:@"objectID"];
+                step.protocolId = [results intForColumn:@"protocolID"];
                 step.updatedAt = [results dateForColumn:@"updatedAt"];
                 step.createdAt = [results dateForColumn:@"createdAt"];
                 [_steps addObject:step];

@@ -45,10 +45,9 @@
             [steps stringByAppendingString:@", "];
         }
         NSString *nameLabel = @"Protocol Name: ";
-        NSString *idLabel = @"Protocol ID: ";
+        self.protocolID.text  = [NSString stringWithFormat:@"Protocol ID:%i",self.protocol.objectId];
         NSString *stepsLabel = @"Protocol Steps: ";
         self.protocolName.text= [nameLabel stringByAppendingString:self.protocol.name];
-        self.protocolID.text = [idLabel stringByAppendingString:self.protocol.objectId];
         self.protocolSteps.text = [stepsLabel stringByAppendingString:steps];
     }
     else
