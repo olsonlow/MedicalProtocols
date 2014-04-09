@@ -70,8 +70,6 @@
             for (PFObject *object in objects) {
                 if([className isEqualToString:@"Protocol"]){
                     MedProtocol *protocol = [[MedProtocol alloc] initWithName:object[@"name"] objectId:object[@"objectID"]];
-//                    protocol.createdAt = object[@"createdAt"];
-//                    protocol.updatedAt = object[@"updatedAt"];
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
@@ -266,7 +264,6 @@
     __block id obj;
     PFQuery *query;
     NSArray *tableNames = [self tableNamesForDataType:dataType];
-    //this needs to be refined since some type (eg: component) have more than one associated table
     for(NSString* tableName in tableNames){
         query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -335,7 +332,6 @@
             {
                 if(!error){
                     parseTextBlockObject[@"objectId"] = textBlock.objectId;
-//                    parseTextBlockObject[@"updatedAt"] = [textBlock updatedAt];
                     parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:[textBlock printable]];
                     parseTextBlockObject[@"title"] = textBlock.title;
                     parseTextBlockObject[@"step"] = textBlock.stepId;
@@ -455,7 +451,7 @@
         ProtocolStep* step = (ProtocolStep*)object;
         PFObject *parseStepObject = [PFObject objectWithClassName:@"Step"];
         parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
-        parseStepObject[@"protocol"] = step.protocolId;
+        parseStepObject[@"protocol"] = step.protocolId; //Parse refers to protocolId as protocol this is the foreign key in Step
         parseStepObject[@"description"] = step.description;
         [parseStepObject saveInBackground];
         success = YES;
@@ -465,14 +461,14 @@
         PFObject *parseTextBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
         parseTextBlockObject[@"title"] = textBlock.title;
-        parseTextBlockObject[@"step"] = textBlock.stepId;
+        parseTextBlockObject[@"step"] = textBlock.stepId;  //Parse refers to stepId as step this is the foreign key in TextBlock
         [parseTextBlockObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[Calculator class]]){
         Calculator* calculator = (Calculator*)object;
         PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
-        parseCalculatorObject[@"step"] = calculator.stepId;
+        parseCalculatorObject[@"step"] = calculator.stepId; //Parse refers to stepId as step this is the foreign key in Calculator
         [parseCalculatorObject saveInBackground];
         success = YES;
     }
@@ -482,7 +478,7 @@
         parseLinkObject[@"url"] = link.url;
         parseLinkObject[@"label"] = link.label;
         parseLinkObject[@"printable"] = [NSNumber numberWithBool:link.printable];
-        parseLinkObject[@"step"] = link.stepId;
+        parseLinkObject[@"step"] = link.stepId;  //Parse refers to stepId as step this is the foreign key in Link
         [parseLinkObject saveInBackground];
         success = YES;
     }
@@ -497,7 +493,7 @@
         FormSelection* formSelection = (FormSelection*)object;
         PFObject *parseFormSelectionObject = [PFObject objectWithClassName:@"FormSelection"];
         parseFormSelectionObject[@"label"] = formSelection.label;
-        parseFormSelectionObject[@"form"] = formSelection.formId;
+        parseFormSelectionObject[@"form"] = formSelection.formId;  //Parse refers to formId as form this is the foreign key in FormSelection
         parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
         parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
         [parseFormSelectionObject saveInBackground];
@@ -510,7 +506,7 @@
         parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
         parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
         parseFormNumberObject[@"label"] = formNumber.label;
-        parseFormNumberObject[@"form"] = formNumber.formId;
+        parseFormNumberObject[@"form"] = formNumber.formId; //Parse refers to formId as form this is the foreign key in FormNumber
         [parseFormNumberObject saveInBackground];
         success = YES;
     }
