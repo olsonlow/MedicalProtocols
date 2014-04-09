@@ -30,6 +30,7 @@
 {
     static ParseDataSource* sharedObject = nil;
     if(sharedObject == nil){
+        
         sharedObject = [[ParseDataSource alloc] init];
         sharedObject.delegate = delegate;
         sharedObject.runningQueries = 0;
@@ -53,34 +54,34 @@
             NSMutableArray* parseObjects = [[NSMutableArray alloc] init];
             for (PFObject *object in objects) {
                 if([className isEqualToString:@"Protocol"]){
-                    MedProtocol *protocol = [[MedProtocol alloc] initWithName:object[@"name"] objectId:object[@"objectID"]];
+                    MedProtocol *protocol = [[MedProtocol alloc] initWithName:object[@"name"] objectId:object[@"databaseId"]];
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"objectId"] stepNumber:[object[@"stepNumber"]intValue] description:object[@"description"] protocolId:object[@"protocol"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"databaseId"] stepNumber:[object[@"stepNumber"]intValue] description:object[@"description"] protocolId:object[@"protocol"]];
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
-                    Form *form = [[Form alloc] initWithObjectId:object[@"objectId"] stepId:object[@"stepId"]];
+                    Form *form = [[Form alloc] initWithObjectId:object[@"databaseId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:form];
                 }
                 else if([className isEqualToString:@"Link"]){
-                    Link *link = [[Link alloc]initWithLabel:object[@"label"] url:object[@"url"] objectId:object[@"objectId"] stepId:object[@"stepId"]];
+                    Link *link = [[Link alloc]initWithLabel:object[@"label"] url:object[@"url"] objectId:object[@"databaseId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:link];
                 }
                 else if([className isEqualToString:@"Calculator"]){
-                    Calculator *calculator = [[Calculator alloc] initWithObjectId:object[@"objectId"] stepId:object[@"stepId"]];
+                    Calculator *calculator = [[Calculator alloc] initWithObjectId:object[@"databaseId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:calculator];
                 }
                 else if([className isEqualToString:@"TextBlock"]){
-                    TextBlock *textBlock = [[TextBlock alloc] initWithTitle:object[@"title"] content:object[@"content"] printable:[object[@"printable"]boolValue] objectId:object[@"objectId"] stepId:object[@"stepId"]];
+                    TextBlock *textBlock = [[TextBlock alloc] initWithTitle:object[@"title"] content:object[@"content"] printable:[object[@"printable"]boolValue] objectId:object[@"databaseId"] stepId:object[@"stepId"]];
                     [parseObjects addObject:textBlock];
                 }
                 else if([className isEqualToString:@"FormNumber"]){
-                    FormNumber *formNumber = [[FormNumber alloc]initWithLabel:object[@"label"] defaultValue:[object[@"defaultValue"]intValue] minValue:[object[@"minValue"]intValue] maxValue:[object[@"maxValue"]intValue] objectId:object[@"objectId"] formId:object[@"formId"]];
+                    FormNumber *formNumber = [[FormNumber alloc]initWithLabel:object[@"label"] defaultValue:[object[@"defaultValue"]intValue] minValue:[object[@"minValue"]intValue] maxValue:[object[@"maxValue"]intValue] objectId:object[@"databaseId"] formId:object[@"formId"]];
                     [parseObjects addObject:formNumber];
                 }else{
-                    FormSelection *formSelection = [[FormSelection alloc] initWithLabel:object[@"label"] choiceA:object[@"choiceA"] choiceB:object[@"choiceB"] objectId:object[@"objectId"] formId:object[@"formId"]];
+                    FormSelection *formSelection = [[FormSelection alloc] initWithLabel:object[@"label"] choiceA:object[@"choiceA"] choiceB:object[@"choiceB"] objectId:object[@"databaseId"] formId:object[@"formId"]];
                     [parseObjects addObject:formSelection];
                 }
             }
