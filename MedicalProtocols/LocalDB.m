@@ -85,7 +85,7 @@
                     protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
                 while([protocolResults next])
                 {
-                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"objectId"]];
+                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"id"]];
                         [protocols addObject:medProtocol];
                 }
                 if ([db hadError]) {
@@ -102,13 +102,13 @@
                 NSMutableArray* steps = [[NSMutableArray alloc] init];
                 FMResultSet *stepResults;
                 if(parentId){
-                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", parentId];
+                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", parentId];
                 } else {
                     stepResults = [db executeQuery:@"SELECT * FROM step"];
                 }
                 while([stepResults next])
                 {
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults intForColumn:@"objectId"] stepNumber:[stepResults intForColumn:@"stepNumber"] description:[stepResults stringForColumn:@"description"] protocolId:[stepResults intForColumn:@"protocolId"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults intForColumn:@"id"] stepNumber:[stepResults intForColumn:@"stepNumber"] description:[stepResults stringForColumn:@"description"] protocolId:[stepResults intForColumn:@"protocolId"]];
                     [steps addObject:step];
                 }
                 if ([db hadError]) {
@@ -134,32 +134,32 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol*) object;
-        success = [db executeUpdate:@"UPDATE protocol SET objectID = ?, pName = ? WHERE objectID = ? ",medProtocol.objectId, medProtocol.name, objectId];
+        success = [db executeUpdate:@"UPDATE protocol SET id = ?, pName = ? WHERE id = ? ",medProtocol.objectId, medProtocol.name, objectId];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET objectID = ?, stepNumber = ?, protocolID = ? , description = ? WHERE objectID = ?", step.objectId, step.stepNumber, step.updatedAt, step.protocolId, step.description, objectId];
+        success = [db executeUpdate:@"UPDATE step SET id = ?, stepNumber = ?, protocolId = ? , description = ? WHERE id = ?", step.objectId, step.stepNumber, step.protocolId, step.description, objectId];
     }
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form *) object;
-        success = [db executeUpdate:@"UPDATE form SET objectID = ?, stepID = ? WHERE objectID = ?", form.objectId, form.updatedAt, form.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE form SET id = ?, stepId = ? WHERE id = ?", form.objectId, form.stepId, objectId];
     }
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET objectID = ?, printable = ?, title = ?, stepID = ? WHERE objectID = ?", textBlock.objectId, textBlock.printable, textBlock.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE textBlock SET id = ?, printable = ?, title = ?, stepId = ? WHERE id = ?", textBlock.objectId, textBlock.printable, textBlock.stepId, objectId];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET objectID = ?, url = ?,, printable = ?, label = ?, stepID = ? WHERE objectID = ?", link.objectId, link.url, link.printable, link.label, link.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?,, printable = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.printable, link.label, link.stepId, objectId];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator*)object;
-        success = [db executeUpdate:@"UPDATE calculator SET objectID = ?, stepID = ? WHERE objectID = ?", calculator.objectId, calculator.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
     }
     return success;
 }
@@ -171,18 +171,18 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?,?)", medProtocol.objectId, medProtocol.name];
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?)", medProtocol.objectId, medProtocol.name];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?,?)",step.objectId, step.stepNumber, step.updatedAt, step.protocolId, step.description];
+        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?)",step.objectId, step.stepNumber, step.protocolId, step.description];
     }
     
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?,?)", form.objectId, form.updatedAt, form.stepId];
+        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?)", form.objectId, form.stepId];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
@@ -213,13 +213,13 @@
     switch (dataType) {
         case DataTypeProtocol:
             [self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
-            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectID = ?", objectId];
+            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE id = ?", objectId];
         case DataTypeStep:
             [self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
-            step = [db executeUpdate:@"DELETE FROM step WHERE objectID = ?", objectId];
+            step = [db executeUpdate:@"DELETE FROM step WHERE id = ?", objectId];
         case DataTypeComponent:
             [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
-            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepID = ?", objectId];
+            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = ?", objectId];
             form = [db executeUpdate:@"DELETE FROM form WHERE stepID = ?", objectId];
             link = [db executeUpdate:@"DELETE FROM link WHERE stepID = ?", objectId];
             calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepID = ?", objectId];
