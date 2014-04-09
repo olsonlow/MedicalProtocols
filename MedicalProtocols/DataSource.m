@@ -73,23 +73,23 @@
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType];
 }
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
 }
--(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)idString withObject:(id)object{
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(int)objectId withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];
-    return [dataSource updateObjectWithDataType:dataType withId:idString withObject:object];
+    return [dataSource updateObjectWithDataType:dataType withId:objectId withObject:object];
 }
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId{
     id<MedRefDataSource> dataSource = [self getDataSource];
-    return [dataSource deleteObjectWithDataType:dataType withId:idString];
+    return [dataSource deleteObjectWithDataType:dataType withId:objectId];
 }
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource insertObjectWithDataType:dataType withObject:object];
 }
--(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+-(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
     return NULL;
 }
 -(void)dataSourceReadyForUse{

@@ -87,35 +87,7 @@
             [self.delegate downloadedParseObjects:parseObjects withDataType:DataTypeProtocol];
         }
     }];
-    return parseObjects;
-}
-
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
-    NSMutableArray *objectsWithParentId = nil;
-    switch (dataType) {
-        case DataTypeProtocol:
-            objectsWithParentId = [self getAllFromParseClassNamed:@"Protocol"];
-            break;
-        case DataTypeStep:
-            if(true){
-                NSMutableArray *steps = [[NSMutableArray alloc]init];
-                steps = [self getAllFromParseClassNamed:@"Step"];
-                for(ProtocolStep* step in steps){
-                    if(step.protocolId == parentId)
-                        [objectsWithParentId addObject:step];
-                }
-            }
-            break;
-        case DataTypeComponent:
-            objectsWithParentId = [self getStepComponentsWithParentId:parentId];
-            break;
-        case DataTypeFormComponent:
-            objectsWithParentId = [self getFormComponentsWithParentId:parentId];
-            break;
-        default:
-            break;
-    }
-    return objectsWithParentId;
+    return nil;
 }
 
 -(NSMutableArray*)getStepComponents{
@@ -277,7 +249,8 @@
     }
     return dataTypes;
 }
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
+
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
     NSMutableArray *objectsWithParentId = nil;
     switch (dataType) {
         case DataTypeProtocol:
@@ -285,11 +258,10 @@
             break;
         case DataTypeStep:
             if(true){
-                //TODO fix this so the parse query is smaller and takes into accoun parent id
                 NSMutableArray *steps = [[NSMutableArray alloc]init];
                 steps = [self getAllFromParseClassNamed:@"Step"];
                 for(ProtocolStep* step in steps){
-                    if([step.protocolId isEqualToString:parentId])
+                    if(step.protocolId == parentId)
                         [objectsWithParentId addObject:step];
                 }
             }
@@ -305,7 +277,8 @@
     }
     return objectsWithParentId;
 }
--(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+
+-(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
     __block id obj;
     PFQuery *query;
     NSArray *tableNames = [self tableNamesForDataType:dataType];
@@ -346,6 +319,7 @@
     {
         ProtocolStep *step = (ProtocolStep*)object;
         query = [PFQuery queryWithClassName:@"Step"];
+        [query includeKey:@"protocol"];
         [query whereKey:@"databaseId" equalTo:[NSNumber numberWithInt:objectId]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseStepObject, NSError *error) {
                 if(!error){
@@ -470,7 +444,7 @@
     
     return success;
 }
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId{
     __block id obj;
     __block BOOL success;
     success = NO;
