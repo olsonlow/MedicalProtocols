@@ -31,7 +31,7 @@
 +(LocalDB *) sharedInstance{
     return [LocalDB sharedInstanceWithDelegate:nil];
 }
-+(LocalDB *) sharedInstanceWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
++(LocalDB *) sharedInstanceWithDelegate:(id<LocalDBReadyForUseDelegate>)delegate;
 {
     static LocalDB* sharedObject = nil;
     if(sharedObject == nil){

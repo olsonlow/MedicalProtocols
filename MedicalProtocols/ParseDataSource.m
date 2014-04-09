@@ -280,17 +280,17 @@
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)idString{
     __block id obj;
     PFQuery *query;
-    NSArray *tableName = [self tableNamesForDataType:dataType];
-    //this needs to be refined since some type (eg: component) have more than one associated table
-    query = [PFQuery queryWithClassName:[tableName objectAtIndex:0]];
-    [query whereKey:@"objectId" equalTo:idString];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        {
-            if(!error){
-                [self.delegate downloadedParseObjects:[objects objectAtIndex:0] withDataType:dataType];
+    NSArray *tableNames = [self tableNamesForDataType:dataType];
+    for(NSString* tableName in tableNames){
+        query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            {
+                if(!error){
+                    [self.delegate downloadedParseObjects:[objects objectAtIndex:[tableNames indexOfObject:tableName]] withDataType:dataType];
+                }
             }
-        }
-    }];
+        }];
+    }
     return obj;
 }
 
@@ -317,18 +317,18 @@
     {
         ProtocolStep *step = (ProtocolStep*)object;
         query = [PFQuery queryWithClassName:@"Step"];
+        [query includeKey:@"protocol"];
         [query getObjectInBackgroundWithId:idString block:^(PFObject *parseStepObject, NSError *error) {
-            if(!error){
-                parseStepObject[@"objectId"] = step.objectId;
-                parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
-//                    parseStepData[@"createdAt"] = step.createdAt;
-//                    parseStepData[@"updatedAt"] = step.updatedAt;
-                parseStepObject[@"protocolId"] = step.protocolId;
-                [parseStepObject saveInBackground];
-                success = YES;
-            }
-        }];
-    }
+                if(!error){
+                    parseStepObject[@"objectId"] = step.objectId;
+                    parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
+                    PFObject* protocol = parseStepObject[@"protocol"];
+                    protocol.objectId = step.protocolId;
+                    [parseStepObject saveInBackground];
+                    success = YES;
+                }
+            }];
+        }
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form*)object;
