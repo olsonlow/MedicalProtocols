@@ -12,12 +12,12 @@
 @class ProtocolStep;
 @interface MedProtocol : NSObject
 @property(nonatomic,copy) NSString* name; //corresponds to pName
-@property(nonatomic, copy) NSString* objectId; //corresponds to objectID
+@property(nonatomic,assign) int objectId; //corresponds to objectID
 @property(nonatomic, copy) NSDate* createdAt;
 @property(nonatomic, copy) NSDate* updatedAt;
 @property(nonatomic) UIImage* image;
 @property(nonatomic) NSString* dbPath;
--(id)initWithName:(NSString*)name objectId:(NSString*)objectId;
+-(id)initWithName:(NSString*)name objectId:(int)objectId;
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
 -(NSMutableArray*)steps;

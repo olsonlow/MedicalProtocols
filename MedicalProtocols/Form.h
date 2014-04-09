@@ -12,9 +12,9 @@
 @interface Form : NSObject
 @property(nonatomic) NSDate *createdAt;
 @property(nonatomic) NSDate *updatedAt;
-@property(nonatomic) NSString *stepId;
-@property(nonatomic) NSString *objectId;
+@property(nonatomic,assign) int stepId;
+@property(nonatomic,assign) int objectId;
 
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(id)initWithObjectId:(int)objectId stepId:(int)stepId;
 -(id)initWithParseObject:(PFObject*)parseObject;
 @end

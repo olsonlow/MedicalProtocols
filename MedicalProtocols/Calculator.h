@@ -11,11 +11,9 @@
 
 @interface Calculator : NSObject
 
-@property(nonatomic) NSString* objectId;
-@property(nonatomic) NSString* stepId;
-@property(nonatomic) NSDate *createdAt;
-@property(nonatomic) NSDate *updatedAt;
+@property(nonatomic, assign) int objectId;
+@property(nonatomic, assign) int stepId;
 
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(id)initWithObjectId:(int)objectId stepId:(int)stepId;
 
 @end
