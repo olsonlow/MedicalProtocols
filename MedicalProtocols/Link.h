@@ -19,6 +19,5 @@
 @property(nonatomic) BOOL printable;
 
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId;
--(id)initWithParseObject:(PFObject*)parseObject;
 
 @end

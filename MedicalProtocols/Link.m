@@ -23,36 +23,5 @@
     }
     return self;
 }
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-        _label = parseObject[@"label"];
-        _url = parseObject[@"URL"];
-    }
-    return self;
-}
-
--(id)initFromDBWithStepID:(NSObject*)DBObject{
-    self = [super init];
-    if (self) {
-        NSString *dbPath = @"medRef.db";
-        
-        FMDatabase *db = [FMDatabase databaseWithPath:dbPath];
-        [db open];
-        FMResultSet *results = [db executeQuery:@"SELECT * FROM link where stepID = ?"];
-        while([results next])
-        {
-            _label = [results stringForColumn:@"label"];
-            _url = [results stringForColumn:@"url"];
-            
-        }
-        
-        [db close];
-    }
-    return self;
-}
--(BOOL)printable{
-    return NO;
-}
 
 @end

@@ -17,6 +17,5 @@
 @property(nonatomic) NSDate *updatedAt;
 
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
--(id)initWithParseObject:(PFObject*)parseObject;
--(id)initWithDBObject:(NSObject*)DBObject;
+
 @end

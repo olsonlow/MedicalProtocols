@@ -10,5 +10,8 @@
 @class MedProtocol;
 @interface ProtocolDetailViewController : UIViewController <UISplitViewControllerDelegate>
 @property (strong, nonatomic) MedProtocol* protocol;
+@property (weak, nonatomic) IBOutlet UILabel *protocolName;
+@property (weak, nonatomic) IBOutlet UILabel *protocolID;
+@property (weak, nonatomic) IBOutlet UILabel *protocolSteps;
 
 @end

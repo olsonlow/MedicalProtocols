@@ -15,7 +15,6 @@ mp.objectId = @"ldsjgbljgr";
 NSDate *now = [[NSDate alloc]init];
 NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-mp.createdAt = [calendar dateFromComponents:components];
 mp.updatedAt = [calendar dateFromComponents:components];
 [lb deleteObjectWithDataType:DataTypeProtocol withId:mp.objectId];
 [lb insertObjectWithDataType:DataTypeProtocol withObject:mp];
@@ -25,7 +24,6 @@ newP.name = @"High Blood Pressure";
 NSDate *newnow = [[NSDate alloc]init];
 NSCalendar *newcalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 NSDateComponents *newcomponents = [newcalendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:newnow];
-mp.createdAt = [newcalendar dateFromComponents:newcomponents];
-mp.updatedAt = [newcalendar dateFromComponents:newcomponents];
+newP.updatedAt = [newcalendar dateFromComponents:newcomponents];
 [lb updateObjectWithDataType:DataTypeProtocol withId:mp.objectId withObject:newP];
 */

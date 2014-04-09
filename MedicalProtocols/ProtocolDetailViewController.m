@@ -34,6 +34,33 @@
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
+   
+    if(self.protocol)
+    {
+        NSString *steps = @"";
+        
+        for(int i = 0; i < [_protocol.steps count]; i++)
+        {
+            [steps stringByAppendingString:[_protocol.steps objectAtIndex:i]];
+            [steps stringByAppendingString:@", "];
+        }
+        NSString *nameLabel = @"Protocol Name: ";
+        NSString *idLabel = @"Protocol ID: ";
+        NSString *stepsLabel = @"Protocol Steps: ";
+        self.protocolName.text= [nameLabel stringByAppendingString:self.protocol.name];
+        self.protocolID.text = [idLabel stringByAppendingString:self.protocol.objectId];
+        self.protocolSteps.text = [stepsLabel stringByAppendingString:steps];
+    }
+    else
+    {
+        self.protocolName.text = @"";
+        self.protocolID.text = @"";
+        self.protocolSteps.text = @"";
+        
+    }
+    [self.view addSubview:self.protocolName];
+    [self.view addSubview:self.protocolID];
+    [self.view addSubview:self.protocolSteps];
 }
 
 - (void)viewDidLoad

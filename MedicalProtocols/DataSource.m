@@ -9,6 +9,8 @@
 #import "DataSource.h"
 #import "LocalDB.h"
 #import "ParseDataSource.h"
+#import "MedProtocol.h"
+
 
 @interface DataSource()
 @property(nonatomic,strong) NSDate* lastUpdated;
@@ -35,6 +37,17 @@
             [self.medRefDataSourceDelegate dataSourceReadyForUse];
         }
     }
+    //UNCOMMENT THE CODE BELOW TO TEST ON-BOARD DB
+//    LocalDB *lb = [LocalDB sharedInstance];
+//    MedProtocol *mp = [[MedProtocol alloc]init];
+//    mp.name = @"High Blood Pressure";
+//    mp.objectId = @"ldsjgbljgr";
+//    NSDate *now = [[NSDate alloc]init];
+//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
+//    mp.updatedAt = [calendar dateFromComponents:components];
+//    [lb deleteObjectWithDataType:DataTypeProtocol withId:mp.objectId];
+//    [lb insertObjectWithDataType:DataTypeProtocol withObject:mp];
     
     return [LocalDB sharedInstance];
 }
