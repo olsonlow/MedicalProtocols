@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DataSource.h"
+#import "DataSourceProtocols.h"
 
 
-@interface ParseDataSource : NSObject<medRefDataSource>
+@interface ParseDataSource : NSObject<MedRefDataSource>
 +(ParseDataSource *) sharedInstance;
++(ParseDataSource *) sharedInstanceWithDelegate:(id<ParseDataDownloadedDelegate>)delegate;
+@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,weak) id<ParseDataDownloadedDelegate> delegate;
 @end

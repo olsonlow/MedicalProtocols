@@ -7,12 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DataSource.h"
-@interface LocalDB : NSObject <medRefDataSource>
-
+#import "DataSourceProtocols.h"
+@interface LocalDB : NSObject <MedRefDataSource>
 +(LocalDB *) sharedInstance;
-@property (strong, nonatomic) NSString *databaseName;
-@property (strong, nonatomic) NSString *databasePath;
--(NSArray*)tableNamesForDataType:(DataType)dataType;
-
++(LocalDB *) sharedInstanceWithDelegate:(id<LocalDBReadyForUseDelegate>)delegate;
+@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,weak) id<LocalDBReadyForUseDelegate> delegate;
 @end
