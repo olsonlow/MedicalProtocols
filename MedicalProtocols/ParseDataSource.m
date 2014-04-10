@@ -147,7 +147,7 @@
 }
 
 -(NSMutableArray*)getFormComponents{
-    NSArray* parseClassNames = @[@"FromNumber",@"FormSelection"];
+    NSArray* parseClassNames = @[@"FormNumber",@"FormSelection"];
     NSMutableArray* formComponents = [[NSMutableArray alloc]  init];
     for(NSString* className in parseClassNames){
         [formComponents addObjectsFromArray:[self getAllFromParseClassNamed:className]];
