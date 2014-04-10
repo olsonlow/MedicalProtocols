@@ -135,42 +135,42 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol*) object;
-        success = [db executeUpdate:@"UPDATE protocol SET id = ?, pName = ? WHERE id = ? ",medProtocol.objectId, medProtocol.name, objectId];
+        success = [db executeUpdate:@"UPDATE protocol SET pName = ? WHERE objectId = ? ",medProtocol.name, objectId];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET id = ?, stepNumber = ?, protocolId = ? , description = ? WHERE id = ?", step.objectId, step.stepNumber, step.protocolId, step.description, objectId];
+        success = [db executeUpdate:@"UPDATE step SET stepNumber = ?, protocolId = ? , description = ? WHERE objectId = ?", step.stepNumber, step.protocolId, step.description, objectId];
     }
     else if([object isKindOfClass:[Form class]])
     {
         Form* form = (Form *) object;
-        success = [db executeUpdate:@"UPDATE form SET id = ?, stepId = ? WHERE id = ?", form.objectId, form.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE form SET  stepId = ? WHERE objectId = ?", form.stepId, objectId];
     }
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET id = ?, printable = ?, title = ?, stepId = ? WHERE id = ?", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE textBlock SET printable = ?, title = ?, stepId = ? WHERE bjectId = ?", textBlock.printable, textBlock.title, textBlock.stepId, objectId];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.label, link.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE link SET url = ?, label = ?, stepId = ? WHERE objectId = ?", link.url, link.label, link.stepId, objectId];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator*)object;
-        success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE calculator SET  stepId = ? WHERE objectId = ?", calculator.stepId, objectId];
     }
     else if([object isKindOfClass:[FormNumber class]])
     {
         FormNumber *formNumber = (FormNumber*)object;
-        success = [db executeUpdate:@"UPDATE formNumber SET id = ?, stepId = ? WHERE id = ?", formNumber.objectId, formNumber.formId, objectId];
+        success = [db executeUpdate:@"UPDATE formNumber SET stepId = ? WHERE objectId = ?", formNumber.formId, objectId];
     }
     else if([object isKindOfClass:[FormSelection class]])
     {
         FormSelection *formSelection = (FormSelection*)object;
-        success = [db executeUpdate:@"UPDATE formSelection SET id = ?, stepId = ? WHERE id = ?", formSelection.objectId, formSelection.formId, objectId];
+        success = [db executeUpdate:@"UPDATE formSelection SET stepId = ? WHERE objectId = ?", formSelection.formId, objectId];
     }
     return success;
 }
