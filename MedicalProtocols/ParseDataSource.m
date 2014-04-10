@@ -59,7 +59,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %d sprotocols.", objects.count);
+            NSLog(@"Successfully retrieved %d objects from Class %@.", objects.count,className);
             // Do something with the found objects
             NSMutableArray* parseObjects = [[NSMutableArray alloc] init];
             for (PFObject *object in objects) {
