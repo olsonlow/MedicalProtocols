@@ -5,7 +5,7 @@ BEGIN;
 DROP TABLE IF EXISTS protocol;
 
 CREATE TABLE protocol (
-    id                  integer      NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id                  integer      PRIMARY KEY AUTOINCREMENT,
     objectId            integer      NOT NULL,
     pName               varchar(50)	NOT NULL
 );
@@ -13,7 +13,7 @@ CREATE TABLE protocol (
 DROP TABLE IF EXISTS step;
 
 CREATE TABLE step (
-    id          integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id          integer     PRIMARY KEY AUTOINCREMENT,
     objectId    integer     NOT NULL,
     stepNumber 	integer 	NOT NULL,
     protocolId	integer     NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE step (
 DROP TABLE IF EXISTS textBlock;
 
 CREATE TABLE textBlock (
-    id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id              integer     PRIMARY KEY AUTOINCREMENT,
     objectId        integer     NOT NULL,
     printable       BIT 		NOT NULL,
     content         varchar(140),
@@ -34,7 +34,7 @@ CREATE TABLE textBlock (
 DROP TABLE IF EXISTS calculator;
 
 CREATE TABLE calculator(
-    id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id              integer     PRIMARY KEY AUTOINCREMENT,
     objectId        integer     NOT NULL,
     stepId          integer     NOT NULL
 );
@@ -42,7 +42,7 @@ CREATE TABLE calculator(
 DROP TABLE IF EXISTS link;
 
 CREATE TABLE link (
-    id             integer      NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id             integer      PRIMARY KEY AUTOINCREMENT,
     objectId       integer      NOT NULL,
     url            varchar(100)      NOT NULL,
     label	       varchar(100)	NOT NULL,
@@ -52,16 +52,16 @@ CREATE TABLE link (
 DROP TABLE IF EXISTS form;
 
 CREATE TABLE form(
-    id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId        integer      NOT NULL,
+    id              integer     PRIMARY KEY AUTOINCREMENT,
+    objectId        integer     NOT NULL,
     stepID          integer     NOT NULL
 );
 
 DROP TABLE IF EXISTS formSelection;
 
 CREATE TABLE formSelection(
-    id          integer         NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId    integer      NOT NULL,
+    id          integer         PRIMARY KEY AUTOINCREMENT,
+    objectId    integer         NOT NULL,
     choiceA		varchar(1)      NOT NULL,
     choiceB		varchar(1)      NOT NULL,
     label		varchar(20)     NOT NULL,
@@ -71,8 +71,8 @@ CREATE TABLE formSelection(
 DROP TABLE IF EXISTS formNumber;
 
 CREATE TABLE formNumber(
-    id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId        integer      NOT NULL,
+    id              integer     PRIMARY KEY AUTOINCREMENT,
+    objectId        integer     NOT NULL,
     defaultValue	integer		NOT NULL,
     minValue		integer		NOT NULL,
     maxValue		integer		NOT NULL,
