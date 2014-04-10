@@ -37,7 +37,6 @@
     }
     return _steps;
 }
-
 -(int)countSteps{
     return [self.steps count];
 }

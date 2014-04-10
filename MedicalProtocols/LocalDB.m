@@ -63,10 +63,10 @@
             if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:_databasePath error:&copyError]) {
                 NSLog(@"Error copying files: %@", [copyError localizedDescription]);
             }
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setBool:YES forKey:@"dbinitialized"];
-            [defaults synchronize];
         }
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:YES forKey:@"dbinitialized"];
+        [defaults synchronize];
         _dataSourceReady = YES;
     }
     return self;
@@ -83,10 +83,7 @@
                 [db open];
                 NSMutableArray *protocols = [[NSMutableArray alloc]init];
                 FMResultSet *protocolResults;
-                if(parentId == -1)
-                    return NULL;
-                else
-                    protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
+                protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
                 while([protocolResults next])
                 {
                     MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"id"]];

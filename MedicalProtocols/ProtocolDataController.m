@@ -47,7 +47,7 @@
     return [self.protocols objectAtIndex:index];
 }
 -(void)dataSourceReadyForUse{
-    [self.protocols addObjectsFromArray:[self.dataSource getAllObjectsWithDataType:DataTypeProtocol]];
+    //[self.protocols addObjectsFromArray:[self.dataSource getAllObjectsWithDataType:DataTypeProtocol]];
     [self.medRefDataSourceDelegate dataSourceReadyForUse];
 }
 @end

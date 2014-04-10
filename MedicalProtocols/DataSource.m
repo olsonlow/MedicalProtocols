@@ -35,12 +35,13 @@
         [[ParseDataSource sharedInstanceWithDelegate:self] downloadAllTablesFromParse];
     } else {
         NSCalendar *calender = [NSCalendar currentCalendar];
-        NSDateComponents *dateComparison = [calender components:NSHourCalendarUnit fromDate:[defaults objectForKey:@"dbLastUpdated"]];
+        NSDateComponents *dateComparison = [calender components:NSDayCalendarUnit fromDate:[defaults objectForKey:@"dbLastUpdated"]toDate:[NSDate date]options:0];
+        
+        NSLog(@"%ld,%d",((long)[dateComparison day]),[dateComparison day] > 1);
         if([dateComparison day] > 1) {
             [self getParseUpdates];
         } else {
             self.dataSourceReady = true;
-            [self.medRefDataSourceDelegate dataSourceReadyForUse];
         }
     }
     //UNCOMMENT THE CODE BELOW TO TEST ON-BOARD DB
@@ -56,6 +57,14 @@
 //    [lb insertObjectWithDataType:DataTypeProtocol withObject:mp];
     
     return [LocalDB sharedInstance];
+}
+-(void)getParseUpdates{
+    //TODO Compmplete parse updates
+    self.dataSourceReady = true;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
+    [defaults synchronize];
+    [self.medRefDataSourceDelegate dataSourceReadyForUse];
 }
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
     id<MedRefDataSource> dataSource = [self getDataSource];
