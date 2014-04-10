@@ -11,8 +11,8 @@
 @class PFObject;
 @class ProtocolStep;
 @interface MedProtocol : NSObject
-@property(nonatomic,copy) NSString* name; //corresponds to pName
-@property(nonatomic,assign) int objectId; //corresponds to objectID
+@property(nonatomic,copy) NSString* name;
+@property(nonatomic,assign) int objectId;
 @property(nonatomic) NSString* dbPath;
 -(id)initWithName:(NSString*)name objectId:(int)objectId;
 -(int)countSteps;

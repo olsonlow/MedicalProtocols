@@ -39,41 +39,41 @@
 -(NSMutableArray*)components{
     if(_components == nil){
         _components = [[NSMutableArray alloc] init];
-        FMDatabase *db = [FMDatabase databaseWithPath:self.dbPath];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        BOOL success = [fileManager fileExistsAtPath:self.dbPath];
-        NSArray *componentList = [NSArray arrayWithObjects: @"textblock", @"calculator", @"link", @"form",nil];
-
-        if(success)
-        {
-            [db open];
-            for(NSString* componentName in componentList){
-                FMResultSet *results = [db executeQuery:@"Select * from ? where stepID = ?",componentName, self.objectId];
-                while([results next])
-                {
-                    if ([componentName isEqualToString: @"textblock"]) {
-                        TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"]  printable:[results boolForColumn:@"printable"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
-                        [_components addObject:textBlock];
-                    }
-                    else if([componentName isEqualToString:@"calculator"]){
-                        Calculator *calculator = [[Calculator alloc] initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
-                        [_components addObject:calculator];
-                    }
-                    else if([componentName isEqualToString:@"link"]){
-                        Link *link = [[Link alloc] initWithLabel:[results stringForColumn:@"label"] url:[results stringForColumn:@"url"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
-                        [_components addObject:link];
-                    }else{
-                        Form *form = [[Form alloc]initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
-                        [_components addObject:form];
-                        
-                    }
-                }
-                if ([db hadError]) {
-                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-                }
-            }
-            [db close];
-        }
+//        FMDatabase *db = [FMDatabase databaseWithPath:self.dbPath];
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        BOOL success = [fileManager fileExistsAtPath:self.dbPath];
+//        NSArray *componentList = [NSArray arrayWithObjects: @"textblock", @"calculator", @"link", @"form",nil];
+//
+//        if(success)
+//        {
+//            [db open];
+//            for(NSString* componentName in componentList){
+//                FMResultSet *results = [db executeQuery:@"Select * from ? where stepID = ?",componentName, self.objectId];
+//                while([results next])
+//                {
+//                    if ([componentName isEqualToString: @"textblock"]) {
+//                        TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[results stringForColumn:@"title"] content:[results stringForColumn:@"content"]  printable:[results boolForColumn:@"printable"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
+//                        [_components addObject:textBlock];
+//                    }
+//                    else if([componentName isEqualToString:@"calculator"]){
+//                        Calculator *calculator = [[Calculator alloc] initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
+//                        [_components addObject:calculator];
+//                    }
+//                    else if([componentName isEqualToString:@"link"]){
+//                        Link *link = [[Link alloc] initWithLabel:[results stringForColumn:@"label"] url:[results stringForColumn:@"url"] objectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
+//                        [_components addObject:link];
+//                    }else{
+//                        Form *form = [[Form alloc]initWithObjectId:[results intForColumn:@"objectID"] stepId:[results intForColumn:@"stepID"]];
+//                        [_components addObject:form];
+//                        
+//                    }
+//                }
+//                if ([db hadError]) {
+//                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+//                }
+//            }
+//            [db close];
+//        }
     }
     return _components;
 }
