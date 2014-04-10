@@ -68,7 +68,7 @@
 //
 //PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
 //linkObject[@"label"] = @"Calculator link";
-//linkObject[@"URL"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
+//linkObject[@"url"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
 //linkObject[@"stepDatabaseId"] = stepObject[@"databaseId"];
 //linkObject[@"databaseId"] = [NSNumber numberWithInt:0];
 //[linkObject saveInBackground];

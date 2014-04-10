@@ -181,46 +181,46 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol (objectId,pName) VALUES (:objectId,:pName)", medProtocol.objectId, medProtocol.name];
+        success =  [db executeUpdate:@"INSERT INTO protocol (objectId, pName) VALUES (:objectId,:pName)", [NSNumber numberWithInt:medProtocol.objectId], medProtocol.name];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step VALUES (:objectId,:stepNumber,:protocolId,:description)",step.objectId, step.stepNumber, step.protocolId, step.description];
+        success =  [db executeUpdate:@"INSERT INTO step (objectId, stepNumber, protocolId, description) VALUES (:objectId,:stepNumber,:protocolId,:description)",[NSNumber numberWithInt:step.objectId], [NSNumber numberWithInt:step.stepNumber], [NSNumber numberWithInt:step.protocolId], step.description];
     }
     
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form VALUES (:objectId,:stepId)", form.objectId, form.stepId];
+        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId) VALUES (:objectId,:stepId)", [NSNumber numberWithInt:form.objectId], [NSNumber numberWithInt:form.stepId]];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (:objectId,:printable,:title,:stepId,:content)", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId,textBlock.content];
+        success = [db executeUpdate:@"INSERT INTO textBlock (objectId,printable,title,stepId,content) VALUES (:objectId,:printable,:title,:stepId,:content)", [NSNumber numberWithInt:textBlock.objectId], [NSNumber numberWithBool:textBlock.printable], textBlock.title, [NSNumber numberWithInt:textBlock.stepId],textBlock.content];
     }
     
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link VALUES (:objectId,:url,:label,:stepId)", link.objectId, link.url, link.label, link.stepId];
+        success = [db executeUpdate:@"INSERT INTO link (objectId,url,label,stepId) VALUES (:objectId,:url,:label,:stepId)", [NSNumber numberWithInt:link.objectId], link.url, link.label, [NSNumber numberWithInt:link.stepId]];
     }
     
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator *)object;
-        success = [db executeUpdate:@"INSERT INTO calculator VALUES (:objectId,:stepId)",calculator.objectId, calculator.stepId];
+        success = [db executeUpdate:@"INSERT INTO calculator (objectId,stepId) VALUES (:objectId,:stepId)",[NSNumber numberWithInt:calculator.objectId], [NSNumber numberWithInt:calculator.stepId]];
     }
     else if([object isKindOfClass:[FormSelection class]])
     {
         FormSelection *formSelection = (FormSelection *)object;
-        success = [db executeUpdate:@"INSERT INTO formSelection VALUES (:objectId,:choiceA,choiceB,label,:formId)",formSelection.objectId, formSelection.choiceA, formSelection.choiceB, formSelection.label, formSelection.formId];
+        success = [db executeUpdate:@"INSERT INTO formSelection (objectId,choiceA,choiceB,label,formId) VALUES (:objectId,:choiceA,:choiceB,:label,:formId)",[NSNumber numberWithInt:formSelection.objectId], formSelection.choiceA, formSelection.choiceB, formSelection.label, [NSNumber numberWithInt:formSelection.formId]];
     }
     else if([object isKindOfClass:[FormNumber class]])
     {
         FormNumber *formNumber = (FormNumber *)object;
-        success = [db executeUpdate:@"INSERT INTO formNumber VALUES (:objectId,defaultValue,minValue,maxValue,label,:formId)",formNumber.objectId, formNumber.defaultValue,formNumber.minValue,formNumber.maxValue,formNumber.label,formNumber.formId];
+        success = [db executeUpdate:@"INSERT INTO formNumber (objectId,defaultValue,minValue,maxValue,label,formId) VALUES (:objectId,:defaultValue,:minValue,:maxValue,:label,:formId)",[NSNumber numberWithInt:formNumber.objectId], [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue],[NSNumber numberWithInt:formNumber.maxValue],formNumber.label,[NSNumber numberWithInt:formNumber.formId]];
     }
     return success;
 }
