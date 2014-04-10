@@ -14,5 +14,4 @@
 @property(nonatomic,assign) int objectId;
 
 -(id)initWithObjectId:(int)objectId stepId:(int)stepId;
--(id)initWithParseObject:(PFObject*)parseObject;
 @end

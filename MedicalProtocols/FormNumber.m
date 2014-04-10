@@ -21,14 +21,5 @@
     }
     return self;
 }
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-        _label = parseObject[@"label"];
-        _defaultValue = [parseObject[@"defaultValue"] intValue];
-        _maxValue = [parseObject[@"maxValue"]intValue];
-        _minValue = [parseObject[@"minValue"]intValue];
-    }
-    return self;
-}
+
 @end

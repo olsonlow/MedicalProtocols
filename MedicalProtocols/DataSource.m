@@ -112,6 +112,9 @@
 }
 
 -(void)ParseDataFinishedDownloading{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
+    [defaults synchronize];
     [self readyForUse];
 }
 -(void)databaseReadyForUse{

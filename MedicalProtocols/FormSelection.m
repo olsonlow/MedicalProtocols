@@ -21,13 +21,5 @@
     }
     return self;
 }
--(id)initWithParseObject:(PFObject*)parseObject{
-    self = [super init];
-    if (self) {
-        _label = parseObject[@"label"];
-        _choiceA = parseObject[@"choiceA"];
-        _choiceB = parseObject[@"choiceB"];
-    }
-    return self;
-}
+
 @end

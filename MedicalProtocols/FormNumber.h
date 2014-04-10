@@ -18,6 +18,5 @@
 @property(nonatomic,assign) int formId;
 
 -(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(int)objectId formId:(int)formId;
--(id)initWithParseObject:(PFObject*)parseObject;
 
 @end

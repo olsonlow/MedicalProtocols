@@ -63,6 +63,9 @@
             if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:_databasePath error:&copyError]) {
                 NSLog(@"Error copying files: %@", [copyError localizedDescription]);
             }
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setBool:YES forKey:@"dbinitialized"];
+            [defaults synchronize];
         }
         _dataSourceReady = YES;
     }
@@ -162,16 +165,16 @@
         Calculator *calculator = (Calculator*)object;
         success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
     }
-//    else if([object isKindOfClass:[FormNumber class]])
-//    {
-//        FormNumber *formNumber = (FormNumber*)object;
-//        success = [db executeUpdate:@"UPDATE formNumber SET id = ?, stepId = ? WHERE id = ?", formNumber.objectId, formNumber.stepId, objectId];
-//    }
-//    else if([object isKindOfClass:[FormSelection class]])
-//    {
-//        FormSelection *formSelection = (FormSelection*)object;
-//        success = [db executeUpdate:@"UPDATE formSelection SET id = ?, stepId = ? WHERE id = ?", formSelection.objectId, formSelection.stepId, objectId];
-//    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        FormNumber *formNumber = (FormNumber*)object;
+        success = [db executeUpdate:@"UPDATE formNumber SET id = ?, stepId = ? WHERE id = ?", formNumber.objectId, formNumber.formId, objectId];
+    }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        FormSelection *formSelection = (FormSelection*)object;
+        success = [db executeUpdate:@"UPDATE formSelection SET id = ?, stepId = ? WHERE id = ?", formSelection.objectId, formSelection.formId, objectId];
+    }
     return success;
 }
 
