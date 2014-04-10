@@ -111,7 +111,7 @@
             for(Form* form in stepComponents){
                 if(form.stepId == parentId)
                     [componentsWithParentId addObject:form];
-                    }
+            }
         }
         else if([className isEqualToString:@"Link"]){
             for(Link *link in stepComponents){
@@ -410,7 +410,6 @@
             {
                 if(!error){
                     parseFormSelectionObject[@"dataBaseId"] = [NSNumber numberWithInt:formSelection.objectId];
-                    parseFormSelectionObject[@"updatedAt"] = formSelection.updatedAt;
                     parseFormSelectionObject[@"form"] = [NSNumber numberWithInt:formSelection.objectId];
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
@@ -430,7 +429,6 @@
             {
                 if(!error){
                     parseFormNumberObject[@"dataBaseId"] = [NSNumber numberWithInt:formNumber.objectId];
-                    parseFormNumberObject[@"updatedAt"] = formNumber.updatedAt;
                     parseFormNumberObject[@"formDataBaseID"] = [NSNumber numberWithInt:formNumber.formId];
                     parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
                     parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
