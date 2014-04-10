@@ -376,7 +376,6 @@
                 if(!error){
                     parseLinkObject[@"dataBaseId"] = [NSNumber numberWithInt:link.objectId];
                     parseLinkObject[@"url"] = link.url;
-                    parseLinkObject[@"printable"] = [NSNumber numberWithBool:[link printable]];
                     parseLinkObject[@"label"] = link.label;
                     parseLinkObject[@"stepDataBaseID"] = [NSNumber numberWithInt:link.stepId];
                     [parseLinkObject saveInBackground];
@@ -501,7 +500,6 @@
         PFObject *parseLinkObject = [PFObject objectWithClassName:@"Link"];
         parseLinkObject[@"url"] = link.url;
         parseLinkObject[@"label"] = link.label;
-        parseLinkObject[@"printable"] = [NSNumber numberWithBool:link.printable];
         parseLinkObject[@"stepDataBaseId"] = [NSNumber numberWithInt:link.stepId];  //Parse refers to stepId as step this is the foreign key in Link
         [parseLinkObject saveInBackground];
         success = YES;

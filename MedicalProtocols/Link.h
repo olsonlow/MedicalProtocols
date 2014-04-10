@@ -14,7 +14,6 @@
 @property(nonatomic,copy) NSString* url;
 @property(nonatomic, assign) int objectId;
 @property(nonatomic, assign) int stepId;
-@property(nonatomic) BOOL printable;
 
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(int)objectId stepId:(int)stepId;
 

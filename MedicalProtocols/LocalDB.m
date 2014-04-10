@@ -154,13 +154,23 @@
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?, printable = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.printable, link.label, link.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.label, link.stepId, objectId];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator*)object;
         success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
     }
+//    else if([object isKindOfClass:[FormNumber class]])
+//    {
+//        FormNumber *formNumber = (FormNumber*)object;
+//        success = [db executeUpdate:@"UPDATE formNumber SET id = ?, stepId = ? WHERE id = ?", formNumber.objectId, formNumber.stepId, objectId];
+//    }
+//    else if([object isKindOfClass:[FormSelection class]])
+//    {
+//        FormSelection *formSelection = (FormSelection*)object;
+//        success = [db executeUpdate:@"UPDATE formSelection SET id = ?, stepId = ? WHERE id = ?", formSelection.objectId, formSelection.stepId, objectId];
+//    }
     return success;
 }
 
@@ -171,36 +181,46 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (?,?)", medProtocol.objectId, medProtocol.name];
+        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (:objectId,:pName)", medProtocol.objectId, medProtocol.name];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step VALUES (?,?,?,?)",step.objectId, step.stepNumber, step.protocolId, step.description];
+        success =  [db executeUpdate:@"INSERT INTO step VALUES (:objectId,:stepNumber,:protocolId,:description)",step.objectId, step.stepNumber, step.protocolId, step.description];
     }
     
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form VALUES (?,?)", form.objectId, form.stepId];
+        success = [db executeUpdate:@"INSERT INTO form VALUES (:objectId,:stepId)", form.objectId, form.stepId];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (?,?,?,?)", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId];
+        success = [db executeUpdate:@"INSERT INTO textBlock VALUES (:objectId,:printable,:title,:stepId,:content)", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId,textBlock.content];
     }
     
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link VALUES (?,?,?,?,?)", link.objectId, link.url, link.printable, link.label, link.stepId];
+        success = [db executeUpdate:@"INSERT INTO link VALUES (:objectId,:url,:label,:stepId)", link.objectId, link.url, link.label, link.stepId];
     }
     
     else if([object isKindOfClass:[Calculator class]])
     {
         Calculator *calculator = (Calculator *)object;
-        success = [db executeUpdate:@"INSERT INTO calculator VALUES (?,?)",calculator.objectId, calculator.stepId];
+        success = [db executeUpdate:@"INSERT INTO calculator VALUES (:objectId,:stepId)",calculator.objectId, calculator.stepId];
+    }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        FormSelection *formSelection = (FormSelection *)object;
+        success = [db executeUpdate:@"INSERT INTO formSelection VALUES (:objectId,:choiceA,choiceB,label,:formId)",formSelection.objectId, formSelection.choiceA, formSelection.choiceB, formSelection.label, formSelection.formId];
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        FormNumber *formNumber = (FormNumber *)object;
+        success = [db executeUpdate:@"INSERT INTO formNumber VALUES (:objectId,defaultValue,minValue,maxValue,label,:formId)",formNumber.objectId, formNumber.defaultValue,formNumber.minValue,formNumber.maxValue,formNumber.label,formNumber.formId];
     }
     return success;
 }
