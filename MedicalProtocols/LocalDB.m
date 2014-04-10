@@ -181,7 +181,7 @@
     if([object isKindOfClass:[MedProtocol class]])
     {
         MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol VALUES (:objectId,:pName)", medProtocol.objectId, medProtocol.name];
+        success =  [db executeUpdate:@"INSERT INTO protocol (objectId,pName) VALUES (:objectId,:pName)", medProtocol.objectId, medProtocol.name];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
