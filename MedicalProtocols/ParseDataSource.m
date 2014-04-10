@@ -111,7 +111,7 @@
             for(Form* form in stepComponents){
                 if(form.stepId == parentId)
                     [componentsWithParentId addObject:form];
-                    }
+            }
         }
         else if([className isEqualToString:@"Link"]){
             for(Link *link in stepComponents){
