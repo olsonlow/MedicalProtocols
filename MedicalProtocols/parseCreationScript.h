@@ -37,7 +37,7 @@
 //formNumberComponent[@"defaultValue"] = [NSNumber numberWithInt:0];
 //formNumberComponent[@"minValue"] = [NSNumber numberWithInt:0];
 //formNumberComponent[@"maxValue"] = [NSNumber numberWithInt:10];
-//formNumberComponent[@"stepDatabaseId"] = formComponent[@"databaseId"];
+//formNumberComponent[@"formDatabaseId"] = formComponent[@"databaseId"];
 //formNumberComponent[@"databaseId"] = [NSNumber numberWithInt:0];
 //[formNumberComponent saveInBackground];
 //
@@ -45,7 +45,7 @@
 //selectionComponent[@"label"] = @"Gender";
 //selectionComponent[@"choiceA"] = @"M";
 //selectionComponent[@"choiceB"] = @"F";
-//selectionComponent[@"stepDatabaseId"] = formComponent[@"databaseId"];
+//selectionComponent[@"formDatabaseId"] = formComponent[@"databaseId"];
 //selectionComponent[@"databaseId"] = [NSNumber numberWithInt:0];
 //[selectionComponent saveInBackground];
 //
@@ -54,7 +54,7 @@
 //selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
 //selectionComponent2[@"minValue"] = [NSNumber numberWithInt:0];
 //selectionComponent2[@"maxValue"] = [NSNumber numberWithInt:10];
-//calculatorComponent[@"stepDatabaseId"] = formComponent[@"databaseId"];
+//calculatorComponent[@"formDatabaseId"] = formComponent[@"databaseId"];
 //calculatorComponent[@"databaseId"] = [NSNumber numberWithInt:1];
 //[selectionComponent2 saveInBackground];
 //
@@ -62,7 +62,7 @@
 //selectionComponent3[@"label"] = @"PM";
 //selectionComponent3[@"choiceA"] = @"Y";
 //selectionComponent3[@"choiceB"] = @"N";
-//selectionComponent3[@"stepDatabaseId"] = stepObject[@"databaseId"];
+//selectionComponent3[@"stepDatabaseId"] = formComponent[@"databaseId"];
 //selectionComponent3[@"databaseId"] = [NSNumber numberWithInt:1];
 //[selectionComponent3 saveInBackground];
 //
