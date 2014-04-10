@@ -409,7 +409,7 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseFormSelectionObject, NSError *error) {
             {
                 if(!error){
-                    parseFormSelectionObject[@"objectId"] = [NSNumber numberWithInt:formSelection.objectId];
+                    parseFormSelectionObject[@"dataBaseId"] = [NSNumber numberWithInt:formSelection.objectId];
                     parseFormSelectionObject[@"form"] = [NSNumber numberWithInt:formSelection.objectId];
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
@@ -428,8 +428,8 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseFormNumberObject, NSError *error) {
             {
                 if(!error){
-                    parseFormNumberObject[@"objectId"] = [NSNumber numberWithInt:formNumber.objectId];
-                    parseFormNumberObject[@"form"] = [NSNumber numberWithInt:formNumber.formId];
+                    parseFormNumberObject[@"dataBaseId"] = [NSNumber numberWithInt:formNumber.objectId];
+                    parseFormNumberObject[@"formDataBaseID"] = [NSNumber numberWithInt:formNumber.formId];
                     parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
                     parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
                     parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
