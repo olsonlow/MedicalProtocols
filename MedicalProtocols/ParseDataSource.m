@@ -409,7 +409,6 @@
             {
                 if(!error){
                     parseFormSelectionObject[@"objectId"] = [NSNumber numberWithInt:formSelection.objectId];
-                    parseFormSelectionObject[@"updatedAt"] = formSelection.updatedAt;
                     parseFormSelectionObject[@"form"] = [NSNumber numberWithInt:formSelection.objectId];
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
@@ -429,7 +428,6 @@
             {
                 if(!error){
                     parseFormNumberObject[@"objectId"] = [NSNumber numberWithInt:formNumber.objectId];
-                    parseFormNumberObject[@"updatedAt"] = formNumber.updatedAt;
                     parseFormNumberObject[@"form"] = [NSNumber numberWithInt:formNumber.formId];
                     parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
                     parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];

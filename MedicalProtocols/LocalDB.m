@@ -149,12 +149,12 @@
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET id = ?, printable = ?, title = ?, stepId = ? WHERE id = ?", textBlock.objectId, textBlock.printable, textBlock.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE textBlock SET id = ?, printable = ?, title = ?, stepId = ? WHERE id = ?", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId, objectId];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?,, printable = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.printable, link.label, link.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?, printable = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.printable, link.label, link.stepId, objectId];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
@@ -220,11 +220,11 @@
         case DataTypeComponent:
             [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
             textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = ?", objectId];
-            form = [db executeUpdate:@"DELETE FROM form WHERE stepID = ?", objectId];
-            link = [db executeUpdate:@"DELETE FROM link WHERE stepID = ?", objectId];
-            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepID = ?", objectId];
+            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = ?", objectId];
+            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = ?", objectId];
+            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = ?", objectId];
         case DataTypeFormComponent:
-            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formID = ?", objectId];
+            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = ?", objectId];
             formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = ?", objectId];
         default:
             break;
@@ -241,7 +241,7 @@
     if(success)
     {
         [db open];
-        result = [db executeQuery:@"SELECT * FROM ? WHERE objectID = ?", tableName, objectId];
+        result = [db executeQuery:@"SELECT * FROM ? WHERE id = ?", tableName, objectId];
     }
     if ([db hadError]) {
         NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -266,21 +266,21 @@
         [db open];
         FMResultSet *formSelectionResults;
         if(parentId)
-            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formID = ?", parentId];
+            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formId = ?", parentId];
         else
             formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection"];
         while([formSelectionResults next])
         {
-            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults intForColumn:@"objectID"] formId:[formSelectionResults intForColumn:@"formID"]];
+            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults intForColumn:@"id"] formId:[formSelectionResults intForColumn:@"formId"]];
             [formComponents addObject:formSelection];
         }
         FMResultSet *formNumberResults;
         if(parentId)
-            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formID = ?", parentId];
+            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formId = ?", parentId];
         else
             formNumberResults = [db executeQuery:@"SELECT * from formNumber"];
         while ([formNumberResults next]) {
-            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults intForColumn:@"objectID"] formId:[formNumberResults intForColumn:@"formID"]];
+            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults intForColumn:@"id"] formId:[formNumberResults intForColumn:@"formId"]];
             [formComponents addObject:formNumber];
         }
     }
@@ -309,36 +309,36 @@
         [db open];
         FMResultSet *textBlockResults;
         if(parentId == -1)
-            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepID = ?", parentId];
+            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = ?", parentId];
         else
             textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
         while([textBlockResults next])
         {
-            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"objectID"] stepId:[textBlockResults intForColumn:@"stepID"]];
+            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
             [components addObject:textBlock];
         }
         
         FMResultSet *calculatorResults;
         if(parentId == -1)
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepID = ", parentId];
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = ?", parentId];
         else
             calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
         
         while([calculatorResults next])
         {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"objectID"] stepId:[calculatorResults intForColumn:@"stepID"]];
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
             [components addObject:calculator];
         }
         
         FMResultSet *linkResults;
         if(parentId)
-            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepID = ?", parentId];
+            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = ?", parentId];
         else
             linkResults = [db executeQuery:@"SELECT * FROM link  "];
         
         while([linkResults next])
         {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"objectId"] stepId:[linkResults intForColumn:@"stepId"]];
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
             [components addObject:link];
         }
         if ([db hadError]) {
@@ -362,11 +362,11 @@
     if(success)
     {
         FMResultSet *results;
-        results = [db executeQuery:@"SELECT * FROM step WHERE protocolID = ?", protocolId];
+        results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", protocolId];
         
         while([results next])
         {
-            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results intForColumn:@"objectId"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results intForColumn:@"protocolId"]];
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results intForColumn:@"id"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results intForColumn:@"protocolId"]];
             [steps addObject:step];
         }
         if ([db hadError]) {
@@ -386,23 +386,23 @@
     {
         [db open];
         FMResultSet *textBlockResults;
-        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepID = ?", stepId];
+        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = ?", stepId];
         while([textBlockResults next])
         {
-            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"objectId"] stepId:[textBlockResults intForColumn:@"stepId"]];
+            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
             [components addObject:t];
         }
-        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepID = ?", stepId];
+        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = ?", stepId];
         while([textBlockResults next])
         {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"objectId"] stepId:[calculatorResults intForColumn:@"stepId"]];
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
             [components addObject:calculator];
         }
         
-        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepID = ? ", stepId];
+        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = ? ", stepId];
         while([linkResults next])
         {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"objectId"] stepId:[linkResults intForColumn:@"stepId"]];
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
             [components addObject:link];
         }
         if ([db hadError]) {

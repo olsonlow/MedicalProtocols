@@ -14,8 +14,6 @@
 @property(nonatomic,assign) int defaultValue;
 @property(nonatomic,assign) int maxValue;
 @property(nonatomic,assign) int minValue;
-@property(nonatomic) NSDate *createdAt;
-@property(nonatomic) NSDate *updatedAt;
 @property(nonatomic,assign) int objectId;
 @property(nonatomic,assign) int formId;
 

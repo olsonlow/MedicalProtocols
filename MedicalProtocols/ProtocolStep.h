@@ -13,9 +13,7 @@
 @property(nonatomic) NSString* dbPath;
 @property(nonatomic,assign) int objectId;
 @property(nonatomic,assign) int stepNumber;
-@property(nonatomic) NSDate *createdAt;
-@property(nonatomic) NSDate *updatedAt;
-@property(nonatomic,assign) int protocolId; //foreign key from protocol (idStr)
+@property(nonatomic,assign) int protocolId;
 @property(nonatomic,strong) NSString* description;
 
 -(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId;

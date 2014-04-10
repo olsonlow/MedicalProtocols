@@ -10,8 +10,6 @@
 @class PFObject;
 
 @interface Form : NSObject
-@property(nonatomic) NSDate *createdAt;
-@property(nonatomic) NSDate *updatedAt;
 @property(nonatomic,assign) int stepId;
 @property(nonatomic,assign) int objectId;
 
