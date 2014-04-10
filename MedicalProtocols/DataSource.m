@@ -21,6 +21,13 @@
 @end
 
 @implementation DataSource
+-(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate{
+    self = [super init];
+    if (self) {
+        _medRefDataSourceDelegate = delegate;
+    }
+    return self;
+}
 -(id<MedRefDataSource>)getDataSource{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(![defaults boolForKey:@"dbinitialized"]){

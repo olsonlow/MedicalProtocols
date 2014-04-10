@@ -45,25 +45,26 @@
     self = [super init];
     if (self) {
         NSLog(@"INITIALIZING LOCAL DB");
-        self.databaseName = @"medRef.db";
+        _databaseName = @"medRef.db";
         NSString* path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         path = [path stringByAppendingPathComponent:@"Private Documents/MedProtocol/"];
-        self.databasePath = [path stringByAppendingPathComponent:self.databaseName];
+        _databasePath = [path stringByAppendingPathComponent:_databaseName];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if(![fileManager fileExistsAtPath:self.databasePath])
         {
             NSLog(@"COPYING DB FROM RESOURCES TO LIBRARY");
             NSString *fromPath = [[NSBundle mainBundle] bundlePath];
-            fromPath = [fromPath stringByAppendingPathComponent:self.databaseName];
+            fromPath = [fromPath stringByAppendingPathComponent:_databaseName];
             NSError *createFileError = nil;
             if (![[NSFileManager defaultManager] createDirectoryAtPath:path  withIntermediateDirectories:YES attributes:nil error:&createFileError]) {
                 NSLog(@"Error copying files: %@", [createFileError localizedDescription]);
             }
             NSError *copyError = nil;
-            if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:self.databasePath error:&copyError]) {
+            if (![[NSFileManager defaultManager]copyItemAtPath:fromPath toPath:_databasePath error:&copyError]) {
                 NSLog(@"Error copying files: %@", [copyError localizedDescription]);
             }
         }
+        _dataSourceReady = YES;
     }
     return self;
 }

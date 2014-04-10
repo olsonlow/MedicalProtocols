@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSourceProtocols.h"
+
 @class MedProtocol;
-@interface ProtocolDataController : NSObject
+@interface ProtocolDataController : NSObject<MedRefDataSourceDelegate>
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
 -(int)countProtocols;

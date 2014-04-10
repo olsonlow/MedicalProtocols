@@ -40,8 +40,18 @@
 -(void)setRunningQueries:(int)runningQueries{
     _runningQueries = runningQueries;
     if(runningQueries == 0){
+        self.dataSourceReady = YES;
         [self.delegate ParseDataFinishedDownloading];
+    } else {
+        self.dataSourceReady = NO;
     }
+}
+-(void)downloadAllTablesFromParse{
+    self.runningQueries = 4;
+    [self getAllObjectsWithDataType:DataTypeProtocol];
+    [self getAllObjectsWithDataType:DataTypeStep];
+    [self getAllObjectsWithDataType:DataTypeComponent];
+    [self getAllObjectsWithDataType:DataTypeFormComponent];
 }
 #pragma mark Parse Methods
 -(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className{
@@ -86,6 +96,7 @@
                 }
             }
             [self.delegate downloadedParseObjects:parseObjects withDataType:DataTypeProtocol];
+            self.runningQueries--;
         }
     }];
     return nil;
@@ -289,6 +300,7 @@
             {
                 if(!error){
                     [self.delegate downloadedParseObjects:[objects objectAtIndex:[tableNames indexOfObject:tableName]] withDataType:dataType];
+                     self.runningQueries--;
                 }
             }
         }];

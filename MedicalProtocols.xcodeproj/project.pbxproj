@@ -55,6 +55,8 @@
 		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
 		A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE518F08F610016613C /* ParseDataSource.m */; };
 		A3EBEAE818F378E40016613C /* medRef.db in Resources */ = {isa = PBXBuildFile; fileRef = A3EBEAE718F378E40016613C /* medRef.db */; };
+		A3EBEB2518F732C50016613C /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3EBEB2218F732C50016613C /* SVProgressHUD.bundle */; };
+		A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEB2418F732C50016613C /* SVProgressHUD.m */; };
 		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
 /* End PBXBuildFile section */
 
@@ -145,6 +147,10 @@
 		A3EBEAE518F08F610016613C /* ParseDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDataSource.m; sourceTree = "<group>"; };
 		A3EBEAE718F378E40016613C /* medRef.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = medRef.db; sourceTree = "<group>"; };
 		A3EBEAED18F4921A0016613C /* DataSourceProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataSourceProtocols.h; sourceTree = "<group>"; };
+		A3EBEB2118F732C50016613C /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		A3EBEB2218F732C50016613C /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		A3EBEB2318F732C50016613C /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		A3EBEB2418F732C50016613C /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,11 +160,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				360ABCF018E61294004C815D /* QuartzCore.framework in Frameworks */,
 				89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */,
 				360ABCF618E612B5004C815D /* SystemConfiguration.framework in Frameworks */,
 				360ABCF418E612AA004C815D /* StoreKit.framework in Frameworks */,
 				360ABCF218E6129F004C815D /* Security.framework in Frameworks */,
-				360ABCF018E61294004C815D /* QuartzCore.framework in Frameworks */,
 				360ABCEE18E61288004C815D /* MobileCoreServices.framework in Frameworks */,
 				360ABCEC18E61279004C815D /* libz.dylib in Frameworks */,
 				360ABCEA18E61251004C815D /* CoreLocation.framework in Frameworks */,
@@ -256,6 +262,7 @@
 		A324B2DA18E24A4600261C57 /* MedicalProtocols */ = {
 			isa = PBXGroup;
 			children = (
+				A3EBEB2018F732C50016613C /* SVProgressHUD */,
 				A324B31118E24ADB00261C57 /* Data */,
 				A324B31018E24AD200261C57 /* MasterViews */,
 				A324B30F18E24AC600261C57 /* DetailViews */,
@@ -404,6 +411,17 @@
 			name = DataSource;
 			sourceTree = "<group>";
 		};
+		A3EBEB2018F732C50016613C /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A3EBEB2118F732C50016613C /* SVProgressHUD-Prefix.pch */,
+				A3EBEB2218F732C50016613C /* SVProgressHUD.bundle */,
+				A3EBEB2318F732C50016613C /* SVProgressHUD.h */,
+				A3EBEB2418F732C50016613C /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -480,6 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3EBEB2518F732C50016613C /* SVProgressHUD.bundle in Resources */,
 				A3EBEAE818F378E40016613C /* medRef.db in Resources */,
 				A324B2EB18E24A4600261C57 /* Main_iPad.storyboard in Resources */,
 				89756D4E18ECCBB20006321C /* medRef.sql in Resources */,
@@ -516,6 +535,7 @@
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
+				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
