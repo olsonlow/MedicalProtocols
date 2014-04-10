@@ -15,7 +15,6 @@
 @interface DataSource()
 @property(nonatomic,strong) NSDate* lastUpdated;
 -(id<MedRefDataSource>)getDataSource;
--(void)populateLocalDbFromParse;
 -(void)getParseUpdates;
 -(void)readyForUse;
 @end
@@ -33,7 +32,7 @@
     if(![defaults boolForKey:@"dbinitialized"]){
         //initialise DB
         [LocalDB sharedInstanceWithDelegate:self];
-        [self populateLocalDbFromParse];
+        [[ParseDataSource sharedInstanceWithDelegate:self] downloadAllTablesFromParse];
     } else {
         NSCalendar *calender = [NSCalendar currentCalendar];
         NSDateComponents *dateComparison = [calender components:NSHourCalendarUnit fromDate:[defaults objectForKey:@"dbLastUpdated"]];
@@ -57,24 +56,6 @@
 //    [lb insertObjectWithDataType:DataTypeProtocol withObject:mp];
     
     return [LocalDB sharedInstance];
-}
--(void)populateLocalDbFromParse{
-    //initialise Parse
-    ParseDataSource* parseDataSource = [ParseDataSource sharedInstanceWithDelegate:self];
-    [parseDataSource getAllObjectsWithDataType:DataTypeProtocol];
-    [parseDataSource getAllObjectsWithDataType:DataTypeStep];
-    [parseDataSource getAllObjectsWithDataType:DataTypeComponent];
-    [parseDataSource getAllObjectsWithDataType:DataTypeFormComponent];
-    
-    //Luke work from here, put parse objects into local db.
-    
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setBool:YES forKey:@"dbinitialized"];
-//    [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
-//    [defaults synchronize];
-}
--(void)getParseUpdates{
-    
 }
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
     id<MedRefDataSource> dataSource = [self getDataSource];

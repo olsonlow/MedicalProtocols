@@ -15,5 +15,5 @@
 @property (strong, nonatomic) NSString *databasePath;
 -(int)countProtocols;
 -(MedProtocol*)protocolAtIndex:(int)index;
-
+-(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
 @end

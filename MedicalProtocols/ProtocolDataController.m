@@ -23,14 +23,17 @@
 }
 @property(nonatomic,strong) NSMutableArray* protocols;
 @property (nonatomic, strong) DataSource<MedRefDataSource> *dataSource;
+@property(nonatomic,assign) id<MedRefDataSourceDelegate> medRefDataSourceDelegate;
+
 @end
 
 
 @implementation ProtocolDataController
-- (id)init
+-(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate
 {
     self = [super init];
     if (self) {
+        _medRefDataSourceDelegate = delegate;
         _dataSource = [[DataSource alloc] initWithDelegate:self];
         _protocols = [[NSMutableArray alloc] init];
         [_protocols addObjectsFromArray:[_dataSource getAllObjectsWithDataType:DataTypeProtocol]];
@@ -44,6 +47,7 @@
     return [self.protocols objectAtIndex:index];
 }
 -(void)dataSourceReadyForUse{
-    
+    [self.protocols addObjectsFromArray:[self.dataSource getAllObjectsWithDataType:DataTypeProtocol]];
+    [self.medRefDataSourceDelegate dataSourceReadyForUse];
 }
 @end

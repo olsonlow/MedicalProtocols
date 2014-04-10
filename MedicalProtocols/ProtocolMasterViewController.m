@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.protocolDataController = [[ProtocolDataController alloc] init];
+    self.protocolDataController = [[ProtocolDataController alloc] initWithDelegate:self];
     
 	// Do any additional setup after loading the view, typically from a nib.
 
@@ -123,6 +123,8 @@
         stepMasterViewController.detailViewController = self.detailViewController;
     }
 }
-
+-(void)dataSourceReadyForUse{
+    [self.tableView reloadData];
+}
 
 @end

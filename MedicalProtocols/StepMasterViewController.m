@@ -72,7 +72,9 @@
     
     return cell;
 }
-
+-(void)dataSourceReadyForUse{
+    [self.tableView reloadData];
+}
 
 /*
 // Override to support conditional editing of the table view.

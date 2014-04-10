@@ -30,11 +30,10 @@
 {
     static ParseDataSource* sharedObject = nil;
     if(sharedObject == nil){
-        
         sharedObject = [[ParseDataSource alloc] init];
-        sharedObject.delegate = delegate;
         sharedObject.runningQueries = 0;
     }
+    sharedObject.delegate = delegate;
     return sharedObject;
 }
 -(void)setRunningQueries:(int)runningQueries{
