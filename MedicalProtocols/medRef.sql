@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS step;
 
 CREATE TABLE step (
     id          integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId    integer      NOT NULL,
+    objectId    integer     NOT NULL,
     stepNumber 	integer 	NOT NULL,
     protocolId	integer     NOT NULL,
     description	varchar(200)
@@ -26,7 +26,8 @@ CREATE TABLE textBlock (
     id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
     objectId        integer     NOT NULL,
     printable       BIT 		NOT NULL,
-    title	       varchar(100)	NOT NULL,
+    content         varchar(140),
+    title	       varchar(100),
     stepId         integer      NOT NULL
 );
 
@@ -34,17 +35,16 @@ DROP TABLE IF EXISTS calculator;
 
 CREATE TABLE calculator(
     id              integer     NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId        integer      NOT NULL,
+    objectId        integer     NOT NULL,
     stepId          integer     NOT NULL
 );
 
 DROP TABLE IF EXISTS link;
 
 CREATE TABLE link (
-    id              integer	NOT NULL PRIMARY KEY AUTOINCREMENT,
-    objectId            integer      NOT NULL,
-    url             varchar(100)      NOT NULL,
-    printable       BIT 		NOT NULL,
+    id             integer      NOT NULL PRIMARY KEY AUTOINCREMENT,
+    objectId       integer      NOT NULL,
+    url            varchar(100)      NOT NULL,
     label	       varchar(100)	NOT NULL,
     stepId         integer      NOT NULL
 );
