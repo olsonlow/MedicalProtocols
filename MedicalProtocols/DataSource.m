@@ -44,18 +44,14 @@
             self.dataSourceReady = true;
         }
     }
-    //UNCOMMENT THE CODE BELOW TO TEST ON-BOARD DB
-//    LocalDB *lb = [LocalDB sharedInstance];
-//    MedProtocol *mp = [[MedProtocol alloc]init];
-//    mp.name = @"High Blood Pressure";
-//    mp.objectId = @"ldsjgbljgr";
-//    NSDate *now = [[NSDate alloc]init];
-//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:now];
-//    mp.updatedAt = [calendar dateFromComponents:components];
-//    [lb deleteObjectWithDataType:DataTypeProtocol withId:mp.objectId];
-//    [lb insertObjectWithDataType:DataTypeProtocol withObject:mp];
     
+    //UNCOMMENT THE CODE BELOW TO TEST ON-BOARD DB
+    //MedProtocol *mp = [[MedProtocol alloc]initWithName:@"High Blood Pressure" objectId:1];
+    //mp.name = @"High Blood Pressure";
+    //[[LocalDB sharedInstance] updateObjectWithDataType:DataTypeProtocol withId:0 withObject:mp];
+    //MedProtocol *newP = [[MedProtocol alloc]initWithName:@"Myocarditis" objectId:1];
+    //[lb deleteObjectWithDataType:DataTypeProtocol withId:mp.objectId];
+    //[[LocalDB sharedInstance] insertObjectWithDataType:DataTypeProtocol withObject:newP];
     return [LocalDB sharedInstance];
 }
 -(void)getParseUpdates{
