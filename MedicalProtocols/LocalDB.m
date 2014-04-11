@@ -256,7 +256,6 @@
 }
 
 -(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
-    NSArray *tableName = [self tableNamesForDataType:dataType];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     bool success = [fileManager fileExistsAtPath:self.databasePath];
@@ -264,7 +263,20 @@
     if(success)
     {
         [db open];
-        result = [db executeQuery:@"SELECT * FROM ? WHERE id = ?", tableName, objectId];
+        switch (dataType) {
+            case DataTypeProtocol:
+                result = [db executeQuery:@"SELECT * FROM protocol WHERE objectId = (:objectId)", objectId];
+                break;
+            case DataTypeStep:
+                result = [db executeQuery:@"SELECT * FROM step WHERE objectId = (:objectId)", objectId];
+                break;
+            case DataTypeComponent:
+                result = [db executeQuery:@"SELECT * FROM textBlock, calculator, form, link WHERE textBlock.objectId = calculator.objectId = form.objectId = link.objectId = (:objectId)", objectId];
+            case DataTypeFormComponent:
+                result = [db executeQuery:@"SELECT * FROM formNumber, formSelection WHERE formNumber.objectId = formSelection.objectId = (:objectId)", objectId];
+            default:
+                break;
+        }
     }
     if ([db hadError]) {
         NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -288,7 +300,7 @@
         [db open];
         FMResultSet *formSelectionResults;
         if(parentId)
-            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formId = ?", parentId];
+            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formId = (:formId)", parentId];
         else
             formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection"];
         while([formSelectionResults next])
@@ -298,7 +310,7 @@
         }
         FMResultSet *formNumberResults;
         if(parentId)
-            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formId = ?", parentId];
+            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formId = (:formId)", parentId];
         else
             formNumberResults = [db executeQuery:@"SELECT * from formNumber"];
         while ([formNumberResults next]) {
@@ -310,7 +322,6 @@
     {
         NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
     }
-    
     [db close];
     return formComponents;
 }
@@ -331,7 +342,7 @@
         [db open];
         FMResultSet *textBlockResults;
         if(parentId == -1)
-            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = ?", parentId];
+            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
         else
             textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
         while([textBlockResults next])
@@ -342,7 +353,7 @@
         
         FMResultSet *calculatorResults;
         if(parentId == -1)
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = ?", parentId];
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
         else
             calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
         
@@ -354,9 +365,9 @@
         
         FMResultSet *linkResults;
         if(parentId)
-            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = ?", parentId];
+            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
         else
-            linkResults = [db executeQuery:@"SELECT * FROM link  "];
+            linkResults = [db executeQuery:@"SELECT * FROM link"];
         
         while([linkResults next])
         {
@@ -384,7 +395,7 @@
     if(success)
     {
         FMResultSet *results;
-        results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", protocolId];
+        results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = (:protocolId)", protocolId];
         
         while([results next])
         {
@@ -408,20 +419,20 @@
     {
         [db open];
         FMResultSet *textBlockResults;
-        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = ?", stepId];
+        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = (:stepId)", stepId];
         while([textBlockResults next])
         {
             TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
             [components addObject:t];
         }
-        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = ?", stepId];
+        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = (:stepId)", stepId];
         while([textBlockResults next])
         {
             Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
             [components addObject:calculator];
         }
         
-        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = ? ", stepId];
+        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", stepId];
         while([linkResults next])
         {
             Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
