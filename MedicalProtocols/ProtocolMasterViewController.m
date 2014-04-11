@@ -11,6 +11,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "StepMasterViewController.h"
+#import "SVProgressHUD/SVProgressHUD.h"
 
 @interface ProtocolMasterViewController ()
 
@@ -32,16 +33,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.protocolDataController = [[ProtocolDataController alloc] initWithDelegate:self];
     
-	// Do any additional setup after loading the view, typically from a nib.
-
     //Navigation Button Items removed
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     //self.navigationItem.rightBarButtonItem = addButton;
 
     self.detailViewController = (ProtocolDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.protocolDataController = [[ProtocolDataController alloc] initWithDelegate:self];
+    if(!self.protocolDataController.dataSourceReady){
+        [self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,6 +126,7 @@
     }
 }
 -(void)dataSourceReadyForUse{
+    [self.detailViewController cancelProgressHud];
     [self.tableView reloadData];
 }
 

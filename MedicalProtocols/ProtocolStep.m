@@ -39,6 +39,7 @@
 -(NSMutableArray*)components{
     if(_components == nil){
         _components = [[NSMutableArray alloc] init];
+
     }
     return _components;
 }

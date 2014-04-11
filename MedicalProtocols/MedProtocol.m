@@ -9,9 +9,7 @@
 #import "MedProtocol.h"
 #import <Parse/Parse.h>
 #import "ProtocolStep.h"
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
+#import "DataSource.h"
 
 @interface MedProtocol()
 @property (nonatomic,strong) NSMutableArray* steps;
@@ -33,6 +31,7 @@
 -(NSMutableArray *)steps{
     if(_steps == nil){
         _steps = [[NSMutableArray alloc] init];
+        [_steps addObjectsFromArray:[[DataSource sharedInstance] getAllObjectsWithDataType:DataTypeStep withParentId:self.objectId]];
         
     }
     return _steps;

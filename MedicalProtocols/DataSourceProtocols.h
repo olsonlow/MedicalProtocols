@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, DataType) {
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId;
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
 @optional
-@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,assign,readonly) bool dataSourceReady;
 @property(nonatomic,assign) id<MedRefDataSourceDelegate> medRefDataSourceDelegate;
 @end
 

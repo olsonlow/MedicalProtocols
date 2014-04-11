@@ -11,9 +11,9 @@
 
 @interface DataSource : NSObject <MedRefDataSource,ParseDataDownloadedDelegate,LocalDBReadyForUseDelegate>
 
--(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
-
-@property(nonatomic,assign) bool dataSourceReady;
++(DataSource *) sharedInstance;
++(DataSource *) sharedInstanceWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
+@property(nonatomic,assign,readonly) bool dataSourceReady;
 @property(nonatomic,assign) id<MedRefDataSourceDelegate> medRefDataSourceDelegate;
 
 @end

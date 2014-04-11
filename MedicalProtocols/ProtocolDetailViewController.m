@@ -8,7 +8,11 @@
 
 #import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
+#import "SVProgressHUD/SVProgressHUD.h"
+#import "ProtocolStep.h"
 @interface ProtocolDetailViewController ()
+@property (assign, nonatomic) bool showProgressHud;
+@property (copy, nonatomic) NSString* progressHudLabel;
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
 @end
@@ -34,14 +38,13 @@
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
-   
     if(self.protocol)
     {
         NSString *steps = @"";
         
-        for(int i = 0; i < [_protocol.steps count]; i++)
+        for(ProtocolStep* step in self.protocol.steps)
         {
-            [steps stringByAppendingString:[_protocol.steps objectAtIndex:i]];
+            [steps stringByAppendingString:step.description];
             [steps stringByAppendingString:@", "];
         }
         NSString *nameLabel = @"Protocol Name: ";
@@ -75,6 +78,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    if(self.showProgressHud){
+        [self displayProgressHudWithMessage:self.progressHudLabel];
+    } else {
+        [self cancelProgressHud];
+    }
+    [self showProgressHud];
+}
+
 #pragma mark - Split view
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
@@ -90,5 +102,21 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
+-(void)displayProgressHudWithMessage:(NSString*)message{
+    self.showProgressHud = YES;
+    self.progressHudLabel = message;
+    if (self.isViewLoaded && self.view.window) {
+        [SVProgressHUD showWithStatus:self.progressHudLabel];
+        self.view.userInteractionEnabled = NO;
 
+    }
+}
+-(void)cancelProgressHud{
+    self.showProgressHud = NO;
+    if (self.isViewLoaded && self.view.window) {
+        [SVProgressHUD dismiss];
+        self.view.userInteractionEnabled = YES;
+
+    }
+}
 @end

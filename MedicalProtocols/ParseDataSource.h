@@ -14,6 +14,6 @@
 +(ParseDataSource *) sharedInstance;
 +(ParseDataSource *) sharedInstanceWithDelegate:(id<ParseDataDownloadedDelegate>)delegate;
 -(void)downloadAllTablesFromParse;
-@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,assign,readonly) bool dataSourceReady;
 @property(nonatomic,weak) id<ParseDataDownloadedDelegate> delegate;
 @end

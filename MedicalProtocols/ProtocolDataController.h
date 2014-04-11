@@ -13,6 +13,7 @@
 @interface ProtocolDataController : NSObject<MedRefDataSourceDelegate>
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
+@property (readonly,assign, nonatomic) bool dataSourceReady;
 -(int)countProtocols;
 -(MedProtocol*)protocolAtIndex:(int)index;
 -(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
