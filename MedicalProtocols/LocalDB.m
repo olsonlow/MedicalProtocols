@@ -22,6 +22,7 @@
 #import "DataSource.h"
 
 @interface LocalDB()
+@property(nonatomic,assign,readwrite) bool dataSourceReady;
 @property (strong, nonatomic) NSString *databaseName;
 @property (strong, nonatomic) NSString *databasePath;
 -(NSArray*)tableNamesForDataType:(DataType)dataType;
@@ -86,7 +87,7 @@
                 protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
                 while([protocolResults next])
                 {
-                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"id"]];
+                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"objectId"]];
                         [protocols addObject:medProtocol];
                 }
                 if ([db hadError]) {
@@ -102,8 +103,8 @@
                 [db open];
                 NSMutableArray* steps = [[NSMutableArray alloc] init];
                 FMResultSet *stepResults;
-                if(parentId){
-                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", parentId];
+                if(parentId != -1){
+                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", [NSNumber numberWithInt:parentId]];
                 } else {
                     stepResults = [db executeQuery:@"SELECT * FROM step"];
                 }

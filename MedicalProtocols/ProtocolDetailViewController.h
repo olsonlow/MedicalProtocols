@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *protocolName;
 @property (weak, nonatomic) IBOutlet UILabel *protocolID;
 @property (weak, nonatomic) IBOutlet UILabel *protocolSteps;
-
+-(void)displayProgressHudWithMessage:(NSString*)message;
+-(void)cancelProgressHud;
 @end

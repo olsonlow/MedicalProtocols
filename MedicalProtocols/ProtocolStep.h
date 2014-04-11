@@ -10,7 +10,6 @@
 
 @class PFObject;
 @interface ProtocolStep : NSObject
-@property(nonatomic) NSString* dbPath;
 @property(nonatomic,assign) int objectId;
 @property(nonatomic,assign) int stepNumber;
 @property(nonatomic,assign) int protocolId;

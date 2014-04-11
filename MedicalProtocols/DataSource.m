@@ -14,18 +14,24 @@
 
 @interface DataSource()
 @property(nonatomic,strong) NSDate* lastUpdated;
+@property(nonatomic,assign,readwrite) bool dataSourceReady;
 -(id<MedRefDataSource>)getDataSource;
 -(void)getParseUpdates;
 -(void)readyForUse;
 @end
 
 @implementation DataSource
--(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate{
-    self = [super init];
-    if (self) {
-        _medRefDataSourceDelegate = delegate;
++(DataSource *) sharedInstance{
+    return [DataSource sharedInstanceWithDelegate:nil];
+}
++(DataSource *) sharedInstanceWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
+{
+    static DataSource* sharedObject = nil;
+    if(sharedObject == nil){
+        sharedObject = [[DataSource alloc] init];
+        sharedObject.medRefDataSourceDelegate = delegate;
     }
-    return self;
+    return sharedObject;
 }
 -(id<MedRefDataSource>)getDataSource{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -112,6 +118,7 @@
 }
 -(void)readyForUse{
     if([LocalDB sharedInstance].dataSourceReady && [ParseDataSource sharedInstance].dataSourceReady){
+        self.dataSourceReady = true;
         [self.medRefDataSourceDelegate dataSourceReadyForUse];
     }
 }

@@ -11,6 +11,6 @@
 @interface LocalDB : NSObject <MedRefDataSource>
 +(LocalDB *) sharedInstance;
 +(LocalDB *) sharedInstanceWithDelegate:(id<LocalDBReadyForUseDelegate>)delegate;
-@property(nonatomic,assign) bool dataSourceReady;
+@property(nonatomic,assign,readonly) bool dataSourceReady;
 @property(nonatomic,weak) id<LocalDBReadyForUseDelegate> delegate;
 @end

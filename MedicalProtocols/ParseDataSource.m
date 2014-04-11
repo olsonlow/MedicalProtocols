@@ -20,6 +20,7 @@
 @interface ParseDataSource()
 -(NSMutableArray*)getAllFromParseClassNamed:(NSString*)className;
 @property (nonatomic,assign) int runningQueries;
+@property(nonatomic,assign,readwrite) bool dataSourceReady;
 @end
 
 @implementation ParseDataSource
@@ -33,7 +34,9 @@
         sharedObject = [[ParseDataSource alloc] init];
         sharedObject.runningQueries = 0;
     }
-    sharedObject.delegate = delegate;
+    if(delegate != nil){
+        sharedObject.delegate = delegate;
+    }
     return sharedObject;
 }
 -(void)setRunningQueries:(int)runningQueries{
