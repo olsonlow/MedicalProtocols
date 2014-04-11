@@ -135,43 +135,45 @@
     bool success = NO;
     if([object isKindOfClass:[MedProtocol class]])
     {
+        NSLog(@"UPDATING PROTOCOL : %d", objectId);
         MedProtocol *medProtocol = (MedProtocol*) object;
-        success = [db executeUpdate:@"UPDATE protocol SET id = ?, pName = ? WHERE id = ? ",medProtocol.objectId, medProtocol.name, objectId];
+        NSLog(@"NEW NAME: %@", medProtocol.name);
+        success = [db executeUpdate:@"UPDATE protocol SET pName = (:pName) WHERE objectId = (:objectId) ", medProtocol.name, [NSNumber numberWithInt:objectId]];
     }
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET id = ?, stepNumber = ?, protocolId = ? , description = ? WHERE id = ?", step.objectId, step.stepNumber, step.protocolId, step.description, objectId];
+        success = [db executeUpdate:@"UPDATE step SET stepNumber = (:stepNumber), description = (:description) WHERE objectId = (:objectId)", [NSNumber numberWithInt:step.stepNumber], step.description, [NSNumber numberWithInt:objectId]];
     }
     else if([object isKindOfClass:[Form class]])
     {
-        Form* form = (Form *) object;
-        success = [db executeUpdate:@"UPDATE form SET id = ?, stepId = ? WHERE id = ?", form.objectId, form.stepId, objectId];
+            //Form is not updatable, it serves as a joining table between a step and form components
     }
     else if([object isKindOfClass:[TextBlock class]])
     {
         TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET id = ?, printable = ?, title = ?, stepId = ? WHERE id = ?", textBlock.objectId, textBlock.printable, textBlock.title, textBlock.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE textBlock SET printable = (:printable), title = (:title) WHERE objectId = (:objectId)", [NSNumber numberWithBool:textBlock.printable], textBlock.title, [NSNumber numberWithInt:objectId]];
     }
     else if([object isKindOfClass:[Link class]])
     {
         Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET id = ?, url = ?, label = ?, stepId = ? WHERE id = ?", link.objectId, link.url, link.label, link.stepId, objectId];
+        success = [db executeUpdate:@"UPDATE link SET url = (:url), label = (:label) WHERE objectId = (:objectId)", link.url, link.label, [NSNumber numberWithInt:objectId]];
     }
     else if([object isKindOfClass:[Calculator class]])
     {
-        Calculator *calculator = (Calculator*)object;
-        success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
+        //Calculator still needs to be worked out (is it similar to a form?)
+       // Calculator *calculator = (Calculator*)object;
+       // success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
     }
     else if([object isKindOfClass:[FormNumber class]])
     {
         FormNumber *formNumber = (FormNumber*)object;
-        success = [db executeUpdate:@"UPDATE formNumber SET id = ?, stepId = ? WHERE id = ?", formNumber.objectId, formNumber.formId, objectId];
+        success = [db executeUpdate:@"UPDATE formNumber SET defaultValue = (:defaultValue), minValue = (:minValue), maxValue = (:maxValue), label = (:label) WHERE objectId = (:objectId)", [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue], [NSNumber numberWithInt:formNumber.maxValue], formNumber.label,[NSNumber numberWithInt:objectId]];
     }
     else if([object isKindOfClass:[FormSelection class]])
     {
         FormSelection *formSelection = (FormSelection*)object;
-        success = [db executeUpdate:@"UPDATE formSelection SET id = ?, stepId = ? WHERE id = ?", formSelection.objectId, formSelection.formId, objectId];
+        success = [db executeUpdate:@"UPDATE formSelection SET choiceA = (:choiceA), choiceB = (:choiceB), label = (:label) WHERE objectId = (:objectId)", formSelection.choiceA,formSelection.choiceB,formSelection.label,[NSNumber numberWithInt:objectId]];
     }
     return success;
 }
@@ -235,19 +237,19 @@
     switch (dataType) {
         case DataTypeProtocol:
             [self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
-            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE id = ?", objectId];
+            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
         case DataTypeStep:
             [self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
-            step = [db executeUpdate:@"DELETE FROM step WHERE id = ?", objectId];
+            step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
         case DataTypeComponent:
             [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
-            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = ?", objectId];
-            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = ?", objectId];
-            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = ?", objectId];
-            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = ?", objectId];
+            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
+            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
+            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
+            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
         case DataTypeFormComponent:
-            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = ?", objectId];
-            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = ?", objectId];
+            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
+            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
         default:
             break;
     }
@@ -278,7 +280,6 @@
 
 -(NSArray *) getAllFormComponentsWithParentID: (NSString *)parentId
 {
-    
     NSMutableArray *formComponents = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];

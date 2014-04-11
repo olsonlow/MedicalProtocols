@@ -138,7 +138,7 @@
             </objects>
             <point key="canvasLocation" x="859" y="-631"/>
         </scene>
-        <!--Step Master View Controller-->
+        <!--Step Master View Controller - Steps-->
         <scene sceneID="R6v-wI-OyB">
             <objects>
                 <tableViewController id="Q9e-w3-Q7G" customClass="StepMasterViewController" sceneMemberID="viewController">
@@ -171,7 +171,7 @@
                             <outlet property="delegate" destination="Q9e-w3-Q7G" id="8Gj-3U-txt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="TxW-8t-OAW"/>
+                    <navigationItem key="navigationItem" title="Steps" id="TxW-8t-OAW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkL-MD-VAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
