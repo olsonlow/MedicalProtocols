@@ -7,7 +7,7 @@
 //
 
 #import "TextBlockView.h"
-
+#import "TextBlock.h"
 @implementation TextBlockView
 
 - (id)initWithFrame:(CGRect)frame
@@ -17,6 +17,17 @@
         // Initialization code
     }
     return self;
+}
+
+-(id) initWithTextBlock:(TextBlock*)textBlock
+{
+    self.textBlock = textBlock;
+    return self;
+}
+
+-(void) formatDisplay
+{
+    
 }
 
 /*
