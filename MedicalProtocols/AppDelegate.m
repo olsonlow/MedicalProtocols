@@ -8,7 +8,6 @@
 
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -20,6 +19,7 @@
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
     }
+    
     [Parse setApplicationId:@"dPZh0fgDg0NMoIitsS0nbsvkr6LRCRmFfUnVOvuC"
                   clientKey:@"mdFku5EbsXU6D5pGd2nYG62zaFewptNrbjqd4aWt"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
