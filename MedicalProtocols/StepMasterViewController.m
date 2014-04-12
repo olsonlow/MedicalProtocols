@@ -7,7 +7,7 @@
 //
 
 #import "StepMasterViewController.h"
-#import "StepDetailViewController.h"
+#import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 
@@ -33,13 +33,16 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    
+//    DetailViewManager *detailViewManager = (DetailViewManager*)self.splitViewController.delegate;
+//    self.detailViewController = [[ProtocolDetailViewController alloc] init];
+//    self.detailViewController.protocol = self.protocolData;
+//    detailViewManager.detailViewController = self.detailViewController;
     
-    self.detailViewController = (StepDetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
-    //[self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
+    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -96,17 +99,20 @@
      if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-        //self.detailViewController.step = step;
-        //((StepDetailViewController *)[segue destinationViewController]).step = step;
-        //from here, move to a new view with a step's components
-    }
+         //from here, move to a new view with a step's components
+     }
 }
 
 -(void)dataSourceReadyForUse{
     [self.detailViewController cancelProgressHud];
     [self.tableView reloadData];
 }
-
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.detailViewController.navigationController popViewControllerAnimated:NO];
+    }
+    [super viewWillDisappear:animated];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

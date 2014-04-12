@@ -7,6 +7,7 @@
 //
 
 #import "MedRefBaseDetailViewController.h"
+#import "DetailViewControllerSegue.h"
 #import "SVProgressHUD/SVProgressHUD.h"
 @interface MedRefBaseDetailViewController ()
 @property (assign, nonatomic) bool showProgressHud;
@@ -15,7 +16,6 @@
 @end
 
 @implementation MedRefBaseDetailViewController
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,6 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationItem.hidesBackButton = YES;
+    [self.navigationController.topViewController.navigationItem setHidesBackButton:YES];
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -55,6 +57,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier {
+    DetailViewControllerSegue *segue = [[DetailViewControllerSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    return segue;
+}
 -(void)displayProgressHudWithMessage:(NSString*)message{
     self.showProgressHud = YES;
     self.progressHudLabel = message;
