@@ -1,4 +1,4 @@
-//////TODO update parse backend by re-running below code
+////TODO update parse backend by re-running below code
 //
 //PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
 //protocol[@"name"] = @"Atrial Fibrillation";
@@ -41,6 +41,15 @@
 //formNumberComponent[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 //[formNumberComponent saveInBackground];
 //
+//PFObject *formNumberComponent2 = [PFObject objectWithClassName:@"FormNumber"];
+//formNumberComponent2[@"label"] = @"EF(%)";
+//formNumberComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
+//formNumberComponent2[@"minValue"] = [NSNumber numberWithInt:0];
+//formNumberComponent2[@"maxValue"] = [NSNumber numberWithInt:10];
+//formNumberComponent2[@"parentUUID"] = formComponent[@"UUID"];
+//formNumberComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
+//[formNumberComponent2 saveInBackground];
+//
 //PFObject *selectionComponent = [PFObject objectWithClassName:@"FormSelection"];
 //selectionComponent[@"label"] = @"Gender";
 //selectionComponent[@"choiceA"] = @"M";
@@ -49,22 +58,13 @@
 //selectionComponent[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 //[selectionComponent saveInBackground];
 //
-//PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormNumber"];
-//selectionComponent2[@"label"] = @"EF(%)";
-//selectionComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
-//selectionComponent2[@"minValue"] = [NSNumber numberWithInt:0];
-//selectionComponent2[@"maxValue"] = [NSNumber numberWithInt:10];
-//calculatorComponent[@"parentUUID"] = formComponent[@"UUID"];
-//calculatorComponent[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
+//PFObject *selectionComponent2 = [PFObject objectWithClassName:@"FormSelection"];
+//selectionComponent2[@"label"] = @"PM";
+//selectionComponent2[@"choiceA"] = @"Y";
+//selectionComponent2[@"choiceB"] = @"N";
+//selectionComponent2[@"parentUUID"] = formComponent[@"UUID"];
+//selectionComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 //[selectionComponent2 saveInBackground];
-//
-//PFObject *selectionComponent3 = [PFObject objectWithClassName:@"FormSelection"];
-//selectionComponent3[@"label"] = @"PM";
-//selectionComponent3[@"choiceA"] = @"Y";
-//selectionComponent3[@"choiceB"] = @"N";
-//selectionComponent3[@"parentUUID"] = formComponent[@"UUID"];
-//selectionComponent3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
-//[selectionComponent3 saveInBackground];
 //
 //PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
 //linkObject[@"label"] = @"Calculator link";
