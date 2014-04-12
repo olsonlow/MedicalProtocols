@@ -132,6 +132,8 @@
     }
 }
 -(void)dataSourceReadyForUse{
+    [NSThread sleepForTimeInterval:0.0001];
+    NSLog(@"%@:%d",[self.protocolDataController protocolAtIndex:0].name,[self.protocolDataController countProtocols]);
     [self.detailViewController cancelProgressHud];
     [self.tableView reloadData];
 }

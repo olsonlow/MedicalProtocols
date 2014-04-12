@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 
 @implementation FormNumber
--(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(int)objectId formId:(int)formId{
+-(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(NSString*)objectId formId:(NSString*)formId{
     if (self) {
         _label = label;
         _defaultValue = defaultValue;

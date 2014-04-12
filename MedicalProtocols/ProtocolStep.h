@@ -10,12 +10,13 @@
 
 @class PFObject;
 @interface ProtocolStep : NSObject
-@property(nonatomic,assign) int objectId;
+@property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int stepNumber;
-@property(nonatomic,assign) int protocolId;
+@property(nonatomic,copy) NSString* protocolId;
 @property(nonatomic,strong) NSString* description;
+@property (nonatomic) NSUUID* nsuuid;
 
--(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId;
+-(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId;
 
 
 @end

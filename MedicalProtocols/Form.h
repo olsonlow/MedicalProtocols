@@ -10,8 +10,8 @@
 @class PFObject;
 
 @interface Form : NSObject
-@property(nonatomic,assign) int stepId;
-@property(nonatomic,assign) int objectId;
+@property(nonatomic,copy) NSString* stepId;
+@property(nonatomic,copy) NSString* objectId;
 
--(id)initWithObjectId:(int)objectId stepId:(int)stepId;
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
 @end

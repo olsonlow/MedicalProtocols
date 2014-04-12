@@ -13,10 +13,10 @@
 @property(nonatomic,copy) NSString* title;
 @property(nonatomic,copy) NSString* content;
 @property(nonatomic,assign) Boolean printable;
-@property(nonatomic, assign) int objectId;
-@property(nonatomic, assign) int stepId;
+@property(nonatomic,copy) NSString* objectId;
+@property(nonatomic,copy) NSString* stepId;
 
--(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(int)objectId stepId:(int)stepId;
+-(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId;
 
 
 @end

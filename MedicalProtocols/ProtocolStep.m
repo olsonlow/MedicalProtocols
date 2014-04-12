@@ -22,10 +22,9 @@
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
-
 @end
 @implementation ProtocolStep
--(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId{
+-(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId{
     self = [super init];
     if (self) {
         _description = description;
