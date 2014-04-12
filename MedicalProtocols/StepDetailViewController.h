@@ -9,6 +9,8 @@
 #import "MedRefBaseDetailViewController.h"
 
 @class MedProtocol;
-@interface StepsDetailViewController : MedRefBaseDetailViewController
+@class ProtocolStep;
+@interface StepDetailViewController : MedRefBaseDetailViewController
 @property (strong, nonatomic) MedProtocol* protocol;
+@property (strong, nonatomic) ProtocolStep *step;
 @end

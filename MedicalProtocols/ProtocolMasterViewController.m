@@ -123,11 +123,11 @@
         MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
         StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)[segue destinationViewController]);
         stepMasterViewController.protocolData = protocol;
-        stepMasterViewController.detailViewController = self.detailViewController;
+        //stepMasterViewController.detailViewController = self.detailViewController;
     } else if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
-        StepsDetailViewController* stepDetailViewController = ((StepsDetailViewController*)[segue destinationViewController]);
+        StepDetailViewController* stepDetailViewController = ((StepDetailViewController*)[segue destinationViewController]);
         stepDetailViewController.protocol = protocol;
     }
 }

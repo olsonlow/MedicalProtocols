@@ -7,14 +7,16 @@
 //
 
 #import "StepDetailViewController.h"
-
-@interface StepsDetailViewController ()
+#import "ProtocolStep.h"
+#import "MedProtocol.h"
+@interface StepDetailViewController ()
+- (void) configureView;
 @property (assign, nonatomic) bool showProgressHud;
 @property (copy, nonatomic) NSString* progressHudLabel;
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
-@implementation StepsDetailViewController
+@implementation StepDetailViewController
 
 #pragma mark - Managing the detail item
 
@@ -27,11 +29,20 @@
     }
 }
 
+-(void)setStep:(ProtocolStep *)step
+{
+    if(_step != step)
+    {
+        _step = step;
+        [self configureView];
+    }
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
-    if(self.protocol)
+    if(self.protocol && self.step)
     {
         
     }
