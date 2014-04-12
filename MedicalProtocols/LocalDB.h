@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DataSourceProtocols.h"
 @interface LocalDB : NSObject <MedRefDataSource>
+-(NSString *) tableNameForObject:(id) object;
 +(LocalDB *) sharedInstance;
 +(LocalDB *) sharedInstanceWithDelegate:(id<LocalDBReadyForUseDelegate>)delegate;
 @property(nonatomic,assign,readonly) bool dataSourceReady;
