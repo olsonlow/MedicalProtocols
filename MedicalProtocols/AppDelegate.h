@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DetailViewManager.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) DetailViewManager *viewManager;
 
 
 @end

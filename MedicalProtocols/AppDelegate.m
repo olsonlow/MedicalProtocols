@@ -8,7 +8,6 @@
 
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
-#import "DetailViewManager.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -17,9 +16,8 @@
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        self.viewManager = [[DetailViewManager alloc] init];
-        self.viewManager.splitViewController = splitViewController;
-        splitViewController.delegate = self.viewManager;
+        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        splitViewController.delegate = (id)navigationController.topViewController;
     }
     
     [Parse setApplicationId:@"dPZh0fgDg0NMoIitsS0nbsvkr6LRCRmFfUnVOvuC"

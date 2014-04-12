@@ -9,7 +9,7 @@
 #import "StepMasterViewController.h"
 #import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
-#import "DetailViewManager.h"
+#import "ProtocolStep.h"
 
 @interface StepMasterViewController ()
 
@@ -43,9 +43,6 @@
 //    detailViewManager.detailViewController = self.detailViewController;
     
     [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
-    
-    self.detailViewController = (StepDetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
-    //[self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

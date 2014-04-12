@@ -49,7 +49,6 @@
 		A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */; };
 		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
 		A3533FAD18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */; };
-		A363FCB318F9CF7C00E4F8C6 /* DetailViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A363FCB218F9CF7C00E4F8C6 /* DetailViewManager.m */; };
 		A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */; };
 		A3689B7A18E94D0B0040D6F2 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7918E94D0B0040D6F2 /* Component.m */; };
 		A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7E18E94EE60040D6F2 /* TextBlock.m */; };
@@ -147,8 +146,6 @@
 		A3533FAB18F9A3A300715D2A /* MedRefFirstDetailViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedRefFirstDetailViewViewController.h; sourceTree = "<group>"; };
 		A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedRefFirstDetailViewViewController.m; sourceTree = "<group>"; };
 		A362A68718EE38DB00148BD6 /* parseCreationScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parseCreationScript.h; sourceTree = "<group>"; };
-		A363FCB118F9CF7C00E4F8C6 /* DetailViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewManager.h; sourceTree = "<group>"; };
-		A363FCB218F9CF7C00E4F8C6 /* DetailViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewManager.m; sourceTree = "<group>"; };
 		A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolStep.h; sourceTree = "<group>"; };
 		A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolStep.m; sourceTree = "<group>"; };
 		A3689B7818E94D0A0040D6F2 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
@@ -360,8 +357,6 @@
 		A324B30F18E24AC600261C57 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				A363FCB118F9CF7C00E4F8C6 /* DetailViewManager.h */,
-				A363FCB218F9CF7C00E4F8C6 /* DetailViewManager.m */,
 				A3B2756618F99BA5001C5027 /* DetailViewControllerSegue.h */,
 				A3B2756718F99BA5001C5027 /* DetailViewControllerSegue.m */,
 				A3B2755D18F8C773001C5027 /* MedRefBaseDetailViewController.h */,
@@ -613,7 +608,6 @@
 				A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */,
 				A3689B8518E94EFC0040D6F2 /* Calculator.m in Sources */,
 				A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */,
-				A363FCB318F9CF7C00E4F8C6 /* DetailViewManager.m in Sources */,
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */,
