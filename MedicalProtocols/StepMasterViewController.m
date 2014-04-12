@@ -7,6 +7,7 @@
 //
 
 #import "StepMasterViewController.h"
+#import "StepDetailViewController.h"
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 
@@ -36,6 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.detailViewController = (StepDetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
+    //[self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -81,8 +85,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        ProtocolStep *step = [self.protocolData stepAtIndex:[indexPath row]];
-        //based on this step, we bring up a particular step's component view (yeah?)
+        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+       
+        
+        //self.detailViewController.step = step;//this line causes a break
+        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 
@@ -92,12 +99,9 @@
      if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+         ((StepDetailViewController *)[segue destinationViewController]).step = step;
          //from here, move to a new view with a step's components
     }
-}
-
--(void)dataSourceReadyForUse{
-    [self.tableView reloadData];
 }
 
 /*
