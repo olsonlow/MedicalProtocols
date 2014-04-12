@@ -21,7 +21,7 @@
 @end
 
 @implementation Form
--(id)initWithObjectId:(int)objectId stepId:(int)stepId{
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId{
     self = [super init];
     if (self) {
         _objectId = objectId;

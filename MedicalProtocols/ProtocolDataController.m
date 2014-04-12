@@ -9,6 +9,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "DataSource.h"
+#import <Parse/Parse.h>
 
 @interface ProtocolDataController()
 @property (readwrite,assign, nonatomic) bool dataSourceReady;
@@ -23,6 +24,7 @@
 -(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate
 {
     self = [super init];
+    
     if (self) {
         _dataSourceReady = NO;
         _medRefDataSourceDelegate = delegate;

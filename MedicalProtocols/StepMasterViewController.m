@@ -88,9 +88,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        ProtocolStep *step = [self.protocolData stepAtIndex:[indexPath row]];
-        //based on this step, we bring up a particular step's component view (yeah?)
-        
+        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+       
+        //self.detailViewController.step = step;//this line causes a break
+        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 

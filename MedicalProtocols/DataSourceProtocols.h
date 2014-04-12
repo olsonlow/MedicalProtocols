@@ -20,11 +20,11 @@ typedef NS_ENUM(NSUInteger, DataType) {
 @end
 
 @protocol MedRefDataSource<NSObject>
--(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId;
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)objectId;
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType;
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId;
--(bool)updateObjectWithDataType:(DataType)dataType withId:(int)objectId withObject:(id)object;
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId;
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId;
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)objectId withObject:(id)object;
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId;
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
 @optional
 @property(nonatomic,assign,readonly) bool dataSourceReady;
