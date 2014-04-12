@@ -76,12 +76,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
     ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-    
-//    NSString* uuid = [ObjectUUID getUUID];
-//    NSLog(@"UUID test = %@",uuid);
-    
-    NSString *num = [NSString stringWithFormat:@"Step %d",step.stepNumber];
-    cell.textLabel.text = num;
+    cell.textLabel.text = step.description;
     
     return cell;
 }
