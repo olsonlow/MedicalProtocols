@@ -1,19 +1,20 @@
 //
-//  ProtocolDetailViewController.m
+//  StepsDetailViewController.m
 //  MedicalProtocols
 //
-//  Created by Luke Vergos on 27/03/14.
+//  Created by Luke Vergos on 11/04/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import "ProtocolDetailViewController.h"
-#import "MedProtocol.h"
-#import "ProtocolStep.h"
-@interface ProtocolDetailViewController ()
-- (void)configureView;
+#import "StepDetailViewController.h"
+
+@interface StepsDetailViewController ()
+@property (assign, nonatomic) bool showProgressHud;
+@property (copy, nonatomic) NSString* progressHudLabel;
+@property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
-@implementation ProtocolDetailViewController
+@implementation StepsDetailViewController
 
 #pragma mark - Managing the detail item
 
@@ -32,24 +33,6 @@
     // TODO updateView Based on protocol
     if(self.protocol)
     {
-        NSString *steps = @"";
-        
-        for(ProtocolStep* step in self.protocol.steps)
-        {
-            steps = [steps stringByAppendingString:step.description];
-            steps = [steps stringByAppendingString:@", "];
-        }
-        NSString *nameLabel = @"Protocol Name: ";
-        self.protocolID.text  = [NSString stringWithFormat:@"Protocol ID:%i",self.protocol.objectId];
-        NSString *stepsLabel = @"Protocol Steps: ";
-        self.protocolName.text= [nameLabel stringByAppendingString:self.protocol.name];
-        self.protocolSteps.text = [stepsLabel stringByAppendingString:steps];
-    }
-    else
-    {
-        self.protocolName.text = @"";
-        self.protocolID.text = @"";
-        self.protocolSteps.text = @"";
         
     }
 }
@@ -60,7 +43,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -69,9 +51,17 @@
 
 #pragma mark - Split view
 
+- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
+{
+    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+    self.masterPopoverController = popoverController;
+}
+
 - (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+    self.masterPopoverController = nil;
 }
 @end

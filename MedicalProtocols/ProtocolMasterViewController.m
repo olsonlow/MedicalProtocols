@@ -11,7 +11,7 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "StepMasterViewController.h"
-#import "SVProgressHUD/SVProgressHUD.h"
+#import "StepDetailViewController.h"
 
 @interface ProtocolMasterViewController ()
 
@@ -108,6 +108,7 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
         self.detailViewController.protocol = protocol;
+        [self.detailViewController performSegueWithIdentifier:@"ProtocolDetailViewToStepDetailView" sender:self];
     }
 }
 
@@ -123,6 +124,11 @@
         StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)[segue destinationViewController]);
         stepMasterViewController.protocolData = protocol;
         stepMasterViewController.detailViewController = self.detailViewController;
+    } else if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
+        StepsDetailViewController* stepDetailViewController = ((StepsDetailViewController*)[segue destinationViewController]);
+        stepDetailViewController.protocol = protocol;
     }
 }
 -(void)dataSourceReadyForUse{

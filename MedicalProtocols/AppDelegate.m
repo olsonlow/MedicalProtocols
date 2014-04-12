@@ -7,7 +7,6 @@
 //
 
 #import <Parse/Parse.h>
-#import "FMDatabase.h"
 #import "AppDelegate.h"
 
 @implementation AppDelegate
