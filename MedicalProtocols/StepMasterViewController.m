@@ -90,8 +90,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
        
-        //self.detailViewController.step = step;//this line causes a break
-        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
+        self.detailViewController.step = step;//this line causes a break
+        [self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 

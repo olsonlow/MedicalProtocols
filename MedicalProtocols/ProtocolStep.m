@@ -31,8 +31,6 @@
         _stepNumber = stepNumber;
         _objectId = objectId;
         _protocolId = protocolId;
-//        _nsuuid = [[NSUUID alloc] init];
-//        NSLog(@"UUID = %@",_nsuuid);
     }
     
     return self;
