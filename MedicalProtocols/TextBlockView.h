@@ -1,5 +1,5 @@
 //
-//  textBlockView.h
+//  TextBlockView.h
 //  MedicalProtocols
 //
 //  Created by Zach Dahlgren on 4/12/14.
@@ -8,6 +8,6 @@
 
 #import "ComponentView.h"
 
-@interface textBlockView : ComponentView
+@interface TextBlockView : ComponentView
 
 @end

@@ -28,7 +28,7 @@
 		89AC2BAC18F9E14C00BC4BC2 /* FormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BAB18F9E14C00BC4BC2 /* FormView.m */; };
 		89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BAE18F9E16100BC4BC2 /* LinkView.m */; };
 		89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */; };
-		89AC2BBB18F9FB8400BC4BC2 /* textBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BBA18F9FB8400BC4BC2 /* textBlockView.m */; };
+		89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */; };
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
 		A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A302F60718ECDC830065D42E /* StepMasterViewController.m */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
@@ -110,8 +110,8 @@
 		89AC2BAE18F9E16100BC4BC2 /* LinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkView.m; sourceTree = "<group>"; };
 		89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
-		89AC2BB918F9FB8400BC4BC2 /* textBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textBlockView.h; sourceTree = "<group>"; };
-		89AC2BBA18F9FB8400BC4BC2 /* textBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textBlockView.m; sourceTree = "<group>"; };
+		89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlockView.h; sourceTree = "<group>"; };
+		89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBlockView.m; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
@@ -234,8 +234,6 @@
 		89AC2BA018F9D2F700BC4BC2 /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
-				89AC2BB918F9FB8400BC4BC2 /* textBlockView.h */,
-				89AC2BBA18F9FB8400BC4BC2 /* textBlockView.m */,
 				89AC2BA718F9D5B700BC4BC2 /* ComponentView.h */,
 				89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */,
 				89AC2BAA18F9E14C00BC4BC2 /* FormView.h */,
@@ -244,6 +242,8 @@
 				89AC2BAE18F9E16100BC4BC2 /* LinkView.m */,
 				89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */,
 				89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */,
+				89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */,
+				89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */,
 			);
 			name = ComponentViews;
 			sourceTree = "<group>";
@@ -607,7 +607,7 @@
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
-				89AC2BBB18F9FB8400BC4BC2 /* textBlockView.m in Sources */,
+				89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */,
 				A3B2756218F8CB53001C5027 /* StepDetailViewController.m in Sources */,
 				A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,

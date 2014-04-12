@@ -1,14 +1,14 @@
 //
-//  textBlockView.m
+//  TextBlockView.m
 //  MedicalProtocols
 //
 //  Created by Zach Dahlgren on 4/12/14.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import "textBlockView.h"
+#import "TextBlockView.h"
 
-@implementation textBlockView
+@implementation TextBlockView
 
 - (id)initWithFrame:(CGRect)frame
 {
