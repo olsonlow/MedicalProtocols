@@ -8,6 +8,7 @@
 
 #import "StepMasterViewController.h"
 #import "MedProtocol.h"
+#import "ProtocolStep.h"
 
 @interface StepMasterViewController ()
 
@@ -67,8 +68,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
-    
     // Configure the cell...
+    ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+    NSString *num = [NSString stringWithFormat:@"Step %d",step.stepNumber];
+    cell.textLabel.text = num;
     
     return cell;
 }
