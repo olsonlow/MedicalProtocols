@@ -24,8 +24,12 @@
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
 		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
 		89A41F4118EF627C00CA871F /* LocalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 89C6501618E8DE66004553E9 /* LocalDB.m */; };
+		89AC2BA918F9D5B700BC4BC2 /* ComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */; };
+		89AC2BAC18F9E14C00BC4BC2 /* FormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BAB18F9E14C00BC4BC2 /* FormView.m */; };
+		89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BAE18F9E16100BC4BC2 /* LinkView.m */; };
+		89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */; };
+		89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */; };
 		89C6500118E8DB81004553E9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C6500018E8DB81004553E9 /* libsqlite3.dylib */; };
-		89C6501418E8DCFD004553E9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A302F60718ECDC830065D42E /* StepMasterViewController.m */; };
 		A324B2D518E24A4600261C57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D418E24A4600261C57 /* Foundation.framework */; };
 		A324B2D718E24A4600261C57 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A324B2D618E24A4600261C57 /* CoreGraphics.framework */; };
@@ -98,6 +102,16 @@
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		89A41F3F18EF5C9A00CA871F /* sqlObjectCreateDummyCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sqlObjectCreateDummyCode.h; sourceTree = "<group>"; };
+		89AC2BA718F9D5B700BC4BC2 /* ComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentView.h; path = ../ComponentView.h; sourceTree = "<group>"; };
+		89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComponentView.m; path = ../ComponentView.m; sourceTree = "<group>"; };
+		89AC2BAA18F9E14C00BC4BC2 /* FormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormView.h; sourceTree = "<group>"; };
+		89AC2BAB18F9E14C00BC4BC2 /* FormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormView.m; sourceTree = "<group>"; };
+		89AC2BAD18F9E16100BC4BC2 /* LinkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkView.h; sourceTree = "<group>"; };
+		89AC2BAE18F9E16100BC4BC2 /* LinkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkView.m; sourceTree = "<group>"; };
+		89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
+		89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlockView.h; sourceTree = "<group>"; };
+		89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBlockView.m; sourceTree = "<group>"; };
 		89C6500018E8DB81004553E9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		89C6501518E8DE66004553E9 /* LocalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalDB.h; sourceTree = "<group>"; };
 		89C6501618E8DE66004553E9 /* LocalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalDB.m; sourceTree = "<group>"; };
@@ -217,6 +231,23 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
+		89AC2BA018F9D2F700BC4BC2 /* ComponentViews */ = {
+			isa = PBXGroup;
+			children = (
+				89AC2BA718F9D5B700BC4BC2 /* ComponentView.h */,
+				89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */,
+				89AC2BAA18F9E14C00BC4BC2 /* FormView.h */,
+				89AC2BAB18F9E14C00BC4BC2 /* FormView.m */,
+				89AC2BAD18F9E16100BC4BC2 /* LinkView.h */,
+				89AC2BAE18F9E16100BC4BC2 /* LinkView.m */,
+				89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */,
+				89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */,
+				89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */,
+				89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */,
+			);
+			name = ComponentViews;
+			sourceTree = "<group>";
+		};
 		89C64FFF18E8DB06004553E9 /* LocalDatabase */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +357,7 @@
 				A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */,
 				A3B2756018F8CB52001C5027 /* StepDetailViewController.h */,
 				A3B2756118F8CB53001C5027 /* StepDetailViewController.m */,
+				89AC2BA018F9D2F700BC4BC2 /* ComponentViews */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -567,19 +599,23 @@
 				A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */,
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
+				89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */,
+				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
+				89AC2BA918F9D5B700BC4BC2 /* ComponentView.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
+				89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */,
 				A3B2756218F8CB53001C5027 /* StepDetailViewController.m in Sources */,
 				A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,
+				89AC2BAC18F9E14C00BC4BC2 /* FormView.m in Sources */,
 				A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */,
 				A3689B8218E94EF00040D6F2 /* Link.m in Sources */,
 				A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */,
-				89C6501418E8DCFD004553E9 /* (null) in Sources */,
 				A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */,
 				A3689B7A18E94D0B0040D6F2 /* Component.m in Sources */,
 			);

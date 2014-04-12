@@ -7,10 +7,10 @@
 //
 
 #import "MedRefBaseDetailViewController.h"
-
 @class MedProtocol;
 @class ProtocolStep;
 @interface StepDetailViewController : MedRefBaseDetailViewController
 @property (strong, nonatomic) MedProtocol* protocol;
 @property (strong, nonatomic) ProtocolStep *step;
+-(void)setStep:(ProtocolStep *)step;
 @end

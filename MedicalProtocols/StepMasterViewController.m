@@ -90,8 +90,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
        
-        self.detailViewController.step = step;//this line causes a break
-        [self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
+        //self.detailViewController.step = step;//this line causes a break
+        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 
@@ -101,9 +101,15 @@
      if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-         ((StepDetailViewController *)[segue destinationViewController]).step = step;
-         //from here, move to a new view with a step's components
+        //self.detailViewController.step = step;
+        //((StepDetailViewController *)[segue destinationViewController]).step = step;
+        //from here, move to a new view with a step's components
     }
+}
+
+-(void)dataSourceReadyForUse{
+    [self.detailViewController cancelProgressHud];
+    [self.tableView reloadData];
 }
 
 /*

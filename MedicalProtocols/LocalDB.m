@@ -466,6 +466,10 @@
     {
         className = @"Form";
     }
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        className = @"TextBlock";
+    }
     else if([object isKindOfClass:[Calculator class]])
     {
         className = @"Calculator";
