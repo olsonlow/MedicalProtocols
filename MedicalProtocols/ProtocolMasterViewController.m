@@ -39,7 +39,8 @@
     //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     //self.navigationItem.rightBarButtonItem = addButton;
 
-    self.detailViewController = (ProtocolDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    UINavigationController* navigationController = [self.splitViewController.viewControllers lastObject];
+    self.detailViewController = (ProtocolDetailViewController *)[navigationController.viewControllers lastObject];
     self.protocolDataController = [[ProtocolDataController alloc] initWithDelegate:self];
     if(!self.protocolDataController.dataSourceReady){
         [self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
@@ -106,9 +107,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
-        self.detailViewController.protocol = protocol;
-        [self.detailViewController performSegueWithIdentifier:@"ProtocolDetailViewToStepDetailView" sender:self];
+
     }
 }
 
@@ -124,12 +123,13 @@
         StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)[segue destinationViewController]);
         stepMasterViewController.protocolData = protocol;
         stepMasterViewController.detailViewController = self.detailViewController;
-    } else if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
-        StepsDetailViewController* stepDetailViewController = ((StepsDetailViewController*)[segue destinationViewController]);
-        stepDetailViewController.protocol = protocol;
     }
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+
+    }
+    [super viewWillDisappear:animated];
 }
 -(void)dataSourceReadyForUse{
     [self.detailViewController cancelProgressHud];

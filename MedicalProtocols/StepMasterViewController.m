@@ -7,7 +7,9 @@
 //
 
 #import "StepMasterViewController.h"
+#import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
+#import "DetailViewManager.h"
 
 @interface StepMasterViewController ()
 
@@ -31,10 +33,16 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    
+//    DetailViewManager *detailViewManager = (DetailViewManager*)self.splitViewController.delegate;
+//    self.detailViewController = [[ProtocolDetailViewController alloc] init];
+//    self.detailViewController.protocol = self.protocolData;
+//    detailViewManager.detailViewController = self.detailViewController;
+    
+    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -90,13 +98,18 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
          //from here, move to a new view with a step's components
-    }
+     }
 }
 
 -(void)dataSourceReadyForUse{
     [self.tableView reloadData];
 }
-
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.detailViewController.navigationController popViewControllerAnimated:NO];
+    }
+    [super viewWillDisappear:animated];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

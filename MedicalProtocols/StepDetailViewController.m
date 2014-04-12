@@ -64,4 +64,6 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
+- (IBAction)unwindToStepDetailViewController:(UIStoryboardSegue *)sender {
+}
 @end
