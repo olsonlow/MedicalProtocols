@@ -18,6 +18,7 @@
 #import "Form.h"
 #import "FormNumber.h"
 #import "FormSelection.h"
+#import "DataSource.h"
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
@@ -39,6 +40,7 @@
 -(NSMutableArray*)components{
     if(_components == nil){
         _components = [[NSMutableArray alloc] init];
+        [_components addObjectsFromArray:[[DataSource sharedInstance]getAllObjectsWithDataType: DataTypeComponent withParentId:self.objectId]];
 
     }
     return _components;
