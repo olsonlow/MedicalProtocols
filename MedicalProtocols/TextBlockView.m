@@ -22,12 +22,18 @@
 -(id) initWithTextBlock:(TextBlock*)textBlock
 {
     self.textBlock = textBlock;
+    [self formatDisplay];
     return self;
 }
 
 -(void) formatDisplay
 {
-    
+    UILabel *title;
+    title.text = self.textBlock.title;
+    UILabel *content;
+    content.text = self.textBlock.content;
+    [self addSubview:title];
+    [self addSubview:content];
 }
 
 /*

@@ -10,12 +10,6 @@
 
 @implementation FormView
 
--(id) initWithForm:(Form *)form
-{
-    self.form = form;
-    return self;
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,9 +19,16 @@
     return self;
 }
 
+-(id) initWithForm:(Form *)form
+{
+    self.form = form;
+    [self formatDisplay];
+    return self;
+}
+
 -(void) formatDisplay
 {
-    
+
 }
 
 /*

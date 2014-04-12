@@ -22,6 +22,7 @@
 -(id) initWithCalculator:(Calculator *) calculator
 {
     self.calculator = calculator;
+    [self formatDisplay];
     return self;
 }
 

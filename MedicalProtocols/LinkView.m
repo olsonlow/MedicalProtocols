@@ -22,12 +22,18 @@
 -(id) initWithLink:(Link*)link
 {
     self.link = link;
+    [self formatDisplay];
     return self;
 }
 
 -(void) formatDisplay
 {
-    
+    UILabel *label;
+    label.text = self.link.label;
+    UILabel *link;
+    link.text = self.link.url;
+    [self addSubview:label];
+    [self addSubview:link];
 }
 
 /*
