@@ -73,6 +73,40 @@
     return self;
 }
 
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
+    return [self getAllObjectsWithDataType:dataType withParentId:-1];
+}
+
+-(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    FMResultSet * result;
+    if(success)
+    {
+        [db open];
+        switch (dataType) {
+            case DataTypeProtocol:
+                result = [db executeQuery:@"SELECT * FROM protocol WHERE objectId = (:objectId)", objectId];
+                break;
+            case DataTypeStep:
+                result = [db executeQuery:@"SELECT * FROM step WHERE objectId = (:objectId)", objectId];
+                break;
+            case DataTypeComponent:
+                result = [db executeQuery:@"SELECT * FROM textBlock, calculator, form, link WHERE textBlock.objectId = calculator.objectId = form.objectId = link.objectId = (:objectId)", objectId];
+            case DataTypeFormComponent:
+                result = [db executeQuery:@"SELECT * FROM formNumber, formSelection WHERE formNumber.objectId = formSelection.objectId = (:objectId)", objectId];
+            default:
+                break;
+        }
+    }
+    if ([db hadError]) {
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+    [db close];
+    return result;
+}
+
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -88,7 +122,7 @@
                 while([protocolResults next])
                 {
                     MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"objectId"]];
-                        [protocols addObject:medProtocol];
+                    [protocols addObject:medProtocol];
                 }
                 if ([db hadError]) {
                     NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -120,13 +154,170 @@
                 return steps;
             }
         case DataTypeComponent:
-            return[self getAllComponents];
+            return[self getAllComponentsWithParentID:parentId];
         case DataTypeFormComponent:
-            return[self getAllFormComponents];
+            return[self getAllFormComponentsWithParentID:parentId];
         default:
             break;
     }
     return NULL;
+}
+
+-(NSArray*)getAllComponents
+{
+    return [self getAllComponentsWithParentID:-1];
+}
+
+-(NSArray*)getAllComponentsWithParentID: (int) parentId
+{
+    NSMutableArray *components = [[NSMutableArray alloc]init];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+        [db open];
+        FMResultSet *textBlockResults;
+        if(parentId == -1)
+            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
+        else
+            textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
+        while([textBlockResults next])
+        {
+            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
+            [components addObject:textBlock];
+        }
+        
+        FMResultSet *calculatorResults;
+        if(parentId == -1)
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
+        else
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
+        
+        while([calculatorResults next])
+        {
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
+            [components addObject:calculator];
+        }
+        
+        FMResultSet *linkResults;
+        if(parentId)
+            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
+        else
+            linkResults = [db executeQuery:@"SELECT * FROM link"];
+        
+        while([linkResults next])
+        {
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
+            [components addObject:link];
+        }
+        if ([db hadError]) {
+            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+        [db close];
+    }
+    return components;
+}
+
+-(NSArray *) getAllFormComponents
+{
+    return [self getAllComponentsWithParentID:-1];
+}
+
+-(NSArray *) getAllFormComponentsWithParentID: (int)parentId
+{
+    NSMutableArray *formComponents = [[NSMutableArray alloc]init];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+        [db open];
+        FMResultSet *formSelectionResults;
+        if(parentId)
+            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formId = (:formId)", parentId];
+        else
+            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection"];
+        while([formSelectionResults next])
+        {
+            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults intForColumn:@"id"] formId:[formSelectionResults intForColumn:@"formId"]];
+            [formComponents addObject:formSelection];
+        }
+        FMResultSet *formNumberResults;
+        if(parentId)
+            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formId = (:formId)", parentId];
+        else
+            formNumberResults = [db executeQuery:@"SELECT * from formNumber"];
+        while ([formNumberResults next]) {
+            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults intForColumn:@"id"] formId:[formNumberResults intForColumn:@"formId"]];
+            [formComponents addObject:formNumber];
+        }
+    }
+    if ([db hadError])
+    {
+        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
+    [db close];
+    return formComponents;
+}
+
+-(NSArray*)getStepsForProtocolId:(NSString*)protocolId{
+    NSMutableArray *steps = [[NSMutableArray alloc]init];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+        FMResultSet *results;
+        results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = (:protocolId)", protocolId];
+        
+        while([results next])
+        {
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results intForColumn:@"id"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results intForColumn:@"protocolId"]];
+            [steps addObject:step];
+        }
+        if ([db hadError]) {
+            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+        [db close];
+    }
+    return steps;
+}
+
+-(NSArray*)getComponentsForStepId:(NSString*)stepId{
+    NSMutableArray *components = [[NSMutableArray alloc]init];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+        [db open];
+        FMResultSet *textBlockResults;
+        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = (:stepId)", stepId];
+        while([textBlockResults next])
+        {
+            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
+            [components addObject:t];
+        }
+        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = (:stepId)", stepId];
+        while([textBlockResults next])
+        {
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
+            [components addObject:calculator];
+        }
+        
+        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", stepId];
+        while([linkResults next])
+        {
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
+            [components addObject:link];
+        }
+        if ([db hadError]) {
+            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+        [db close];
+    }
+    return components;
 }
 
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(int)objectId withObject:(id)object{
@@ -256,196 +447,6 @@
     return protocol || step || textBlock || link || form || calculator || formNumber || formSelection;
 }
 
--(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    FMResultSet * result;
-    if(success)
-    {
-        [db open];
-        switch (dataType) {
-            case DataTypeProtocol:
-                result = [db executeQuery:@"SELECT * FROM protocol WHERE objectId = (:objectId)", objectId];
-                break;
-            case DataTypeStep:
-                result = [db executeQuery:@"SELECT * FROM step WHERE objectId = (:objectId)", objectId];
-                break;
-            case DataTypeComponent:
-                result = [db executeQuery:@"SELECT * FROM textBlock, calculator, form, link WHERE textBlock.objectId = calculator.objectId = form.objectId = link.objectId = (:objectId)", objectId];
-            case DataTypeFormComponent:
-                result = [db executeQuery:@"SELECT * FROM formNumber, formSelection WHERE formNumber.objectId = formSelection.objectId = (:objectId)", objectId];
-            default:
-                break;
-        }
-    }
-    if ([db hadError]) {
-        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-    }
-    [db close];
-    return result;
-}
-
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
-    return [self getAllObjectsWithDataType:dataType withParentId:-1];
-}
-
--(NSArray *) getAllFormComponentsWithParentID: (NSString *)parentId
-{
-    NSMutableArray *formComponents = [[NSMutableArray alloc]init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        [db open];
-        FMResultSet *formSelectionResults;
-        if(parentId)
-            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection WHERE formId = (:formId)", parentId];
-        else
-            formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection"];
-        while([formSelectionResults next])
-        {
-            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults intForColumn:@"id"] formId:[formSelectionResults intForColumn:@"formId"]];
-            [formComponents addObject:formSelection];
-        }
-        FMResultSet *formNumberResults;
-        if(parentId)
-            formNumberResults= [db executeQuery:@"SELECT * from formNumber WHERE formId = (:formId)", parentId];
-        else
-            formNumberResults = [db executeQuery:@"SELECT * from formNumber"];
-        while ([formNumberResults next]) {
-            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults intForColumn:@"id"] formId:[formNumberResults intForColumn:@"formId"]];
-            [formComponents addObject:formNumber];
-        }
-    }
-    if ([db hadError])
-    {
-        NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-    }
-    [db close];
-    return formComponents;
-}
-
--(NSArray *) getAllFormComponents
-{
-    return [self getAllComponentsWithParentID:-1];
-}
-
--(NSArray*)getAllComponentsWithParentID: (int) parentId
-{
-    NSMutableArray *components = [[NSMutableArray alloc]init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        [db open];
-        FMResultSet *textBlockResults;
-        if(parentId == -1)
-            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
-        else
-            textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
-        while([textBlockResults next])
-        {
-            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
-            [components addObject:textBlock];
-        }
-        
-        FMResultSet *calculatorResults;
-        if(parentId == -1)
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
-        else
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
-        
-        while([calculatorResults next])
-        {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
-            [components addObject:calculator];
-        }
-        
-        FMResultSet *linkResults;
-        if(parentId)
-            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
-        else
-            linkResults = [db executeQuery:@"SELECT * FROM link"];
-        
-        while([linkResults next])
-        {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
-            [components addObject:link];
-        }
-        if ([db hadError]) {
-            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-        }
-        [db close];
-    }
-    return components;
-}
-
--(NSArray*)getAllComponents
-{
-    return [self getAllComponentsWithParentID:-1];
-}
-
--(NSArray*)getStepsForProtocolId:(NSString*)protocolId{
-    NSMutableArray *steps = [[NSMutableArray alloc]init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        FMResultSet *results;
-        results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = (:protocolId)", protocolId];
-        
-        while([results next])
-        {
-            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results intForColumn:@"id"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results intForColumn:@"protocolId"]];
-            [steps addObject:step];
-        }
-        if ([db hadError]) {
-            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-        }
-        [db close];
-    }
-    return steps;
-}
-
--(NSArray*)getComponentsForStepId:(NSString*)stepId{
-    NSMutableArray *components = [[NSMutableArray alloc]init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        [db open];
-        FMResultSet *textBlockResults;
-        textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = (:stepId)", stepId];
-        while([textBlockResults next])
-        {
-            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
-            [components addObject:t];
-        }
-        FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = (:stepId)", stepId];
-        while([textBlockResults next])
-        {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
-            [components addObject:calculator];
-        }
-        
-        FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", stepId];
-        while([linkResults next])
-        {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
-            [components addObject:link];
-        }
-        if ([db hadError]) {
-            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-        }
-        [db close];
-    }
-    return components;
-}
 
 -(NSString *) tableNameForObject:(id) object
 {
