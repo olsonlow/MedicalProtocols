@@ -9,13 +9,6 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "DataSource.h"
-//#import <Parse/Parse.h>
-//#import "FMDB.h"
-//#import "FMResultSet.h"
-//#import "FMDatabase.h"
-//#import "LocalDB.h"
-//#import "FMDatabase.h"
-//#import "FMResultSet.h"
 
 @interface ProtocolDataController()
 @property (readwrite,assign, nonatomic) bool dataSourceReady;

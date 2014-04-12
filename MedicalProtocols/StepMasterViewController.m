@@ -72,6 +72,27 @@
     
     return cell;
 }
+
+
+//INCOMPLETE
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        ProtocolStep *step = [self.protocolData stepAtIndex:[indexPath row]];
+        //based on this step, we bring up a particular step's component view (yeah?)
+    }
+}
+
+//INCOMPLELTE
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+     if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+         //from here, move to a new view with a step's components
+    }
+}
+
 -(void)dataSourceReadyForUse{
     [self.tableView reloadData];
 }
