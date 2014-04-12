@@ -14,6 +14,7 @@
 @property(nonatomic,assign) int stepNumber;
 @property(nonatomic,assign) int protocolId;
 @property(nonatomic,strong) NSString* description;
+@property (nonatomic) NSUUID* nsuuid;
 
 -(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId;
 

@@ -343,9 +343,10 @@
         [db open];
         FMResultSet *textBlockResults;
         if(parentId == -1)
-            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
+            textBlockResults = [db executeQuery:@"SELECT * FROM textBlock"];
         else
-            textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
+            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
+        
         while([textBlockResults next])
         {
             TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
@@ -354,10 +355,9 @@
         
         FMResultSet *calculatorResults;
         if(parentId == -1)
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
-        else
             calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
-        
+        else
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
         while([calculatorResults next])
         {
             Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
@@ -366,10 +366,9 @@
         
         FMResultSet *linkResults;
         if(parentId)
-            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
-        else
             linkResults = [db executeQuery:@"SELECT * FROM link"];
-        
+        else
+            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
         while([linkResults next])
         {
             Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];

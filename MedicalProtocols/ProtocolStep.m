@@ -22,7 +22,6 @@
 
 @interface ProtocolStep()
 @property (nonatomic,strong) NSMutableArray* components;
-
 @end
 @implementation ProtocolStep
 -(id)initWithId:(int)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(int)protocolId{
@@ -32,6 +31,8 @@
         _stepNumber = stepNumber;
         _objectId = objectId;
         _protocolId = protocolId;
+//        _nsuuid = [[NSUUID alloc] init];
+//        NSLog(@"UUID = %@",_nsuuid);
     }
     
     return self;
