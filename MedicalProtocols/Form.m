@@ -13,19 +13,28 @@
 #import "LocalDB.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+#import "DataSource.h"
 
 @interface Form()
 @property(nonatomic,strong) NSMutableArray* fields;
+@property(nonatomic,strong) NSMutableArray* formComponents;
 @end
 
 @implementation Form
--(id)initWithObjectId:(int)objectId stepId:(int)stepId{
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId{
     self = [super init];
     if (self) {
         _objectId = objectId;
         _stepId = stepId;
     }
     return self;
+}
+-(NSMutableArray*)formComponents{
+    if(_formComponents == nil){
+        _formComponents = [[NSMutableArray alloc] init];
+        [_formComponents addObjectsFromArray:[[DataSource sharedInstance]getAllObjectsWithDataType: DataTypeFormComponent withParentId:self.objectId]];
+    }
+    return _formComponents;
 }
 
 -(NSMutableArray *)fields{

@@ -19,7 +19,7 @@
 
 @implementation MedProtocol
 
--(id)initWithName:(NSString*)name objectId:(int)objectId{
+-(id)initWithName:(NSString*)name objectId:(NSString*)objectId{
     self = [super init];
     if (self) {
         _name = name;

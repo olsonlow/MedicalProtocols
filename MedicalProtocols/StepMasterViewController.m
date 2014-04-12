@@ -44,6 +44,9 @@
     
     [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
     
+    self.detailViewController = (StepDetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
+    //[self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -75,8 +78,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
+    ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
     
-    // Configure the cell...
+//    NSString* uuid = [ObjectUUID getUUID];
+//    NSLog(@"UUID test = %@",uuid);
+    
+    NSString *num = [NSString stringWithFormat:@"Step %d",step.stepNumber];
+    cell.textLabel.text = num;
     
     return cell;
 }
@@ -86,8 +94,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        ProtocolStep *step = [self.protocolData stepAtIndex:[indexPath row]];
-        //based on this step, we bring up a particular step's component view (yeah?)
+        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+       
+        //self.detailViewController.step = step;//this line causes a break
+        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 
@@ -102,6 +112,7 @@
 }
 
 -(void)dataSourceReadyForUse{
+    [self.detailViewController cancelProgressHud];
     [self.tableView reloadData];
 }
 -(void) viewWillDisappear:(BOOL)animated {

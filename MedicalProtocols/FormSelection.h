@@ -13,9 +13,9 @@
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* choiceA;
 @property(nonatomic,copy) NSString* choiceB;
-@property(nonatomic,assign) int objectId;
-@property(nonatomic,assign) int formId;
+@property(nonatomic,copy) NSString* objectId;
+@property(nonatomic,copy) NSString* formId;
 
--(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(int)objectId formId:(int)formId;
+-(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId formId:(NSString*)formId;
 
 @end

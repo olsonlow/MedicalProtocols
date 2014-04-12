@@ -7,14 +7,20 @@
 //
 
 #import "StepDetailViewController.h"
-
-@interface StepsDetailViewController ()
+#import "ProtocolStep.h"
+#import "MedProtocol.h"
+#import "Component.h"
+#import "LocalDB.h"
+#import "ComponentView.h"
+#import <QuartzCore/QuartzCore.h>
+@interface StepDetailViewController ()
+- (void) configureView;
 @property (assign, nonatomic) bool showProgressHud;
 @property (copy, nonatomic) NSString* progressHudLabel;
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
-@implementation StepsDetailViewController
+@implementation StepDetailViewController
 
 #pragma mark - Managing the detail item
 
@@ -27,11 +33,20 @@
     }
 }
 
+-(void)setStep:(ProtocolStep *)step
+{
+    if(_step != step)
+    {
+        _step = step;
+        [self configureView];
+    }
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
-    if(self.protocol)
+    if(self.protocol && self.step)
     {
         
     }
@@ -41,6 +56,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:self.step.objectId];
+    
+    for(int i = 0; i < [components count]; i++)
+    {
+        id component = [components objectAtIndex:i];
+        self.view.layer.cornerRadius = 5;
+        self.view.layer.masksToBounds = YES;
+        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
+        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+        [self.view addSubview:componentView];
+    }
     [self configureView];
 }
 - (void)didReceiveMemoryWarning

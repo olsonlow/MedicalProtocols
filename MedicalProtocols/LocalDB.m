@@ -73,190 +73,11 @@
     return self;
 }
 
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    switch (dataType) {
-        case DataTypeProtocol:
-            if(success)
-            {
-                [db open];
-                NSMutableArray *protocols = [[NSMutableArray alloc]init];
-                FMResultSet *protocolResults;
-                protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
-                while([protocolResults next])
-                {
-                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults intForColumn:@"objectId"]];
-                        [protocols addObject:medProtocol];
-                }
-                if ([db hadError]) {
-                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-                }
-                [db close];
-                return protocols;
-            }
-            
-        case DataTypeStep:
-            if(success)
-            {
-                [db open];
-                NSMutableArray* steps = [[NSMutableArray alloc] init];
-                FMResultSet *stepResults;
-                if(parentId != -1){
-                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", [NSNumber numberWithInt:parentId]];
-                } else {
-                    stepResults = [db executeQuery:@"SELECT * FROM step"];
-                }
-                while([stepResults next])
-                {
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults intForColumn:@"id"] stepNumber:[stepResults intForColumn:@"stepNumber"] description:[stepResults stringForColumn:@"description"] protocolId:[stepResults intForColumn:@"protocolId"]];
-                    [steps addObject:step];
-                }
-                if ([db hadError]) {
-                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-                }
-                [db close];
-                return steps;
-            }
-        case DataTypeComponent:
-            return[self getAllComponents];
-        case DataTypeFormComponent:
-            return[self getAllFormComponents];
-        default:
-            break;
-    }
-    return NULL;
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
+    return [self getAllObjectsWithDataType:dataType withParentId:NULL];
 }
 
--(bool)updateObjectWithDataType:(DataType)dataType withId:(int)objectId withObject:(id)object{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    [db open];
-    bool success = NO;
-    if([object isKindOfClass:[MedProtocol class]])
-    {
-        NSLog(@"UPDATING PROTOCOL : %d", objectId);
-        MedProtocol *medProtocol = (MedProtocol*) object;
-        NSLog(@"NEW NAME: %@", medProtocol.name);
-        success = [db executeUpdate:@"UPDATE protocol SET pName = (:pName) WHERE objectId = (:objectId) ", medProtocol.name, [NSNumber numberWithInt:objectId]];
-    }
-    else if([object isKindOfClass:[ProtocolStep class]])
-    {
-        ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET stepNumber = (:stepNumber), description = (:description) WHERE objectId = (:objectId)", [NSNumber numberWithInt:step.stepNumber], step.description, [NSNumber numberWithInt:objectId]];
-    }
-    else if([object isKindOfClass:[Form class]])
-    {
-            //Form is not updatable, it serves as a joining table between a step and form components
-    }
-    else if([object isKindOfClass:[TextBlock class]])
-    {
-        TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"UPDATE textBlock SET printable = (:printable), title = (:title) WHERE objectId = (:objectId)", [NSNumber numberWithBool:textBlock.printable], textBlock.title, [NSNumber numberWithInt:objectId]];
-    }
-    else if([object isKindOfClass:[Link class]])
-    {
-        Link *link = (Link *) object;
-        success = [db executeUpdate:@"UPDATE link SET url = (:url), label = (:label) WHERE objectId = (:objectId)", link.url, link.label, [NSNumber numberWithInt:objectId]];
-    }
-    else if([object isKindOfClass:[Calculator class]])
-    {
-        //Calculator still needs to be worked out (is it similar to a form?)
-       // Calculator *calculator = (Calculator*)object;
-       // success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
-    }
-    else if([object isKindOfClass:[FormNumber class]])
-    {
-        FormNumber *formNumber = (FormNumber*)object;
-        success = [db executeUpdate:@"UPDATE formNumber SET defaultValue = (:defaultValue), minValue = (:minValue), maxValue = (:maxValue), label = (:label) WHERE objectId = (:objectId)", [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue], [NSNumber numberWithInt:formNumber.maxValue], formNumber.label,[NSNumber numberWithInt:objectId]];
-    }
-    else if([object isKindOfClass:[FormSelection class]])
-    {
-        FormSelection *formSelection = (FormSelection*)object;
-        success = [db executeUpdate:@"UPDATE formSelection SET choiceA = (:choiceA), choiceB = (:choiceB), label = (:label) WHERE objectId = (:objectId)", formSelection.choiceA,formSelection.choiceB,formSelection.label,[NSNumber numberWithInt:objectId]];
-    }
-    return success;
-}
-
--(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    [db open];
-    bool success = NO;
-    if([object isKindOfClass:[MedProtocol class]])
-    {
-        MedProtocol *medProtocol = (MedProtocol *)object;
-        success =  [db executeUpdate:@"INSERT INTO protocol (objectId, pName) VALUES (:objectId,:pName)", [NSNumber numberWithInt:medProtocol.objectId], medProtocol.name];
-    }
-    else if([object isKindOfClass:[ProtocolStep class]])
-    {
-        ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step (objectId, stepNumber, protocolId, description) VALUES (:objectId,:stepNumber,:protocolId,:description)",[NSNumber numberWithInt:step.objectId], [NSNumber numberWithInt:step.stepNumber], [NSNumber numberWithInt:step.protocolId], step.description];
-    }
-    
-    else if([object isKindOfClass:[Form class]])
-    {
-        Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId) VALUES (:objectId,:stepId)", [NSNumber numberWithInt:form.objectId], [NSNumber numberWithInt:form.stepId]];
-    }
-    
-    else if([object isKindOfClass:[TextBlock class]])
-    {
-        TextBlock *textBlock = (TextBlock *) object;
-        success = [db executeUpdate:@"INSERT INTO textBlock (objectId,printable,title,stepId,content) VALUES (:objectId,:printable,:title,:stepId,:content)", [NSNumber numberWithInt:textBlock.objectId], [NSNumber numberWithBool:textBlock.printable], textBlock.title, [NSNumber numberWithInt:textBlock.stepId],textBlock.content];
-    }
-    
-    else if([object isKindOfClass:[Link class]])
-    {
-        Link *link = (Link *)object;
-        success = [db executeUpdate:@"INSERT INTO link (objectId,url,label,stepId) VALUES (:objectId,:url,:label,:stepId)", [NSNumber numberWithInt:link.objectId], link.url, link.label, [NSNumber numberWithInt:link.stepId]];
-    }
-    
-    else if([object isKindOfClass:[Calculator class]])
-    {
-        Calculator *calculator = (Calculator *)object;
-        success = [db executeUpdate:@"INSERT INTO calculator (objectId,stepId) VALUES (:objectId,:stepId)",[NSNumber numberWithInt:calculator.objectId], [NSNumber numberWithInt:calculator.stepId]];
-    }
-    else if([object isKindOfClass:[FormSelection class]])
-    {
-        FormSelection *formSelection = (FormSelection *)object;
-        success = [db executeUpdate:@"INSERT INTO formSelection (objectId,choiceA,choiceB,label,formId) VALUES (:objectId,:choiceA,:choiceB,:label,:formId)",[NSNumber numberWithInt:formSelection.objectId], formSelection.choiceA, formSelection.choiceB, formSelection.label, [NSNumber numberWithInt:formSelection.formId]];
-    }
-    else if([object isKindOfClass:[FormNumber class]])
-    {
-        FormNumber *formNumber = (FormNumber *)object;
-        success = [db executeUpdate:@"INSERT INTO formNumber (objectId,defaultValue,minValue,maxValue,label,formId) VALUES (:objectId,:defaultValue,:minValue,:maxValue,:label,:formId)",[NSNumber numberWithInt:formNumber.objectId], [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue],[NSNumber numberWithInt:formNumber.maxValue],formNumber.label,[NSNumber numberWithInt:formNumber.formId]];
-    }
-    return success;
-}
-
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId{
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    [db open];
-    bool protocol = NO, step = NO, textBlock = NO, link = NO, form = NO, calculator = NO, formNumber = NO, formSelection = NO;
-    
-    switch (dataType) {
-        case DataTypeProtocol:
-            [self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
-            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
-        case DataTypeStep:
-            [self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
-            step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
-        case DataTypeComponent:
-            [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
-            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
-            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
-            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
-            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
-        case DataTypeFormComponent:
-            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
-            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
-        default:
-            break;
-    }
-    return protocol || step || textBlock || link || form || calculator || formNumber || formSelection;
-}
-
--(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     bool success = [fileManager fileExistsAtPath:self.databasePath];
@@ -286,11 +107,124 @@
     return result;
 }
 
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType{
-    return [self getAllObjectsWithDataType:dataType withParentId:-1];
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    switch (dataType) {
+        case DataTypeProtocol:
+            if(success)
+            {
+                [db open];
+                NSMutableArray *protocols = [[NSMutableArray alloc]init];
+                FMResultSet *protocolResults;
+                protocolResults = [db executeQuery:@"SELECT * FROM protocol"];
+                while([protocolResults next])
+                {
+                    MedProtocol *medProtocol = [[MedProtocol alloc]initWithName:[protocolResults stringForColumn:@"pName"] objectId:[protocolResults stringForColumn:@"objectId"]];
+                    [protocols addObject:medProtocol];
+                }
+                if ([db hadError]) {
+                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+                }
+                [db close];
+                return protocols;
+            }
+            
+        case DataTypeStep:
+            if(success)
+            {
+                [db open];
+                NSMutableArray* steps = [[NSMutableArray alloc] init];
+                FMResultSet *stepResults;
+                if(parentId){
+                    stepResults = [db executeQuery:@"SELECT * FROM step WHERE protocolId = ?", parentId];
+                } else {
+                    stepResults = [db executeQuery:@"SELECT * FROM step"];
+                }
+                while([stepResults next])
+                {
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults stringForColumn:@"objectId"] stepNumber:[stepResults intForColumn:@"stepNumber"] description:[stepResults stringForColumn:@"description"] protocolId:[stepResults stringForColumn:@"protocolId"]];
+                    [steps addObject:step];
+                }
+                if ([db hadError]) {
+                    NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+                }
+                [db close];
+                return steps;
+            }
+        case DataTypeComponent:
+            return[self getAllComponentsWithParentID:parentId];
+        case DataTypeFormComponent:
+            return[self getAllFormComponentsWithParentID:parentId];
+        default:
+            break;
+    }
+    return NULL;
 }
 
--(NSArray *) getAllFormComponentsWithParentID: (NSString *)parentId
+-(NSArray*)getAllComponents
+{
+    return [self getAllComponentsWithParentID:NULL];
+}
+
+-(NSArray*)getAllComponentsWithParentID: (NSString*) parentId
+{
+    NSMutableArray *components = [[NSMutableArray alloc]init];
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    bool success = [fileManager fileExistsAtPath:self.databasePath];
+    if(success)
+    {
+        [db open];
+        FMResultSet *textBlockResults;
+        if(parentId)
+            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
+        else
+            textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
+        while([textBlockResults next])
+        {
+            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults stringForColumn:@"objectId"] stepId:[textBlockResults stringForColumn:@"stepId"]];
+            [components addObject:textBlock];
+        }
+        
+        FMResultSet *calculatorResults;
+        if(parentId)
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
+        else
+            calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
+        
+        while([calculatorResults next])
+        {
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults stringForColumn:@"objectId"] stepId:[calculatorResults stringForColumn:@"stepId"]];
+            [components addObject:calculator];
+        }
+        
+        FMResultSet *linkResults;
+        if(parentId)
+            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
+        else
+            linkResults = [db executeQuery:@"SELECT * FROM link"];
+        
+        while([linkResults next])
+        {
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults stringForColumn:@"objectId"] stepId:[linkResults stringForColumn:@"stepId"]];
+            [components addObject:link];
+        }
+        if ([db hadError]) {
+            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+        [db close];
+    }
+    return components;
+}
+
+-(NSArray *) getAllFormComponents
+{
+    return [self getAllComponentsWithParentID:NULL];
+}
+
+-(NSArray *) getAllFormComponentsWithParentID: (NSString*)parentId
 {
     NSMutableArray *formComponents = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
@@ -306,7 +240,7 @@
             formSelectionResults = [db executeQuery:@"SELECT * FROM formSelection"];
         while([formSelectionResults next])
         {
-            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults intForColumn:@"id"] formId:[formSelectionResults intForColumn:@"formId"]];
+            FormSelection *formSelection = [[FormSelection alloc] initWithLabel:[formSelectionResults stringForColumn:@"label"] choiceA:[formSelectionResults stringForColumn:@"choiceA"] choiceB:[formSelectionResults stringForColumn:@"choiceB"] objectId:[formSelectionResults stringForColumn:@"objectId"] formId:[formSelectionResults stringForColumn:@"formId"]];
             [formComponents addObject:formSelection];
         }
         FMResultSet *formNumberResults;
@@ -315,7 +249,7 @@
         else
             formNumberResults = [db executeQuery:@"SELECT * from formNumber"];
         while ([formNumberResults next]) {
-            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults intForColumn:@"id"] formId:[formNumberResults intForColumn:@"formId"]];
+            FormNumber *formNumber = [[FormNumber alloc] initWithLabel:[formNumberResults stringForColumn:@"label"] defaultValue:[formNumberResults intForColumn:@"defaultValue"] minValue:[formNumberResults intForColumn:@"minValue"] maxValue:[formNumberResults intForColumn:@"maxValue"] objectId:[formNumberResults stringForColumn:@"objectId"] formId:[formNumberResults stringForColumn:@"formId"]];
             [formComponents addObject:formNumber];
         }
     }
@@ -325,67 +259,6 @@
     }
     [db close];
     return formComponents;
-}
-
--(NSArray *) getAllFormComponents
-{
-    return [self getAllComponentsWithParentID:-1];
-}
-
--(NSArray*)getAllComponentsWithParentID: (int) parentId
-{
-    NSMutableArray *components = [[NSMutableArray alloc]init];
-    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    bool success = [fileManager fileExistsAtPath:self.databasePath];
-    if(success)
-    {
-        [db open];
-        FMResultSet *textBlockResults;
-        if(parentId == -1)
-            textBlockResults= [db executeQuery:@"SELECT * FROM textblock WHERE stepId = (:stepId)", parentId];
-        else
-            textBlockResults = [db executeQuery:@"SELECT * FROM textblock"];
-        while([textBlockResults next])
-        {
-            TextBlock *textBlock = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
-            [components addObject:textBlock];
-        }
-        
-        FMResultSet *calculatorResults;
-        if(parentId == -1)
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator WHERE stepId = (:stepId)", parentId];
-        else
-            calculatorResults = [db executeQuery:@"SELECT * FROM calculator"];
-        
-        while([calculatorResults next])
-        {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
-            [components addObject:calculator];
-        }
-        
-        FMResultSet *linkResults;
-        if(parentId)
-            linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", parentId];
-        else
-            linkResults = [db executeQuery:@"SELECT * FROM link"];
-        
-        while([linkResults next])
-        {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
-            [components addObject:link];
-        }
-        if ([db hadError]) {
-            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-        }
-        [db close];
-    }
-    return components;
-}
-
--(NSArray*)getAllComponents
-{
-    return [self getAllComponentsWithParentID:-1];
 }
 
 -(NSArray*)getStepsForProtocolId:(NSString*)protocolId{
@@ -400,7 +273,7 @@
         
         while([results next])
         {
-            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results intForColumn:@"id"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results intForColumn:@"protocolId"]];
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectId"] stepNumber:[results intForColumn:@"stepNumber"] description:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolId"]];
             [steps addObject:step];
         }
         if ([db hadError]) {
@@ -423,20 +296,20 @@
         textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = (:stepId)", stepId];
         while([textBlockResults next])
         {
-            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults intForColumn:@"id"] stepId:[textBlockResults intForColumn:@"stepId"]];
+            TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults stringForColumn:@"objectId"] stepId:[textBlockResults stringForColumn:@"stepId"]];
             [components addObject:t];
         }
         FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = (:stepId)", stepId];
         while([textBlockResults next])
         {
-            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults intForColumn:@"id"] stepId:[calculatorResults intForColumn:@"stepId"]];
+            Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults stringForColumn:@"objectId"] stepId:[calculatorResults stringForColumn:@"stepId"]];
             [components addObject:calculator];
         }
         
         FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", stepId];
         while([linkResults next])
         {
-            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults intForColumn:@"id"] stepId:[linkResults intForColumn:@"stepId"]];
+            Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults stringForColumn:@"objectId"] stepId:[linkResults stringForColumn:@"stepId"]];
             [components addObject:link];
         }
         if ([db hadError]) {
@@ -445,6 +318,133 @@
         [db close];
     }
     return components;
+}
+
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)objectId withObject:(NSString*)object{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    bool success = NO;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        NSLog(@"UPDATING PROTOCOL : %@", objectId);
+        MedProtocol *medProtocol = (MedProtocol*) object;
+        NSLog(@"NEW NAME: %@", medProtocol.name);
+        success = [db executeUpdate:@"UPDATE protocol SET pName = (:pName) WHERE objectId = (:objectId) ", medProtocol.name, objectId];
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        ProtocolStep *step = (ProtocolStep *)object;
+        success = [db executeUpdate:@"UPDATE step SET stepNumber = (:stepNumber), description = (:description) WHERE objectId = (:objectId)", [NSNumber numberWithInt:step.stepNumber], step.description, objectId];
+    }
+    else if([object isKindOfClass:[Form class]])
+    {
+            //Form is not updatable, it serves as a joining table between a step and form components
+    }
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        TextBlock *textBlock = (TextBlock *) object;
+        success = [db executeUpdate:@"UPDATE textBlock SET printable = (:printable), title = (:title) WHERE objectId = (:objectId)", [NSNumber numberWithBool:textBlock.printable], textBlock.title, objectId];
+    }
+    else if([object isKindOfClass:[Link class]])
+    {
+        Link *link = (Link *) object;
+        success = [db executeUpdate:@"UPDATE link SET url = (:url), label = (:label) WHERE objectId = (:objectId)", link.url, link.label, objectId];
+    }
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        //Calculator still needs to be worked out (is it similar to a form?)
+       // Calculator *calculator = (Calculator*)object;
+       // success = [db executeUpdate:@"UPDATE calculator SET id = ?, stepId = ? WHERE id = ?", calculator.objectId, calculator.stepId, objectId];
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        FormNumber *formNumber = (FormNumber*)object;
+        success = [db executeUpdate:@"UPDATE formNumber SET defaultValue = (:defaultValue), minValue = (:minValue), maxValue = (:maxValue), label = (:label) WHERE objectId = (:objectId)", [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue], [NSNumber numberWithInt:formNumber.maxValue], formNumber.label, objectId];
+    }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        FormSelection *formSelection = (FormSelection*)object;
+        success = [db executeUpdate:@"UPDATE formSelection SET choiceA = (:choiceA), choiceB = (:choiceB), label = (:label) WHERE objectId = (:objectId)", formSelection.choiceA,formSelection.choiceB,formSelection.label, objectId];
+    }
+    return success;
+}
+
+-(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    bool success = NO;
+    if([object isKindOfClass:[MedProtocol class]])
+    {
+        MedProtocol *medProtocol = (MedProtocol *)object;
+        success =  [db executeUpdate:@"INSERT INTO protocol (objectId, pName) VALUES (:objectId,:pName)", medProtocol.objectId, medProtocol.name];
+    }
+    else if([object isKindOfClass:[ProtocolStep class]])
+    {
+        ProtocolStep *step = (ProtocolStep*)object;
+        success =  [db executeUpdate:@"INSERT INTO step (objectId, stepNumber, protocolId, description) VALUES (:objectId,:stepNumber,:protocolId,:description)",step.objectId, [NSNumber numberWithInt:step.stepNumber], step.protocolId, step.description];
+    }
+    
+    else if([object isKindOfClass:[Form class]])
+    {
+        Form *form = (Form *) object;
+        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId) VALUES (:objectId,:stepId)", form.objectId, form.stepId];
+    }
+    
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        TextBlock *textBlock = (TextBlock *) object;
+        success = [db executeUpdate:@"INSERT INTO textBlock (objectId,printable,title,stepId,content) VALUES (:objectId,:printable,:title,:stepId,:content)", textBlock.objectId, [NSNumber numberWithBool:textBlock.printable], textBlock.title, textBlock.stepId,textBlock.content];
+    }
+    
+    else if([object isKindOfClass:[Link class]])
+    {
+        Link *link = (Link *)object;
+        success = [db executeUpdate:@"INSERT INTO link (objectId,url,label,stepId) VALUES (:objectId,:url,:label,:stepId)", link.objectId, link.url, link.label, link.stepId];
+    }
+    
+    else if([object isKindOfClass:[Calculator class]])
+    {
+        Calculator *calculator = (Calculator *)object;
+        success = [db executeUpdate:@"INSERT INTO calculator (objectId,stepId) VALUES (:objectId,:stepId)",calculator.objectId, calculator.stepId];
+    }
+    else if([object isKindOfClass:[FormSelection class]])
+    {
+        FormSelection *formSelection = (FormSelection *)object;
+        success = [db executeUpdate:@"INSERT INTO formSelection (objectId,choiceA,choiceB,label,formId) VALUES (:objectId,:choiceA,:choiceB,:label,:formId)",formSelection.objectId, formSelection.choiceA, formSelection.choiceB, formSelection.label, formSelection.formId];
+    }
+    else if([object isKindOfClass:[FormNumber class]])
+    {
+        FormNumber *formNumber = (FormNumber *)object;
+        success = [db executeUpdate:@"INSERT INTO formNumber (objectId,defaultValue,minValue,maxValue,label,formId) VALUES (:objectId,:defaultValue,:minValue,:maxValue,:label,:formId)",formNumber.objectId, [NSNumber numberWithInt:formNumber.defaultValue],[NSNumber numberWithInt:formNumber.minValue],[NSNumber numberWithInt:formNumber.maxValue],formNumber.label,formNumber.formId];
+    }
+    return success;
+}
+
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    bool protocol = NO, step = NO, textBlock = NO, link = NO, form = NO, calculator = NO, formNumber = NO, formSelection = NO;
+    
+    switch (dataType) {
+        case DataTypeProtocol:
+            [self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
+            protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
+        case DataTypeStep:
+            [self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
+            step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
+        case DataTypeComponent:
+            [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
+            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
+            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
+            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
+            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
+        case DataTypeFormComponent:
+            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
+            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
+        default:
+            break;
+    }
+    return protocol || step || textBlock || link || form || calculator || formNumber || formSelection;
 }
 
 -(NSString *) tableNameForObject:(id) object
@@ -465,6 +465,10 @@
     else if([object isKindOfClass:[Form class]])
     {
         className = @"Form";
+    }
+    else if([object isKindOfClass:[TextBlock class]])
+    {
+        className = @"TextBlock";
     }
     else if([object isKindOfClass:[Calculator class]])
     {

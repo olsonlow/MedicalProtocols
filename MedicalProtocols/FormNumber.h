@@ -14,9 +14,9 @@
 @property(nonatomic,assign) int defaultValue;
 @property(nonatomic,assign) int maxValue;
 @property(nonatomic,assign) int minValue;
-@property(nonatomic,assign) int objectId;
-@property(nonatomic,assign) int formId;
+@property(nonatomic,copy) NSString* objectId;
+@property(nonatomic,copy) NSString* formId;
 
--(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(int)objectId formId:(int)formId;
+-(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(NSString*)objectId formId:(NSString*)formId;
 
 @end

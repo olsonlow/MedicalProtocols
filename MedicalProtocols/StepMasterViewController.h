@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DataSourceProtocols.h"
 @class MedProtocol;
-@class ProtocolDetailViewController;
+@class StepDetailViewController;
 @interface StepMasterViewController : UITableViewController<MedRefDataSourceDelegate>
 
 @property (strong,nonatomic) MedProtocol* protocolData;

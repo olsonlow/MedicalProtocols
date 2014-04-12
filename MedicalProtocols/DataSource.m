@@ -72,15 +72,15 @@
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType];
 }
--(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(int)parentId{
+-(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId{
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource getAllObjectsWithDataType:dataType withParentId:parentId];
 }
--(bool)updateObjectWithDataType:(DataType)dataType withId:(int)objectId withObject:(id)object{
+-(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)objectId withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource updateObjectWithDataType:dataType withId:objectId withObject:object];
 }
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(int)objectId{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource deleteObjectWithDataType:dataType withId:objectId];
 }
@@ -88,7 +88,7 @@
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource insertObjectWithDataType:dataType withObject:object];
 }
--(id)getObjectWithDataType:(DataType)dataType withId:(int)objectId{
+-(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
     return NULL;
 }
 -(void)dataSourceReadyForUse{
