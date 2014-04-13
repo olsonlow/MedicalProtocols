@@ -28,6 +28,7 @@
 
 -(void) formatDisplay
 {
+    UILabel *calcId = self.calculator.objectId;
     
 }
 

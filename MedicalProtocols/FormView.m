@@ -28,7 +28,10 @@
 
 -(void) formatDisplay
 {
-
+    UILabel *formId;
+    formId.text = self.form.objectId;
+    [formId setCenter:self.center];
+    [self addSubview:formId];
 }
 
 /*

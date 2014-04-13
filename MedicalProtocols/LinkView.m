@@ -32,6 +32,10 @@
     label.text = self.link.label;
     UILabel *link;
     link.text = self.link.url;
+    CGPoint labelCenter = CGPointMake(self.center.x/2, self.center.y/2);
+    CGPoint linkCenter = CGPointMake(self.center.x/4, self.center.y/4);
+    [label setCenter:labelCenter];
+    [label setCenter:linkCenter];
     [self addSubview:label];
     [self addSubview:link];
 }

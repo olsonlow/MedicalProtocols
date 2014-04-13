@@ -19,8 +19,9 @@
     return self;
 }
 
--(id) initWithTextBlock:(TextBlock*)textBlock
+-(id) initWithFrame: (CGRect)frame textBlock:(TextBlock*)textBlock
 {
+    self = [super initWithFrame:frame];
     self.textBlock = textBlock;
     [self formatDisplay];
     return self;
