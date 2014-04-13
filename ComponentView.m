@@ -41,7 +41,7 @@
     else if([object isKindOfClass:[TextBlock class]])
     {
         //create and add a text block view
-        result = [[TextBlockView alloc]initWithTextBlock:object];
+        result = [[TextBlockView alloc]initWithFrame:frame textBlock:object];
     }
     else if([object isKindOfClass:[Calculator class]])
     {

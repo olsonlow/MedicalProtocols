@@ -9,6 +9,7 @@
 #import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
+#import "ComponentView.h"
 @interface ProtocolDetailViewController ()
 
 - (void)configureView;
@@ -57,6 +58,20 @@
     [[self view] setClipsToBounds:YES];
     self.navigationItem.leftBarButtonItem=nil;
     self.navigationItem.hidesBackButton=YES;
+
+    
+    //TESTING - ZACH
+//    self.collectionView.hidden = YES;
+//    ProtocolStep * step =[self.protocol stepAtIndex:0];
+//    for (int i = 0; i < [step countComponents]; i++) {
+//        id component = [step componentAtIndex:i];
+//        self.view.layer.cornerRadius = 5;
+//        self.view.layer.masksToBounds = YES;
+//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
+//        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+//        [self.view addSubview:componentView];
+//    }
+    
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }

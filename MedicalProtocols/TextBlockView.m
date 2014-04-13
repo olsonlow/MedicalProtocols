@@ -19,15 +19,22 @@
     return self;
 }
 
--(id) initWithTextBlock:(TextBlock*)textBlock
+-(id) initWithFrame: (CGRect)frame textBlock:(TextBlock*)textBlock
 {
+    self = [super initWithFrame:frame];
     self.textBlock = textBlock;
+    [self formatDisplay];
     return self;
 }
 
 -(void) formatDisplay
 {
-    
+    UILabel *title;
+    title.text = self.textBlock.title;
+    UILabel *content;
+    content.text = self.textBlock.content;
+    [self addSubview:title];
+    [self addSubview:content];
 }
 
 /*

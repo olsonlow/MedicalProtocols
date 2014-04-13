@@ -22,11 +22,13 @@
 -(id) initWithCalculator:(Calculator *) calculator
 {
     self.calculator = calculator;
+    [self formatDisplay];
     return self;
 }
 
 -(void) formatDisplay
 {
+    UILabel *calcId = self.calculator.objectId;
     
 }
 
