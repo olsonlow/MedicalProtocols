@@ -28,8 +28,9 @@
 
 -(void) formatDisplay
 {
-    UILabel *calcId = self.calculator.objectId;
-    
+     self.backgroundColor = [UIColor colorWithRed:251.0 green:206.0 blue:177.0 alpha:1.0];
+    UILabel *calcId;
+    calcId.text = self.calculator.objectId;
 }
 
 /*

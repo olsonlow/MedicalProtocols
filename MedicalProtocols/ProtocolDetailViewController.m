@@ -10,6 +10,7 @@
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 #import "ComponentView.h"
+#import "LocalDB.h"
 @interface ProtocolDetailViewController ()
 
 - (void)configureView;
@@ -61,7 +62,17 @@
     self.navigationItem.hidesBackButton=YES;
 
     
-    //TESTING - ZACH
+      //TESTING - ZACH
+//    ProtocolStep* step = [self.protocol stepAtIndex:0];
+//    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:step.objectId];
+//    
+//    for(int i = 0; i < 1; i++)
+//    {
+//        id component = [components objectAtIndex:i];
+//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+//        [self.view addSubview:componentView];
+    //}
+
 //    self.collectionView.hidden = YES;
 //    ProtocolStep * step =[self.protocol stepAtIndex:0];
 //    for (int i = 0; i < [step countComponents]; i++) {
@@ -109,6 +120,8 @@
 //}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+   
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);

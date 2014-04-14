@@ -29,6 +29,7 @@
 
 -(void) formatDisplay
 {
+     self.backgroundColor = [UIColor colorWithRed:240.0 green:234.0 blue:214.0 alpha:1.0];
     UILabel *title;
     title.text = self.textBlock.title;
     UILabel *content;

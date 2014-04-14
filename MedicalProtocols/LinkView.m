@@ -28,6 +28,7 @@
 
 -(void) formatDisplay
 {
+     self.backgroundColor = [UIColor colorWithRed:194.0 green:194.0 blue:194.0 alpha:1.0];
     UILabel *label;
     label.text = self.link.label;
     UILabel *link;
@@ -35,7 +36,7 @@
     CGPoint labelCenter = CGPointMake(self.center.x/2, self.center.y/2);
     CGPoint linkCenter = CGPointMake(self.center.x/4, self.center.y/4);
     [label setCenter:labelCenter];
-    [label setCenter:linkCenter];
+    [link setCenter:linkCenter];
     [self addSubview:label];
     [self addSubview:link];
 }

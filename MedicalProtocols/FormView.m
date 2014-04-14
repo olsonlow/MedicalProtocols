@@ -29,6 +29,7 @@
 
 -(void) formatDisplay
 {
+    self.backgroundColor = [UIColor colorWithRed:255.0 green:218.0 blue:185.0 alpha:1.0];
     UILabel *formId;
     formId.text = self.form.objectId;
     [formId setCenter:self.center];
