@@ -57,10 +57,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self view] setClipsToBounds:YES];
-    self.navigationItem.leftBarButtonItem=nil;
-    self.navigationItem.hidesBackButton=YES;
-
     
       //TESTING - ZACH
 //    ProtocolStep* step = [self.protocol stepAtIndex:0];
@@ -128,7 +124,12 @@
 //}
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
+    if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
+        StepDetailViewController* stepDetailViewController = ((StepDetailViewController*)[segue destinationViewController]);
+        StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)sender);
+        stepDetailViewController.step = stepMasterViewController.selectedStep;
+        stepMasterViewController.detailViewController = stepDetailViewController;
+    }
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
 }
