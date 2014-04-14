@@ -44,4 +44,10 @@
     }
     return _components;
 }
+-(int)countComponents{
+    return [self.components count];
+}
+-(Component*)componentAtIndex:(int)index{
+    return [self.components objectAtIndex:index];
+}
 @end

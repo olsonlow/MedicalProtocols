@@ -17,6 +17,5 @@
 -(id)initWithName:(NSString*)name objectId:(NSString*)objectId;
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
--(NSMutableArray*)steps;
 
 @end
