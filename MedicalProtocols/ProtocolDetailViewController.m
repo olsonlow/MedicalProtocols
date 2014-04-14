@@ -10,6 +10,8 @@
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 #import "ComponentView.h"
+#import "StepDetailViewController.h"
+#import "StepMasterViewController.h"
 @interface ProtocolDetailViewController ()
 
 - (void)configureView;
@@ -56,10 +58,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self view] setClipsToBounds:YES];
-    self.navigationItem.leftBarButtonItem=nil;
-    self.navigationItem.hidesBackButton=YES;
-
     
     //TESTING - ZACH
 //    self.collectionView.hidden = YES;
@@ -115,7 +113,12 @@
 //}
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
+    if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
+        StepDetailViewController* stepDetailViewController = ((StepDetailViewController*)[segue destinationViewController]);
+        StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)sender);
+        stepDetailViewController.step = stepMasterViewController.selectedStep;
+        stepMasterViewController.detailViewController = stepDetailViewController;
+    }
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
 }

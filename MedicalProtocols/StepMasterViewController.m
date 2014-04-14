@@ -46,8 +46,7 @@
 //    self.detailViewController = [[ProtocolDetailViewController alloc] init];
 //    self.detailViewController.protocol = self.protocolData;
 //    detailViewManager.detailViewController = self.detailViewController;
-    
-    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
+    self.title = self.protocolData.name;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -55,7 +54,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -101,9 +103,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
      if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-         //from here, move to a new view with a step's components
+         
      }
 }
 

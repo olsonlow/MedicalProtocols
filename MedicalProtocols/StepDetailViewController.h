@@ -10,7 +10,7 @@
 @class MedProtocol;
 @class ProtocolStep;
 @interface StepDetailViewController : MedRefBaseDetailViewController<UICollectionViewDataSource,UICollectionViewDelegate>
-@property (strong, nonatomic) MedProtocol* protocol;
 @property (strong, nonatomic) ProtocolStep *step;
+@property (strong, nonatomic) UICollectionView *collectionView;
 -(void)setStep:(ProtocolStep *)step;
 @end
