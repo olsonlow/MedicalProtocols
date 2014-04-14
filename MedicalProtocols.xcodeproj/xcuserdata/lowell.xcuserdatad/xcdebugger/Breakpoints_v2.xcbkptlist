@@ -36,22 +36,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MedicalProtocols/ProtocolMasterViewController.m"
-            timestampString = "419031377.901575"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MedicalProtocols/ProtocolMasterViewController.m"
             timestampString = "419031676.161475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
