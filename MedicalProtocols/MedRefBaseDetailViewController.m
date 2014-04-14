@@ -61,6 +61,7 @@
     DetailViewControllerSegue *segue = [[DetailViewControllerSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
     return segue;
 }
+
 -(void)displayProgressHudWithMessage:(NSString*)message{
     self.showProgressHud = YES;
     self.progressHudLabel = message;
