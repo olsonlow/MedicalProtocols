@@ -10,8 +10,13 @@
 #import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
+#import "ProtocolMasterViewController.h"
+#import "ProtocolDataController.h"
+#import "StepDetailViewController.h"
 
 @interface StepMasterViewController ()
+
+@property (strong,nonatomic) ProtocolDataController* protocolDataController;
 
 @end
 
@@ -87,9 +92,8 @@
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-       
-        //self.detailViewController.step = step;//this line causes a break
-        //[self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
+//        self.detailViewController.step = step;//this line causes a break
+//        [self.detailViewController performSegueWithIdentifier: @"MasterViewStepToComponent" sender:self];
     }
 }
 
