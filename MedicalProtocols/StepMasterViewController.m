@@ -89,14 +89,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.selectedStep = [self.protocolData stepAtIndex:indexPath.row];
-        [self.detailViewController performSegueWithIdentifier:@"ProtocolDetailViewToStepDetailView" sender:self];
-        
-//        [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
-//        StepDetailViewController* stepDetailViewController = [[StepDetailViewController alloc] init];
-//        stepDetailViewController.step = [self.protocolData stepAtIndex:indexPath.row];
-//        [self.detailViewController.navigationController pushViewController:stepDetailViewController animated:NO];
-
+        self.detailViewController.step = [self.protocolData stepAtIndex:indexPath.row];
     }
 }
 

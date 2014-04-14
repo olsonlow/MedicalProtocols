@@ -24,32 +24,27 @@
 -(void)setProtocol:(MedProtocol *)protocol{
     if (_protocol != protocol) {
         _protocol = protocol;
-        
+        _step = nil;
         // Update the view.
         [self configureView];
     }
 }
-
+-(void)setStep:(ProtocolStep *)step{
+    if (_step != step) {
+        _step = step;
+        // Update the view.
+        [self configureView];
+    }
+}
 - (void)configureView
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
-    if(self.protocol)
-    {
-        self.collectionView.hidden = (self.protocol == nil);
-//        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
-//        
-//        self.collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
-//        NSLog(@"%f,%f",self.view.frame.size.width,self.view.frame.size.height);
-//        [self.collectionView setDataSource:self];
-//        [self.collectionView setDelegate:self];
-//        
-//        [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"stepCellIdentifier"];
-//        [self.collectionView setBackgroundColor:[UIColor colorWithRed:0/255.0f green:168/255.0f blue:230/255.0f alpha:1.0]];
-//        
-//        [self.view addSubview:self.collectionView];
+    self.collectionView.hidden = (self.step == nil);
+    if(self.step){
+        [self.collectionView reloadData];
     }
-    else
+    else if(self.protocol)
     {
         
     }
@@ -87,13 +82,12 @@
 #pragma mark - Collection View
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.protocol countSteps];
+    return [self.step countComponents];
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProtocolStep* step = [self.protocol stepAtIndex:indexPath.row];
     
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     
@@ -113,12 +107,7 @@
 //}
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([[segue identifier] isEqualToString:@"ProtocolDetailViewToStepDetailView"]){
-        StepDetailViewController* stepDetailViewController = ((StepDetailViewController*)[segue destinationViewController]);
-        StepMasterViewController* stepMasterViewController = ((StepMasterViewController*)sender);
-        stepDetailViewController.step = stepMasterViewController.selectedStep;
-        stepMasterViewController.detailViewController = stepDetailViewController;
-    }
+
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
 }

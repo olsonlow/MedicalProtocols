@@ -8,10 +8,9 @@
 #import "MedRefBaseDetailViewController.h"
 
 @class MedProtocol;
+@class ProtocolStep;
 @interface ProtocolDetailViewController : MedRefBaseDetailViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) MedProtocol* protocol;
-@property (weak, nonatomic) IBOutlet UILabel *protocolName;
-@property (weak, nonatomic) IBOutlet UILabel *protocolID;
-@property (weak, nonatomic) IBOutlet UILabel *protocolSteps;
+@property (strong, nonatomic) ProtocolStep* step;
 @end
