@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DataSourceProtocols.h"
 @class MedProtocol;
-@class StepDetailViewController;
+@class ProtocolStep;
+@class MedRefBaseDetailViewController;
 @interface StepMasterViewController : UITableViewController<MedRefDataSourceDelegate>
 
 @property (strong,nonatomic) MedProtocol* protocolData;
-@property (strong, nonatomic) StepDetailViewController *detailViewController;;
-
+@property (strong, nonatomic) MedRefBaseDetailViewController *detailViewController;;
+@property (strong, nonatomic) ProtocolStep* selectedStep;
 @end

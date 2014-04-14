@@ -214,6 +214,22 @@
         if ([db hadError]) {
             NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         }
+        
+        FMResultSet *formResults;
+        if(parentId)
+            formResults = [db executeQuery:@"SELECT * FROM form WHERE stepId = (:stepId)", parentId];
+        else
+            formResults = [db executeQuery:@"SELECT * FROM form"];
+        
+        while([formResults next])
+        {
+            Form *form = [[Form alloc] initWithObjectId:[formResults stringForColumn:@"objectId"] stepId:[formResults stringForColumn:@"stepId"]];
+            [components addObject:form];
+        }
+        if ([db hadError]) {
+            NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+        
         [db close];
     }
     return components;
