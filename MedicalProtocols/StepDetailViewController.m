@@ -23,16 +23,6 @@
 @implementation StepDetailViewController
 
 #pragma mark - Managing the detail item
-
--(void)setProtocol:(MedProtocol *)protocol{
-    if (_protocol != protocol) {
-        _protocol = protocol;
-        
-        // Update the view.
-        [self configureView];
-    }
-}
-
 -(void)setStep:(ProtocolStep *)step
 {
     if(_step != step)
@@ -46,27 +36,18 @@
 {
     // Update the user interface for the detail item.
     // TODO updateView Based on protocol
-    if(self.protocol && self.step)
+    if(self.step)
     {
         
     }
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:self.step.objectId];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     
-    for(int i = 0; i < [components count]; i++)
-    {
-        id component = [components objectAtIndex:i];
-        self.view.layer.cornerRadius = 5;
-        self.view.layer.masksToBounds = YES;
-        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
-        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
-        [self.view addSubview:componentView];
-    }
     [self configureView];
 }
 - (void)didReceiveMemoryWarning
@@ -75,21 +56,31 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
+#pragma mark - Collection View
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
+    return [self.step countComponents];
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
+    Component* component = [self.step componentAtIndex:indexPath.row];
+    
+    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
+    
+    cell.backgroundColor=[UIColor whiteColor];
+    return cell;
 }
-- (IBAction)unwindToStepDetailViewController:(UIStoryboardSegue *)sender {
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(150, 150);
+//}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+//    return UIEdgeInsetsMake(20, 20, 20, 20);
+//}
 @end
