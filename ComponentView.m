@@ -25,7 +25,10 @@
 -(id) initWithFrame:(CGRect)frame Object:(id)object
 {
     //set up background here...
-    
+    self = [super initWithFrame:frame];
+    self.layer.cornerRadius = 5;
+    self.layer.masksToBounds = YES;
+    self.backgroundColor = [UIColor whiteColor];
     [self addSubview:[ComponentView componentWithFrame:frame Object:object]];
     return self;
 }
@@ -36,7 +39,7 @@
     if([object isKindOfClass:[Form class]])
     {
         //create and add a form view
-        result = [[FormView alloc]initWithForm:object];
+        result = [[FormView alloc]initWithFrame: frame andForm:object];
     }
     else if([object isKindOfClass:[TextBlock class]])
     {

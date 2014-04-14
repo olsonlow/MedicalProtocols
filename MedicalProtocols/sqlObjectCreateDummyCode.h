@@ -27,3 +27,13 @@ NSDateComponents *newcomponents = [newcalendar components:NSYearCalendarUnit|NSM
 newP.updatedAt = [newcalendar dateFromComponents:newcomponents];
 [lb updateObjectWithDataType:DataTypeProtocol withId:mp.objectId withObject:newP];
 */
+
+/*NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:self.step.objectId];
+for(int i = 0; i < [components count]; i++)
+{
+    id component = [components objectAtIndex:i];
+    //ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
+    ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+    [self.view addSubview:componentView];
+}
+*/

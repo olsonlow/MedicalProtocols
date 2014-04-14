@@ -61,10 +61,7 @@
     for(int i = 0; i < [components count]; i++)
     {
         id component = [components objectAtIndex:i];
-        self.view.layer.cornerRadius = 5;
-        self.view.layer.masksToBounds = YES;
-        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
-        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
         [self.view addSubview:componentView];
     }
     [self configureView];
