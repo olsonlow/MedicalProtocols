@@ -19,8 +19,9 @@
     return self;
 }
 
--(id) initWithForm:(Form *)form
+-(id) initWithFrame:(CGRect) frame andForm:(Form *)form
 {
+    self = [super initWithFrame:frame];
     self.form = form;
     [self formatDisplay];
     return self;
