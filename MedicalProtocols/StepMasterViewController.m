@@ -10,9 +10,13 @@
 #import "ProtocolDetailViewController.h"
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
+#import "ProtocolMasterViewController.h"
+#import "ProtocolDataController.h"
 #import "StepDetailViewController.h"
 
 @interface StepMasterViewController ()
+
+@property (strong,nonatomic) ProtocolDataController* protocolDataController;
 
 @end
 

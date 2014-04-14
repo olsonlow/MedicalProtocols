@@ -93,7 +93,7 @@
 
     //All objects below are associated with the Rate Control Med step.
     PFObject *stepObject2 = [PFObject objectWithClassName:@"Step"];
-    stepObject2[@"stepNumber"] = [NSNumber numberWithInt:1];
+    stepObject2[@"stepNumber"] = [NSNumber numberWithInt:2];
     stepObject2[@"description"] = @"Rate Control Med.:";
     stepObject2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
     stepObject2[@"parentUUID"] = protocol[@"UUID"];
@@ -139,7 +139,7 @@
 
     //All objects below are associated with Rate vs Rhythm step.
     PFObject *stepObject3 = [PFObject objectWithClassName:@"Step"];
-    stepObject3[@"stepNumber"] = [NSNumber numberWithInt:1];
+    stepObject3[@"stepNumber"] = [NSNumber numberWithInt:3];
     stepObject3[@"description"] = @"Rate vs Rhythm:";
     stepObject3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
     stepObject3[@"parentUUID"] = protocol[@"UUID"];
@@ -161,7 +161,7 @@
     [calculatorComponent2 saveInBackground];
 
     PFObject *stepObject4 = [PFObject objectWithClassName:@"Step"];
-    stepObject4[@"stepNumber"] = [NSNumber numberWithInt:1];
+    stepObject4[@"stepNumber"] = [NSNumber numberWithInt:4];
     stepObject4[@"description"] = @"When to Report:";
     stepObject4[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
     stepObject4[@"parentUUID"] = protocol[@"UUID"];
