@@ -34,6 +34,7 @@
     // TODO updateView Based on protocol
     if(self.protocol)
     {
+        self.collectionView.hidden = (self.protocol == nil);
 //        UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc] init];
 //        
 //        self.collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
@@ -94,7 +95,9 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
+    ProtocolStep* step = [self.protocol stepAtIndex:indexPath.row];
+    
+    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     
     cell.backgroundColor=[UIColor whiteColor];
     return cell;

@@ -9,7 +9,7 @@
 #import "MedRefBaseDetailViewController.h"
 @class MedProtocol;
 @class ProtocolStep;
-@interface StepDetailViewController : MedRefBaseDetailViewController
+@interface StepDetailViewController : MedRefBaseDetailViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (strong, nonatomic) MedProtocol* protocol;
 @property (strong, nonatomic) ProtocolStep *step;
 -(void)setStep:(ProtocolStep *)step;
