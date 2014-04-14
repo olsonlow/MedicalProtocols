@@ -10,6 +10,6 @@
 #import "Calculator.h"
 @interface CalculatorView : ComponentView
 @property (strong, nonatomic) Calculator *calculator;
--(id) initWithFrame:(CGRect*)frame andCalculator:(Calculator *) calculator;
+-(id) initWithFrame:(CGRect)frame andCalculator:(Calculator *) calculator;
 -(void) formatDisplay;
 @end
