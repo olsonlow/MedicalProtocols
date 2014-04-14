@@ -51,12 +51,12 @@
     else if([object isKindOfClass:[Calculator class]])
     {
         //create and add a calculator view
-        result = [[CalculatorView alloc]initWithCalculator:object];
+        result = [[CalculatorView alloc]initWithFrame: frame andCalculator:object];
     }
     else if([object isKindOfClass:[Link class]])
     {
         //create and add a link view
-        result = [[LinkView alloc] initWithLink:object];
+        result = [[LinkView alloc] initWithFrame: frame andLink:object];
     }
     return result;
 }
