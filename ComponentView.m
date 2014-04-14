@@ -28,8 +28,10 @@
     self = [super initWithFrame:frame];
     self.layer.cornerRadius = 5;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = [UIColor whiteColor];
-    [self addSubview:[ComponentView componentWithFrame:frame Object:object]];
+    self.backgroundColor = [UIColor greenColor];
+    ComponentView * componentView = [ComponentView componentWithFrame:frame Object:object];
+    componentView.center = CGPointMake(frame.size.height/2, frame.size.width/2);
+    [self addSubview:componentView];
     return self;
 }
 

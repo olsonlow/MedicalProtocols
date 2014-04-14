@@ -10,6 +10,8 @@
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 #import "ComponentView.h"
+#import "StepDetailViewController.h"
+#import "StepMasterViewController.h"
 #import "LocalDB.h"
 @interface ProtocolDetailViewController ()
 
@@ -59,15 +61,16 @@
     [super viewDidLoad];
     
       //TESTING - ZACH
-//    ProtocolStep* step = [self.protocol stepAtIndex:0];
+//   ProtocolStep* step = [self.protocol stepAtIndex:0];
 //    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:step.objectId];
 //    
 //    for(int i = 0; i < 1; i++)
 //    {
 //        id component = [components objectAtIndex:i];
-//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
+//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(50, 100, 300, 300) Object:component];
 //        [self.view addSubview:componentView];
-    //}
+//        [self.view bringSubviewToFront:componentView];
+//    }
 
 //    self.collectionView.hidden = YES;
 //    ProtocolStep * step =[self.protocol stepAtIndex:0];
@@ -102,18 +105,21 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProtocolStep* step = [self.protocol stepAtIndex:indexPath.row];
-    
+
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
-    
+    ProtocolStep* step = [self.protocol stepAtIndex:indexPath.row];
+    Component *component = [step componentAtIndex:0];
+    ComponentView *componentView = [[ComponentView alloc]initWithFrame:cell.frame Object:component];
+    componentView.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2);
+    [cell addSubview:componentView];
     cell.backgroundColor=[UIColor whiteColor];
     return cell;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(150, 150);
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(200, 200);
+}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     
