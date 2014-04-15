@@ -25,7 +25,7 @@
     NSLog(@"CALCULATOR OBJECT");
     self.calculator = calculator;
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
-    self.backgroundColor = [UIColor colorWithRed:251.0 green:206.0 blue:177.0 alpha:1.0];
+    self.backgroundColor = [UIColor colorWithRed:193.0/255.0 green:205.0/255.0 blue:193.0/255.0 alpha:1.0];
    
     UILabel *name = [[UILabel alloc]init];
     name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
