@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FormComponent.h"
+#import "Component.h"
+@class PFObject;
 @class PFObject;
 
 @interface Form : Component
