@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Component.h"
 
-@class PFObject;
-@interface FormNumber : NSObject
+@interface FormNumber : Component
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,assign) int defaultValue;
 @property(nonatomic,assign) int maxValue;

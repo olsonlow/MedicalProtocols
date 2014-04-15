@@ -19,5 +19,6 @@ typedef NS_ENUM(NSUInteger, ComponentType) {
 @interface Component : NSObject
 +(NSString*)ImageNameForComponentType:(ComponentType)componentType;
 +(NSString*)NameForComponentType:(ComponentType)componentType;
++(void)DeleteComponentWithId:(NSString*)objectId;
 
 @end

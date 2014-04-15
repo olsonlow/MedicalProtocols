@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@class PFObject;
+#import "Component.h"
 
-@interface Form : NSObject
+@interface Form : Component
 @property(nonatomic,copy) NSString* stepId;
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;

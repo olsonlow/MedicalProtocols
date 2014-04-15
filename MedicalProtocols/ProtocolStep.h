@@ -18,4 +18,5 @@
 -(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber description:(NSString*)description protocolId:(NSString*)protocolId;
 -(int)countComponents;
 -(Component*)componentAtIndex:(int)index;
+-(void)removeComponents;
 @end
