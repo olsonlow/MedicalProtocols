@@ -13,13 +13,14 @@
 #import "FMResultSet.h"
 
 @implementation Link
--(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId{
+-(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super init];
     if (self) {
         _label = label;
         _url = url;
         _objectId = objectId;
         _stepId = stepId;
+        _orderNumber = orderNumber;
     }
     return self;
 }

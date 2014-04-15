@@ -7,9 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-@class PFObject;
+
+typedef NS_ENUM(NSUInteger, ComponentType) {
+    ComponentTypeTextBlock,
+    ComponentTypeLink,
+    ComponentTypeCalculator,
+    ComponentTypeForm,
+    ComponentTypeCount,
+};
 
 @interface Component : NSObject
-@property(nonatomic) NSString* dbPath;
++(NSString*)ImageNameForComponentType:(ComponentType)componentType;
++(NSString*)NameForComponentType:(ComponentType)componentType;
 
 @end

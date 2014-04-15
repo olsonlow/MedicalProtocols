@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
-            landmarkName = "-formComponents"
+            landmarkName = "-initWithObjectId:stepId:orderNumber:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,7 +15,8 @@
 @property(nonatomic,copy) NSString* choiceB;
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,copy) NSString* formId;
+@property(nonatomic,assign) int orderNumber;
 
--(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId formId:(NSString*)formId;
+-(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId orderNumber:(int)orderNumber formId:(NSString*)formId;
 
 @end

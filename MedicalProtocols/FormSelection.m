@@ -11,13 +11,14 @@
 #import <Parse/Parse.h>
 
 @implementation FormSelection
--(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId formId:(NSString*)formId{
+-(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId orderNumber:(int)orderNumber formId:(NSString*)formId{
     self = [super init];
     if (self) {
         _label = label;
         _choiceA = choiceA;
         _choiceB = choiceB;
         _objectId = objectId;
+        _orderNumber = orderNumber;
         _formId = formId;
     }
     return self;
