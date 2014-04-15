@@ -11,5 +11,4 @@
 @interface FormView : ComponentView
 @property (strong, nonatomic) Form *form;
 -(id) initWithFrame:(CGRect)frame andForm:(Form *) form;
--(void) formatDisplay;
 @end

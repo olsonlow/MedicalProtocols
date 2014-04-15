@@ -19,26 +19,31 @@
     return self;
 }
 
--(id) initWithLink:(Link*)link
+-(id)initWithFrame:(CGRect)frame andLink:(Link*)link
 {
+    self = [super initWithFrame:frame];
+    self.backgroundColor = [UIColor blueColor];
+    NSLog(@"LINK OBJECT: %@", link.url);
     self.link = link;
-    [self formatDisplay];
+    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
+    linkButton.center = CGPointMake(linkButton.frame.size.height, linkButton.frame.size.width);
+    linkButton.backgroundColor = [UIColor darkGrayColor];
+    [linkButton setTitle:self.link.label forState:UIControlStateNormal];
+    [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:linkButton];
+    [self bringSubviewToFront:self];
+    
     return self;
 }
 
--(void) formatDisplay
-{
-     self.backgroundColor = [UIColor colorWithRed:194.0 green:194.0 blue:194.0 alpha:1.0];
-    UILabel *label;
-    label.text = self.link.label;
-    UILabel *link;
-    link.text = self.link.url;
-    CGPoint labelCenter = CGPointMake(self.center.x/2, self.center.y/2);
-    CGPoint linkCenter = CGPointMake(self.center.x/4, self.center.y/4);
-    [label setCenter:labelCenter];
-    [link setCenter:linkCenter];
-    [self addSubview:label];
-    [self addSubview:link];
+-(void)buttonPressed:(id)sender{
+    NSURL *url = [NSURL URLWithString:self.link.url];
+    
+    if (![[UIApplication sharedApplication] openURL:url])
+        
+        NSLog(@"%@%@",@"Failed to open url:",[url description]);
 }
 
 /*

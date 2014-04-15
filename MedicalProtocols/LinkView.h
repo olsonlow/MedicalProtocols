@@ -10,6 +10,6 @@
 #import "Link.h"
 @interface LinkView : ComponentView
 @property (strong, nonatomic) Link *link;
--(id) initWithFrame:(CGRect)frame andLink:(Link *)link;
--(void) formatDisplay;
+-(id)initWithFrame:(CGRect)frame andLink:(Link *)link;
+-(void)buttonPressed:(id)sender;
 @end

@@ -19,18 +19,27 @@
     return self;
 }
 
--(id) initWithCalculator:(Calculator *) calculator
+-(id) initWithFrame:(CGRect) frame andCalculator:(Calculator *) calculator
 {
+    self = [super initWithFrame:frame];
+    NSLog(@"CALCULATOR OBJECT");
     self.calculator = calculator;
-    [self formatDisplay];
-    return self;
-}
-
--(void) formatDisplay
-{
-     self.backgroundColor = [UIColor colorWithRed:251.0 green:206.0 blue:177.0 alpha:1.0];
-    UILabel *calcId;
+    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    self.backgroundColor = [UIColor colorWithRed:193.0/255.0 green:205.0/255.0 blue:193.0/255.0 alpha:1.0];
+   
+    UILabel *name = [[UILabel alloc]init];
+    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
+    name.center = CGPointMake(name.frame.size.height/2, name.frame.size.width/4);
+    name.text = @"Calculator";
+    
+    UILabel *calcId = [[UILabel alloc]init];
+    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
+    [calcId setCenter:self.center];
     calcId.text = self.calculator.objectId;
+    
+    [self addSubview:calcId];
+    [self addSubview:name];
+    return self;
 }
 
 /*
