@@ -7,6 +7,7 @@
 //
 
 #import "FormSelection.h"
+#import "FormComponent.h"
 #import <Parse/Parse.h>
 
 @implementation FormSelection

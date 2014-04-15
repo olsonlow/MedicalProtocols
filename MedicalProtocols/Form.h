@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FormComponent.h"
 @class PFObject;
 
 @interface Form : NSObject
@@ -14,4 +15,7 @@
 @property(nonatomic,copy) NSString* objectId;
 
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(FormComponent *) formComponentAtIndex: (int) index;
+-(int) countFormComonents;
+
 @end
