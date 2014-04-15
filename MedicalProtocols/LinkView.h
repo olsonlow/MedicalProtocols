@@ -11,5 +11,5 @@
 @interface LinkView : ComponentView
 @property (strong, nonatomic) Link *link;
 -(id) initWithFrame:(CGRect)frame andLink:(Link *)link;
--(void) formatDisplay;
+
 @end
