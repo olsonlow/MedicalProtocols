@@ -11,7 +11,6 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "StepMasterViewController.h"
-#import "StepDetailViewController.h"
 
 @interface ProtocolMasterViewController (){
     bool editable;
@@ -48,9 +47,7 @@
 }
 -(void)makeEditable{
     editable = YES;
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-        self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.rightBarButtonItems = @[self.editButtonItem,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)]];
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning

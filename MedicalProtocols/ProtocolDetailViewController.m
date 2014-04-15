@@ -10,7 +10,6 @@
 #import "MedProtocol.h"
 #import "ProtocolStep.h"
 #import "ComponentView.h"
-#import "StepDetailViewController.h"
 #import "StepMasterViewController.h"
 #import "LocalDB.h"
 @interface ProtocolDetailViewController ()
@@ -100,7 +99,6 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     Component *component = [self.step componentAtIndex:indexPath.row];
     ComponentView *componentView = [[ComponentView alloc]initWithFrame:cell.frame Object:component];
@@ -116,8 +114,6 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-   
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);

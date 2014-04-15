@@ -12,12 +12,11 @@
 #import "ProtocolStep.h"
 #import "ProtocolMasterViewController.h"
 #import "ProtocolDataController.h"
-#import "StepDetailViewController.h"
+#import "StepBuilderMasterViewController.h"
 
-@interface StepMasterViewController ()
-
-@property (strong,nonatomic) ProtocolDataController* protocolDataController;
-
+@interface StepMasterViewController (){
+    bool editable;
+}
 @end
 
 @implementation StepMasterViewController
@@ -41,7 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    
+    editable = NO;
+    [self makeEditable];
+    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
+//
 //    DetailViewManager *detailViewManager = (DetailViewManager*)self.splitViewController.delegate;
 //    self.detailViewController = [[ProtocolDetailViewController alloc] init];
 //    self.detailViewController.protocol = self.protocolData;
@@ -54,10 +56,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
+-(void)makeEditable{
+    editable = YES;
+    self.navigationItem.rightBarButtonItems = @[self.editButtonItem,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)]];
+    [self.tableView reloadData];
 }
+- (void)insertNewObject:(id)sender
+{
+    [self.protocolData addNewStep];
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -88,20 +97,26 @@
     return cell;
 }
 
-
-//INCOMPLETE
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.detailViewController.step = [self.protocolData stepAtIndex:indexPath.row];
     }
 }
-
-//INCOMPLELTE
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if([identifier isEqualToString:@"MasterViewStepToStepBuilder"]){
+        return editable;
+    }
+    return YES;
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-     if([[segue identifier] isEqualToString:@"MasterViewStepToComponent"]){
-         
+     if([[segue identifier] isEqualToString:@"MasterViewStepToStepBuilder"]){
+         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+         StepBuilderMasterViewController* stepBuilderMasterViewController = ((StepBuilderMasterViewController*)[segue destinationViewController]);
+         stepBuilderMasterViewController.step = step;
+         stepBuilderMasterViewController.detailViewController = self.detailViewController;
      }
 }
 
@@ -115,27 +130,21 @@
     }
     [super viewWillDisappear:animated];
 }
-/*
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return editable;
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        [self.protocolData removeStepAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
 }
-*/
 
 /*
 // Override to support rearranging the table view.

@@ -58,7 +58,6 @@
 		A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8B18E952BA0040D6F2 /* FormNumber.m */; };
 		A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8E18E952C90040D6F2 /* FormSelection.m */; };
 		A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2755E18F8C773001C5027 /* MedRefBaseDetailViewController.m */; };
-		A3B2756218F8CB53001C5027 /* StepDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2756118F8CB53001C5027 /* StepDetailViewController.m */; };
 		A3B2756818F99BA5001C5027 /* DetailViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2756718F99BA5001C5027 /* DetailViewControllerSegue.m */; };
 		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
 		A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE518F08F610016613C /* ParseDataSource.m */; };
@@ -66,6 +65,7 @@
 		A3EBEB2518F732C50016613C /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3EBEB2218F732C50016613C /* SVProgressHUD.bundle */; };
 		A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEB2418F732C50016613C /* SVProgressHUD.m */; };
 		A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA341318E8AEBA000D64F8 /* MedProtocol.m */; };
+		A3FC35AF18FDDE5900D2F75D /* StepBuilderMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FC35AE18FDDE5900D2F75D /* StepBuilderMasterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,8 +163,6 @@
 		A3689B8E18E952C90040D6F2 /* FormSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormSelection.m; sourceTree = "<group>"; };
 		A3B2755D18F8C773001C5027 /* MedRefBaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedRefBaseDetailViewController.h; sourceTree = "<group>"; };
 		A3B2755E18F8C773001C5027 /* MedRefBaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedRefBaseDetailViewController.m; sourceTree = "<group>"; };
-		A3B2756018F8CB52001C5027 /* StepDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepDetailViewController.h; sourceTree = "<group>"; };
-		A3B2756118F8CB53001C5027 /* StepDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepDetailViewController.m; sourceTree = "<group>"; };
 		A3B2756618F99BA5001C5027 /* DetailViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewControllerSegue.h; sourceTree = "<group>"; };
 		A3B2756718F99BA5001C5027 /* DetailViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewControllerSegue.m; sourceTree = "<group>"; };
 		A3EBEAE118F08F380016613C /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
@@ -179,6 +177,8 @@
 		A3EBEB2418F732C50016613C /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		A3FA341218E8AEBA000D64F8 /* MedProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedProtocol.h; sourceTree = "<group>"; };
 		A3FA341318E8AEBA000D64F8 /* MedProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedProtocol.m; sourceTree = "<group>"; };
+		A3FC35AD18FDDE5900D2F75D /* StepBuilderMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepBuilderMasterViewController.h; sourceTree = "<group>"; };
+		A3FC35AE18FDDE5900D2F75D /* StepBuilderMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepBuilderMasterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,8 +362,6 @@
 				A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */,
 				A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */,
 				A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */,
-				A3B2756018F8CB52001C5027 /* StepDetailViewController.h */,
-				A3B2756118F8CB53001C5027 /* StepDetailViewController.m */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -375,6 +373,8 @@
 				A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */,
 				A302F60618ECDC830065D42E /* StepMasterViewController.h */,
 				A302F60718ECDC830065D42E /* StepMasterViewController.m */,
+				A3FC35AD18FDDE5900D2F75D /* StepBuilderMasterViewController.h */,
+				A3FC35AE18FDDE5900D2F75D /* StepBuilderMasterViewController.m */,
 			);
 			name = MasterViews;
 			sourceTree = "<group>";
@@ -605,6 +605,7 @@
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */,
+				A3FC35AF18FDDE5900D2F75D /* StepBuilderMasterViewController.m in Sources */,
 				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
@@ -613,7 +614,6 @@
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
 				89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */,
-				A3B2756218F8CB53001C5027 /* StepDetailViewController.m in Sources */,
 				A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
 				A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */,

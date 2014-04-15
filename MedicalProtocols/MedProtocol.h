@@ -13,9 +13,9 @@
 @interface MedProtocol : NSObject
 @property(nonatomic,copy) NSString* name;
 @property(nonatomic,copy) NSString* objectId;
-@property(nonatomic) NSString* dbPath;
 -(id)initWithName:(NSString*)name objectId:(NSString*)objectId;
 -(int)countSteps;
 -(ProtocolStep*)stepAtIndex:(int)index;
-
+-(void)removeStepAtIndex:(int)index;
+-(void)addNewStep;
 @end
