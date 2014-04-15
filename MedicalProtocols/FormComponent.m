@@ -10,15 +10,5 @@
 #import "FormNumber.h"
 #import "FormSelection.h"
 @implementation FormComponent
-/*-(id) initWithLabel:(NSString *)label objectId: (NSString *) objectId formId:(NSString *)formId
-{   self = [super init];
-    return self;
-}
--(id) initFormComponentKindFromObject:(id)object
-{
-    self = [super init];
-    if([object isKindOfClass:[FormNumber class]])
-    
-        return self;
-}*/
+
 @end

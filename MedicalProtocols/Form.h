@@ -15,7 +15,7 @@
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;
 
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 -(FormComponent *) formComponentAtIndex: (int) index;
 -(int) countFormComonents;
 

@@ -53,30 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-      //TESTING - ZACH
-//   ProtocolStep* step = [self.protocol stepAtIndex:0];
-//    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:step.objectId];
-//    
-//    for(int i = 0; i < 1; i++)
-//    {
-//        id component = [components objectAtIndex:i];
-//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(50, 100, 300, 300) Object:component];
-//        [self.view addSubview:componentView];
-//        [self.view bringSubviewToFront:componentView];
-//    }
-
-//    self.collectionView.hidden = YES;
-//    ProtocolStep * step =[self.protocol stepAtIndex:0];
-//    for (int i = 0; i < [step countComponents]; i++) {
-//        id component = [step componentAtIndex:i];
-//        self.view.layer.cornerRadius = 5;
-//        self.view.layer.masksToBounds = YES;
-//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
-//        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
-//        [self.view addSubview:componentView];
-//    }
-    
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
@@ -101,6 +77,7 @@
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     Component *component = [self.step componentAtIndex:indexPath.row];
+    NSLog(@"COMPONENT TYPE: %@", component.class);
     ComponentView *componentView = [[ComponentView alloc]initWithFrame:cell.frame Object:component];
     componentView.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2);
     [cell addSubview:componentView];

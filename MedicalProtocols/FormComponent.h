@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface FormComponent : NSObject
-@property(nonatomic,copy) NSString* formId;
 @property(nonatomic,copy) NSString* label;
--(id) initWithLabel:(NSString *)label objectId: (NSString *) objectId formId:(NSString *)formId;
--(id) initFormComponentKindFromObject:(id)object;
+@property(nonatomic,copy) NSString* objectId;
+@property(nonatomic,copy) NSString* formId;
+@property(nonatomic,assign) int orderNumber;
 @end

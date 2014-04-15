@@ -35,7 +35,7 @@
     NSLog(@"LABEL: %@", formNumber.label);
     UILabel *sliderLabel = [[UILabel alloc]init];
     [sliderLabel setCenter:CGPointMake(frame.size.width/4, frame.size.width/4)];
-   // sliderLabel.frame = CGRectMake(frame.origin.x-20, frame.origin.y-20, 50, 50);
+    //sliderLabel.frame = CGRectMake(frame.origin.x-20, frame.origin.y-20, 50, 50);
     sliderLabel.text = formNumber.label;
     
     [self addSubview:sliderLabel];

@@ -403,7 +403,7 @@
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId, orderNumbre) VALUES (:objectId,:stepId,:orderNumber)", form.objectId, form.stepId, [NSNumber numberWithInt:form.orderNumber]];
+        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId, orderNumber) VALUES (:objectId,:stepId,:orderNumber)", form.objectId, form.stepId, [NSNumber numberWithInt:form.orderNumber]];
     }
     
     else if([object isKindOfClass:[TextBlock class]])

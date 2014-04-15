@@ -28,7 +28,7 @@
     self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
     
     RadioButton *choiceA = [[RadioButton alloc]init];
-    RadioButton *choiceB = [[RadioButton alloc]init];
+    //RadioButton *choiceB = [[RadioButton alloc]init];
     choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
     [choiceA setCenter:self.center];
     [self addSubview:choiceA];
