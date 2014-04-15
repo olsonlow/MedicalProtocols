@@ -10,7 +10,7 @@
 #import "FormComponent.h"
 @class PFObject;
 
-@interface Form : NSObject
+@interface Form : Component
 @property(nonatomic,copy) NSString* stepId;
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;

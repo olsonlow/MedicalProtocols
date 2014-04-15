@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@class PFObject;
+#import "Component.h"
 
-@interface Link : NSObject
+@interface Link : Component
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* url;
 @property(nonatomic,copy) NSString* objectId;

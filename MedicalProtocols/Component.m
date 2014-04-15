@@ -63,4 +63,7 @@
     }
     return comonentName;
 }
++(void)DeleteComponentWithId:(NSString*)objectId{
+    
+}
 @end

@@ -443,13 +443,13 @@
     
     switch (dataType) {
         case DataTypeProtocol:
-            [self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
+            //[self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
             protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
         case DataTypeStep:
-            [self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
+            //[self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
             step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
         case DataTypeComponent:
-            [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
+            //[self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
             textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
             form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
             link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];

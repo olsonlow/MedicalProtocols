@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
+#import "Component.h"
 @class PFObject;
-@interface FormSelection : NSObject
+@interface FormSelection : Component
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* choiceA;
 @property(nonatomic,copy) NSString* choiceB;
