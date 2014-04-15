@@ -22,14 +22,21 @@
 -(id) initWithFrame:(CGRect) frame andForm:(Form *)form
 {
     self = [super initWithFrame:frame];
-    NSLog(@"FORM OBJECT");
     self.form = form;
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:255.0 green:218.0 blue:185.0 alpha:1.0];
+   
+    UILabel *name = [[UILabel alloc]init];
+    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
+    name.center = CGPointMake(name.frame.size.height/2, name.frame.size.width/4);
+    name.text = @"Form";
+    
     UILabel *formId = [[UILabel alloc]init];
     formId.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
     [formId setCenter:self.center];
     formId.text = self.form.objectId;
+    
+    [self addSubview:name];
     [self addSubview:formId];
     return self;
 }
