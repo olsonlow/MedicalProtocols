@@ -13,7 +13,7 @@
 #import "FMResultSet.h"
 
 @implementation TextBlock
--(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId{
+-(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super init];
     if (self) {
         _title = title;
@@ -21,6 +21,7 @@
         _objectId = objectId;
         _stepId = stepId;
         _printable = printable;
+        _orderNumber = orderNumber;
     }
     return self;
 }

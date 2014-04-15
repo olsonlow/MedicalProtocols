@@ -11,11 +11,11 @@
 @class Component;
 @interface ProtocolStep : NSObject
 @property(nonatomic,copy) NSString* objectId;
-@property(nonatomic,assign) int stepNumber;
+@property(nonatomic,assign) int orderNumber;
 @property(nonatomic,copy) NSString* protocolId;
 @property(nonatomic,strong) NSString* description;
 
--(id)initWithId:(NSString*)objectId stepNumber:(int)stepNumber description:(NSString*)description protocolId:(NSString*)protocolId;
+-(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber description:(NSString*)description protocolId:(NSString*)protocolId;
 -(int)countComponents;
 -(Component*)componentAtIndex:(int)index;
 @end
