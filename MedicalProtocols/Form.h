@@ -12,6 +12,7 @@
 @interface Form : NSObject
 @property(nonatomic,copy) NSString* stepId;
 @property(nonatomic,copy) NSString* objectId;
+@property(nonatomic,assign) int orderNumber;
 
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId;
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 @end

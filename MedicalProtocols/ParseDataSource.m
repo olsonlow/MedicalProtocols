@@ -70,30 +70,30 @@
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] stepNumber:[object[@"stepNumber"]intValue] description:object[@"description"] protocolId:object[@"parentUUID"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] description:object[@"description"] protocolId:object[@"parentUUID"]];
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
-                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"]];
+                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
                     [parseObjects addObject:form];
                 }
                 else if([className isEqualToString:@"Link"]){
-                    Link *link = [[Link alloc]initWithLabel:object[@"label"] url:object[@"url"] objectId:object[@"UUID"] stepId:object[@"parentUUID"]];
+                    Link *link = [[Link alloc]initWithLabel:object[@"label"] url:object[@"url"] objectId:object[@"UUID"] stepId:object[@"parentUUID"]orderNumber:[object[@"orderNumber"]intValue]];
                     [parseObjects addObject:link];
                 }
                 else if([className isEqualToString:@"Calculator"]){
-                    Calculator *calculator = [[Calculator alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"]];
+                    Calculator *calculator = [[Calculator alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
                     [parseObjects addObject:calculator];
                 }
                 else if([className isEqualToString:@"TextBlock"]){
-                    TextBlock *textBlock = [[TextBlock alloc] initWithTitle:object[@"title"] content:object[@"content"] printable:[object[@"printable"]boolValue] objectId:object[@"UUID"] stepId:object[@"parentUUID"]];
+                    TextBlock *textBlock = [[TextBlock alloc] initWithTitle:object[@"title"] content:object[@"content"] printable:[object[@"printable"]boolValue] objectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
                     [parseObjects addObject:textBlock];
                 }
                 else if([className isEqualToString:@"FormNumber"]){
-                    FormNumber *formNumber = [[FormNumber alloc]initWithLabel:object[@"label"] defaultValue:[object[@"defaultValue"]intValue] minValue:[object[@"minValue"]intValue] maxValue:[object[@"maxValue"]intValue] objectId:object[@"UUID"] formId:object[@"parentUUID"]];
+                    FormNumber *formNumber = [[FormNumber alloc]initWithLabel:object[@"label"] defaultValue:[object[@"defaultValue"]intValue] minValue:[object[@"minValue"]intValue] maxValue:[object[@"maxValue"]intValue] objectId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] formId:object[@"parentUUID"]];
                     [parseObjects addObject:formNumber];
                 }else{
-                    FormSelection *formSelection = [[FormSelection alloc] initWithLabel:object[@"label"] choiceA:object[@"choiceA"] choiceB:object[@"choiceB"] objectId:object[@"UUID"] formId:object[@"parentUUID"]];
+                    FormSelection *formSelection = [[FormSelection alloc] initWithLabel:object[@"label"] choiceA:object[@"choiceA"] choiceB:object[@"choiceB"] objectId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] formId:object[@"parentUUID"]];
                     [parseObjects addObject:formSelection];
                 }
             }
@@ -339,7 +339,7 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseStepObject, NSError *error) {
                 if(!error){
                     parseStepObject[@"UUID"] = step.objectId;
-                    parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
+                    parseStepObject[@"orderNumber"] = [NSNumber numberWithInt:step.orderNumber];
                     parseStepObject[@"parentUUID"] = step.protocolId;
                     [parseStepObject saveInBackground];
                     success = YES;
@@ -356,6 +356,7 @@
                 if(!error){
                     parseFormObject[@"UUID"] = form.objectId;
                     parseFormObject[@"parentUUID"] = form.stepId;
+                    parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
                     [parseFormObject saveInBackground];
                     success = YES;
                 }
@@ -374,6 +375,7 @@
                     parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:[textBlock printable]];
                     parseTextBlockObject[@"title"] = textBlock.title;
                     parseTextBlockObject[@"parentUUID"] = textBlock.stepId;
+                    parseTextBlockObject[@"orderNumber"] = [NSNumber numberWithInt:textBlock.orderNumber];
                     [parseTextBlockObject saveInBackground];
                     success = YES;
                 }
@@ -392,6 +394,7 @@
                     parseLinkObject[@"url"] = link.url;
                     parseLinkObject[@"label"] = link.label;
                     parseLinkObject[@"parentUUID"] = link.stepId;
+                    parseLinkObject[@"orderNumber"] = [NSNumber numberWithInt:link.orderNumber];
                     [parseLinkObject saveInBackground];
                     success = YES;
                 }
@@ -408,6 +411,7 @@
                 if(!error){
                     parseCalculatorObject[@"UUID"] = calculator.objectId;
                     parseCalculatorObject[@"parentUUID"] = calculator.stepId;
+                    parseCalculatorObject[@"orderNumber"] = [NSNumber numberWithInt:calculator.orderNumber];
                     [parseCalculatorObject saveInBackground];
                     success = YES;
                 }
@@ -427,6 +431,7 @@
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
                     parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
+                    parseFormSelectionObject[@"orderNumber"] = [NSNumber numberWithInt:formSelection.orderNumber];
                     [parseFormSelectionObject saveInBackground];
                     success = YES;
                 }
@@ -447,6 +452,7 @@
                     parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
                     parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
                     parseFormNumberObject[@"label"] = formNumber.label;
+                    parseFormNumberObject[@"orderNumber"] = [NSNumber numberWithInt:formNumber.orderNumber];
                     [parseFormNumberObject saveInBackground];
                     success = YES;
                 }
@@ -487,7 +493,7 @@
     if([object isKindOfClass:[ProtocolStep class]]){
         ProtocolStep* step = (ProtocolStep*)object;
         PFObject *parseStepObject = [PFObject objectWithClassName:@"Step"];
-        parseStepObject[@"stepNumber"] = [NSNumber numberWithInt:step.stepNumber];
+        parseStepObject[@"orderNumber"] = [NSNumber numberWithInt:step.orderNumber];
         parseStepObject[@"parentUUID"] = step.protocolId; //Parse refers to protocolId as protocol this is the foreign key in Step
         parseStepObject[@"description"] = step.description;
         [parseStepObject saveInBackground];
@@ -497,6 +503,7 @@
         TextBlock* textBlock = (TextBlock*)object;
         PFObject *parseTextBlockObject = [PFObject objectWithClassName:@"TextBlock"];
         parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
+        parseTextBlockObject[@"orderNumber"] = [NSNumber numberWithInt:textBlock.orderNumber];
         parseTextBlockObject[@"title"] = textBlock.title;
         parseTextBlockObject[@"parentUUID"] = textBlock.stepId;  //Parse refers to stepId as step this is the foreign key in TextBlock
         [parseTextBlockObject saveInBackground];
@@ -505,6 +512,7 @@
     if([object isKindOfClass:[Calculator class]]){
         Calculator* calculator = (Calculator*)object;
         PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
+        parseCalculatorObject[@"orderNumber"] = [NSNumber numberWithInt:calculator.orderNumber];
         parseCalculatorObject[@"parentUUID"] = calculator.stepId;
         [parseCalculatorObject saveInBackground];
         success = YES;
@@ -515,6 +523,7 @@
         parseLinkObject[@"url"] = link.url;
         parseLinkObject[@"label"] = link.label;
         parseLinkObject[@"parentUUID"] = link.stepId;
+        parseLinkObject[@"orderNumber"] = [NSNumber numberWithInt:link.orderNumber];
         [parseLinkObject saveInBackground];
         success = YES;
     }
@@ -522,6 +531,7 @@
         Form* form = (Form*)object;
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
         parseFormObject[@"parentUID"] = form.stepId;
+        parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
         [parseFormObject saveInBackground];
         success = YES;
     }
@@ -532,6 +542,7 @@
         parseFormSelectionObject[@"parentUUID"] = formSelection.formId;
         parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
         parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
+        parseFormSelectionObject[@"orderNumber"] = [NSNumber numberWithInt:formSelection.orderNumber];
         [parseFormSelectionObject saveInBackground];
         success = YES;
     }
@@ -543,6 +554,7 @@
         parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
         parseFormNumberObject[@"label"] = formNumber.label;
         parseFormNumberObject[@"parentUUID"] = formNumber.formId;
+        parseFormNumberObject[@"orderNumber"] = [NSNumber numberWithInt:formNumber.orderNumber];
         [parseFormNumberObject saveInBackground];
         success = YES;
     }

@@ -13,11 +13,12 @@
 #import "FMResultSet.h"
 
 @implementation Calculator
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId{
+-(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super init];
     if (self) {
         _objectId = objectId;
         _stepId = stepId;
+        _orderNumber = orderNumber;
     }
     return self;
 }
