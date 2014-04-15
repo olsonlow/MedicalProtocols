@@ -38,8 +38,17 @@
 -(int)countProtocols{
     return [self.protocols count];
 }
+-(void)removeProtocolAtIndex:(int)index{
+    [self.dataSource deleteObjectWithDataType:DataTypeProtocol withId:((MedProtocol*)[self.protocols objectAtIndex:index]).objectId];
+    [self.protocols removeObjectAtIndex:index];
+}
 -(MedProtocol*)protocolAtIndex:(int)index{
     return [self.protocols objectAtIndex:index];
+}
+-(void)createNewProtocol{
+    MedProtocol* newProtocol = [[MedProtocol alloc] initWithName:@"New Protocol" objectId:[[[NSUUID alloc] init] UUIDString]];
+    [self.dataSource insertObjectWithDataType:DataTypeProtocol withObject:newProtocol];
+    [self.protocols addObject:newProtocol];
 }
 -(void)dataSourceReadyForUse{
     //[self.protocols addObjectsFromArray:[self.dataSource getAllObjectsWithDataType:DataTypeProtocol]];

@@ -11,10 +11,10 @@
 
 @class MedProtocol;
 @interface ProtocolDataController : NSObject<MedRefDataSourceDelegate>
-@property (strong, nonatomic) NSString *databaseName;
-@property (strong, nonatomic) NSString *databasePath;
 @property (readonly,assign, nonatomic) bool dataSourceReady;
 -(int)countProtocols;
+-(void)createNewProtocol;
 -(MedProtocol*)protocolAtIndex:(int)index;
+-(void)removeProtocolAtIndex:(int)index;
 -(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate;
 @end

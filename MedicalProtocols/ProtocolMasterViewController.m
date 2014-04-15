@@ -13,7 +13,9 @@
 #import "StepMasterViewController.h"
 #import "StepDetailViewController.h"
 
-@interface ProtocolMasterViewController ()
+@interface ProtocolMasterViewController (){
+    bool editable;
+}
 
 @property (strong,nonatomic) ProtocolDataController* protocolDataController;
 
@@ -33,12 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    editable = NO;
+    [self makeEditable];
     
     //Navigation Button Items removed
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    //self.navigationItem.rightBarButtonItem = addButton;
-
     UINavigationController* navigationController = [self.splitViewController.viewControllers lastObject];
     self.detailViewController = (ProtocolDetailViewController *)[navigationController.viewControllers lastObject];
     self.protocolDataController = [[ProtocolDataController alloc] initWithDelegate:self];
@@ -46,11 +46,23 @@
         [self.detailViewController displayProgressHudWithMessage:@"Preparing Database"];
     }
 }
-
+-(void)makeEditable{
+    editable = YES;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+        self.navigationItem.rightBarButtonItem = addButton;
+    [self.tableView reloadData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)insertNewObject:(id)sender
+{
+    [self.protocolDataController createNewProtocol];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table View
@@ -78,15 +90,18 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return NO;
+    return editable;
 }
 
-/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.protocolDataController removeProtocolAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
 }
- */
 
 /*
  // Override to support rearranging the table view.

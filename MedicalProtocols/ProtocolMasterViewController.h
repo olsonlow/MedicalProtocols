@@ -13,5 +13,5 @@
 @interface ProtocolMasterViewController : UITableViewController<MedRefDataSourceDelegate>
 
 @property (strong, nonatomic) ProtocolDetailViewController *detailViewController;
-
+-(void)makeEditable;
 @end
