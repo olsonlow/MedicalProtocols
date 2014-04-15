@@ -25,7 +25,7 @@
     NSLog(@"TEXTBLOCK OBJECT");
     self.textBlock = textBlock;
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
-    self.backgroundColor = [UIColor redColor];
+    self.backgroundColor = [UIColor colorWithRed:209.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1];
     UILabel *title = [[UILabel alloc]init];
     title.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
     title.center = CGPointMake(title.frame.size.height/2, title.frame.size.width/4);
