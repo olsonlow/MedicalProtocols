@@ -38,7 +38,7 @@
 -(void)removeStepAtIndex:(int)index{
     for(ProtocolStep* step in self.steps){
         [step removeComponents];
-        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:step.objectId];
+        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:step.objectId isChild:NO];
         [self.steps removeObjectAtIndex:index];
     }
 }
