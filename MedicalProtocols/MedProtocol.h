@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class PFObject;
 @class ProtocolStep;
 @interface MedProtocol : NSObject
 @property(nonatomic,copy) NSString* name;

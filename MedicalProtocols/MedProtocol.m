@@ -7,7 +7,6 @@
 //
 
 #import "MedProtocol.h"
-#import <Parse/Parse.h>
 #import "ProtocolStep.h"
 #import "DataSource.h"
 

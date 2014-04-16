@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataSourceProtocols.h"
+#import "Component.h"
 
-@class Component;
 @interface ProtocolStep : NSObject
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;
@@ -18,4 +19,6 @@
 -(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber description:(NSString*)description protocolId:(NSString*)protocolId;
 -(int)countComponents;
 -(Component*)componentAtIndex:(int)index;
+-(void)removeComponentAtIndex:(int)index;
+-(void)addNewComponentWithDataType:(ComponentType)componentType;
 @end

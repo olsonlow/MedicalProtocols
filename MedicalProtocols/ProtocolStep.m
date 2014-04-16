@@ -41,4 +41,14 @@
 -(Component*)componentAtIndex:(int)index{
     return [self.components objectAtIndex:index];
 }
+-(void)removeComponentAtIndex:(int)index{
+    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:[self.components objectAtIndex:index]];
+    [self.components removeObjectAtIndex:index];
+}
+-(void)addNewComponentWithComponentType:(ComponentType)componentType{
+    Component* newComponent = [[Component alloc] initWithComponentType:componentType];
+    [self.components addObject:newComponent];
+    newComponent.orderNumber = [self.components indexOfObject:newStep];
+    [[DataSource sharedInstance] insertObjectWithDataType:DataTypeComponent withObject:newComponent];
+}
 @end

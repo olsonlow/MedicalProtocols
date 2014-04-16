@@ -17,7 +17,8 @@ typedef NS_ENUM(NSUInteger, ComponentType) {
 };
 
 @interface Component : NSObject
+@property(nonatomic,assign) int orderNumber;
 +(NSString*)ImageNameForComponentType:(ComponentType)componentType;
 +(NSString*)NameForComponentType:(ComponentType)componentType;
-
+-(id)initWithComponentType:(ComponentType)componentType;
 @end

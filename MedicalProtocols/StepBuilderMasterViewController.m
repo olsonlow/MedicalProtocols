@@ -11,7 +11,7 @@
 #import "ProtocolStep.h"
 #import "Component.h"
 @interface StepBuilderMasterViewController ()
-
+@property(nonatomic,strong) UILabel* draggingView;
 @end
 
 @implementation StepBuilderMasterViewController
@@ -63,10 +63,56 @@
     NSString *componentName = [Component NameForComponentType:indexPath.row];
     cell.textLabel.text = componentName
     ;
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
+                                                    initWithTarget:self action:@selector(longPress:)];
+    
+    [cell addGestureRecognizer:panGestureRecognizer];
     
     return cell;
 }
-
+- (void)longPress:(UIPanGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        // create item to be dragged, in this example, just a simple UILabel
+        UITableViewCell* cell = ((UITableViewCell*)sender.view);
+        UIView *splitView = self.splitViewController.view;
+        CGPoint point = [sender locationInView:splitView];
+        CGSize size = [cell.textLabel.text sizeWithAttributes:@{NSFontAttributeName:
+                                                                    cell.textLabel.font}];
+        CGRect frame = CGRectMake(point.x - (size.width / 2.0), point.y - (size.height / 2.0), size.width, size.height);
+        self.draggingView = [[UILabel alloc] initWithFrame:frame];
+        [self.draggingView setText:cell.textLabel.text];
+        [self.draggingView setBackgroundColor:[UIColor clearColor]];
+        
+        // now add the item to the view
+        
+        [splitView addSubview:self.draggingView];
+    }
+    else if (sender.state == UIGestureRecognizerStateChanged)
+    {
+        // we dragged it, so let's update the coordinates of the dragged view
+        
+        UIView *splitView = self.splitViewController.view;
+        CGPoint point = [sender locationInView:splitView];
+        self.draggingView.center = point;
+    }
+    else if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        // dropped, so remove it from the view
+        [self.draggingView removeFromSuperview];
+        CGPoint point = [sender locationInView:self.detailViewController.view];
+        
+        UIAlertView *alert;
+        if (CGRectContainsPoint(self.detailViewController.view.bounds, point)){
+            alert = [[UIAlertView alloc] initWithTitle:@"dropped in details view" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        }
+        else
+        {
+            //dropped outside of details view
+        }
+    }
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {

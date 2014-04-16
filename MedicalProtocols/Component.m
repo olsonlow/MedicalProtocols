@@ -63,4 +63,25 @@
     }
     return comonentName;
 }
+-(id)initWithComponentType:(ComponentType)componentType{
+    Component* component = nil;
+    switch (componentType) {
+        case ComponentTypeTextBlock:
+            component = [[TextBlock alloc] init];
+            break;
+        case ComponentTypeForm:
+            component = [[Form alloc] init];
+            break;
+        case ComponentTypeCalculator:
+            component = [[Calculator alloc] init];
+            break;
+        case ComponentTypeLink:
+            component = [[Link alloc] init];
+            break;
+            
+        default:
+            break;
+    }
+    return component;
+}
 @end

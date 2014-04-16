@@ -12,6 +12,7 @@
 #import "ComponentView.h"
 #import "StepMasterViewController.h"
 #import "LocalDB.h"
+
 @interface ProtocolDetailViewController ()
 
 - (void)configureView;
@@ -53,30 +54,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-      //TESTING - ZACH
-//   ProtocolStep* step = [self.protocol stepAtIndex:0];
-//    NSArray * components = [[LocalDB sharedInstance]getAllObjectsWithDataType:DataTypeComponent withParentId:step.objectId];
-//    
-//    for(int i = 0; i < 1; i++)
-//    {
-//        id component = [components objectAtIndex:i];
-//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(50, 100, 300, 300) Object:component];
-//        [self.view addSubview:componentView];
-//        [self.view bringSubviewToFront:componentView];
-//    }
-
-//    self.collectionView.hidden = YES;
-//    ProtocolStep * step =[self.protocol stepAtIndex:0];
-//    for (int i = 0; i < [step countComponents]; i++) {
-//        id component = [step componentAtIndex:i];
-//        self.view.layer.cornerRadius = 5;
-//        self.view.layer.masksToBounds = YES;
-//        ComponentView *componentView = [[ComponentView alloc]initWithFrame:CGRectMake(100, 50, 50, 50)];
-//        componentView = [componentView initWithFrame:CGRectMake(100, 50, 50, 50) Object:component];
-//        [self.view addSubview:componentView];
-//    }
-    
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
@@ -118,6 +95,16 @@
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);
 //}
+-(void)insertComponentOfComponentType:(DataType)componentType IntoCollectionViewAtLocation:(CGPoint)location{
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
+    if(indexPath){
+        //insert at index path
+        self.step addNewComponentWithDataType:DA
+    } else {
+        //insert at end
+    }
+}
+
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
