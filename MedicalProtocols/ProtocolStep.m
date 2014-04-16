@@ -48,7 +48,7 @@
 -(void)addNewComponentWithComponentType:(ComponentType)componentType{
     Component* newComponent = [[Component alloc] initWithComponentType:componentType];
     [self.components addObject:newComponent];
-    newComponent.orderNumber = [self.components indexOfObject:newStep];
+    newComponent.orderNumber = [self.components indexOfObject:newComponent];
     [[DataSource sharedInstance] insertObjectWithDataType:DataTypeComponent withObject:newComponent];
 }
 @end
