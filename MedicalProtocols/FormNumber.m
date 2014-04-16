@@ -7,6 +7,7 @@
 //
 
 #import "FormNumber.h"
+#import "FormComponent.h"
 #import <Parse/Parse.h>
 
 @implementation FormNumber

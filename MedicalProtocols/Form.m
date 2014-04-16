@@ -14,6 +14,7 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "DataSource.h"
+#import "FormComponent.h"
 
 @interface Form()
 @property(nonatomic,strong) NSMutableArray* fields;
@@ -36,6 +37,16 @@
         [_formComponents addObjectsFromArray:[[DataSource sharedInstance]getAllObjectsWithDataType: DataTypeFormComponent withParentId:self.objectId]];
     }
     return _formComponents;
+}
+
+-(int) countFormComonents
+{
+    return [self.formComponents count];
+}
+
+-(FormComponent *) formComponentAtIndex: (int) index
+{
+    return [self.formComponents objectAtIndex:index];
 }
 
 -(NSMutableArray *)fields{

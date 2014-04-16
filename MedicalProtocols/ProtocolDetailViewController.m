@@ -78,6 +78,7 @@
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     Component *component = [self.step componentAtIndex:indexPath.row];
+    NSLog(@"COMPONENT TYPE: %@", component.class);
     ComponentView *componentView = [[ComponentView alloc]initWithFrame:cell.frame Object:component];
     componentView.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2);
     [cell addSubview:componentView];

@@ -22,7 +22,6 @@
 -(id) initWithFrame: (CGRect)frame textBlock:(TextBlock*)textBlock
 {
     self = [super initWithFrame:frame];
-    NSLog(@"TEXTBLOCK OBJECT");
     self.textBlock = textBlock;
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:209.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1];

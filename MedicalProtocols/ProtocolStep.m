@@ -38,6 +38,12 @@
 -(int)countComponents{
     return [self.components count];
 }
+//-(void)removeComponents{
+//    for(Component* component in self.components){
+//        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:component.objectId];
+//    }
+//}
+
 -(Component*)componentAtIndex:(int)index{
     return [self.components objectAtIndex:index];
 }

@@ -23,7 +23,6 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor blueColor];
-    NSLog(@"LINK OBJECT: %@", link.url);
     self.link = link;
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];

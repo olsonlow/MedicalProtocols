@@ -36,9 +36,13 @@
     return _steps;
 }
 -(void)removeStepAtIndex:(int)index{
-    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:[self.steps objectAtIndex:index]];
-    [self.steps removeObjectAtIndex:index];
+    for(ProtocolStep* step in self.steps){
+        [step removeComponents];
+        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:step.objectId];
+        [self.steps removeObjectAtIndex:index];
+    }
 }
+
 -(void)addNewStep{
     ProtocolStep* newStep = [[ProtocolStep alloc] initWithId:[[[NSUUID alloc] init] UUIDString] orderNumber:-1 description:@"New Step" protocolId:self.objectId];
     [self.steps addObject:newStep];
