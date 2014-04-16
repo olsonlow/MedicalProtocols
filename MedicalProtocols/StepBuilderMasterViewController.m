@@ -12,6 +12,7 @@
 #import "Component.h"
 @interface StepBuilderMasterViewController ()
 @property(nonatomic,strong) UILabel* draggingView;
+@property(nonatomic,assign) ComponentType selectedComponent;
 @end
 
 @implementation StepBuilderMasterViewController
@@ -61,8 +62,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepBuilderCell" forIndexPath:indexPath];
     NSString *componentName = [Component NameForComponentType:indexPath.row];
-    cell.textLabel.text = componentName
-    ;
+    cell.textLabel.text = componentName;
+    cell.tag = indexPath.row;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(longPress:)];
     
@@ -100,12 +101,12 @@
     else if (sender.state == UIGestureRecognizerStateEnded)
     {
         // dropped, so remove it from the view
+        UITableViewCell* cell = ((UITableViewCell*)sender.view);
         [self.draggingView removeFromSuperview];
         CGPoint point = [sender locationInView:self.detailViewController.view];
         
-        UIAlertView *alert;
         if (CGRectContainsPoint(self.detailViewController.view.bounds, point)){
-            alert = [[UIAlertView alloc] initWithTitle:@"dropped in details view" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [self.detailViewController insertComponentOfComponentType:cell.tag IntoCollectionViewAtLocation:point];
         }
         else
         {

@@ -13,7 +13,6 @@
 @property(nonatomic,copy) NSString* url;
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,copy) NSString* stepId;
-@property(nonatomic,assign) int orderNumber;
 
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 

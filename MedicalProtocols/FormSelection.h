@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import "Component.h"
-@class PFObject;
-@interface FormSelection : Component
+#import "FormComponent.h"
+@interface FormSelection : FormComponent
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,copy) NSString* choiceA;
 @property(nonatomic,copy) NSString* choiceB;

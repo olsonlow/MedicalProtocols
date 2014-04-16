@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import "Component.h"
+#import "FormComponent.h"
 
-@interface FormNumber : Component
+@interface FormNumber : FormComponent
 @property(nonatomic,copy) NSString* label;
 @property(nonatomic,assign) int defaultValue;
 @property(nonatomic,assign) int maxValue;

@@ -13,4 +13,6 @@
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,copy) NSString* formId;
 @property(nonatomic,assign) int orderNumber;
+
+-(id)initWithFormId:(NSString*)formId orderNumber:(int)orderNumber label:(NSString*)label;
 @end

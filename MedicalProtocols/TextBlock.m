@@ -7,24 +7,21 @@
 //
 
 #import "TextBlock.h"
-#import <Parse/Parse.h>
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 
 @implementation TextBlock
 -(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super init];
+    self = [super initWithStepId:stepId OrderNumber:orderNumber];
     if (self) {
         _title = title;
         _content = content;
         _objectId = objectId;
-        _stepId = stepId;
         _printable = printable;
-        _orderNumber = orderNumber;
     }
     return self;
 }
-
+- (instancetype)init
+{
+    return [self initWithTitle:@"" content:@"" printable:NO objectId:[[[NSUUID alloc] init] UUIDString]  stepId:@"" orderNumber:-1];
+}
 
 @end

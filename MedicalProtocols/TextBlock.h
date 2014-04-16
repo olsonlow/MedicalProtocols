@@ -14,7 +14,6 @@
 @property(nonatomic,assign) Boolean printable;
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,copy) NSString* stepId;
-@property(nonatomic,assign) int orderNumber;
 
 -(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 

@@ -7,18 +7,15 @@
 //
 
 #import "Calculator.h"
-#import <Parse/Parse.h>
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 
 @implementation Calculator
+-(id)init{
+    return [self initWithObjectId:@"" stepId:@"" orderNumber:-1];
+}
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super init];
+    self = [super initWithStepId:stepId OrderNumber:orderNumber];
     if (self) {
         _objectId = objectId;
-        _stepId = stepId;
-        _orderNumber = orderNumber;
     }
     return self;
 }

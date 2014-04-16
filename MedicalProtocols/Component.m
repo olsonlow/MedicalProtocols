@@ -7,14 +7,10 @@
 //
 
 #import "Component.h"
-#import <Parse/Parse.h>
 #import "Link.h"
 #import "TextBlock.h"
 #import "Form.h"
 #import "Calculator.h"
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 
 @interface Component()
 
@@ -63,7 +59,15 @@
     }
     return comonentName;
 }
--(id)initWithComponentType:(ComponentType)componentType{
+-(id)initWithStepId:(NSString*)stepId OrderNumber:(int)orderNumber{
+    self = [super init];
+    if (self) {
+        _stepId = stepId;
+        _orderNumber = orderNumber;
+    }
+    return self;
+}
++(id)componentType:(ComponentType)componentType stepId:(NSString*)stepId{
     Component* component = nil;
     switch (componentType) {
         case ComponentTypeTextBlock:
@@ -82,6 +86,10 @@
         default:
             break;
     }
+    component.stepId = stepId;
     return component;
+}
++(void)DeleteComponentWithId:(NSString*)objectId{
+    
 }
 @end

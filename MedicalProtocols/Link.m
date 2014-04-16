@@ -7,22 +7,18 @@
 //
 
 #import "Link.h"
-#import <Parse/Parse.h>
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 
 @implementation Link
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super init];
+    self = [super initWithStepId:stepId OrderNumber:orderNumber];
     if (self) {
         _label = label;
         _url = url;
         _objectId = objectId;
-        _stepId = stepId;
-        _orderNumber = orderNumber;
     }
     return self;
 }
-
+-(instancetype)init{
+    return [self initWithLabel:@"" url:@"" objectId:@"" stepId:@"" orderNumber:-1];
+}
 @end

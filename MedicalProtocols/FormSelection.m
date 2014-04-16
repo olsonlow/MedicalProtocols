@@ -12,14 +12,10 @@
 
 @implementation FormSelection
 -(id)initWithLabel:(NSString*)label choiceA:(NSString*)choiceA choiceB:(NSString*)choiceB objectId:(NSString*)objectId orderNumber:(int)orderNumber formId:(NSString*)formId{
-    self = [super init];
+    self = [super initWithFormId:formId orderNumber:orderNumber label:label];
     if (self) {
-        _label = label;
         _choiceA = choiceA;
         _choiceB = choiceB;
-        _objectId = objectId;
-        _orderNumber = orderNumber;
-        _formId = formId;
     }
     return self;
 }

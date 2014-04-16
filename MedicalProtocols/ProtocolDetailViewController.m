@@ -96,13 +96,15 @@
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);
 //}
--(void)insertComponentOfComponentType:(DataType)componentType IntoCollectionViewAtLocation:(CGPoint)location{
+-(void)insertComponentOfComponentType:(ComponentType)componentType IntoCollectionViewAtLocation:(CGPoint)location{
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
     if(indexPath){
         //insert at index path
-        self.step addNewComponentWithDataType:DA
+        [self.step addNewComponentWithComponentType:componentType atIndex:indexPath.row];
+        [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
     } else {
-        //insert at end
+        [self.step addNewComponentWithComponentType:componentType];
+        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.step countComponents]-1 inSection:0]]];
     }
 }
 

@@ -26,9 +26,9 @@
 {
     //set up background here...
     self = [super initWithFrame:frame];
-    self.layer.cornerRadius = 5;
+    self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = [UIColor greenColor];
+    self.backgroundColor = [UIColor clearColor];
     ComponentView * componentView = [ComponentView componentWithFrame:frame Object:object];
     componentView.center = CGPointMake(frame.size.height/2, frame.size.width/2);
     [self addSubview:componentView];

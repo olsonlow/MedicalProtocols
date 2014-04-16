@@ -12,14 +12,11 @@
 
 @implementation FormNumber
 -(id)initWithLabel:(NSString*)label defaultValue:(int)defaultValue minValue:(int)minValue maxValue:(int)maxValue objectId:(NSString*)objectId orderNumber:(int)orderNumber formId:(NSString*)formId{
+    self = [super initWithFormId:formId orderNumber:orderNumber label:label];
     if (self) {
-        _label = label;
         _defaultValue = defaultValue;
         _maxValue = maxValue;
         _minValue = minValue;
-        _objectId = objectId;
-        _orderNumber = orderNumber;
-        _formId = formId;
     }
     return self;
 }

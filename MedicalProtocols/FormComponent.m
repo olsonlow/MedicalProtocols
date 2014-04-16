@@ -10,5 +10,13 @@
 #import "FormNumber.h"
 #import "FormSelection.h"
 @implementation FormComponent
-
+-(id)initWithFormId:(NSString*)formId orderNumber:(int)orderNumber label:(NSString*)label{
+    self = [super init];
+    if (self) {
+        _label = label;
+        _formId = formId;
+        _orderNumber = orderNumber;
+    }
+    return self;
+}
 @end

@@ -52,8 +52,11 @@
     [self.components removeObjectAtIndex:index];
 }
 -(void)addNewComponentWithComponentType:(ComponentType)componentType{
-    Component* newComponent = [[Component alloc] initWithComponentType:componentType];
-    [self.components addObject:newComponent];
+    [self addNewComponentWithComponentType:componentType atIndex:[self.components count]];
+}
+-(void)addNewComponentWithComponentType:(ComponentType)componentType atIndex:(int)index{
+    Component* newComponent = [Component componentType:componentType stepId:self.objectId];
+    [self.components insertObject:newComponent atIndex:index];
     newComponent.orderNumber = [self.components indexOfObject:newComponent];
     [[DataSource sharedInstance] insertObjectWithDataType:DataTypeComponent withObject:newComponent];
 }

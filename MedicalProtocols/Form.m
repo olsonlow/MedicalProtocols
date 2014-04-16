@@ -7,12 +7,8 @@
 //
 
 #import "Form.h"
-#import <Parse/Parse.h>
 #import "FormNumber.h"
 #import "FormSelection.h"
-#import "LocalDB.h"
-#import "FMDatabase.h"
-#import "FMResultSet.h"
 #import "DataSource.h"
 #import "FormComponent.h"
 
@@ -22,12 +18,14 @@
 @end
 
 @implementation Form
+- (instancetype)init
+{
+    return [self initWithObjectId:@"" stepId:@"" orderNumber:-1];
+}
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super init];
+    self = [super initWithStepId:stepId OrderNumber:orderNumber];
     if (self) {
         _objectId = objectId;
-        _stepId = stepId;
-        _orderNumber = orderNumber;
     }
     return self;
 }
