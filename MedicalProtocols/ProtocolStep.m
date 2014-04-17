@@ -43,7 +43,7 @@
     return [self.components objectAtIndex:index];
 }
 -(void)removeComponentAtIndex:(int)index{
-    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:[self.components objectAtIndex:index]isChild:NO];
+    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:[self.components objectAtIndex:index] isChild:NO];
     [self.components removeObjectAtIndex:index];
 }
 
