@@ -316,20 +316,23 @@
         {
             TextBlock *t = [[TextBlock alloc] initWithTitle:[textBlockResults stringForColumn:@"title"] content:[textBlockResults stringForColumn:@"content"] printable:[textBlockResults boolForColumn:@"printable"] objectId:[textBlockResults stringForColumn:@"objectId"] stepId:[textBlockResults stringForColumn:@"stepId"] orderNumber:[textBlockResults intForColumn:@"orderNumber"]];
             [components addObject:t];
+
         }
+        [textBlockResults close];
         FMResultSet *calculatorResults = [db executeQuery:@"SELECT * FROM calculator  WHERE stepId = (:stepId)", stepId];
-        while([textBlockResults next])
+        while([calculatorResults next])
         {
             Calculator *calculator = [[Calculator alloc]initWithObjectId:[calculatorResults stringForColumn:@"objectId"] stepId:[calculatorResults stringForColumn:@"stepId"] orderNumber:[calculatorResults intForColumn:@"orderNumber"]];
             [components addObject:calculator];
         }
-        
+        [calculatorResults close];
         FMResultSet *linkResults = [db executeQuery:@"SELECT * FROM link WHERE stepId = (:stepId)", stepId];
         while([linkResults next])
         {
             Link *link = [[Link alloc] initWithLabel:[linkResults stringForColumn:@"label"] url:[linkResults stringForColumn:@"url"] objectId:[linkResults stringForColumn:@"objectId"] stepId:[linkResults stringForColumn:@"stepId"] orderNumber:[linkResults intForColumn:@"orderNumber"]];
             [components addObject:link];
         }
+        [linkResults close];
         if ([db hadError]) {
             NSLog(@"DB Error %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         }
@@ -441,73 +444,89 @@
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     //isChild flag determines whether we are deleting an object explicitly or deleting an object as a byproduct of a need to do so before deleting its parent
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    [db open];
+    //[db open];
     
-    
-    
-    NSLog(@"TEST");
-    NSArray *steps = [self getStepsForProtocolId:objectId];
-    NSArray *components = [self getComponentsForStepId:objectId];
-    NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
+    //NSArray *steps = [self getStepsForProtocolId:objectId];
+   // NSArray *components = [self getComponentsForStepId:objectId];
+   // NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
     bool protocol = NO, step = NO, textBlock = NO, link = NO, form = NO, calculator = NO, formNumber = NO, formSelection = NO;
     
     switch (dataType) {
         case DataTypeProtocol:
             [self deleteObjectWithDataType:DataTypeStep withId:objectId isChild:YES]; //recursive call to delete steps associated with this particular protocol
+            [db open];
             protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
-            
+            [db close];
         case DataTypeStep:
             //steps = [self getStepsForProtocolId:objectId];
-            for(ProtocolStep *stepObj in steps)
+            if(!isChild)
             {
-            [self deleteObjectWithDataType:DataTypeComponent withId:stepObj.objectId isChild:YES];//recursive call to delete components associated with this particular step
-                if(isChild)
+                [self deleteObjectWithDataType:DataTypeComponent withId:objectId isChild:YES];
+                [db open];
+                step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
+                [db close];
+            }
+            else{
+                NSArray *steps = [self getStepsForProtocolId:objectId];
+                for(ProtocolStep *stepObj in steps)
+                {
+                    [self deleteObjectWithDataType:DataTypeComponent withId:stepObj.objectId isChild:YES];//recursive call to delete components associated with this particular step
+                    [db open];
                     step = [db executeUpdate:@"DELETE FROM step WHERE protocolId = (:protocolId)", objectId];
-                else
-                    step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
+                    [db close];
+                }
             }
             
         case DataTypeComponent:
             //components = [self getComponentsForStepId:objectId];
-            for(Component *componentObj in components)
+            if(!isChild)
             {
-                if([componentObj isKindOfClass:[Form class]])
-                {
-                    Form *formObject = (Form *) componentObj;
-                    [self deleteObjectWithDataType:DataTypeFormComponent withId:formObject.objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
-                }
-                    if(isChild)
-                    {
-                        form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
-                        textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
-                        link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
-                        calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
-                    }
-                    else //if we are just deleting a component (that is not a form)
-                    {
-                        form = [db executeUpdate:@"DELETE FROM form WHERE objectId = (:objectId)", objectId];
-                        textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectId = (:objectId", objectId];
-                        link = [db executeUpdate:@"DELETE FROM link WHERE objectId = (:objectId)", objectId];
-                        calculator =[db executeUpdate:@"DELETE FROM calculator WHERE objectId = (:objectId)", objectId];
-                    }
-                }
-            case DataTypeFormComponent:
-                for(FormComponent *formComponentObject in formComponents)
+                [db open];
+                form = [db executeUpdate:@"DELETE FROM form WHERE objectId = (:objectId)", objectId];
+                textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectId = (:objectId)", objectId];
+                link = [db executeUpdate:@"DELETE FROM link WHERE objectId = (:objectId)", objectId];
+                calculator =[db executeUpdate:@"DELETE FROM calculator WHERE objectId = (:objectId)", objectId];
+                [db close];
+            }
+            else
             {
-                if(isChild)
+                NSArray *components = [self getComponentsForStepId:objectId];
+                for(int i = 0; i < [components count]; i++)
                 {
-                    formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
-                    formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
-                }
-                else //if we are just deleting a form component
-                {
-                    formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE objectId = (:objectId)", objectId];
-                    formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE objectId = (:objectId)", objectId];
+                    if([[components objectAtIndex:i] isKindOfClass:[Form class]])
+                    {
+                        Form *formObject = (Form *) [components objectAtIndex:i];
+                        [self deleteObjectWithDataType:DataTypeFormComponent withId:formObject.objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
+                    }
+                    [db open];
+                    form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
+                    textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
+                    link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
+                    calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
+                    [db close];
                 }
             }
-            
-            default:
-                break;
+        case DataTypeFormComponent:
+            if(!isChild)
+            {
+                [db open];
+                formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE objectId = (:objectId)", objectId];
+                formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE objectId = (:objectId)", objectId];
+                [db close];
+            }
+            else
+            {
+                NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
+                for(FormComponent *formComponentObject in formComponents)
+                {
+                    [db open];
+                    formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
+                    formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
+                    [db close];
+                }
+            }
+        default:
+            break;
     }
     return protocol || step || textBlock || link || form || calculator || formNumber || formSelection;
 }
