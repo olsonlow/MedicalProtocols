@@ -38,7 +38,7 @@
     return [self.protocols count];
 }
 -(void)removeProtocolAtIndex:(int)index{
-    [self.dataSource deleteObjectWithDataType:DataTypeProtocol withId:((MedProtocol*)[self.protocols objectAtIndex:index]).objectId];
+    [self.dataSource deleteObjectWithDataType:DataTypeProtocol withId:((MedProtocol*)[self.protocols objectAtIndex:index]).objectId isChild:NO];
     [self.protocols removeObjectAtIndex:index];
 }
 -(MedProtocol*)protocolAtIndex:(int)index{

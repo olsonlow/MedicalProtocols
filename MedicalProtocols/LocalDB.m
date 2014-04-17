@@ -284,6 +284,7 @@
     bool success = [fileManager fileExistsAtPath:self.databasePath];
     if(success)
     {
+        [db open];
         FMResultSet *results;
         results = [db executeQuery:@"SELECT * FROM step WHERE protocolId = (:protocolId)", protocolId];
         
@@ -301,6 +302,7 @@
 }
 
 -(NSArray*)getComponentsForStepId:(NSString*)stepId{
+    NSLog(@"COMPONENTS FOR STEP ID");
     NSMutableArray *components = [[NSMutableArray alloc]init];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -436,29 +438,76 @@
     return success;
 }
 
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
+    //isChild flag determines whether we are deleting an object explicitly or deleting an object as a byproduct of a need to do so before deleting its parent
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
+    
+    
+    
+    NSLog(@"TEST");
+    NSArray *steps = [self getStepsForProtocolId:objectId];
+    NSArray *components = [self getComponentsForStepId:objectId];
+    NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
     bool protocol = NO, step = NO, textBlock = NO, link = NO, form = NO, calculator = NO, formNumber = NO, formSelection = NO;
     
     switch (dataType) {
         case DataTypeProtocol:
-            //[self deleteObjectWithDataType:DataTypeStep withId:objectId]; //recursive call to delete steps associated with this particular protocol
+            [self deleteObjectWithDataType:DataTypeStep withId:objectId isChild:YES]; //recursive call to delete steps associated with this particular protocol
             protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
+            
         case DataTypeStep:
-            //[self deleteObjectWithDataType:DataTypeComponent withId:objectId];//recursive call to delete components associated with this particular step
-            step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
+            //steps = [self getStepsForProtocolId:objectId];
+            for(ProtocolStep *stepObj in steps)
+            {
+            [self deleteObjectWithDataType:DataTypeComponent withId:stepObj.objectId isChild:YES];//recursive call to delete components associated with this particular step
+                if(isChild)
+                    step = [db executeUpdate:@"DELETE FROM step WHERE protocolId = (:protocolId)", objectId];
+                else
+                    step = [db executeUpdate:@"DELETE FROM step WHERE objectId = (:objectId)", objectId];
+            }
+            
         case DataTypeComponent:
-            //[self deleteObjectWithDataType:DataTypeFormComponent withId:objectId];//recursive call to delete formComponents associated with this particular form
-            textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
-            form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
-            link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
-            calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
-        case DataTypeFormComponent:
-            formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
-            formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
-        default:
-            break;
+            //components = [self getComponentsForStepId:objectId];
+            for(Component *componentObj in components)
+            {
+                if([componentObj isKindOfClass:[Form class]])
+                {
+                    Form *formObject = (Form *) componentObj;
+                    [self deleteObjectWithDataType:DataTypeFormComponent withId:formObject.objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
+                }
+                    if(isChild)
+                    {
+                        form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
+                        textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
+                        link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
+                        calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
+                    }
+                    else //if we are just deleting a component (that is not a form)
+                    {
+                        form = [db executeUpdate:@"DELETE FROM form WHERE objectId = (:objectId)", objectId];
+                        textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectId = (:objectId", objectId];
+                        link = [db executeUpdate:@"DELETE FROM link WHERE objectId = (:objectId)", objectId];
+                        calculator =[db executeUpdate:@"DELETE FROM calculator WHERE objectId = (:objectId)", objectId];
+                    }
+                }
+            case DataTypeFormComponent:
+                for(FormComponent *formComponentObject in formComponents)
+            {
+                if(isChild)
+                {
+                    formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
+                    formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
+                }
+                else //if we are just deleting a form component
+                {
+                    formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE objectId = (:objectId)", objectId];
+                    formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE objectId = (:objectId)", objectId];
+                }
+            }
+            
+            default:
+                break;
     }
     return protocol || step || textBlock || link || form || calculator || formNumber || formSelection;
 }

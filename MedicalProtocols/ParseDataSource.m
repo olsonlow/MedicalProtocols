@@ -462,7 +462,7 @@
     
     return success;
 }
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     __block id obj;
     __block BOOL success;
     success = NO;

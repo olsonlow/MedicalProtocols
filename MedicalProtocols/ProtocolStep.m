@@ -48,8 +48,14 @@
     return [self.components objectAtIndex:index];
 }
 -(void)removeComponentAtIndex:(int)index{
-    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:[self.components objectAtIndex:index]];
+    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:[self.components objectAtIndex:index]isChild:NO];
     [self.components removeObjectAtIndex:index];
+}
+
+-(void) removeComponents
+{
+    [[DataSource sharedInstance]deleteObjectWithDataType:DataTypeComponent withId:self.objectId isChild:YES]; //remove all componenets associated to this step's objectId
+    [self.components removeAllObjects];
 }
 -(void)addNewComponentWithComponentType:(ComponentType)componentType{
     [self addNewComponentWithComponentType:componentType atIndex:[self.components count]];

@@ -80,9 +80,9 @@
     id<MedRefDataSource> dataSource = [self getDataSource];
     return [dataSource updateObjectWithDataType:dataType withId:objectId withObject:object];
 }
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     id<MedRefDataSource> dataSource = [self getDataSource];
-    return [dataSource deleteObjectWithDataType:dataType withId:objectId];
+    return [dataSource deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
 }
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];

@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, DataType) {
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType;
 -(NSArray*)getAllObjectsWithDataType:(DataType)dataType withParentId:(NSString*)parentId;
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)objectId withObject:(id)object;
--(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId;
+-(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild;
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object;
 @optional
 @property(nonatomic,assign,readonly) bool dataSourceReady;
