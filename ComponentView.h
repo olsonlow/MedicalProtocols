@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Component.h"
-@interface ComponentView : UIView
+@interface ComponentView : UICollectionViewCell
 @property int stepId;
 @property NSString *componentType;
 @property id component;
+@property (nonatomic,strong) id dataObject;
 -(id)initWithFrame:(CGRect)frame Object:(id) object;
-- (id)initWithFrame:(CGRect)frame;
+-(id)initWithFrame:(CGRect)frame;
+-(void)startWobble;
+-(void)stopWobble;
 @end

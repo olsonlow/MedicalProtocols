@@ -20,7 +20,7 @@
 @implementation Form
 - (instancetype)init
 {
-    return [self initWithObjectId:@"" stepId:@"" orderNumber:-1];
+    return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super initWithStepId:stepId OrderNumber:orderNumber];
@@ -33,6 +33,8 @@
     if(_formComponents == nil){
         _formComponents = [[NSMutableArray alloc] init];
         [_formComponents addObjectsFromArray:[[DataSource sharedInstance]getAllObjectsWithDataType: DataTypeFormComponent withParentId:self.objectId]];
+        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
+        [_formComponents sortUsingDescriptors:@[sortDescriptor]];
     }
     return _formComponents;
 }

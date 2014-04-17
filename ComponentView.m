@@ -11,6 +11,8 @@
 #import "FormView.h"
 #import "LinkView.h"
 #import "CalculatorView.h"
+
+#define RADIANS(degrees) ((degrees * M_PI) / 180.0)
 @implementation ComponentView
 
 - (id)initWithFrame:(CGRect)frame
@@ -21,20 +23,28 @@
     }
     return self;
 }
-
+-(void)setDataObject:(id)dataObject{
+    if(!_dataObject){
+        [self setupViewWithObject:dataObject];
+    }
+}
 -(id) initWithFrame:(CGRect)frame Object:(id)object
 {
     //set up background here...
     self = [super initWithFrame:frame];
+    if (self) {
+        [self setupViewWithObject:object];
+    }
+    return self;
+}
+-(void)setupViewWithObject:(id)object{
     self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
     self.backgroundColor = [UIColor clearColor];
-    ComponentView * componentView = [ComponentView componentWithFrame:frame Object:object];
-    componentView.center = CGPointMake(frame.size.height/2, frame.size.width/2);
+    ComponentView * componentView = [ComponentView componentWithFrame:self.frame Object:object];
+    componentView.center = CGPointMake(self.frame.size.height/2, self.frame.size.width/2);
     [self addSubview:componentView];
-    return self;
 }
-
 +(ComponentView *)componentWithFrame:(CGRect)frame Object:(id)object
 {
     ComponentView * result;
@@ -62,6 +72,36 @@
     return result;
 }
 
+- (void)startWobble {
+    self.layer.shouldRasterize = YES;
+    self.layer.rasterizationScale = 0.6;
+    self.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
+    self.alpha = 0.8;
+    self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-2));
+    
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:(UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
+                     animations:^ {
+                         self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(5));
+                     }
+                     completion:NULL
+     ];
+}
+
+- (void)stopWobble {
+    self.layer.shouldRasterize = NO;
+    self.layer.rasterizationScale = 1;
+    self.alpha = 1;
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:(UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear)
+                     animations:^ {
+                         self.transform = CGAffineTransformIdentity;
+                     }
+                     completion:NULL
+     ];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -10,7 +10,7 @@
 
 @implementation Calculator
 -(id)init{
-    return [self initWithObjectId:@"" stepId:@"" orderNumber:-1];
+    return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super initWithStepId:stepId OrderNumber:orderNumber];

@@ -19,6 +19,6 @@
     return self;
 }
 -(instancetype)init{
-    return [self initWithLabel:@"" url:@"" objectId:@"" stepId:@"" orderNumber:-1];
+    return [self initWithLabel:@"" url:@"" objectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }
 @end

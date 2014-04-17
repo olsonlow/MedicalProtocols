@@ -65,13 +65,13 @@
     cell.textLabel.text = componentName;
     cell.tag = indexPath.row;
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]
-                                                    initWithTarget:self action:@selector(longPress:)];
+                                                    initWithTarget:self action:@selector(panGesture:)];
     
     [cell addGestureRecognizer:panGestureRecognizer];
     
     return cell;
 }
-- (void)longPress:(UIPanGestureRecognizer *)sender
+- (void)panGesture:(UIPanGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateBegan)
     {

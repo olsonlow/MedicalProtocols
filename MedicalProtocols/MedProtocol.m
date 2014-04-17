@@ -31,6 +31,8 @@
     if(_steps == nil){
         _steps = [[NSMutableArray alloc] init];
         [_steps addObjectsFromArray:[[DataSource sharedInstance] getAllObjectsWithDataType:DataTypeStep withParentId:self.objectId]];
+        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
+        [_steps sortUsingDescriptors:@[sortDescriptor]];
         
     }
     return _steps;

@@ -76,16 +76,19 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
+    ComponentView *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
     Component *component = [self.step componentAtIndex:indexPath.row];
     NSLog(@"COMPONENT TYPE: %@", component.class);
-    ComponentView *componentView = [[ComponentView alloc]initWithFrame:cell.frame Object:component];
-    componentView.center = CGPointMake(cell.frame.size.width/2, cell.frame.size.height/2);
-    [cell addSubview:componentView];
-    cell.backgroundColor=[UIColor whiteColor];
+    cell.dataObject = component;
+    cell.backgroundColor=[UIColor clearColor];
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]
+                                                    initWithTarget:self action:@selector(longPress:)];
+    [cell addGestureRecognizer:longPressGestureRecognizer];
     return cell;
 }
-
+-(void)longPress:(UILongPressGestureRecognizer*)longPress{
+    [(ComponentView*)longPress.view startWobble];
+}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(200, 200);

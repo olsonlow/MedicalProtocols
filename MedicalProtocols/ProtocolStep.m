@@ -31,7 +31,8 @@
     if(_components == nil){
         _components = [[NSMutableArray alloc] init];
         [_components addObjectsFromArray:[[DataSource sharedInstance]getAllObjectsWithDataType: DataTypeComponent withParentId:self.objectId]];
-
+        NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
+        [_components sortUsingDescriptors:@[sortDescriptor]];
     }
     return _components;
 }
