@@ -82,6 +82,8 @@
 }
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     id<MedRefDataSource> dataSource = [self getDataSource];
+//    [[LocalDB sharedInstance]deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
+//    [[ParseDataSource sharedInstance]deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
     return [dataSource deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
 }
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
