@@ -104,8 +104,9 @@
         UITableViewCell* cell = ((UITableViewCell*)sender.view);
         [self.draggingView removeFromSuperview];
         CGPoint point = [sender locationInView:self.detailViewController.view];
+        point = CGPointMake(point.x+self.detailViewController.collectionView.contentOffset.x, point.y+self.detailViewController.collectionView.contentOffset.y);
         
-        if (CGRectContainsPoint(self.detailViewController.view.bounds, point)){
+        if (CGRectContainsPoint(self.detailViewController.collectionView.bounds, point)){
             [self.detailViewController insertComponentOfComponentType:cell.tag IntoCollectionViewAtLocation:point];
         }
         else
