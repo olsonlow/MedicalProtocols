@@ -482,7 +482,7 @@
         if(isChild){
             PFQuery *stepQuery;
             stepQuery = [PFQuery queryWithClassName:@"Step"];
-            [stepQuery whereKey:@"protocolUUID" equalTo:objectId];
+            [stepQuery whereKey:@"parentUUID" equalTo:objectId];
             [stepQuery findObjectsInBackgroundWithBlock:^(NSArray *steps, NSError *error) {
                 if(!error){
                     for(PFObject* step in steps){
@@ -515,7 +515,7 @@
             if([object isKindOfClass:[Form class]]){
                 PFQuery *formQuery;
                 formQuery = [PFQuery queryWithClassName:@"Form"];
-                [formQuery whereKey:@"stepUUID" equalTo:objectId];
+                [formQuery whereKey:@"parentUUID" equalTo:objectId];
                 [formQuery findObjectsInBackgroundWithBlock:^(NSArray* forms, NSError *error){
                     if(!error){
                         for(PFObject* form in forms){
@@ -530,7 +530,7 @@
             else if([object isKindOfClass:[Link class]]){
                 PFQuery *linkQuery;
                 linkQuery = [PFQuery queryWithClassName:@"Link"];
-                [linkQuery whereKey:@"stepUUID" equalTo:objectId];
+                [linkQuery whereKey:@"parentUUID" equalTo:objectId];
                 [linkQuery findObjectsInBackgroundWithBlock:^(NSArray* links, NSError *error){
                     if(!error){
                         for(PFObject* link in links){
@@ -543,7 +543,7 @@
             else if([object isKindOfClass:[Calculator class]]){
                 PFQuery *calculatorQuery;
                 calculatorQuery = [PFQuery queryWithClassName:@"Calculator"];
-                [calculatorQuery whereKey:@"stepUUID" equalTo:objectId];
+                [calculatorQuery whereKey:@"parentUUID" equalTo:objectId];
                 [calculatorQuery findObjectsInBackgroundWithBlock:^(NSArray* calculators, NSError *error){
                     if(!error){
                         for(PFObject* calculator in calculators){
@@ -556,7 +556,7 @@
             else if([object isKindOfClass:[TextBlock class]]){
                 PFQuery *textBlockQuery;
                 textBlockQuery = [PFQuery queryWithClassName:@"TextBlock"];
-                [textBlockQuery whereKey:@"stepUUID" equalTo:objectId];
+                [textBlockQuery whereKey:@"parentUUID" equalTo:objectId];
                 [textBlockQuery findObjectsInBackgroundWithBlock:^(NSArray* textBlocks, NSError *error){
                     if(!error){
                         for(PFObject* textBlock in textBlocks){
@@ -628,7 +628,7 @@
         if(isChild){
             PFQuery *formNumberQuery;
             formNumberQuery = [PFQuery queryWithClassName:@"FormNumber"];
-            [formNumberQuery whereKey:@"formUUID" equalTo:objectId];
+            [formNumberQuery whereKey:@"parentUUID" equalTo:objectId];
             [formNumberQuery findObjectsInBackgroundWithBlock:^(NSArray* formNumbers, NSError *error){
                 if(!error){
                     for(PFObject* formNumber in formNumbers){
@@ -639,7 +639,7 @@
             }];
             PFQuery *formSelectionQuery;
             formSelectionQuery = [PFQuery queryWithClassName:@"FormSelection"];
-            [formSelectionQuery whereKey:@"formUUID" equalTo:objectId];
+            [formSelectionQuery whereKey:@"parentUUID" equalTo:objectId];
             [formSelectionQuery findObjectsInBackgroundWithBlock:^(NSArray* formSelections, NSError *error){
                 if(!error){
                     for(PFObject* formSelection in formSelections){
