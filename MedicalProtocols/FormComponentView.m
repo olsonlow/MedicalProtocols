@@ -28,7 +28,7 @@
     self.layer.masksToBounds = YES;
     self.backgroundColor = [UIColor greenColor];
     FormComponentView * formComponentView = [FormComponentView formComponentWithFrame:frame Object:object];
-    formComponentView.center = CGPointMake(frame.size.height/2, frame.size.width/2);
+    formComponentView.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     [self addSubview:formComponentView];
     return self;
 }

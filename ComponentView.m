@@ -42,7 +42,7 @@
     self.layer.masksToBounds = YES;
     self.backgroundColor = [UIColor clearColor];
     ComponentView * componentView = [ComponentView componentWithFrame:self.frame Object:object];
-    componentView.center = CGPointMake(self.frame.size.height/2, self.frame.size.width/2);
+    componentView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     [self addSubview:componentView];
 }
 +(ComponentView *)componentWithFrame:(CGRect)frame Object:(id)object

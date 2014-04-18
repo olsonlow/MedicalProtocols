@@ -27,7 +27,7 @@
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
     linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    linkButton.center = CGPointMake(linkButton.frame.size.height, linkButton.frame.size.width);
+    linkButton.center = CGPointMake(linkButton.frame.size.width, linkButton.frame.size.height);
     linkButton.backgroundColor = [UIColor darkGrayColor];
     [linkButton setTitle:self.link.label forState:UIControlStateNormal];
     [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];

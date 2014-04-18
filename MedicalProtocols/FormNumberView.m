@@ -23,7 +23,8 @@
 -(id) initWithFrame:(CGRect)frame andFormNumber:(FormNumber *)formNumber
 {
     self = [super initWithFrame:frame];
-    self.center = CGPointMake(frame.size.width/2, frame.size.width/2);
+
+    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
     UISlider *slider= [[UISlider alloc]init];
     slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);

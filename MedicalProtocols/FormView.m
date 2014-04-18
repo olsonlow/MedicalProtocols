@@ -39,7 +39,7 @@
     
     UILabel *name = [[UILabel alloc]init];
     name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    name.center = CGPointMake(name.frame.size.height/2, name.frame.size.width/4);
+    name.center = CGPointMake(name.frame.size.width/2, name.frame.size.height/4);
     name.text = @"Form";
     
     //UILabel *formId = [[UILabel alloc]init];

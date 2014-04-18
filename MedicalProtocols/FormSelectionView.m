@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     NSLog(@"FORM SELECTION VIEW");
-    self.center = CGPointMake(frame.size.width/2, frame.size.width/2);
+    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
     
     RadioButton *choiceA = [[RadioButton alloc]init];

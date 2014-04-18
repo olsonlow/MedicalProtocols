@@ -27,12 +27,12 @@
     self.backgroundColor = [UIColor colorWithRed:209.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1];
     UILabel *title = [[UILabel alloc]init];
     title.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    title.center = CGPointMake(title.frame.size.height/2, title.frame.size.width/4);
+    title.center = CGPointMake(title.frame.size.width/2, title.frame.size.height/4);
     title.text = self.textBlock.title;
     UILabel *content = [[UILabel alloc]init];
     content.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
     content.text = self.textBlock.content;
-    content.center = CGPointMake(frame.size.height/2, frame.size.width/4);
+    content.center = CGPointMake(frame.size.width/2, frame.size.height/4);
     [self addSubview:title];
     [self addSubview:content];
     [self bringSubviewToFront:self];
