@@ -22,18 +22,17 @@
 -(id)initWithFrame:(CGRect)frame andLink:(Link*)link
 {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor blueColor];
     self.link = link;
-    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    self.backgroundColor = [UIColor colorWithRed:230.0 green:249.0 blue:200.0 alpha:1];
+    //self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    linkButton.center = CGPointMake(linkButton.frame.size.width, linkButton.frame.size.height);
+    CGSize stringSize = [self.link.label sizeWithAttributes:@{NSFontAttributeName:linkButton.titleLabel.font}];
+    linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
+    [linkButton setNeedsDisplay];
     linkButton.backgroundColor = [UIColor darkGrayColor];
     [linkButton setTitle:self.link.label forState:UIControlStateNormal];
     [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:linkButton];
-    [self bringSubviewToFront:self];
-    
     return self;
 }
 

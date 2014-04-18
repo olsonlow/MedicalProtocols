@@ -26,10 +26,13 @@
     NSLog(@"FORM SELECTION VIEW");
     self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
+    UILabel *choiceLabel = [[UILabel alloc]init];
+    CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:choiceLabel.font}];
+    choiceLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
+    RadioButton *choiceA = [[RadioButton alloc]initWithFrame:frame];
     
-    RadioButton *choiceA = [[RadioButton alloc]init];
-    //RadioButton *choiceB = [[RadioButton alloc]init];
-    choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
+    //UISwitch *choiceA = [[UISwitch alloc]init];
+    choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     [choiceA setCenter:self.center];
     [self addSubview:choiceA];
     return self;
