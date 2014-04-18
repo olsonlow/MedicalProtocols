@@ -183,14 +183,17 @@
     NSArray* tableNames = nil;
     switch (dataType) {
         case DataTypeProtocol:
-            tableNames =@[@"protocol"];
+            tableNames =@[@"Protocol"];
             break;
         case DataTypeStep:
-            tableNames =@[@"step"];
+            tableNames =@[@"Step"];
+            break;
         case DataTypeComponent:
-            tableNames =@[@"form", @"link", @"calculator", @"textBlock"];
+            tableNames =@[@"Form", @"Link", @"Calculator", @"TextBlock"];
+            break;
         case DataTypeFormComponent:
-            tableNames = @[@"formNumber", @"formSelection"];
+            tableNames = @[@"FormNumber", @"FormSelection"];
+            break;
         default:
             break;
     }
@@ -296,11 +299,11 @@
     PFQuery *query;
     NSArray *tableNames = [self tableNamesForDataType:dataType];
     for(NSString* tableName in tableNames){
-        query = [PFQuery queryWithClassName:[tableNames objectAtIndex:[tableNames indexOfObject:tableName]]];
+        query = [PFQuery queryWithClassName:tableName];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             {
-                if(!error){
-                    [self.delegate downloadedParseObjects:[objects objectAtIndex:[tableNames indexOfObject:tableName]] withDataType:dataType];
+                if(!error ){
+                    [self.delegate downloadedParseObjects:objects withDataType:dataType];
                      self.runningQueries--;
                 }
             }
@@ -486,7 +489,7 @@
             [stepQuery findObjectsInBackgroundWithBlock:^(NSArray *steps, NSError *error) {
                 if(!error){
                     for(PFObject* step in steps){
-                        NSString* stepId = step.objectId;
+                        NSString* stepId = step[@"UUID"];
                         [self deleteObjectWithDataType:DataTypeComponent withId:stepId isChild:YES];
                         [step deleteInBackground];
                         success = YES;
@@ -500,7 +503,7 @@
             [stepQuery findObjectsInBackgroundWithBlock:^(NSArray *steps, NSError *error) {
                 if(!error){
                     for(PFObject* step in steps){
-                        NSString* stepId = step.objectId;
+                        NSString* stepId = step[@"UUID"];
                         [self deleteObjectWithDataType:DataTypeComponent withId:stepId isChild:YES];
                         [step deleteInBackground];
                         success = YES;
@@ -511,61 +514,23 @@
     }
     else if(dataType == DataTypeComponent){
         if(isChild){
-            PFObject* object = [self getObjectWithDataType:dataType withId: objectId];
-            if([object isKindOfClass:[Form class]]){
-                PFQuery *formQuery;
-                formQuery = [PFQuery queryWithClassName:@"Form"];
-                [formQuery whereKey:@"parentUUID" equalTo:objectId];
-                [formQuery findObjectsInBackgroundWithBlock:^(NSArray* forms, NSError *error){
+            NSArray* tableNames = [self tableNamesForDataType:dataType];
+            for(NSString* tableName in tableNames){
+                PFQuery *query;
+                query = [PFQuery queryWithClassName:tableName];
+                [query whereKey:@"parentUUID" equalTo:objectId];
+                [query findObjectsInBackgroundWithBlock:^(NSArray* objects, NSError *error){
                     if(!error){
-                        for(PFObject* form in forms){
-                            NSString* formId = form.objectId;
+                        for(PFObject* object in objects){
+                            NSString* formId = object[@"UUID"];
                             [self deleteObjectWithDataType:DataTypeFormComponent withId:formId isChild:YES];
-                            [form deleteInBackground];
+                            [object deleteInBackground];
                             success = YES;
                         }
                     }
                 }];
             }
-            else if([object isKindOfClass:[Link class]]){
-                PFQuery *linkQuery;
-                linkQuery = [PFQuery queryWithClassName:@"Link"];
-                [linkQuery whereKey:@"parentUUID" equalTo:objectId];
-                [linkQuery findObjectsInBackgroundWithBlock:^(NSArray* links, NSError *error){
-                    if(!error){
-                        for(PFObject* link in links){
-                            [link deleteInBackground];
-                            success = YES;
-                        }
-                    }
-                }];
-            }
-            else if([object isKindOfClass:[Calculator class]]){
-                PFQuery *calculatorQuery;
-                calculatorQuery = [PFQuery queryWithClassName:@"Calculator"];
-                [calculatorQuery whereKey:@"parentUUID" equalTo:objectId];
-                [calculatorQuery findObjectsInBackgroundWithBlock:^(NSArray* calculators, NSError *error){
-                    if(!error){
-                        for(PFObject* calculator in calculators){
-                            [calculator deleteInBackground];
-                            success = YES;
-                        }
-                    }
-                }];
-            }
-            else if([object isKindOfClass:[TextBlock class]]){
-                PFQuery *textBlockQuery;
-                textBlockQuery = [PFQuery queryWithClassName:@"TextBlock"];
-                [textBlockQuery whereKey:@"parentUUID" equalTo:objectId];
-                [textBlockQuery findObjectsInBackgroundWithBlock:^(NSArray* textBlocks, NSError *error){
-                    if(!error){
-                        for(PFObject* textBlock in textBlocks){
-                            [textBlock deleteInBackground];
-                            success = YES;
-                        }
-                    }
-                }];
-            }
+
         }else{
             PFObject* object = [self getObjectWithDataType:dataType withId: objectId];
             if([object isKindOfClass:[Form class]]){
@@ -575,7 +540,7 @@
                 [formQuery findObjectsInBackgroundWithBlock:^(NSArray* forms, NSError *error){
                     if(!error){
                         for(PFObject* form in forms){
-                            NSString* formId = form.objectId;
+                            NSString* formId = form[@"UUID"];
                             [self deleteObjectWithDataType:DataTypeFormComponent withId:formId isChild:YES];
                             [form deleteInBackground];
                             success = YES;
