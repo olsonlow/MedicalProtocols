@@ -38,11 +38,10 @@
     return _steps;
 }
 -(void)removeStepAtIndex:(int)index{
-    for(ProtocolStep* step in self.steps){
-        //[step removeComponents];
-        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:step.objectId isChild:NO];
-        [self.steps removeObjectAtIndex:index];
-    }
+    ProtocolStep* step = [self.steps objectAtIndex:index];
+    [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeStep withId:step.objectId isChild:NO];
+    [step removeComponents];
+    [self.steps removeObjectAtIndex:index];
 }
 
 -(void)addNewStep{

@@ -44,7 +44,6 @@
 //        [[DataSource sharedInstance] deleteObjectWithDataType:DataTypeComponent withId:component.objectId];
 //    }
 //}
-
 -(Component*)componentAtIndex:(int)index{
     return [self.components objectAtIndex:index];
 }
