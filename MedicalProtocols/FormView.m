@@ -23,7 +23,7 @@
 {
     self = [super initWithFrame:frame];
     self.form = form;
-    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    //self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:218.0/255.0 blue:185.0/255.0 alpha:1.0];
     
     NSLog(@"FORM COMONENTS: %d", [form countFormComonents]);
@@ -38,16 +38,11 @@
     }
     
     UILabel *name = [[UILabel alloc]init];
-    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    name.center = CGPointMake(name.frame.size.height/2, name.frame.size.width/4);
-    name.text = @"Form";
+    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);name.text = @"Form";
+    CGSize nameStringSize = [name.text sizeWithAttributes:@{NSFontAttributeName:name.font}];
+    name.frame = CGRectMake(frame.origin.x, frame.origin.y, nameStringSize.width, nameStringSize.height);
     
-    //UILabel *formId = [[UILabel alloc]init];
-   //formId.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-   //[formId setCenter:self.center];
-   //formId.text = self.form.objectId;
     [self addSubview:name];
-   //[self addSubview:formId];
     return self;
 }
 

@@ -23,17 +23,17 @@
 {
     self = [super initWithFrame:frame];
     self.calculator = calculator;
-    self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     self.backgroundColor = [UIColor colorWithRed:193.0/255.0 green:205.0/255.0 blue:193.0/255.0 alpha:1.0];
    
     UILabel *name = [[UILabel alloc]init];
-    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    name.center = CGPointMake(name.frame.size.height/2, name.frame.size.width/4);
     name.text = @"Calculator";
+    CGSize nameStringSize = [name.text sizeWithAttributes:@{NSFontAttributeName:name.font}];
+    name.frame = CGRectMake(frame.origin.x, frame.origin.y, nameStringSize.width, nameStringSize.height);
     
     UILabel *calcId = [[UILabel alloc]init];
-    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    [calcId setCenter:self.center];
+    CGSize idStringSize = [self.calculator.objectId sizeWithAttributes:@{NSFontAttributeName:calcId.font}];
+    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, idStringSize.width, idStringSize.height);
+    calcId.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     calcId.text = self.calculator.objectId;
     
     [self addSubview:calcId];

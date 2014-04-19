@@ -94,8 +94,10 @@
                 break;
             case DataTypeComponent:
                 result = [db executeQuery:@"SELECT * FROM textBlock, calculator, form, link WHERE textBlock.objectId = calculator.objectId = form.objectId = link.objectId = (:objectId)", objectId];
+                break;
             case DataTypeFormComponent:
                 result = [db executeQuery:@"SELECT * FROM formNumber, formSelection WHERE formNumber.objectId = formSelection.objectId = (:objectId)", objectId];
+                break;
             default:
                 break;
         }
@@ -130,7 +132,7 @@
                 [db close];
                 return protocols;
             }
-            
+            break;
         case DataTypeStep:
             if(success)
             {
@@ -153,10 +155,13 @@
                 [db close];
                 return steps;
             }
+            break;
         case DataTypeComponent:
             return[self getAllComponentsWithParentID:parentId];
+            break;
         case DataTypeFormComponent:
             return[self getAllFormComponentsWithParentID:parentId];
+            break;
         default:
             break;
     }
@@ -457,8 +462,8 @@
             [db open];
             protocol = [db executeUpdate:@"DELETE FROM protocol WHERE objectId = (:objectId)", objectId];
             [db close];
+            break;
         case DataTypeStep:
-            //steps = [self getStepsForProtocolId:objectId];
             if(!isChild)
             {
                 [self deleteObjectWithDataType:DataTypeComponent withId:objectId isChild:YES];
@@ -476,9 +481,8 @@
                     [db close];
                 }
             }
-            
+            break;
         case DataTypeComponent:
-            //components = [self getComponentsForStepId:objectId];
             if(!isChild)
             {
                 [db open];
@@ -506,6 +510,7 @@
                     [db close];
                 }
             }
+            break;
         case DataTypeFormComponent:
             if(!isChild)
             {
@@ -525,6 +530,7 @@
                     [db close];
                 }
             }
+            break;
         default:
             break;
     }
@@ -569,10 +575,13 @@
             break;
         case DataTypeStep:
             tableNames =@[@"step"];
+            break;
         case DataTypeComponent:
             tableNames =@[@"form", @"link", @"calculator", @"textBlock"];
+            break;
         case DataTypeFormComponent:
             tableNames = @[@"formNumber", @"formSelection"];
+            break;
         default:
             break;
     }

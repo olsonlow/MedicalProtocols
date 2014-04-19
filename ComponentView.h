@@ -13,6 +13,7 @@
 @property NSString *componentType;
 @property id component;
 @property (nonatomic,strong) id dataObject;
+
 -(id)initWithFrame:(CGRect)frame Object:(id) object;
 -(id)initWithFrame:(CGRect)frame;
 -(void)startWobble;
