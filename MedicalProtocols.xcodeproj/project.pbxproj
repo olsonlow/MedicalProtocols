@@ -22,6 +22,7 @@
 		361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7918ECDF5F0030D688 /* FMDatabasePool.m */; };
 		361A2D8818ECDFC20030D688 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7B18ECDF5F0030D688 /* FMDatabaseQueue.m */; };
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
+		36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */; };
 		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
 		8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8976C4AE18FDDBD500DECF27 /* FormNumberView.m */; };
 		8976C4B218FDDBEA00DECF27 /* FormSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8976C4B118FDDBEA00DECF27 /* FormSelectionView.m */; };
@@ -108,6 +109,8 @@
 		361A2D7D18ECDF5F0030D688 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		361A2D7E18ECDF5F0030D688 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
+		36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModalViewController.h; sourceTree = "<group>"; };
+		36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModalViewController.m; sourceTree = "<group>"; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		8976C4AD18FDDBD500DECF27 /* FormNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormNumberView.h; sourceTree = "<group>"; };
 		8976C4AE18FDDBD500DECF27 /* FormNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormNumberView.m; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */,
 				A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */,
 				A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */,
+				36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */,
+				36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				A3FC35AF18FDDE5900D2F75D /* StepBuilderMasterViewController.m in Sources */,
 				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
+				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
 				89AC2BA918F9D5B700BC4BC2 /* ComponentView.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
