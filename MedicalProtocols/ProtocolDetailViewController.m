@@ -12,6 +12,7 @@
 #import "ComponentView.h"
 #import "StepMasterViewController.h"
 #import "LocalDB.h"
+#import "ComponentModalViewController.h"
 
 @interface ProtocolDetailViewController ()
 
@@ -95,7 +96,8 @@
 //}
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    Component *component = [self.step componentAtIndex:indexPath.row];
+    [self displayModalViewWithComponent:component];
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);
@@ -111,11 +113,19 @@
         [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.step countComponents]-1 inSection:0]]];
     }
 }
-
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
+}
+- (void)displayModalViewWithComponent:(Component*) component {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    ComponentModalViewController *modalViewController = [storyboard instantiateViewControllerWithIdentifier:@"ModalView"];
+    modalViewController.view.backgroundColor = [UIColor clearColor];
+    modalViewController.component = component;
+    modalViewController.delegate = self;
+    modalViewController.modalPresentationStyle= UIModalPresentationCustom;
+    [self presentViewController:modalViewController animated:YES completion:nil];
 }
 @end

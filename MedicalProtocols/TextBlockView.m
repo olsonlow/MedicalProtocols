@@ -28,8 +28,9 @@
     CGSize titleStringSize = [self.textBlock.title sizeWithAttributes:@{NSFontAttributeName:title.font}];
     title.frame = CGRectMake(frame.origin.x, frame.origin.y, titleStringSize.width, titleStringSize.height);
     title.text = self.textBlock.title;
+    
     UILabel *content = [[UILabel alloc]init];
-      CGSize contentStringSize = [self.textBlock.content sizeWithAttributes:@{NSFontAttributeName:content.font}];
+    CGSize contentStringSize = [self.textBlock.content sizeWithAttributes:@{NSFontAttributeName:content.font}];
     content.frame = CGRectMake(frame.origin.x, frame.origin.y, contentStringSize.width, contentStringSize.height);
     content.text = self.textBlock.content;
     content.center = CGPointMake(frame.size.width/2, frame.size.height/2);
