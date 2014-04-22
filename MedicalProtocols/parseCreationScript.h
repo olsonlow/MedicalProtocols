@@ -32,6 +32,7 @@ calculatorComponent[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [calculatorComponent saveInBackground];
 
 PFObject *formComponent = [PFObject objectWithClassName:@"Form"];
+formComponent[@"label"] = @"Anticoagulation Decision";
 formComponent[@"orderNumber"] = [NSNumber numberWithInt:1];
 formComponent[@"parentUUID"] = stepObject[@"UUID"];
 formComponent[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
@@ -119,6 +120,7 @@ textBlockObject2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [textBlockObject2 saveInBackground];
 
 PFObject *formComponent2 = [PFObject objectWithClassName:@"Form"];
+formComponent2[@"label"] = @"Rate vs Rhythm Decision";
 formComponent2[@"orderNumber"] = [NSNumber numberWithInt:2];
 formComponent2[@"parentUUID"] = stepObject2[@"UUID"];
 formComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
@@ -209,6 +211,7 @@ stepObject5[@"parentUUID"] = protocol2[@"UUID"];
 [stepObject5 saveInBackground];
 
 PFObject *formComponent3 = [PFObject objectWithClassName:@"Form"];
+formComponent3[@"label"] = @"Protocol for Chest Pain";
 formComponent3[@"orderNumber"] = [NSNumber numberWithInt:3];
 formComponent3[@"parentUUID"] = stepObject5[@"UUID"];
 formComponent3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
