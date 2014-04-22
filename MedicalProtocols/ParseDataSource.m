@@ -74,7 +74,7 @@
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
-                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
+                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue] label:object[@"label"]];
                     [parseObjects addObject:form];
                 }
                 else if([className isEqualToString:@"Link"]){
@@ -359,6 +359,7 @@
                     parseFormObject[@"UUID"] = form.objectId;
                     parseFormObject[@"parentUUID"] = form.stepId;
                     parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
+                    parseFormObject[@"label"] = form.label;
                     [parseFormObject saveInBackground];
                     success = YES;
                 }
@@ -693,6 +694,7 @@
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
         parseFormObject[@"parentUID"] = form.stepId;
         parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
+        parseFormObject[@"label"] = form.label;
         [parseFormObject saveInBackground];
         success = YES;
     }

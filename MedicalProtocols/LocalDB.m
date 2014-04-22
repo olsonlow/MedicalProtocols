@@ -228,7 +228,7 @@
         
         while([formResults next])
         {
-            Form *form = [[Form alloc] initWithObjectId:[formResults stringForColumn:@"objectId"] stepId:[formResults stringForColumn:@"stepId"] orderNumber:[formResults intForColumn:@"orderNumber"]];
+            Form *form = [[Form alloc] initWithObjectId:[formResults stringForColumn:@"objectId"] stepId:[formResults stringForColumn:@"stepId"] orderNumber:[formResults intForColumn:@"orderNumber"] label:[formResults stringForColumn:@"label"]];
             [components addObject:form];
         }
         if ([db hadError]) {
@@ -413,7 +413,7 @@
     else if([object isKindOfClass:[Form class]])
     {
         Form *form = (Form *) object;
-        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId, orderNumber) VALUES (:objectId,:stepId,:orderNumber)", form.objectId, form.stepId, [NSNumber numberWithInt:form.orderNumber]];
+        success = [db executeUpdate:@"INSERT INTO form (objectId, stepId, orderNumber, label) VALUES (:objectId,:stepId,:orderNumber,:label)", form.objectId, form.stepId, [NSNumber numberWithInt:form.orderNumber], form.label];
     }
     
     else if([object isKindOfClass:[TextBlock class]])
