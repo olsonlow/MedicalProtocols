@@ -287,7 +287,6 @@
 		89AC2BA018F9D2F700BC4BC2 /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
-				A3A115A01907498E0072E184 /* modalViews */,
 				A3A1159F190749820072E184 /* collectionCellViews */,
 			);
 			name = ComponentViews;
@@ -502,13 +501,6 @@
 				8976C4AC18FDDBAD00DECF27 /* FormComponentViews */,
 			);
 			name = collectionCellViews;
-			sourceTree = "<group>";
-		};
-		A3A115A01907498E0072E184 /* modalViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = modalViews;
 			sourceTree = "<group>";
 		};
 		A3B2755518F8C604001C5027 /* ViewControllers */ = {
