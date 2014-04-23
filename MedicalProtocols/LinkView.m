@@ -24,17 +24,20 @@
     self = [super initWithFrame:frame];
     self.link = link;
     self.backgroundColor = [UIColor colorWithRed:230.0 green:249.0 blue:200.0 alpha:1];
-    //self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
     CGSize stringSize = [self.link.label sizeWithAttributes:@{NSFontAttributeName:linkButton.titleLabel.font}];
-    linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
-    [linkButton setNeedsDisplay];
-    linkButton.backgroundColor = [UIColor clearColor];
+    [linkButton setFrame:CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height)];
+    [linkButton setCenter: CGPointMake(frame.size.width/2, frame.size.height/2)];
+    [linkButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [linkButton setTitleColor:[UIColor purpleColor] forState:UIControlStateSelected];
+    [linkButton setBackgroundColor:[UIColor whiteColor]];
     [linkButton setTitle:self.link.label forState:UIControlStateNormal];
     [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:linkButton];
     return self;
 }
+
 
 -(void)buttonPressed:(id)sender{
     NSURL *url = [NSURL URLWithString:self.link.url];
