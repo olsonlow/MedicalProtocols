@@ -74,7 +74,7 @@
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
-                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
+                    Form *form = [[Form alloc] initWithObjectId:object[@"UUID"] label:object[@"label"] stepId:object[@"parentUUID"] orderNumber:[object[@"orderNumber"]intValue]];
                     [parseObjects addObject:form];
                 }
                 else if([className isEqualToString:@"Link"]){

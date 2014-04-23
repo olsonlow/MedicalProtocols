@@ -228,7 +228,7 @@
         
         while([formResults next])
         {
-            Form *form = [[Form alloc] initWithObjectId:[formResults stringForColumn:@"objectId"] stepId:[formResults stringForColumn:@"stepId"] orderNumber:[formResults intForColumn:@"orderNumber"]];
+            Form *form = [[Form alloc] initWithObjectId:[formResults stringForColumn:@"objectId"] label:[formResults stringForColumn:@"label"] stepId:[formResults stringForColumn:@"stepId"] orderNumber:[formResults intForColumn:@"orderNumber"]];
             [components addObject:form];
         }
         if ([db hadError]) {
