@@ -264,8 +264,8 @@
 		8976C4AC18FDDBAD00DECF27 /* FormComponentViews */ = {
 			isa = PBXGroup;
 			children = (
-				8976C4B718FDE2A200DECF27 /* FormComponentView.m */,
 				8976C4B618FDE2A200DECF27 /* FormComponentView.h */,
+				8976C4B718FDE2A200DECF27 /* FormComponentView.m */,
 				8976C4AD18FDDBD500DECF27 /* FormNumberView.h */,
 				8976C4AE18FDDBD500DECF27 /* FormNumberView.m */,
 				8976C4B018FDDBEA00DECF27 /* FormSelectionView.h */,

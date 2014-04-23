@@ -359,6 +359,7 @@
                     parseFormObject[@"UUID"] = form.objectId;
                     parseFormObject[@"parentUUID"] = form.stepId;
                     parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
+                    parseFormObject[@"label"] = form.label;
                     [parseFormObject saveInBackground];
                     success = YES;
                 }
@@ -693,6 +694,7 @@
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
         parseFormObject[@"parentUID"] = form.stepId;
         parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
+        parseFormObject[@"label"] = form.label;
         [parseFormObject saveInBackground];
         success = YES;
     }

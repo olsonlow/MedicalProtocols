@@ -51,7 +51,8 @@ DROP TABLE IF EXISTS form;
 
 CREATE TABLE form(
     objectId        varchar(100)  PRIMARY KEY,
-    orderNumber      integer         NOT NULL,
+    label           varchar(100)  NOT NULL,
+    orderNumber      integer      NOT NULL,
     stepID          varchar(100)  NOT NULL
 );
 
