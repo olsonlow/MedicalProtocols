@@ -29,7 +29,7 @@
     CGSize stringSize = [self.link.label sizeWithAttributes:@{NSFontAttributeName:linkButton.titleLabel.font}];
     linkButton.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
     [linkButton setNeedsDisplay];
-    linkButton.backgroundColor = [UIColor darkGrayColor];
+    linkButton.backgroundColor = [UIColor clearColor];
     [linkButton setTitle:self.link.label forState:UIControlStateNormal];
     [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:linkButton];

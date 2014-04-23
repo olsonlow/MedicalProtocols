@@ -18,11 +18,12 @@ typedef NS_ENUM(NSUInteger, ComponentType) {
 
 @interface Component : NSObject
 @property(nonatomic,copy) NSString* stepId;
+@property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;
 +(NSString*)ImageNameForComponentType:(ComponentType)componentType;
 +(NSString*)NameForComponentType:(ComponentType)componentType;
 +(void)DeleteComponentWithId:(NSString*)objectId;
 
 +(id)componentType:(ComponentType)componentType stepId:(NSString*)stepId;
--(id)initWithStepId:(NSString*)stepId OrderNumber:(int)orderNumber;
+-(id)initWithObjectId:(NSString*)objectId StepId:(NSString*)stepId OrderNumber:(int)orderNumber;
 @end

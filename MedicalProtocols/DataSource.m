@@ -83,7 +83,7 @@
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     id<MedRefDataSource> dataSource = [self getDataSource];
     [[ParseDataSource sharedInstance]deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
-    return dataSource;
+    return [dataSource deleteObjectWithDataType:dataType withId:objectId isChild:isChild];
 }
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];

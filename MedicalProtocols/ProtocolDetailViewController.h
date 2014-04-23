@@ -10,9 +10,10 @@
 
 @class MedProtocol;
 @class ProtocolStep;
-@interface ProtocolDetailViewController : MedRefBaseDetailViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface ProtocolDetailViewController : MedRefBaseDetailViewController<UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) MedProtocol* protocol;
 @property (strong, nonatomic) ProtocolStep* step;
+-(void)deleteCellAtindex:(int)index;
 -(void)insertComponentOfComponentType:(ComponentType)componentType IntoCollectionViewAtLocation:(CGPoint)location;
 @end

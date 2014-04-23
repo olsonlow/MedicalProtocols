@@ -13,9 +13,9 @@
     return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithStepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
-        _objectId = objectId;
+        //_objectId = objectId;
     }
     return self;
 }

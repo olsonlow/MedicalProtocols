@@ -36,7 +36,6 @@
     content.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     [self addSubview:title];
     [self addSubview:content];
-    [self bringSubviewToFront:self];
     return self;
 }
 

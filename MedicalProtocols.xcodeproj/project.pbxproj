@@ -65,6 +65,8 @@
 		A3689B8818E94F0D0040D6F2 /* Form.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8718E94F0D0040D6F2 /* Form.m */; };
 		A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8B18E952BA0040D6F2 /* FormNumber.m */; };
 		A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8E18E952C90040D6F2 /* FormSelection.m */; };
+		A3A1159B19072F540072E184 /* ComponentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1159A19072F540072E184 /* ComponentCell.m */; };
+		A3A1159D190732E40072E184 /* cancelIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A1159C190732E40072E184 /* cancelIcon.png */; };
 		A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2755E18F8C773001C5027 /* MedRefBaseDetailViewController.m */; };
 		A3B2756818F99BA5001C5027 /* DetailViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2756718F99BA5001C5027 /* DetailViewControllerSegue.m */; };
 		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
@@ -183,6 +185,9 @@
 		A3689B8B18E952BA0040D6F2 /* FormNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormNumber.m; sourceTree = "<group>"; };
 		A3689B8D18E952C90040D6F2 /* FormSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormSelection.h; sourceTree = "<group>"; };
 		A3689B8E18E952C90040D6F2 /* FormSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormSelection.m; sourceTree = "<group>"; };
+		A3A1159919072F540072E184 /* ComponentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentCell.h; sourceTree = "<group>"; };
+		A3A1159A19072F540072E184 /* ComponentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentCell.m; sourceTree = "<group>"; };
+		A3A1159C190732E40072E184 /* cancelIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelIcon.png; sourceTree = "<group>"; };
 		A3B2755D18F8C773001C5027 /* MedRefBaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedRefBaseDetailViewController.h; sourceTree = "<group>"; };
 		A3B2755E18F8C773001C5027 /* MedRefBaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedRefBaseDetailViewController.m; sourceTree = "<group>"; };
 		A3B2756618F99BA5001C5027 /* DetailViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewControllerSegue.h; sourceTree = "<group>"; };
@@ -282,17 +287,8 @@
 		89AC2BA018F9D2F700BC4BC2 /* ComponentViews */ = {
 			isa = PBXGroup;
 			children = (
-				89AC2BA718F9D5B700BC4BC2 /* ComponentView.h */,
-				89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */,
-				89AC2BAA18F9E14C00BC4BC2 /* FormView.h */,
-				89AC2BAB18F9E14C00BC4BC2 /* FormView.m */,
-				89AC2BAD18F9E16100BC4BC2 /* LinkView.h */,
-				89AC2BAE18F9E16100BC4BC2 /* LinkView.m */,
-				89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */,
-				89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */,
-				89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */,
-				89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */,
-				8976C4AC18FDDBAD00DECF27 /* FormComponentViews */,
+				A3A115A01907498E0072E184 /* modalViews */,
+				A3A1159F190749820072E184 /* collectionCellViews */,
 			);
 			name = ComponentViews;
 			sourceTree = "<group>";
@@ -367,6 +363,7 @@
 		A324B2DB18E24A4600261C57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3A1159C190732E40072E184 /* cancelIcon.png */,
 				A3EBEAE718F378E40016613C /* medRef.db */,
 				89756D4D18ECCBB20006321C /* medRef.sql */,
 				8976C4BD18FDE72200DECF27 /* checked.png */,
@@ -410,8 +407,8 @@
 				A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */,
 				A324B32018E4D2A900261C57 /* ProtocolDetailViewController.h */,
 				A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */,
-				36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */,
-				36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */,
+				A3A1159919072F540072E184 /* ComponentCell.h */,
+				A3A1159A19072F540072E184 /* ComponentCell.m */,
 			);
 			name = DetailViews;
 			sourceTree = "<group>";
@@ -480,11 +477,46 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
+		A3A1159E1907482B0072E184 /* Modal Views */ = {
+			isa = PBXGroup;
+			children = (
+				36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */,
+				36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */,
+			);
+			name = "Modal Views";
+			sourceTree = "<group>";
+		};
+		A3A1159F190749820072E184 /* collectionCellViews */ = {
+			isa = PBXGroup;
+			children = (
+				89AC2BA718F9D5B700BC4BC2 /* ComponentView.h */,
+				89AC2BA818F9D5B700BC4BC2 /* ComponentView.m */,
+				89AC2BAA18F9E14C00BC4BC2 /* FormView.h */,
+				89AC2BAB18F9E14C00BC4BC2 /* FormView.m */,
+				89AC2BAD18F9E16100BC4BC2 /* LinkView.h */,
+				89AC2BAE18F9E16100BC4BC2 /* LinkView.m */,
+				89AC2BB018F9E17300BC4BC2 /* CalculatorView.h */,
+				89AC2BB118F9E17300BC4BC2 /* CalculatorView.m */,
+				89AC2BBC18F9FBE400BC4BC2 /* TextBlockView.h */,
+				89AC2BBD18F9FBE400BC4BC2 /* TextBlockView.m */,
+				8976C4AC18FDDBAD00DECF27 /* FormComponentViews */,
+			);
+			name = collectionCellViews;
+			sourceTree = "<group>";
+		};
+		A3A115A01907498E0072E184 /* modalViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = modalViews;
+			sourceTree = "<group>";
+		};
 		A3B2755518F8C604001C5027 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				A3B2755618F8C613001C5027 /* SplitViews */,
 				89AC2BA018F9D2F700BC4BC2 /* ComponentViews */,
+				A3A1159E1907482B0072E184 /* Modal Views */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -626,6 +658,7 @@
 				8976C4BE18FDE72200DECF27 /* checked.png in Resources */,
 				A324B2E818E24A4600261C57 /* Main_iPhone.storyboard in Resources */,
 				8976C4C018FDE72700DECF27 /* unchecked.png in Resources */,
+				A3A1159D190732E40072E184 /* cancelIcon.png in Resources */,
 				A324B2DF18E24A4600261C57 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +699,7 @@
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
+				A3A1159B19072F540072E184 /* ComponentCell.m in Sources */,
 				89AC2BA918F9D5B700BC4BC2 /* ComponentView.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,

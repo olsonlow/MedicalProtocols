@@ -13,8 +13,11 @@
 #import "StepMasterViewController.h"
 #import "LocalDB.h"
 #import "ComponentModalViewController.h"
+#import "ComponentCell.h"
 
-@interface ProtocolDetailViewController ()
+@interface ProtocolDetailViewController (){
+    int componentToDeleteIndex;
+}
 
 - (void)configureView;
 @end
@@ -77,27 +80,36 @@
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ComponentView *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
+    ComponentCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"smallComponentCell" forIndexPath:indexPath];
+    cell.index = [indexPath row];
+    cell.delegate = self;
+    cell.wobbling = NO;
     Component *component = [self.step componentAtIndex:indexPath.row];
     NSLog(@"COMPONENT TYPE: %@", component.class);
-    cell.dataObject = component;
+    CGRect cellFrame = CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height);
+    ComponentView* componentView = [[ComponentView alloc] initWithFrame:cellFrame Object:component];
     cell.backgroundColor=[UIColor clearColor];
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]
                                                     initWithTarget:self action:@selector(longPress:)];
     [cell addGestureRecognizer:longPressGestureRecognizer];
+    [cell addSubview:componentView];
     return cell;
 }
 -(void)longPress:(UILongPressGestureRecognizer*)longPress{
-    [(ComponentView*)longPress.view startWobble];
+    [(ComponentCell*)longPress.view startWobble];
 }
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    return CGSizeMake(self.collectionView.frame.size.x/2, self.collectionView.frame.size.y/2);
 //}
-
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    Component *component = [self.step componentAtIndex:indexPath.row];
-    [self displayModalViewWithComponent:component];
+    ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    if(!componentCell.wobbling){
+        Component *component = [self.step componentAtIndex:indexPath.row];
+        [self displayModalViewWithComponent:component];
+    } else {
+        [componentCell stopWobble];
+    }
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);
@@ -113,19 +125,50 @@
         [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self.step countComponents]-1 inSection:0]]];
     }
 }
+
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
+    if([sender.identifier isEqualToString:@"FormSheetUnwindCancel"]){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else if([sender.identifier isEqualToString:@"FormSheetUnwindSave"]){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (void)displayModalViewWithComponent:(Component*) component {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    ComponentModalViewController *modalViewController = [storyboard instantiateViewControllerWithIdentifier:@"ModalView"];
-    modalViewController.view.backgroundColor = [UIColor clearColor];
-    modalViewController.component = component;
-    modalViewController.delegate = self;
-    modalViewController.modalPresentationStyle= UIModalPresentationCustom;
-    [self presentViewController:modalViewController animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"ModalView" sender:self];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
+//    ComponentModalViewController *modalViewController = [storyboard instantiateViewControllerWithIdentifier:@"ModalView"];
+//    modalViewController.view.backgroundColor = [UIColor clearColor];
+//    modalViewController.component = component;
+//    modalViewController.delegate = self;
+//    modalViewController.modalPresentationStyle= UIModalPresentationCustom;
+//    [self presentViewController:modalViewController animated:YES completion:nil];
+}
+-(void)deleteCellAtindex:(int)index{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"Do you wish to permanently delete this component?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Delete",nil];
+    componentToDeleteIndex = index;
+    [alert show];
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        [self.collectionView performBatchUpdates:^{
+            NSArray *selectedItemsIndexPaths = @[[NSIndexPath indexPathForRow:componentToDeleteIndex inSection:0]];
+            // Delete the items from the data source.
+            [self.step removeComponentAtIndex:componentToDeleteIndex];
+            // Now delete the items from the collection view.
+            [self.collectionView deleteItemsAtIndexPaths:selectedItemsIndexPaths];
+        } completion:^(BOOL finished){
+            if(finished){
+                [self.collectionView reloadData];
+            }
+        }];
+    } else {
+        NSIndexPath* path = [NSIndexPath indexPathForRow:componentToDeleteIndex inSection:0];
+        ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath: path];
+        [componentCell stopWobble];
+    }
 }
 @end

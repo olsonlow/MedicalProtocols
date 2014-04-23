@@ -22,10 +22,14 @@
         <!--Navigation Controller-->
         <scene sceneID="oTS-jN-cn2">
             <objects>
-                <navigationController definesPresentationContext="YES" id="ZXl-F4-TqO" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="ZXl-F4-TqO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b29-YP-42P">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="qdd-VF-LZj">
+                        <rect key="frame" x="0.0" y="724" width="703" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="mie-bD-wi9" kind="relationship" relationship="rootViewController" id="i3P-pT-4Vu"/>
                     </connections>
@@ -68,27 +72,61 @@
         <!--Component Modal View Controller-->
         <scene sceneID="s4U-k4-F3u">
             <objects>
-                <viewController id="dbV-lF-w0s" customClass="ComponentModalViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ModalView" storyboardIdentifier="ModalView" modalPresentationStyle="currentContext" id="dbV-lF-w0s" customClass="ComponentModalViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zEX-5I-ZWx"/>
                         <viewControllerLayoutGuide type="bottom" id="Ty3-dn-7pL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="i8M-p2-ijY">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="ModalView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6fA-Rt-rR9">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qRQ-AL-ol4">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="576"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jc9-H5-uh2">
+                                        <rect key="frame" x="0.0" y="22" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jc9-H5-uh2" id="Hd5-Ix-dDY">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xbO-Nt-s22">
+                                <rect key="frame" x="0.0" y="576" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="cancel" id="25W-yc-cGL">
+                                        <color key="tintColor" red="1" green="0.055647424251851763" blue="0.0035682649539118261" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="aKQ-rd-XW8" kind="unwind" identifier="FormSheetUnwindCancel" unwindAction="unwindToProtocolDetailViewController:" id="1qH-8a-9qV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="d5P-Xu-pAa"/>
+                                    <barButtonItem style="plain" systemItem="save" id="0Ub-Sw-s87">
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="aKQ-rd-XW8" kind="unwind" identifier="FormSheetUnwindSave" unwindAction="unwindToProtocolDetailViewController:" id="qYy-Ir-vGr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1h-cb-OAe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aKQ-rd-XW8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="757" y="1307"/>
+            <point key="canvasLocation" x="2245" y="450"/>
         </scene>
         <!--Protocol Detail View Controller-->
         <scene sceneID="ngp-ki-liX">
@@ -118,7 +156,7 @@
                                     <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="smallComponentCell" id="csF-Y9-tqo" customClass="ComponentView">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="smallComponentCell" id="csF-Y9-tqo" customClass="ComponentCell">
                                         <rect key="frame" x="20" y="88" width="325" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -127,7 +165,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LargeComponentCell" id="n7N-sv-rwe" customClass="ComponentView">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LargeComponentCell" id="n7N-sv-rwe" customClass="ComponentCell">
                                         <rect key="frame" x="358" y="88" width="325" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -157,11 +195,12 @@
                     <navigationItem key="navigationItem" id="Xep-1p-htq"/>
                     <connections>
                         <outlet property="collectionView" destination="1us-9w-nfT" id="Hvv-6l-D0D"/>
+                        <segue destination="dbV-lF-w0s" kind="modal" identifier="ModalView" modalPresentationStyle="formSheet" id="2XQ-a2-NAY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXg-kO-eHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184" y="370"/>
+            <point key="canvasLocation" x="1372" y="376"/>
         </scene>
         <!--Med Ref Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">

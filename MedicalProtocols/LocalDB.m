@@ -521,14 +521,14 @@
             }
             else
             {
-                NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
-                for(FormComponent *formComponentObject in formComponents)
-                {
+//                NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
+//                for(FormComponent *formComponentObject in formComponents)
+//                {
                     [db open];
                     formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
                     formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
                     [db close];
-                }
+//                }
             }
             break;
         default:

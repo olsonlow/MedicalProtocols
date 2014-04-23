@@ -59,9 +59,10 @@
     }
     return comonentName;
 }
--(id)initWithStepId:(NSString*)stepId OrderNumber:(int)orderNumber{
+-(id)initWithObjectId:(NSString*)objectId StepId:(NSString*)stepId OrderNumber:(int)orderNumber{
     self = [super init];
     if (self) {
+        _objectId = objectId;
         _stepId = stepId;
         _orderNumber = orderNumber;
     }

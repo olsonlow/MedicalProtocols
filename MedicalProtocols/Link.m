@@ -10,11 +10,10 @@
 
 @implementation Link
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithStepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
         _label = label;
         _url = url;
-        _objectId = objectId;
     }
     return self;
 }

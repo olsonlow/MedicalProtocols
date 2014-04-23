@@ -41,9 +41,8 @@
     float padding = 10.0;
     self.layer.cornerRadius = 10;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = [UIColor clearColor];
-    ComponentView * componentView = [ComponentView componentWithFrame:CGRectMake(padding, padding, self.frame.size.width +(2*padding), self.frame.size.height+(2*padding)) Object:object];
-    componentView.frame = CGRectMake(padding, padding, self.frame.size.width +(2*padding), self.frame.size.height+(2*padding));
+    self.backgroundColor = [UIColor grayColor];
+    ComponentView * componentView = [ComponentView componentWithFrame:CGRectMake(padding, padding, self.frame.size.width-(2*padding), self.frame.size.height-(2*padding)) Object:object];;
     [self addSubview:componentView];
 }
 +(ComponentView *)componentWithFrame:(CGRect)frame Object:(id)object
@@ -71,37 +70,6 @@
         result = [[LinkView alloc] initWithFrame: frame andLink:object];
     }
     return result;
-}
-
-- (void)startWobble {
-    self.layer.shouldRasterize = YES;
-    self.layer.rasterizationScale = 0.6;
-    self.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
-    self.alpha = 0.8;
-    self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-2));
-    
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:(UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse)
-                     animations:^ {
-                         self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(5));
-                     }
-                     completion:NULL
-     ];
-}
-
-- (void)stopWobble {
-    self.layer.shouldRasterize = NO;
-    self.layer.rasterizationScale = 1;
-    self.alpha = 1;
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:(UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear)
-                     animations:^ {
-                         self.transform = CGAffineTransformIdentity;
-                     }
-                     completion:NULL
-     ];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -10,11 +10,10 @@
 
 @implementation TextBlock
 -(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithStepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
         _title = title;
         _content = content;
-        _objectId = objectId;
         _printable = printable;
     }
     return self;

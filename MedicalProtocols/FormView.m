@@ -43,6 +43,8 @@
     name.frame = CGRectMake(frame.origin.x, frame.origin.y, nameStringSize.width, nameStringSize.height);
     
     [self addSubview:name];
+    NSLog(@"%d",self.userInteractionEnabled);
+
     return self;
 }
 
