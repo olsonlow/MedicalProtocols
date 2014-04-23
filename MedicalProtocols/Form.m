@@ -20,12 +20,12 @@
 @implementation Form
 - (instancetype)init
 {
-    return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
+    return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] label:@"Form" stepId:@"" orderNumber:-1];
 }
--(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
+-(id)initWithObjectId:(NSString*)objectId label:(NSString*)label stepId:(NSString*)stepId orderNumber:(int)orderNumber{
     self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
-
+        _label = label;
     }
     return self;
 }
