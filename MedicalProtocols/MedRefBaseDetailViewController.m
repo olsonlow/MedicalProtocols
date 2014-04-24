@@ -44,12 +44,22 @@
 -(void)viewDidAppear:(BOOL)animated{
 
     [super viewDidAppear:animated];
+    [self refreshView];
+    
+}
+-(void)refreshView{
     if(self.showProgressHud){
         [self displayProgressHudWithMessage:self.progressHudLabel];
     } else {
         [self cancelProgressHud];
     }
     [self showProgressHud];
+    
+    if([PFUser currentUser]){
+        self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)]];
+    } else {
+        self.navigationItem.rightBarButtonItems = nil;
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -123,6 +133,10 @@
         
         [self presentViewController:logInViewController animated:YES completion:NULL];
     }
+}
+-(void)logout{
+    [PFUser logOut];
+    [self refreshView];
 }
 
 @end
