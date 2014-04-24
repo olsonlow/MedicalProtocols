@@ -90,6 +90,12 @@
     component.stepId = stepId;
     return component;
 }
++(int)numberOfEditablePropertiesForComponent:(Component*)component{
+    if(TRUE){
+        
+    }
+    return 0;
+}
 +(void)DeleteComponentWithId:(NSString*)objectId{
     
 }
