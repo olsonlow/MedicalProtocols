@@ -38,12 +38,19 @@
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
         [_formComponents sortUsingDescriptors:@[sortDescriptor]];
     }
-    
-    //TESTING....
-    //NSString *alg = @"v1,||,v2,||,v3,||,v4,+,v5,||,v6";
-    //FormAlgorithm *fA = [[FormAlgorithm alloc]initWithFormId:self.objectId algOutput:0 resultOne:@"WOO" resultTwo:@"NOO"];
-    //[fA computeAlgorithmOnInputs:_formComponents withAlgorithm:alg];
+    NSString *result = self.formEntryComplete;
+    NSLog(@"result: %@", result);
     return _formComponents;
+}
+
+-(NSString *)formEntryComplete
+{
+    NSString *alg = @"v1,+,v2,-,v3,*,v4,+,v5,/,v6";
+    FormAlgorithm *fA = [[FormAlgorithm alloc]initWithFormId:self.objectId algOutput:0 resultOne:@"WOO" resultTwo:@"NOO"];
+    NSArray *v = @[@17, @3, @45, @0,@15, @8];
+    NSMutableArray *values = [[NSMutableArray alloc]initWithArray:v];
+    [fA computeAlgorithmOnInputs:values withAlgorithm:alg];
+    return fA.resultOne;
 }
 
 -(int) countFormComonents

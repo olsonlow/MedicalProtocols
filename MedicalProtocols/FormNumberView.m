@@ -15,9 +15,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        //initialization code...
+        self.frame  = frame;
         self.slider = [[UISlider alloc]init];
         self.sliderLabel =  [[UILabel alloc]init];
-        // Initialization code
     }
     return self;
 }

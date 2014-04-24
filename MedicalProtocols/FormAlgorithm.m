@@ -70,6 +70,7 @@
         return -1;
     }
     //if we get here, everything is going well, proceed to compute algorithm
+    int result = [[formComponentInputs objectAtIndex:0]intValue];
     for(int i = 0; i < [variables count]-1; i++)
     {
         NSString *var1 = [variables objectAtIndex:i];
@@ -79,8 +80,27 @@
         {
             operator = [operators objectAtIndex:j];
         }
-        NSLog(@"%@ %@ %@", var1, operator, var2);
+        //NSLog(@"%@ %@ %@", var1, operator, var2);
+       //if([[operators objectAtIndex:i]rangeOfString:@"||"].location != NSNotFound)
+       //     result += [formComponentInputs objectAtIndex:i] || [formComponentInputs objectAtIndex:i+1];
+       // else if([[operators objectAtIndex:i]rangeOfString:@"&&"].location != NSNotFound)
+       //     result += [formComponentInputs objectAtIndex:i] && [formComponentInputs objectAtIndex:i+1];
+         if([[operators objectAtIndex:i]rangeOfString:@"+"].location != NSNotFound)
+           result +=  [[formComponentInputs objectAtIndex:i+1]intValue];
+        else if([[operators objectAtIndex:i]rangeOfString:@"-"].location != NSNotFound)
+            result -= [[formComponentInputs objectAtIndex:i+1]intValue];
+        else if([[operators objectAtIndex:i]rangeOfString:@"*"].location != NSNotFound)
+            result *= [[formComponentInputs objectAtIndex:i+1]intValue];
+        else if([[operators objectAtIndex:i]rangeOfString:@"/"].location != NSNotFound)
+        {
+            if([[formComponentInputs objectAtIndex:i+1]intValue] != 0)
+                result /= [[formComponentInputs objectAtIndex:i+1]intValue];
+            else
+                NSLog(@"ERROR: DIVIDE BY ZERO");
+        }
+       //NSLog(@"RESULT SO FAR:%d",result);
     }
-    return 0;
+    NSLog(@"RESULT: %d", result);
+    return result;
 }
 @end
