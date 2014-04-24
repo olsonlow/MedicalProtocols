@@ -23,8 +23,7 @@
 -(id) initWithFrame:(CGRect)frame andFormSelection:(FormSelection *)formSelection
 {
     self = [super initWithFrame:frame];
-    NSLog(@"FORM SELECTION VIEW");
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor purpleColor];
     
     UILabel *selectionLabel = [[UILabel alloc]init];
     CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:selectionLabel.font}];
@@ -51,7 +50,6 @@
     [choiceB setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
     [choiceB setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceB.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
-    //choiceB.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     [choiceB setCenter:CGPointMake(self.center.x+50, self.center.y)];
     
     UILabel *choiceBLabel = [[UILabel alloc]init];

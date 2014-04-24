@@ -51,7 +51,6 @@
     if([object isKindOfClass:[Form class]])
     {
         //create and add a form view
-        NSLog(@"COMPONENT IS A FORM");
         result = [[FormView alloc]initWithFrame: frame andForm:object];
     }
     else if([object isKindOfClass:[TextBlock class]])

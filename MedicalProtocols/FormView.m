@@ -23,17 +23,13 @@
 {
     self = [super initWithFrame:frame];
     self.form = form;
-    //self.center = CGPointMake(frame.size.width/2, frame.size.height/2);
-    self.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:218.0/255.0 blue:185.0/255.0 alpha:1.0];
-    
-    NSLog(@"FORM COMONENTS: %d", [form countFormComonents]);
+    self.backgroundColor = [UIColor whiteColor];
     for(int i = 0; i < [form countFormComonents]; i++)
     {
-        NSLog(@"ADDING FORM COMPONENTS");
+        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y +(frame.size.height/3 * i)-10, frame.size.width, frame.size.height/3);
         FormComponent *formComponent = [form formComponentAtIndex:i];
-        NSLog(@"%@",formComponent.label);
-        FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:frame Object:formComponent];
-        [formComponentView setCenter:self.center];
+        NSLog(@"CHECK ME: %@", formComponent.label);
+        FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
         [self addSubview:formComponentView];
     }
     

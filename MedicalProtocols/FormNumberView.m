@@ -23,20 +23,19 @@
 -(id) initWithFrame:(CGRect)frame andFormNumber:(FormNumber *)formNumber
 {
     self = [super initWithFrame:frame];
-    NSLog(@"TIME TO MAKE A SLIDER");
-    self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
+    self.backgroundColor = [UIColor purpleColor];
     UISlider *slider= [[UISlider alloc]init];
-    slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);
-    //[slider setCenter:CGPointMake(frame.size.width/2, frame.size.width/2)];
+    slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
+    [slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
     slider.maximumValue = formNumber.maxValue;
     slider.minimumValue = formNumber.minValue;
     slider.value = formNumber.defaultValue;
     
-    NSLog(@"LABEL: %@", formNumber.label);
     UILabel *sliderLabel = [[UILabel alloc]init];
-    //[sliderLabel setCenter:CGPointMake(frame.size.width/2, frame.size.width/2)];
+    CGSize stringSize = [formNumber.label sizeWithAttributes:@{NSFontAttributeName:sliderLabel.font}];
     sliderLabel.text = formNumber.label;
-    
+    sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
+    [sliderLabel setCenter:CGPointMake(slider.frame.origin.x+100, sliderLabel.frame.origin.y-10)];
     [self addSubview:sliderLabel];
     [self addSubview:slider];
     return self;
