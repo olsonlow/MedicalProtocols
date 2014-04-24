@@ -30,10 +30,13 @@
     title.text = self.textBlock.title;
     
     UILabel *content = [[UILabel alloc]init];
-    CGSize contentStringSize = [self.textBlock.content sizeWithAttributes:@{NSFontAttributeName:content.font}];
-    content.frame = CGRectMake(frame.origin.x, frame.origin.y, contentStringSize.width, contentStringSize.height);
+    content.numberOfLines = 0;
+    content.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 200);
     content.text = self.textBlock.content;
     content.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    
+    content.text = self.textBlock.content;
+    
     [self addSubview:title];
     [self addSubview:content];
     return self;

@@ -31,8 +31,8 @@
     name.frame = CGRectMake(frame.origin.x, frame.origin.y, nameStringSize.width, nameStringSize.height);
     
     UILabel *calcId = [[UILabel alloc]init];
-    CGSize idStringSize = [self.calculator.objectId sizeWithAttributes:@{NSFontAttributeName:calcId.font}];
-    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, idStringSize.width, idStringSize.height);
+    calcId.numberOfLines = 0;
+    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 200);
     calcId.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     calcId.text = self.calculator.objectId;
     

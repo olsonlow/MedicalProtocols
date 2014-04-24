@@ -8,6 +8,7 @@
 
 #import "ComponentView.h"
 #import "TextBlock.h"
+
 @interface TextBlockView : ComponentView
 @property (strong, nonatomic) TextBlock *textBlock;
 -(id) initWithFrame:(CGRect)frame textBlock:(TextBlock *) textBlock;
