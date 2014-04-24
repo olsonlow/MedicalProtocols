@@ -11,6 +11,7 @@
 #import "FormSelection.h"
 #import "DataSource.h"
 #import "FormComponent.h"
+#import "FormAlgorithm.h"
 
 @interface Form()
 @property(nonatomic,strong) NSMutableArray* fields;
@@ -26,6 +27,7 @@
     self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
         _label = label;
+        _formComponentData = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -36,7 +38,19 @@
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
         [_formComponents sortUsingDescriptors:@[sortDescriptor]];
     }
+    NSString *result = self.formEntryComplete;
+    NSLog(@"result: %@", result);
     return _formComponents;
+}
+
+-(NSString *)formEntryComplete
+{
+    NSString *alg = @"v1,+,v2,-,v3,*,v4,+,v5,/,v6";
+    FormAlgorithm *fA = [[FormAlgorithm alloc]initWithFormId:self.objectId algOutput:0 resultOne:@"WOO" resultTwo:@"NOO"];
+    NSArray *v = @[@17, @3, @45, @0,@15, @8];
+    NSMutableArray *values = [[NSMutableArray alloc]initWithArray:v];
+    [fA computeAlgorithmOnInputs:values withAlgorithm:alg];
+    return fA.resultOne;
 }
 
 -(int) countFormComonents
@@ -47,6 +61,13 @@
 -(FormComponent *) formComponentAtIndex: (int) index
 {
     return [self.formComponents objectAtIndex:index];
+}
+
+-(NSMutableArray*)storeEnteredDataFromView:(NSValue*)dataValue
+{
+    //this function should take in data supplied by the user in the formComponent views and store them in an array that we can pass to formAlgorithm
+    [self.formComponentData addObject:dataValue];
+    return self.formComponentData;
 }
 
 -(NSMutableArray *)fields{
