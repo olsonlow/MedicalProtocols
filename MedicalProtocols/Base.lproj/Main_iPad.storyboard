@@ -284,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="1372" y="376"/>
         </scene>
-        <!--Med Ref Split View Controller-->
+        <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController id="H1p-Uh-vWS" customClass="MedRefSplitViewController" sceneMemberID="viewController">
+                <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -297,6 +297,11 @@
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="59E-bu-pCb">
+                    <connections>
+                        <action selector="swipedRight:" destination="H1p-Uh-vWS" id="sMT-Np-h9U"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-687" y="-630"/>
         </scene>

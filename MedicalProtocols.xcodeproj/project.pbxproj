@@ -521,7 +521,7 @@
 			children = (
 				A3B2755618F8C613001C5027 /* SplitViews */,
 				89AC2BA018F9D2F700BC4BC2 /* ComponentViews */,
-				A3A1159E1907482B0072E184 /* Modal Views */,
+				A3A1159E1907482B0072E184 /* ModalViews */,
 				36BCFF6519087AF60095161D /* LoginViewController.h */,
 				36BCFF6619087AF60095161D /* LoginViewController.m */,
 			);
