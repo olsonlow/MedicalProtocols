@@ -9,6 +9,7 @@
 #import "MedRefFirstDetailViewViewController.h"
 #import "StepMasterViewController.h"
 #import "ProtocolDetailViewController.h"
+#import "LoginViewController.h"
 
 @interface MedRefFirstDetailViewViewController ()
 
@@ -28,7 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,4 +65,5 @@
 - (IBAction)unwindToFirstDetailViewController:(UIStoryboardSegue *)sender {
     
 }
+
 @end

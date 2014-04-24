@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface MedRefBaseDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface MedRefBaseDetailViewController : UIViewController <UISplitViewControllerDelegate, PFLogInViewControllerDelegate>
+
 -(void)displayProgressHudWithMessage:(NSString*)message;
 -(void)cancelProgressHud;
+
 @end
