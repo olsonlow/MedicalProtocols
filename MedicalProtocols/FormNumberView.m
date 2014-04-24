@@ -36,6 +36,7 @@
     sliderLabel.text = formNumber.label;
     sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
     [sliderLabel setCenter:CGPointMake(slider.frame.origin.x+100, sliderLabel.frame.origin.y-10)];
+    //in here, we must get the value that the user entered and pass that back to the Form to store in an array, which later will be passed to formAlgorithm to compute
     [self addSubview:sliderLabel];
     [self addSubview:slider];
     return self;

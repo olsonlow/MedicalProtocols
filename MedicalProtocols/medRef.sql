@@ -79,4 +79,14 @@ CREATE TABLE formNumber(
     formId          varchar(100)    NOT NULL
 );
 
+DROP TABLE IF EXIST formAlgorithm;
+
+CREATE TABLE formAlgorithm(
+    objectId        varchar(100)    PRIMARY KEY,
+    algOutput       integer         NOT NULL,
+    resultOne       varchar(100)    NOT NULL,
+    resultTwo       varchar(100)    NOT NULL,
+    formId          varchar(100)    NOT NULL
+);
+
 COMMIT;

@@ -24,6 +24,7 @@
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
 		36BCFF6719087AF60095161D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BCFF6619087AF60095161D /* LoginViewController.m */; };
 		36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */; };
+		8946CCA81908D0590015ABF3 /* FormAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 8946CCA71908D0590015ABF3 /* FormAlgorithm.m */; };
 		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
 		8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8976C4AE18FDDBD500DECF27 /* FormNumberView.m */; };
 		8976C4B218FDDBEA00DECF27 /* FormSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8976C4B118FDDBEA00DECF27 /* FormSelectionView.m */; };
@@ -120,6 +121,8 @@
 		36BCFF6619087AF60095161D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModalViewController.h; sourceTree = "<group>"; };
 		36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModalViewController.m; sourceTree = "<group>"; };
+		8946CCA61908D0590015ABF3 /* FormAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormAlgorithm.h; sourceTree = "<group>"; };
+		8946CCA71908D0590015ABF3 /* FormAlgorithm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormAlgorithm.m; sourceTree = "<group>"; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
 		8976C4AD18FDDBD500DECF27 /* FormNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormNumberView.h; sourceTree = "<group>"; };
 		8976C4AE18FDDBD500DECF27 /* FormNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormNumberView.m; sourceTree = "<group>"; };
@@ -487,6 +490,8 @@
 				8976C4B418FDDF6900DECF27 /* FormComponent.m */,
 				A3689B8D18E952C90040D6F2 /* FormSelection.h */,
 				A3689B8E18E952C90040D6F2 /* FormSelection.m */,
+				8946CCA61908D0590015ABF3 /* FormAlgorithm.h */,
+				8946CCA71908D0590015ABF3 /* FormAlgorithm.m */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				A3D0D84F190887C400CEBA0E /* SwitchPropertyCell.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
+				8946CCA81908D0590015ABF3 /* FormAlgorithm.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
 				8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */,
 				A3D0D84C190887AD00CEBA0E /* TextAreaPropertyCell.m in Sources */,

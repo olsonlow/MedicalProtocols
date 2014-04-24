@@ -16,10 +16,11 @@
 @property(nonatomic,copy) NSString* stepId;
 @property(nonatomic,copy) NSString* objectId;
 @property (nonatomic, copy) NSString* label;
+@property (nonatomic) NSMutableArray* formComponentData;
 @property(nonatomic,assign) int orderNumber;
 
 -(id)initWithObjectId:(NSString*)objectId label:(NSString*)label stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 -(FormComponent *) formComponentAtIndex: (int) index;
 -(int) countFormComonents;
-
+-(NSMutableArray*)storeEnteredDataFromView:(NSValue*)dataValue;
 @end

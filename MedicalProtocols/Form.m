@@ -26,6 +26,7 @@
     self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
     if (self) {
         _label = label;
+        _formComponentData = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -47,6 +48,13 @@
 -(FormComponent *) formComponentAtIndex: (int) index
 {
     return [self.formComponents objectAtIndex:index];
+}
+
+-(NSMutableArray*)storeEnteredDataFromView:(NSValue*)dataValue
+{
+    //this function should take in data supplied by the user in the formComponent views and store them in an array that we can pass to formAlgorithm
+    [self.formComponentData addObject:dataValue];
+    return self.formComponentData;
 }
 
 -(NSMutableArray *)fields{

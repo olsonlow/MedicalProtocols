@@ -58,6 +58,8 @@
     choiceBLabel.text = formSelection.choiceB;
     [choiceBLabel setCenter:CGPointMake(choiceBLabel.frame.origin.x+(choiceBstringSize.width)/2+1, choiceB.center.y)];
     
+     //in here, we must get the value of the button that the user pressed and pass that back to the Form to store in an array, which later will be passed to formAlgorithm to compute
+    
     choiceB.groupButtons =@[choiceA];
     [self addSubview:selectionLabel];
     [self addSubview:choiceALabel];
