@@ -24,30 +24,46 @@
 {
     self = [super initWithFrame:frame];
     NSLog(@"FORM SELECTION VIEW");
-    self.backgroundColor = [UIColor colorWithRed:155.0/255.0 green:190.0/255.0 blue:230.0 alpha:1];
-    UILabel *choiceLabel = [[UILabel alloc]init];
-    CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:choiceLabel.font}];
-    choiceLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
-   
+    self.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *selectionLabel = [[UILabel alloc]init];
+    CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:selectionLabel.font}];
+    selectionLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
+    selectionLabel.text = formSelection.label;
+    [selectionLabel setCenter:CGPointMake(self.center.x+25, self.center.y-25)];
+    
     RadioButton *choiceA = [[RadioButton alloc]initWithFrame:frame];
     choiceA.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-    choiceA.titleLabel.text = formSelection.label;
     [choiceA setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
     [choiceA setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
-    choiceA.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
+    //choiceA.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     [choiceA setCenter:self.center];
+    
+    UILabel *choiceALabel = [[UILabel alloc]init];
+    CGSize choiceAstringSize = [formSelection.choiceA sizeWithAttributes:@{NSFontAttributeName:choiceALabel.font}];
+    choiceALabel.frame = CGRectMake(choiceA.frame.origin.x-12, frame.origin.y, choiceAstringSize.width, choiceAstringSize.height);
+    choiceALabel.text = formSelection.choiceA;
+    [choiceALabel setCenter:CGPointMake(choiceALabel.frame.origin.x-(choiceAstringSize.width)/2+1, choiceA.center.y)];
     
     RadioButton *choiceB = [[RadioButton alloc]initWithFrame:frame];
     choiceB.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-    choiceB.titleLabel.text = formSelection.label;
     [choiceB setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
     [choiceB setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceB.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
-    choiceB.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
+    //choiceB.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     [choiceB setCenter:CGPointMake(self.center.x+50, self.center.y)];
     
+    UILabel *choiceBLabel = [[UILabel alloc]init];
+    CGSize choiceBstringSize = [formSelection.choiceB sizeWithAttributes:@{NSFontAttributeName:choiceBLabel.font}];
+    choiceBLabel.frame = CGRectMake(choiceB.frame.origin.x+25, frame.origin.y, choiceBstringSize.width, choiceBstringSize.height);
+    choiceBLabel.text = formSelection.choiceB;
+    [choiceBLabel setCenter:CGPointMake(choiceBLabel.frame.origin.x+(choiceBstringSize.width)/2+1, choiceB.center.y)];
+    
     choiceB.groupButtons =@[choiceA];
+    [self addSubview:selectionLabel];
+    [self addSubview:choiceALabel];
+    [self addSubview:choiceBLabel];
     [self addSubview:choiceA];
     [self addSubview:choiceB];
     return self;
