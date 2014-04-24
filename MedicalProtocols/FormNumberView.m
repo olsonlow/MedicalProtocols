@@ -25,6 +25,7 @@
 -(id) initWithFrame:(CGRect)frame andFormNumber:(FormNumber *)formNumber
 {
     self = [super initWithFrame:frame];
+    self.frame = frame;
     self.backgroundColor = [UIColor purpleColor];
     self.slider = [[UISlider alloc]init];
     self.sliderLabel =  [[UILabel alloc]init];
@@ -35,7 +36,7 @@
     self.slider.minimumValue = self.formNumber.minValue;
     self.slider.value = self.formNumber.defaultValue;
     
-    NSString *labelText = [NSString stringWithFormat:@"%@: %d years  ",self.formNumber.label,(int)self.slider.value];
+    NSString *labelText = [NSString stringWithFormat:@"%@: %d",self.formNumber.label,(int)self.slider.value];
     self.sliderLabel.text = labelText;
     CGSize stringSize = [labelText sizeWithAttributes:@{NSFontAttributeName:self.sliderLabel.font}];
     self.sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
@@ -49,7 +50,10 @@
 
 - (IBAction)sliderChanged:(UISlider *)sender
 {
-    NSString *labelText = [NSString stringWithFormat:@"%@: %d years   ",self.formNumber.label,(int)self.slider.value];
+    NSString *labelText = [NSString stringWithFormat:@"%@: %d",self.formNumber.label,(int)self.slider.value];
+    CGSize stringSize = [labelText sizeWithAttributes:@{NSFontAttributeName:self.sliderLabel.font}];
+    self.sliderLabel.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, stringSize.width, stringSize.height);
+    [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-10)];
     self.sliderLabel.text = labelText;
 }
 
