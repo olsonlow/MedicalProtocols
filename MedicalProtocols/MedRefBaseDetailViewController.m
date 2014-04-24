@@ -33,6 +33,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
+
     [super viewDidAppear:animated];
     if(self.showProgressHud){
         [self displayProgressHudWithMessage:self.progressHudLabel];

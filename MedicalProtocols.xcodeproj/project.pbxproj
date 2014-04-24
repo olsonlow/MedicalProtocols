@@ -22,6 +22,7 @@
 		361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7918ECDF5F0030D688 /* FMDatabasePool.m */; };
 		361A2D8818ECDFC20030D688 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7B18ECDF5F0030D688 /* FMDatabaseQueue.m */; };
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
+		36BCFF6719087AF60095161D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BCFF6619087AF60095161D /* LoginViewController.m */; };
 		36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */; };
 		89756D4E18ECCBB20006321C /* medRef.sql in Resources */ = {isa = PBXBuildFile; fileRef = 89756D4D18ECCBB20006321C /* medRef.sql */; };
 		8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8976C4AE18FDDBD500DECF27 /* FormNumberView.m */; };
@@ -111,6 +112,8 @@
 		361A2D7D18ECDF5F0030D688 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		361A2D7E18ECDF5F0030D688 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
+		36BCFF6519087AF60095161D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		36BCFF6619087AF60095161D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModalViewController.h; sourceTree = "<group>"; };
 		36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentModalViewController.m; sourceTree = "<group>"; };
 		89756D4D18ECCBB20006321C /* medRef.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = medRef.sql; sourceTree = "<group>"; };
@@ -509,6 +512,8 @@
 				A3B2755618F8C613001C5027 /* SplitViews */,
 				89AC2BA018F9D2F700BC4BC2 /* ComponentViews */,
 				A3A1159E1907482B0072E184 /* Modal Views */,
+				36BCFF6519087AF60095161D /* LoginViewController.h */,
+				36BCFF6619087AF60095161D /* LoginViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 				A3FC35AF18FDDE5900D2F75D /* StepBuilderMasterViewController.m in Sources */,
 				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
+				36BCFF6719087AF60095161D /* LoginViewController.m in Sources */,
 				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
 				A3A1159B19072F540072E184 /* ComponentCell.m in Sources */,

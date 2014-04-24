@@ -7,7 +7,8 @@
 //
 
 #import "MedRefBaseDetailViewController.h"
+#import <Parse/Parse.h>
 
-@interface MedRefFirstDetailViewViewController : MedRefBaseDetailViewController
+@interface MedRefFirstDetailViewViewController : MedRefBaseDetailViewController <PFLogInViewControllerDelegate>
 
 @end
