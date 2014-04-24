@@ -10,6 +10,9 @@
 #import "FormComponentView.h"
 #import "FormNumber.h"
 @interface FormNumberView : FormComponentView
+@property (nonatomic) FormNumber *formNumber;
+@property (nonatomic) UISlider *slider;
+@property (nonatomic) UILabel *sliderLabel;
 -(id) initWithFrame:(CGRect)frame andFormNumber:(FormNumber *)formNumber;
 
 

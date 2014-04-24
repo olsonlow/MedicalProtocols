@@ -15,6 +15,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.slider = [[UISlider alloc]init];
+        self.sliderLabel =  [[UILabel alloc]init];
         // Initialization code
     }
     return self;
@@ -24,23 +26,33 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor purpleColor];
-    UISlider *slider= [[UISlider alloc]init];
-    slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
-    [slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
-    slider.maximumValue = formNumber.maxValue;
-    slider.minimumValue = formNumber.minValue;
-    slider.value = formNumber.defaultValue;
+    self.slider = [[UISlider alloc]init];
+    self.sliderLabel =  [[UILabel alloc]init];
+    self.formNumber = formNumber;
+    self.slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
+    [self.slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
+    self.slider.maximumValue = self.formNumber.maxValue;
+    self.slider.minimumValue = self.formNumber.minValue;
+    self.slider.value = self.formNumber.defaultValue;
     
-    UILabel *sliderLabel = [[UILabel alloc]init];
-    CGSize stringSize = [formNumber.label sizeWithAttributes:@{NSFontAttributeName:sliderLabel.font}];
-    sliderLabel.text = formNumber.label;
-    sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
-    [sliderLabel setCenter:CGPointMake(slider.frame.origin.x+100, sliderLabel.frame.origin.y-10)];
+    NSString *labelText = [NSString stringWithFormat:@"%@: %d years  ",self.formNumber.label,(int)self.slider.value];
+    self.sliderLabel.text = labelText;
+    CGSize stringSize = [labelText sizeWithAttributes:@{NSFontAttributeName:self.sliderLabel.font}];
+    self.sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
+    [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-10)];
     //in here, we must get the value that the user entered and pass that back to the Form to store in an array, which later will be passed to formAlgorithm to compute
-    [self addSubview:sliderLabel];
-    [self addSubview:slider];
+    [self addSubview:self.sliderLabel];
+    [self addSubview:self.slider];
+    [self.slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     return self;
 }
+
+- (IBAction)sliderChanged:(UISlider *)sender
+{
+    NSString *labelText = [NSString stringWithFormat:@"%@: %d years   ",self.formNumber.label,(int)self.slider.value];
+    self.sliderLabel.text = labelText;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
