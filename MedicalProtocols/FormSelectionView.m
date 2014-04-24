@@ -24,7 +24,7 @@
 {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor purpleColor];
-    
+    formSelection.valueSet = NO;
     UILabel *selectionLabel = [[UILabel alloc]init];
     CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:selectionLabel.font}];
     selectionLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
@@ -66,6 +66,9 @@
     [self addSubview:choiceBLabel];
     [self addSubview:choiceA];
     [self addSubview:choiceB];
+    
+    if([choiceA state] == UIControlStateSelected || [choiceB state] == UIControlStateSelected)
+        formSelection.valueSet = YES;
     return self;
 }
 

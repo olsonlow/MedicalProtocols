@@ -14,6 +14,7 @@
 @property (nonatomic) UISlider *slider;
 @property (nonatomic) UILabel *sliderLabel;
 @property (nonatomic) CGRect frame;
+
 -(id) initWithFrame:(CGRect)frame andFormNumber:(FormNumber *)formNumber;
 
 

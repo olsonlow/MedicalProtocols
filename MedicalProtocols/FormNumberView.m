@@ -27,10 +27,12 @@
 {
     self = [super initWithFrame:frame];
     self.frame = frame;
+
     self.backgroundColor = [UIColor purpleColor];
     self.slider = [[UISlider alloc]init];
     self.sliderLabel =  [[UILabel alloc]init];
     self.formNumber = formNumber;
+    self.formNumber.valueSet = NO;
     self.slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
     [self.slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
     self.slider.maximumValue = self.formNumber.maxValue;
@@ -56,6 +58,7 @@
     self.sliderLabel.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, stringSize.width, stringSize.height);
     [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-10)];
     self.sliderLabel.text = labelText;
+    self.formNumber.valueSet = YES;
 }
 
 
