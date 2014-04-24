@@ -17,6 +17,7 @@
 
 @interface ProtocolDetailViewController (){
     int componentToDeleteIndex;
+    bool editable;
 }
 
 - (void)configureView;
@@ -63,6 +64,9 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+
+    if([PFUser currentUser])
+        editable = YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -96,7 +100,9 @@
     return cell;
 }
 -(void)longPress:(UILongPressGestureRecognizer*)longPress{
-    [(ComponentCell*)longPress.view startWobble];
+    if(editable){
+        [(ComponentCell*)longPress.view startWobble];
+    }
 }
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -106,7 +112,8 @@
     ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
     if(!componentCell.wobbling){
         Component *component = [self.step componentAtIndex:indexPath.row];
-        [self displayModalViewWithComponent:component];
+        if(editable)
+            [self displayModalViewWithComponent:component];
     } else {
         [componentCell stopWobble];
     }
@@ -170,5 +177,13 @@
         ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath: path];
         [componentCell stopWobble];
     }
+}
+-(void)logout{
+    [super logout];
+    if(self.step){
+       self.step = nil;
+        [((UINavigationController*)[self.splitViewController.viewControllers firstObject]) popViewControllerAnimated:YES];
+    }
+    
 }
 @end

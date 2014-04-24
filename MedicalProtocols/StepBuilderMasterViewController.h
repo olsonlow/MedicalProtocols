@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseMasterTableViewController.h"
 
 @class ProtocolStep;
 @class ProtocolDetailViewController;
-@interface StepBuilderMasterViewController : UITableViewController
+@interface StepBuilderMasterViewController : BaseMasterTableViewController
 @property (strong, nonatomic) ProtocolDetailViewController *detailViewController;
 @property(nonatomic,strong) ProtocolStep* step;
 @end
