@@ -18,5 +18,5 @@
 @property (nonatomic, copy) NSString* resultOne; //we really should have an array of potential results
 @property (nonatomic, copy) NSString* resultTwo;
 -(id) initWithFormId:(NSString*)formId algOutput:(int)algOutput resultOne:(NSString*)resultOne resultTwo:(NSString*)resultTwo;
--(int) computeAlgorithmOnInputs:(NSMutableArray*)formComponentInputs withAlgorithm:(NSMutableArray*)algorithm;
+-(int) computeAlgorithmOnInputs:(NSMutableArray*)formComponentInputs withAlgorithm:(NSString*)algorithm;
 @end
