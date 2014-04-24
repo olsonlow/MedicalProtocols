@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, ComponentType) {
 +(NSString*)NameForComponentType:(ComponentType)componentType;
 +(void)DeleteComponentWithId:(NSString*)objectId;
 
++(int)numberOfEditablePropertiesForComponent;
 +(id)componentType:(ComponentType)componentType stepId:(NSString*)stepId;
 -(id)initWithObjectId:(NSString*)objectId StepId:(NSString*)stepId OrderNumber:(int)orderNumber;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ComponentModalViewController.h"
+#import "Component.h"
 
 @interface ComponentModalViewController ()
 
@@ -38,6 +39,7 @@
 #pragma mark TableView Data Source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 0;
+    //return [Component numberOfEditablePropertiesForComponent:self.component];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
