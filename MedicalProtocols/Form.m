@@ -11,6 +11,7 @@
 #import "FormSelection.h"
 #import "DataSource.h"
 #import "FormComponent.h"
+#import "FormAlgorithm.h"
 
 @interface Form()
 @property(nonatomic,strong) NSMutableArray* fields;
@@ -37,6 +38,11 @@
         NSSortDescriptor* sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"orderNumber" ascending:YES];
         [_formComponents sortUsingDescriptors:@[sortDescriptor]];
     }
+    
+    //TESTING....
+    //NSString *alg = @"v1,||,v2,||,v3,||,v4,+,v5,||,v6";
+    //FormAlgorithm *fA = [[FormAlgorithm alloc]initWithFormId:self.objectId algOutput:0 resultOne:@"WOO" resultTwo:@"NOO"];
+    //[fA computeAlgorithmOnInputs:_formComponents withAlgorithm:alg];
     return _formComponents;
 }
 

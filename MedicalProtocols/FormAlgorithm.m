@@ -31,44 +31,56 @@
 {
 //this function needs a particular algorithm to run (in array form) and an array of results from associated form components to run the algoritm on (the NSMutableArray property formComponentData in Form). It will return an int which will determine what will be displayed to the screen
     NSArray *algSymbols = [algorithm componentsSeparatedByString:@","];
-    NSMutableArray *vars = [[NSMutableArray alloc]init];
-    NSMutableArray *logiOp = [[NSMutableArray alloc]init];
-    NSMutableArray *mathOp = [[NSMutableArray alloc]init];
+    NSMutableArray *variables = [[NSMutableArray alloc]init];
+    NSMutableArray *operators = [[NSMutableArray alloc]init];
    
-    //parse the algorithm to get all symbols
-    for(int i = 0; i < [algorithm length]; i++)
+    if([algSymbols count] != [algorithm length])
     {
-        if([[[algSymbols objectAtIndex:i ]stringValue] rangeOfString:@"v"].location !=NSNotFound)
+        NSLog(@"ERROR: SOMETHING WENT WRONG");
+    }
+    
+    //parse the algorithm to get all symbols
+    for(int i = 0; i < [algSymbols count]; i++)
+    {
+        if([[algSymbols objectAtIndex:i] rangeOfString:@"v"].location !=NSNotFound)
         {
             //this symbol is a variable.
-            [vars addObject:[algSymbols objectAtIndex:i]];
+            NSLog(@"VAR SYMBOL: %@", [algSymbols objectAtIndex:i]);
+            [variables addObject:[algSymbols objectAtIndex:i]];
         }
-        else if([[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"||"].location != NSNotFound || [[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"&&"].location != NSNotFound)
+        else if([[algSymbols objectAtIndex:i]rangeOfString:@"||"].location != NSNotFound || [[algSymbols objectAtIndex:i]rangeOfString:@"&&"].location != NSNotFound || [[algSymbols objectAtIndex:i]rangeOfString:@"+"].location !=NSNotFound || [[algSymbols objectAtIndex:i]rangeOfString:@"-"].location !=NSNotFound || [[algSymbols objectAtIndex:i]rangeOfString:@"*"].location !=NSNotFound || [[algSymbols objectAtIndex:i]rangeOfString:@"/"].location !=NSNotFound)
         {
-            //this symbol is a logical operator
-            [logiOp addObject:[algSymbols objectAtIndex:i]];
+            //this symbol is an operator
+            NSLog(@"OP SYMBOL: %@", [algSymbols objectAtIndex:i]);
+            [operators addObject:[algSymbols objectAtIndex:i]];
         }
-        else if([[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"+"].location !=NSNotFound || [[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"-"].location !=NSNotFound || [[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"*"].location !=NSNotFound || [[[algSymbols objectAtIndex:i]stringValue]rangeOfString:@"/"].location !=NSNotFound)
-        {
-            //this symbol is a basic math operator
-            [mathOp addObject:[algSymbols objectAtIndex:i]];
-        }
+    
     }
     
     //error checking
-    if([logiOp count] + [mathOp count] >= [vars count]) //if we have more operators than variables
+    if([operators count] >= [variables count]) //if we have more operators than variables
     {
-        NSLog(@"ERROR: INVALID ALGORITHM");
+        NSLog(@"ERROR: INVALID ALGORITHM. %d operators to %d variables", [operators count], [variables count]);
         return -1;
     }
     
-    if([formComponentInputs count] != [vars count])
+    if([formComponentInputs count] != [variables count])
     {
-        NSLog(@"ERROR: INVALID INPUTS");
+        NSLog(@"ERROR: INVALID INPUTS. %d var inputs to %d in alg", [formComponentInputs count], [variables count]);
         return -1;
     }
     //if we get here, everything is going well, proceed to compute algorithm
-    
+    for(int i = 0; i < [variables count]-1; i++)
+    {
+        NSString *var1 = [variables objectAtIndex:i];
+        NSString *var2 = [variables objectAtIndex:i+1];
+        NSString *operator = [[NSString alloc]init];
+        for(int j = i; j < i+1; j++)
+        {
+            operator = [operators objectAtIndex:j];
+        }
+        NSLog(@"%@ %@ %@", var1, operator, var2);
+    }
     return 0;
 }
 @end
