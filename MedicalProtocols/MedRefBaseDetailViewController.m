@@ -10,6 +10,7 @@
 #import "DetailViewControllerSegue.h"
 #import "SVProgressHUD/SVProgressHUD.h"
 #import "LoginViewController.h"
+#import "BaseMasterTableViewController.h"
 
 @interface MedRefBaseDetailViewController ()
 @property (assign, nonatomic) bool showProgressHud;
@@ -96,6 +97,9 @@
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
     // Check if both fields are completed
     if (username && password && username.length != 0 && password.length != 0) {
+        UINavigationController* navigationController = [self.splitViewController.viewControllers firstObject];
+        ((BaseMasterTableViewController *)[navigationController.viewControllers lastObject]).editable = YES;
+        
         return YES; // Begin login process
     }
     
@@ -137,6 +141,7 @@
 -(void)logout{
     [PFUser logOut];
     [self refreshView];
+    [((BaseMasterTableViewController*)[[[self.splitViewController.viewControllers firstObject] viewControllers] lastObject]) refreshView];
 }
 
 @end
