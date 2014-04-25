@@ -13,7 +13,6 @@
 @interface ComponentModalViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property(nonatomic,strong) Component* component;
 @property(nonatomic,strong) ProtocolDetailViewController* delegate;
 

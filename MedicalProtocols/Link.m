@@ -7,10 +7,11 @@
 //
 
 #import "Link.h"
+#import "TextEditableProperty.h"
 
 @implementation Link
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber componentType:ComponentTypeForm];
     if (self) {
         _label = label;
         _url = url;
@@ -19,5 +20,22 @@
 }
 -(instancetype)init{
     return [self initWithLabel:@"" url:@"" objectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
+}
+-(NSMutableArray *)editableProperties{
+    NSMutableArray* editableProperties = super.editableProperties;
+    if(!editableProperties){
+        editableProperties = [[NSMutableArray alloc] init];
+        TextEditableProperty* labelProperty = [[TextEditableProperty alloc] init];
+        labelProperty.name = @"Label";
+        labelProperty.isTextArea = NO;
+        [editableProperties addObject:labelProperty];
+        
+        TextEditableProperty* urlProperty = [[TextEditableProperty alloc] init];
+        urlProperty.name = @"url";
+        urlProperty.isTextArea = NO;
+        [editableProperties addObject:urlProperty];
+        
+    }
+    return editableProperties;
 }
 @end

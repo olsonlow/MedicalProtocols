@@ -31,4 +31,7 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)textFinishedEditing:(UITextField*)sender {
+    self.value = sender.text;
+}
 @end
