@@ -67,6 +67,9 @@
     [super viewDidAppear:animated];
     [self.wobblingComponent stopWobble];
     self.wobblingComponent = nil;
+
+    if([PFUser currentUser])
+        editable = YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -100,8 +103,10 @@
     return cell;
 }
 -(void)longPress:(UILongPressGestureRecognizer*)longPress{
-    self.wobblingComponent = (ComponentCell*)longPress.view;
-    [self.wobblingComponent startWobble];
+    if(editable){
+        self.wobblingComponent = (ComponentCell*)longPress.view;
+        [self.wobblingComponent startWobble];
+    }
 }
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -111,6 +116,9 @@
     if(!self.wobblingComponent){
         self.selectedComponent = [self.step componentAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"ModalView" sender:self];
+        if(editable){
+            [self performSegueWithIdentifier:@"ModalView" sender:self];
+        }
     } else {
         [self.wobblingComponent stopWobble];
         self.wobblingComponent = nil;
