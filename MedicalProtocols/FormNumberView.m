@@ -29,7 +29,7 @@
     self.frame = frame;
     self.backgroundColor = [UIColor purpleColor];
     self.slider = [[UISlider alloc]init];
-    self.sliderLabel =  [[UILabel alloc]init];
+    self.sliderLabel = [[UILabel alloc]init];
     self.formNumber = formNumber;
     self.slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
     [self.slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
@@ -42,6 +42,7 @@
     CGSize stringSize = [labelText sizeWithAttributes:@{NSFontAttributeName:self.sliderLabel.font}];
     self.sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
     [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-10)];
+    
     //in here, we must get the value that the user entered and pass that back to the Form to store in an array, which later will be passed to formAlgorithm to compute
     [self addSubview:self.sliderLabel];
     [self addSubview:self.slider];

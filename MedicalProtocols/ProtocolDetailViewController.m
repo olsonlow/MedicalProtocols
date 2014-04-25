@@ -14,6 +14,8 @@
 #import "LocalDB.h"
 #import "ComponentModalViewController.h"
 #import "ComponentCell.h"
+#import "Form.h"
+#import "TextBlock.h"
 
 @interface ProtocolDetailViewController (){
     int componentToDeleteIndex;
@@ -104,10 +106,25 @@
         [(ComponentCell*)longPress.view startWobble];
     }
 }
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(self.collectionView.frame.size.x/2, self.collectionView.frame.size.y/2);
-//}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Component* component = [self.step componentAtIndex:indexPath.row];
+    
+    if([component isKindOfClass:[Form class]]){
+        Form* form = (Form*)component;
+        int height = 40;
+        for(int i = 0; i < [form countFormComonents];i++){
+            height = height+100;
+        }
+        return CGSizeMake(self.collectionView.frame.size.width, height);
+    }
+//    else if([component isKindOfClass:[TextBlock class]]){
+//        TextBlock* textBlock = (TextBlock*)component;
+//        int height = textBlock.content.le
+//    }
+    return CGSizeMake(self.collectionView.frame.size.width/3, self.collectionView.frame.size.height/5);
+}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
     if(!componentCell.wobbling){

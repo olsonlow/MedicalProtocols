@@ -31,7 +31,7 @@
     
     UILabel *content = [[UILabel alloc]init];
     content.numberOfLines = 0;
-    content.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 200);
+    content.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width , frame.size.height);
     content.text = self.textBlock.content;
     content.center = CGPointMake(frame.size.width/2, frame.size.height/2);
     
