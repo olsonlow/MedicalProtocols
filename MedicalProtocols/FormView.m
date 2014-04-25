@@ -24,12 +24,14 @@
     self = [super initWithFrame:frame];
     self.form = form;
     self.backgroundColor = [UIColor whiteColor];
+    int origin = 0;
     for(int i = 0; i < [form countFormComonents]; i++)
     {
-        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10, frame.size.width, frame.size.height);
+        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10 + origin, frame.size.width, 150);
         FormComponent *formComponent = [form formComponentAtIndex:i];
         FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
         [self addSubview:formComponentView];
+        origin += 100;
     }
     
     UIButton *done =  [UIButton buttonWithType:UIButtonTypeRoundedRect];

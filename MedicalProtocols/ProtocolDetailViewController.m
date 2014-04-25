@@ -123,7 +123,7 @@
 //        TextBlock* textBlock = (TextBlock*)component;
 //        int height = textBlock.content.le
 //    }
-    return CGSizeMake(self.collectionView.frame.size.width/3, self.collectionView.frame.size.height/5);
+    return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height/5);
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
