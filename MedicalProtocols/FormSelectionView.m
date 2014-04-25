@@ -23,8 +23,9 @@
 -(id) initWithFrame:(CGRect)frame andFormSelection:(FormSelection *)formSelection
 {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor purpleColor];
-    
+    self.backgroundColor = [UIColor yellowColor];
+    self.formSelection = formSelection;
+    self.formSelection.valueSet = NO;
     UILabel *selectionLabel = [[UILabel alloc]init];
     CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:selectionLabel.font}];
     selectionLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
@@ -38,6 +39,7 @@
     choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
     //choiceA.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
     [choiceA setCenter:self.center];
+    [choiceA addTarget:self action:@selector(didSelect:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *choiceALabel = [[UILabel alloc]init];
     CGSize choiceAstringSize = [formSelection.choiceA sizeWithAttributes:@{NSFontAttributeName:choiceALabel.font}];
@@ -51,6 +53,7 @@
     [choiceB setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceB.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
     [choiceB setCenter:CGPointMake(self.center.x+50, self.center.y)];
+    [choiceB addTarget:self action:@selector(didSelect:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *choiceBLabel = [[UILabel alloc]init];
     CGSize choiceBstringSize = [formSelection.choiceB sizeWithAttributes:@{NSFontAttributeName:choiceBLabel.font}];
@@ -66,7 +69,13 @@
     [self addSubview:choiceBLabel];
     [self addSubview:choiceA];
     [self addSubview:choiceB];
+    
     return self;
+}
+
+- (IBAction)didSelect:(RadioButton *)sender
+{
+    self.formSelection.valueSet = YES;
 }
 
 /*

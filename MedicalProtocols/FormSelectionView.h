@@ -10,5 +10,6 @@
 #import "FormSelection.h"
 #import "FormComponentView.h"
 @interface FormSelectionView : FormComponentView
+@property (nonatomic) FormSelection* formSelection;
 -(id) initWithFrame:(CGRect)frame andFormSelection:(FormSelection *)formSelection;
 @end
