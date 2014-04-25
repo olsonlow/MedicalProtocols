@@ -33,7 +33,7 @@
     self.sliderLabel =  [[UILabel alloc]init];
     self.formNumber = formNumber;
     self.formNumber.valueSet = NO;
-    self.slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 50);
+    self.slider.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 20);
     [self.slider setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
     self.slider.maximumValue = self.formNumber.maxValue;
     self.slider.minimumValue = self.formNumber.minValue;
