@@ -43,7 +43,7 @@
     self.sliderLabel.text = labelText;
     CGSize stringSize = [labelText sizeWithAttributes:@{NSFontAttributeName:self.sliderLabel.font}];
     self.sliderLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
-    [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-10)];
+    [self.sliderLabel setCenter:CGPointMake(self.slider.frame.origin.x+100, self.sliderLabel.frame.origin.y-20)];
     //in here, we must get the value that the user entered and pass that back to the Form to store in an array, which later will be passed to formAlgorithm to compute
     [self addSubview:self.sliderLabel];
     [self addSubview:self.slider];

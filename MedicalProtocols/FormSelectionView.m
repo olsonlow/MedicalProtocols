@@ -23,7 +23,7 @@
 -(id) initWithFrame:(CGRect)frame andFormSelection:(FormSelection *)formSelection
 {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor purpleColor];
+    self.backgroundColor = [UIColor yellowColor];
     self.formSelection = formSelection;
     self.formSelection.valueSet = NO;
     UILabel *selectionLabel = [[UILabel alloc]init];

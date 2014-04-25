@@ -26,7 +26,7 @@
     self.backgroundColor = [UIColor whiteColor];
     for(int i = 0; i < [form countFormComonents]; i++)
     {
-        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y +(frame.size.height/3 * i)-10, frame.size.width, frame.size.height/3);
+        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10, frame.size.width, frame.size.height);
         FormComponent *formComponent = [form formComponentAtIndex:i];
         FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
         [self addSubview:formComponentView];
