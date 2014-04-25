@@ -26,24 +26,45 @@
     self.backgroundColor = [UIColor whiteColor];
     for(int i = 0; i < [form countFormComonents]; i++)
     {
-        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y +(frame.size.height/3 * i)-10, frame.size.width, frame.size.height/3);
+        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10, frame.size.width, frame.size.height);
         FormComponent *formComponent = [form formComponentAtIndex:i];
-        NSLog(@"CHECK ME: %@", formComponent.label);
         FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
         [self addSubview:formComponentView];
     }
     
-    UILabel *name = [[UILabel alloc]init];
-    name.frame = CGRectMake(frame.origin.x, frame.origin.y, 100, 100);name.text = @"Form";
-    CGSize nameStringSize = [name.text sizeWithAttributes:@{NSFontAttributeName:name.font}];
-    name.frame = CGRectMake(frame.origin.x, frame.origin.y, nameStringSize.width, nameStringSize.height);
+    UIButton *done =  [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [done addTarget:self action:@selector(didClick:) forControlEvents:UIControlEventTouchUpInside];
+    [done setTitle:@"DONE" forState:UIControlStateNormal];
+    done.frame = CGRectMake(frame.origin.x, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
+
     
-    [self addSubview:name];
+    [self addSubview:done];
     NSLog(@"%d",self.userInteractionEnabled);
 
     return self;
 }
 
+- (IBAction)didClick:(UIButton *)sender
+{
+    for(int i = 0; i < [self.form countFormComonents];i++)
+    {
+        if([self.form formComponentAtIndex:i].valueSet == NO)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Whoops!"
+                                        message:@"You haven't provided all the required information"
+                                       delegate:nil
+                              cancelButtonTitle:@"ok"
+                              otherButtonTitles:nil] show];
+                return;
+        }
+    }
+
+    [[[UIAlertView alloc] initWithTitle:@"Form Complete"
+                                message:@"Here are the results produces based on the data: "
+                               delegate:nil
+                      cancelButtonTitle:@"ok"
+                      otherButtonTitles:nil] show];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

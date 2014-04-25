@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseMasterTableViewController.h"
 #import "DataSourceProtocols.h"
 @class MedProtocol;
 @class ProtocolStep;
 @class ProtocolDetailViewController;
-@interface StepMasterViewController : UITableViewController<MedRefDataSourceDelegate>
+@interface StepMasterViewController : BaseMasterTableViewController<MedRefDataSourceDelegate>
 
 @property (strong,nonatomic) MedProtocol* protocolData;
 @property (strong, nonatomic) ProtocolDetailViewController *detailViewController;
--(void)makeEditable;
+
 @end

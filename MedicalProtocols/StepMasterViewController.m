@@ -14,9 +14,7 @@
 #import "ProtocolDataController.h"
 #import "StepBuilderMasterViewController.h"
 
-@interface StepMasterViewController (){
-    bool editable;
-}
+@interface StepMasterViewController ()
 @end
 
 @implementation StepMasterViewController
@@ -40,8 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    editable = NO;
-    [self makeEditable];
+    self.editable = NO;
     [self.detailViewController performSegueWithIdentifier:@"FirstDetailViewToProtocolDetailView" sender:self];
 //
 //    DetailViewManager *detailViewManager = (DetailViewManager*)self.splitViewController.delegate;
@@ -56,9 +53,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
--(void)makeEditable{
-    editable = YES;
-    self.navigationItem.rightBarButtonItems = @[self.editButtonItem,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)]];
+-(void)setEditable:(BOOL)editable{
+    super.editable = editable;
+    if(editable){
+        self.navigationItem.rightBarButtonItems = @[self.editButtonItem,[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)]];
+    } else {
+        self.navigationItem.rightBarButtonItems = nil;
+    }
     [self.tableView reloadData];
 }
 - (void)insertNewObject:(id)sender
@@ -104,7 +105,7 @@
 }
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if([identifier isEqualToString:@"MasterViewStepToStepBuilder"]){
-        return editable;
+        return self.editable;
     }
     return YES;
 }
@@ -132,7 +133,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return editable;
+    return self.editable;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

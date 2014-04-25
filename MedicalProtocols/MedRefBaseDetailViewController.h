@@ -13,5 +13,5 @@
 
 -(void)displayProgressHudWithMessage:(NSString*)message;
 -(void)cancelProgressHud;
-
+-(void)logout;
 @end

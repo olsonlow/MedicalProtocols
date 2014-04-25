@@ -22,5 +22,6 @@
 -(id)initWithObjectId:(NSString*)objectId label:(NSString*)label stepId:(NSString*)stepId orderNumber:(int)orderNumber;
 -(FormComponent *) formComponentAtIndex: (int) index;
 -(int) countFormComonents;
+-(NSString *)formEntryComplete;
 -(NSMutableArray*)storeEnteredDataFromView:(NSValue*)dataValue;
 @end

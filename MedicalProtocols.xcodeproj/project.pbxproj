@@ -22,6 +22,7 @@
 		361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7918ECDF5F0030D688 /* FMDatabasePool.m */; };
 		361A2D8818ECDFC20030D688 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7B18ECDF5F0030D688 /* FMDatabaseQueue.m */; };
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
+		36AD8E331909B39E006210B8 /* BaseMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8E321909B39E006210B8 /* BaseMasterTableViewController.m */; };
 		36BCFF6719087AF60095161D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BCFF6619087AF60095161D /* LoginViewController.m */; };
 		36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */; };
 		8946CCA81908D0590015ABF3 /* FormAlgorithm.m in Sources */ = {isa = PBXBuildFile; fileRef = 8946CCA71908D0590015ABF3 /* FormAlgorithm.m */; };
@@ -120,6 +121,8 @@
 		361A2D7D18ECDF5F0030D688 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		361A2D7E18ECDF5F0030D688 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
+		36AD8E311909B39E006210B8 /* BaseMasterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMasterTableViewController.h; sourceTree = "<group>"; };
+		36AD8E321909B39E006210B8 /* BaseMasterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMasterTableViewController.m; sourceTree = "<group>"; };
 		36BCFF6519087AF60095161D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		36BCFF6619087AF60095161D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentModalViewController.h; sourceTree = "<group>"; };
@@ -444,6 +447,8 @@
 		A324B31018E24AD200261C57 /* MasterViews */ = {
 			isa = PBXGroup;
 			children = (
+				36AD8E311909B39E006210B8 /* BaseMasterTableViewController.h */,
+				36AD8E321909B39E006210B8 /* BaseMasterTableViewController.m */,
 				A324B31D18E4D29000261C57 /* ProtocolMasterViewController.h */,
 				A324B31E18E4D29000261C57 /* ProtocolMasterViewController.m */,
 				A302F60618ECDC830065D42E /* StepMasterViewController.h */,
@@ -757,6 +762,7 @@
 				36BCFF6719087AF60095161D /* LoginViewController.m in Sources */,
 				A37DCAAE1909B5D1001AFF37 /* TextEditableProperty.m in Sources */,
 				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
+				36AD8E331909B39E006210B8 /* BaseMasterTableViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
 				A37DCAA51909AF45001AFF37 /* EditableProperty.m in Sources */,
 				A3A1159B19072F540072E184 /* ComponentCell.m in Sources */,

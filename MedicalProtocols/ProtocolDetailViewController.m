@@ -17,6 +17,7 @@
 
 @interface ProtocolDetailViewController (){
     int componentToDeleteIndex;
+    bool editable;
 }
 @property(nonatomic,strong) Component* selectedComponent;
 @property(nonatomic,strong) ComponentCell* wobblingComponent;
@@ -173,5 +174,13 @@
         ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath: path];
         [componentCell stopWobble];
     }
+}
+-(void)logout{
+    [super logout];
+    if(self.step){
+       self.step = nil;
+        [((UINavigationController*)[self.splitViewController.viewControllers firstObject]) popViewControllerAnimated:YES];
+    }
+    
 }
 @end
