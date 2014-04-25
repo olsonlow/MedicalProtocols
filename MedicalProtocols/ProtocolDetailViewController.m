@@ -119,6 +119,9 @@
     [self.wobblingComponent stopWobble];
     self.wobblingComponent = nil;
 }
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+//    return UIEdgeInsetsMake(20, 20, 20, 20);
+//}
 -(void)insertComponentOfComponentType:(ComponentType)componentType IntoCollectionViewAtLocation:(CGPoint)location{
     [self.wobblingComponent stopWobble];
     self.wobblingComponent = nil;
