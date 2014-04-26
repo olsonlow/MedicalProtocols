@@ -39,6 +39,7 @@
     
     //TODO
     //swipe.numberOfTouchesRequired = 5; //uncomment for testing on Ipad.
+    swipe.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:swipe];
     
 }

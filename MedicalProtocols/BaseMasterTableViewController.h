@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class EditableTableViewCell;
 @interface BaseMasterTableViewController : UITableViewController
 @property(nonatomic,assign) BOOL editable;
+@property(nonatomic, assign) BOOL editButtonClicked;
+@property(nonatomic,strong) NSMutableArray* editedCells;
+
+-(void)editingEndedInCell:(EditableTableViewCell*)editableCell;
 -(void)refreshView;
 @end

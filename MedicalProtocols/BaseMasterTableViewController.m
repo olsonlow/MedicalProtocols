@@ -24,10 +24,17 @@
     return self;
 }
 
+-(NSMutableArray *)editedCells{
+    if(!_editedCells){
+        _editedCells = [[NSMutableArray alloc] init];
+    }
+    return _editedCells;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.editButtonClicked = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -63,6 +70,18 @@
         self.editable = YES;
     } else {
         self.editable = NO;
+    }
+}
+
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    [super setEditing:editing animated:animated];
+    self.editButtonClicked = editing;
+    [self.tableView reloadData];
+}
+
+-(void)editingEndedInCell:(EditableTableViewCell*)editableCell{
+    if(![self.editedCells containsObject:editableCell]){
+        [self.editedCells addObject:editableCell];
     }
 }
 

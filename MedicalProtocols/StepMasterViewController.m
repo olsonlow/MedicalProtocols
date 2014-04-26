@@ -13,6 +13,8 @@
 #import "ProtocolMasterViewController.h"
 #import "ProtocolDataController.h"
 #import "StepBuilderMasterViewController.h"
+#import "EditableTableViewCell.h"
+#import "DataSource.h"
 
 @interface StepMasterViewController ()
 @end
@@ -62,6 +64,19 @@
     }
     [self.tableView reloadData];
 }
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    [super setEditing:editing animated:animated];
+    if(!editing){
+        for(EditableTableViewCell* cell in self.editedCells){
+            ProtocolStep* step = [self.protocolData stepAtIndex:cell.tag];
+            step.description = cell.textField.text;
+            [[DataSource sharedInstance] updateObjectWithDataType:DataTypeStep withId:step.objectId withObject:step];
+        }
+        [self.tableView reloadData];
+    }
+}
+
+
 - (void)insertNewObject:(id)sender
 {
     [self.protocolData addNewStep];
@@ -91,10 +106,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
-    ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-    cell.textLabel.text = step.description;
     
+    UITableViewCell* cell = nil;
+    ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+    if(self.editButtonClicked){
+        EditableTableViewCell *editableCell = [tableView dequeueReusableCellWithIdentifier:@"StepEditableCell" forIndexPath:indexPath];
+        editableCell.delegate = self;
+        ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
+        editableCell.textField.text = step.description;
+        cell =  editableCell;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
+        cell.textLabel.text = step.description;
+    }
+    cell.tag = indexPath.row;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

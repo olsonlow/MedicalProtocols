@@ -115,7 +115,6 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //This is the broken bit I'm working on***********************************
     Component* component = [self.step componentAtIndex:indexPath.row];
     if([component isKindOfClass:[Form class]]){
         Form* form = (Form*)component;

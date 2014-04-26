@@ -22,6 +22,7 @@
 		361A2D8718ECDFC20030D688 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7918ECDF5F0030D688 /* FMDatabasePool.m */; };
 		361A2D8818ECDFC20030D688 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7B18ECDF5F0030D688 /* FMDatabaseQueue.m */; };
 		361A2D8918ECDFC20030D688 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 361A2D7E18ECDF5F0030D688 /* FMResultSet.m */; };
+		363178A9190C48E700B2D53D /* EditableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 363178A8190C48E700B2D53D /* EditableTableViewCell.m */; };
 		36AD8E331909B39E006210B8 /* BaseMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AD8E321909B39E006210B8 /* BaseMasterTableViewController.m */; };
 		36BCFF6719087AF60095161D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BCFF6619087AF60095161D /* LoginViewController.m */; };
 		36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */; };
@@ -120,6 +121,8 @@
 		361A2D7C18ECDF5F0030D688 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		361A2D7D18ECDF5F0030D688 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		361A2D7E18ECDF5F0030D688 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		363178A7190C48E700B2D53D /* EditableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableTableViewCell.h; sourceTree = "<group>"; };
+		363178A8190C48E700B2D53D /* EditableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableTableViewCell.m; sourceTree = "<group>"; };
 		365526D118E8EC77009E276D /* afibImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = afibImage.png; sourceTree = SOURCE_ROOT; };
 		36AD8E311909B39E006210B8 /* BaseMasterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMasterTableViewController.h; sourceTree = "<group>"; };
 		36AD8E321909B39E006210B8 /* BaseMasterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMasterTableViewController.m; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				A302F60718ECDC830065D42E /* StepMasterViewController.m */,
 				A3FC35AD18FDDE5900D2F75D /* StepBuilderMasterViewController.h */,
 				A3FC35AE18FDDE5900D2F75D /* StepBuilderMasterViewController.m */,
+				363178A7190C48E700B2D53D /* EditableTableViewCell.h */,
+				363178A8190C48E700B2D53D /* EditableTableViewCell.m */,
 			);
 			name = MasterViews;
 			sourceTree = "<group>";
@@ -752,6 +757,7 @@
 				8976C4B818FDE2A200DECF27 /* FormComponentView.m in Sources */,
 				8976C4BC18FDE58200DECF27 /* RadioButton.m in Sources */,
 				A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */,
+				363178A9190C48E700B2D53D /* EditableTableViewCell.m in Sources */,
 				A358095A1909F54400F2AB63 /* BasePropertyCell.m in Sources */,
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
