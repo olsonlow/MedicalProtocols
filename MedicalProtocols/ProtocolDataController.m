@@ -24,6 +24,7 @@
 -(id)initWithDelegate:(id<MedRefDataSourceDelegate>)delegate
 {
     self = [super init];
+    
     if (self) {
         _dataSourceReady = NO;
         _medRefDataSourceDelegate = delegate;

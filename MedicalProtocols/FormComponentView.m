@@ -9,6 +9,7 @@
 #import "FormComponentView.h"
 #import "FormSelectionView.h"
 #import "FormNumberView.h"
+
 @implementation FormComponentView
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,6 +33,8 @@
     [self addSubview:formComponentView];
     return self;
 }
+
+
 +(FormComponentView *)formComponentWithFrame:(CGRect)frame Object:(id)object
 {
     FormComponentView * result;
@@ -47,7 +50,6 @@
     }
         return result;
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

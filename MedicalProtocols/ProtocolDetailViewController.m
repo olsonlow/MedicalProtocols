@@ -14,6 +14,8 @@
 #import "LocalDB.h"
 #import "ComponentModalViewController.h"
 #import "ComponentCell.h"
+#import "Form.h"
+#import "TextBlock.h"
 
 @interface ProtocolDetailViewController (){
     int componentToDeleteIndex;
@@ -109,10 +111,22 @@
         [self.wobblingComponent startWobble];
     }
 }
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(self.collectionView.frame.size.x/2, self.collectionView.frame.size.y/2);
-//}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    //This is the broken bit I'm working on***********************************
+    Component* component = [self.step componentAtIndex:indexPath.row];
+    if([component isKindOfClass:[Form class]]){
+        Form* form = (Form*)component;
+        int height = 40;
+        for(int i = 0; i < [form countFormComonents];i++){
+            height = height+100;
+        }
+        return CGSizeMake(self.collectionView.frame.size.width/1.05, height);
+    }
+    return CGSizeMake(self.collectionView.frame.size.width/2.2, self.collectionView.frame.size.height/6);
+}
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(!self.wobblingComponent){
         self.selectedComponent = [self.step componentAtIndex:indexPath.row];
