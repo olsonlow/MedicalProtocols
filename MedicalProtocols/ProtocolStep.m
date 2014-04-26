@@ -2,7 +2,7 @@
 //  ProtocolStep.m
 //  MedicalProtocols
 //
-//  Created by Luke Vergos on 30/03/2014.
+//  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 30/03/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 

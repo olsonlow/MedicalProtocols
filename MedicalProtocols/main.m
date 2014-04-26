@@ -2,7 +2,7 @@
 //  main.m
 //  MedicalProtocols
 //
-//  Created by Luke Vergos on 25/03/14.
+//  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 25/03/14.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
