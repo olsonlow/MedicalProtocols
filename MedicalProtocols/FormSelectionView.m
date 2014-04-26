@@ -23,14 +23,14 @@
 -(id) initWithFrame:(CGRect)frame andFormSelection:(FormSelection *)formSelection
 {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor yellowColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.formSelection = formSelection;
     self.formSelection.valueSet = NO;
     UILabel *selectionLabel = [[UILabel alloc]init];
     CGSize stringSize = [formSelection.label sizeWithAttributes:@{NSFontAttributeName:selectionLabel.font}];
     selectionLabel.frame = CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height);
     selectionLabel.text = formSelection.label;
-    [selectionLabel setCenter:CGPointMake(self.center.x+25, self.center.y-25)];
+    [selectionLabel setCenter:CGPointMake(selectionLabel.frame.size.width/2, selectionLabel.frame.size.height/2)];
     
     RadioButton *choiceA = [[RadioButton alloc]initWithFrame:frame];
     choiceA.titleLabel.font = [UIFont boldSystemFontOfSize:12];
@@ -38,7 +38,7 @@
     [choiceA setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceA.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
     //choiceA.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
-    [choiceA setCenter:self.center];
+    [choiceA setCenter:CGPointMake(frame.size.width/2, frame.size.height/2)];
     [choiceA addTarget:self action:@selector(didSelect:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *choiceALabel = [[UILabel alloc]init];
@@ -52,7 +52,7 @@
     [choiceB setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
     [choiceB setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
     choiceB.frame = CGRectMake(frame.origin.x, frame.origin.y, 24, 24);
-    [choiceB setCenter:CGPointMake(self.center.x+50, self.center.y)];
+    [choiceB setCenter:CGPointMake(choiceA.center.x+50, choiceA.center.y)];
     [choiceB addTarget:self action:@selector(didSelect:) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *choiceBLabel = [[UILabel alloc]init];
