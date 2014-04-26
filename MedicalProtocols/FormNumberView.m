@@ -10,6 +10,7 @@
 #import "Form.h"
 #import "FormNumber.h"
 #import <QuartzCore/QuartzCore.h>
+
 @implementation FormNumberView
 
 - (id)initWithFrame:(CGRect)frame
@@ -54,13 +55,6 @@
     
     return self;
 }
-- (void)addUpperBorder
-{
-    CALayer *upperBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 1.0f);
-    [self.layer addSublayer:upperBorder];
-}
 - (IBAction)sliderChanged:(UISlider *)sender
 {
     NSString *labelText = [NSString stringWithFormat:@"%@: %d",self.formNumber.label,(int)self.slider.value];
@@ -68,6 +62,13 @@
     self.formNumber.valueSet = YES;
 }
 
+- (void)addUpperBorder
+{
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 1.0f);
+    [self.layer addSublayer:upperBorder];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

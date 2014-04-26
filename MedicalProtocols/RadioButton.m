@@ -24,7 +24,6 @@
 //
 
 #import "RadioButton.h"
-
 @interface RadioButton()
 {
 	NSMutableArray* _sharedLinks;
@@ -123,6 +122,7 @@
 	}
 	return nil;
 }
+
 
 -(RadioButton*) selectedButton
 {

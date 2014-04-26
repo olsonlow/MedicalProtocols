@@ -8,6 +8,7 @@
 
 #import "FormView.h"
 #import "FormComponentView.h"
+
 @implementation FormView
 
 - (id)initWithFrame:(CGRect)frame
@@ -39,12 +40,13 @@
     [done setTitle:@"DONE" forState:UIControlStateNormal];
     done.frame = CGRectMake(frame.origin.x, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
 
-    
     [self addSubview:done];
     NSLog(@"%d",self.userInteractionEnabled);
 
     return self;
 }
+
+
 
 - (IBAction)didClick:(UIButton *)sender
 {

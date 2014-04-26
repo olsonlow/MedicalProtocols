@@ -45,6 +45,7 @@
     ComponentView * componentView = [ComponentView componentWithFrame:CGRectMake(padding, padding, self.frame.size.width-(2*padding), self.frame.size.height-(2*padding)) Object:object];;
     [self addSubview:componentView];
 }
+
 +(ComponentView *)componentWithFrame:(CGRect)frame Object:(id)object
 {
     ComponentView * result;
