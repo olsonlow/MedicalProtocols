@@ -11,6 +11,8 @@
 #import "ProtocolDataController.h"
 #import "MedProtocol.h"
 #import "StepMasterViewController.h"
+#import "EditableTableViewCell.h"
+#import "DataSource.h"
 
 @interface ProtocolMasterViewController ()
 @property (strong,nonatomic) ProtocolDataController* protocolDataController;
@@ -51,6 +53,17 @@
     [self.tableView reloadData];
 }
 
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    [super setEditing:editing animated:animated];
+    if(!editing){
+        for(EditableTableViewCell* cell in self.editedCells){
+            MedProtocol* protocol = [self.protocolDataController protocolAtIndex:cell.tag];
+            protocol.name = cell.textField.text;
+            [[DataSource sharedInstance] updateObjectWithDataType:DataTypeProtocol withId:protocol.objectId withObject:protocol];
+        }
+        [self.tableView reloadData];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -77,10 +90,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProtocolCell" forIndexPath:indexPath];
-    
+    UITableViewCell* cell = nil;
     MedProtocol *protocol = [self.protocolDataController protocolAtIndex:indexPath.row];
-    cell.textLabel.text = protocol.name;
+    if(self.editButtonClicked){
+        EditableTableViewCell *editableCell = [tableView dequeueReusableCellWithIdentifier:@"ProtocolEditableCell" forIndexPath:indexPath];
+        editableCell.delegate = self;
+        editableCell.textField.text = protocol.name;
+        cell =  editableCell;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ProtocolCell" forIndexPath:indexPath];
+        cell.textLabel.text = protocol.name;
+    }
+    cell.tag = indexPath.row;
     
     return cell;
 }
