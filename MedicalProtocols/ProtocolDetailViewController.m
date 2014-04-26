@@ -68,8 +68,9 @@
     [self.wobblingComponent stopWobble];
     self.wobblingComponent = nil;
 
-    if([PFUser currentUser])
+    if([PFUser currentUser]){
         editable = YES;
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -115,7 +116,6 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(!self.wobblingComponent){
         self.selectedComponent = [self.step componentAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"ModalView" sender:self];
         if(editable){
             [self performSegueWithIdentifier:@"ModalView" sender:self];
         }

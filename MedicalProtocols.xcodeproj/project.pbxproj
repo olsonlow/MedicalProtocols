@@ -61,6 +61,10 @@
 		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
 		A3533FAD18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */; };
 		A358095A1909F54400F2AB63 /* BasePropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A35809591909F54400F2AB63 /* BasePropertyCell.m */; };
+		A358095D190C242B00F2AB63 /* TextBlockModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */; };
+		A3580960190C244400F2AB63 /* LInkModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A358095F190C244400F2AB63 /* LInkModalViewController.m */; };
+		A3580963190C246700F2AB63 /* FormModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3580962190C246700F2AB63 /* FormModalViewController.m */; };
+		A3580966190C275D00F2AB63 /* CalculatorModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */; };
 		A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */; };
 		A3689B7A18E94D0B0040D6F2 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7918E94D0B0040D6F2 /* Component.m */; };
 		A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7E18E94EE60040D6F2 /* TextBlock.m */; };
@@ -186,6 +190,14 @@
 		A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedRefFirstDetailViewViewController.m; sourceTree = "<group>"; };
 		A35809581909F54400F2AB63 /* BasePropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePropertyCell.h; sourceTree = "<group>"; };
 		A35809591909F54400F2AB63 /* BasePropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePropertyCell.m; sourceTree = "<group>"; };
+		A358095B190C242B00F2AB63 /* TextBlockModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlockModalViewController.h; sourceTree = "<group>"; };
+		A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBlockModalViewController.m; sourceTree = "<group>"; };
+		A358095E190C244400F2AB63 /* LInkModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LInkModalViewController.h; sourceTree = "<group>"; };
+		A358095F190C244400F2AB63 /* LInkModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LInkModalViewController.m; sourceTree = "<group>"; };
+		A3580961190C246700F2AB63 /* FormModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormModalViewController.h; sourceTree = "<group>"; };
+		A3580962190C246700F2AB63 /* FormModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormModalViewController.m; sourceTree = "<group>"; };
+		A3580964190C275D00F2AB63 /* CalculatorModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorModalViewController.h; sourceTree = "<group>"; };
+		A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorModalViewController.m; sourceTree = "<group>"; };
 		A362A68718EE38DB00148BD6 /* parseCreationScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parseCreationScript.h; sourceTree = "<group>"; };
 		A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolStep.h; sourceTree = "<group>"; };
 		A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolStep.m; sourceTree = "<group>"; };
@@ -531,6 +543,14 @@
 			children = (
 				36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */,
 				36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */,
+				A358095B190C242B00F2AB63 /* TextBlockModalViewController.h */,
+				A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */,
+				A358095E190C244400F2AB63 /* LInkModalViewController.h */,
+				A358095F190C244400F2AB63 /* LInkModalViewController.m */,
+				A3580961190C246700F2AB63 /* FormModalViewController.h */,
+				A3580962190C246700F2AB63 /* FormModalViewController.m */,
+				A3580964190C275D00F2AB63 /* CalculatorModalViewController.h */,
+				A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */,
 				A3D0D8461908832400CEBA0E /* ComponentPropertyCell */,
 			);
 			name = ModalViews;
@@ -760,6 +780,8 @@
 				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				36BCFF6719087AF60095161D /* LoginViewController.m in Sources */,
+				A3580966190C275D00F2AB63 /* CalculatorModalViewController.m in Sources */,
+				A358095D190C242B00F2AB63 /* TextBlockModalViewController.m in Sources */,
 				A37DCAAE1909B5D1001AFF37 /* TextEditableProperty.m in Sources */,
 				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
 				36AD8E331909B39E006210B8 /* BaseMasterTableViewController.m in Sources */,
@@ -770,8 +792,10 @@
 				A3D0D84F190887C400CEBA0E /* SwitchPropertyCell.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
+				A3580963190C246700F2AB63 /* FormModalViewController.m in Sources */,
 				8946CCA81908D0590015ABF3 /* FormAlgorithm.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
+				A3580960190C244400F2AB63 /* LInkModalViewController.m in Sources */,
 				8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */,
 				A3D0D84C190887AD00CEBA0E /* TextAreaPropertyCell.m in Sources */,
 				89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */,
