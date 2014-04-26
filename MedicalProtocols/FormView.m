@@ -38,7 +38,7 @@
     UIButton *done =  [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [done addTarget:self action:@selector(didClick:) forControlEvents:UIControlEventTouchUpInside];
     [done setTitle:@"DONE" forState:UIControlStateNormal];
-    done.frame = CGRectMake(frame.origin.x, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
+    done.frame = CGRectMake(frame.size.width-50, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
 
     [self addSubview:done];
     NSLog(@"%d",self.userInteractionEnabled);

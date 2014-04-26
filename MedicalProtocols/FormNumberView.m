@@ -30,7 +30,7 @@
     self = [super initWithFrame:frame];
     self.frame = frame;
 
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.slider = [[UISlider alloc]init];
     self.sliderLabel = [[UILabel alloc]init];
     [self addUpperBorder];
