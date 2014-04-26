@@ -31,6 +31,7 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)switchValueChanged:(id)sender {
+- (IBAction)switchValueChanged:(UISwitch*)sender {
+    self.value = [NSNumber numberWithBool:sender.on];
 }
 @end

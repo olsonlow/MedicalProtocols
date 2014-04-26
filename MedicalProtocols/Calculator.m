@@ -13,11 +13,13 @@
     return [self initWithObjectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }
 -(id)initWithObjectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber  componentType:ComponentTypeCalculator];
     if (self) {
         //_objectId = objectId;
     }
     return self;
 }
-
+-(int)numberOfEditableProperties{
+    return 0;
+}
 @end

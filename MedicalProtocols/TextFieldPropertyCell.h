@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasePropertyCell.h"
 
-@interface TextFieldPropertyCell : UITableViewCell
+@interface TextFieldPropertyCell : BasePropertyCell
+- (IBAction)textFinishedEditing:(UITextField*)sender;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @end

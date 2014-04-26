@@ -60,6 +60,11 @@
 		A324B32218E4D2A900261C57 /* ProtocolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32118E4D2A900261C57 /* ProtocolDetailViewController.m */; };
 		A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = A324B32918E4E4E000261C57 /* ProtocolDataController.m */; };
 		A3533FAD18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */; };
+		A358095A1909F54400F2AB63 /* BasePropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A35809591909F54400F2AB63 /* BasePropertyCell.m */; };
+		A358095D190C242B00F2AB63 /* TextBlockModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */; };
+		A3580960190C244400F2AB63 /* LInkModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A358095F190C244400F2AB63 /* LInkModalViewController.m */; };
+		A3580963190C246700F2AB63 /* FormModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3580962190C246700F2AB63 /* FormModalViewController.m */; };
+		A3580966190C275D00F2AB63 /* CalculatorModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */; };
 		A3689B7718E8DE8C0040D6F2 /* ProtocolStep.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */; };
 		A3689B7A18E94D0B0040D6F2 /* Component.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7918E94D0B0040D6F2 /* Component.m */; };
 		A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B7E18E94EE60040D6F2 /* TextBlock.m */; };
@@ -68,13 +73,15 @@
 		A3689B8818E94F0D0040D6F2 /* Form.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8718E94F0D0040D6F2 /* Form.m */; };
 		A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8B18E952BA0040D6F2 /* FormNumber.m */; };
 		A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3689B8E18E952C90040D6F2 /* FormSelection.m */; };
+		A37DCAA51909AF45001AFF37 /* EditableProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = A37DCAA41909AF45001AFF37 /* EditableProperty.m */; };
+		A37DCAAE1909B5D1001AFF37 /* TextEditableProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = A37DCAAD1909B5D1001AFF37 /* TextEditableProperty.m */; };
+		A37DCAB11909B8D0001AFF37 /* BoolEditableProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = A37DCAB01909B8D0001AFF37 /* BoolEditableProperty.m */; };
 		A3A1159B19072F540072E184 /* ComponentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1159A19072F540072E184 /* ComponentCell.m */; };
 		A3A1159D190732E40072E184 /* cancelIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A1159C190732E40072E184 /* cancelIcon.png */; };
 		A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2755E18F8C773001C5027 /* MedRefBaseDetailViewController.m */; };
 		A3B2756818F99BA5001C5027 /* DetailViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B2756718F99BA5001C5027 /* DetailViewControllerSegue.m */; };
 		A3D0D84C190887AD00CEBA0E /* TextAreaPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D0D84B190887AD00CEBA0E /* TextAreaPropertyCell.m */; };
 		A3D0D84F190887C400CEBA0E /* SwitchPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D0D84E190887C400CEBA0E /* SwitchPropertyCell.m */; };
-		A3D0D852190887F600CEBA0E /* TextFieldPropertyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D0D851190887F600CEBA0E /* TextFieldPropertyCell.m */; };
 		A3D0D85419089E6200CEBA0E /* sprotocols.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D0D85319089E6200CEBA0E /* sprotocols.png */; };
 		A3EBEAE318F08F380016613C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE218F08F380016613C /* DataSource.m */; };
 		A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EBEAE518F08F610016613C /* ParseDataSource.m */; };
@@ -181,6 +188,16 @@
 		A324B32918E4E4E000261C57 /* ProtocolDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolDataController.m; sourceTree = "<group>"; };
 		A3533FAB18F9A3A300715D2A /* MedRefFirstDetailViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedRefFirstDetailViewViewController.h; sourceTree = "<group>"; };
 		A3533FAC18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedRefFirstDetailViewViewController.m; sourceTree = "<group>"; };
+		A35809581909F54400F2AB63 /* BasePropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePropertyCell.h; sourceTree = "<group>"; };
+		A35809591909F54400F2AB63 /* BasePropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePropertyCell.m; sourceTree = "<group>"; };
+		A358095B190C242B00F2AB63 /* TextBlockModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextBlockModalViewController.h; sourceTree = "<group>"; };
+		A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextBlockModalViewController.m; sourceTree = "<group>"; };
+		A358095E190C244400F2AB63 /* LInkModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LInkModalViewController.h; sourceTree = "<group>"; };
+		A358095F190C244400F2AB63 /* LInkModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LInkModalViewController.m; sourceTree = "<group>"; };
+		A3580961190C246700F2AB63 /* FormModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormModalViewController.h; sourceTree = "<group>"; };
+		A3580962190C246700F2AB63 /* FormModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormModalViewController.m; sourceTree = "<group>"; };
+		A3580964190C275D00F2AB63 /* CalculatorModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorModalViewController.h; sourceTree = "<group>"; };
+		A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorModalViewController.m; sourceTree = "<group>"; };
 		A362A68718EE38DB00148BD6 /* parseCreationScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parseCreationScript.h; sourceTree = "<group>"; };
 		A3689B7518E8DE8C0040D6F2 /* ProtocolStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolStep.h; sourceTree = "<group>"; };
 		A3689B7618E8DE8C0040D6F2 /* ProtocolStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolStep.m; sourceTree = "<group>"; };
@@ -198,6 +215,12 @@
 		A3689B8B18E952BA0040D6F2 /* FormNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormNumber.m; sourceTree = "<group>"; };
 		A3689B8D18E952C90040D6F2 /* FormSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormSelection.h; sourceTree = "<group>"; };
 		A3689B8E18E952C90040D6F2 /* FormSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormSelection.m; sourceTree = "<group>"; };
+		A37DCAA31909AF45001AFF37 /* EditableProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditableProperty.h; sourceTree = "<group>"; };
+		A37DCAA41909AF45001AFF37 /* EditableProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditableProperty.m; sourceTree = "<group>"; };
+		A37DCAAC1909B5D1001AFF37 /* TextEditableProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEditableProperty.h; sourceTree = "<group>"; };
+		A37DCAAD1909B5D1001AFF37 /* TextEditableProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextEditableProperty.m; sourceTree = "<group>"; };
+		A37DCAAF1909B8D0001AFF37 /* BoolEditableProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolEditableProperty.h; sourceTree = "<group>"; };
+		A37DCAB01909B8D0001AFF37 /* BoolEditableProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolEditableProperty.m; sourceTree = "<group>"; };
 		A3A1159919072F540072E184 /* ComponentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentCell.h; sourceTree = "<group>"; };
 		A3A1159A19072F540072E184 /* ComponentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentCell.m; sourceTree = "<group>"; };
 		A3A1159C190732E40072E184 /* cancelIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelIcon.png; sourceTree = "<group>"; };
@@ -471,6 +494,7 @@
 		A3689B7B18E94EB70040D6F2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A37DCAA21909AF1C001AFF37 /* EditableProperties */,
 				A3689B7818E94D0A0040D6F2 /* Component.h */,
 				A3689B7918E94D0B0040D6F2 /* Component.m */,
 				A3689B7D18E94EE60040D6F2 /* TextBlock.h */,
@@ -501,11 +525,32 @@
 			name = Forms;
 			sourceTree = "<group>";
 		};
+		A37DCAA21909AF1C001AFF37 /* EditableProperties */ = {
+			isa = PBXGroup;
+			children = (
+				A37DCAA31909AF45001AFF37 /* EditableProperty.h */,
+				A37DCAA41909AF45001AFF37 /* EditableProperty.m */,
+				A37DCAAC1909B5D1001AFF37 /* TextEditableProperty.h */,
+				A37DCAAD1909B5D1001AFF37 /* TextEditableProperty.m */,
+				A37DCAAF1909B8D0001AFF37 /* BoolEditableProperty.h */,
+				A37DCAB01909B8D0001AFF37 /* BoolEditableProperty.m */,
+			);
+			name = EditableProperties;
+			sourceTree = "<group>";
+		};
 		A3A1159E1907482B0072E184 /* ModalViews */ = {
 			isa = PBXGroup;
 			children = (
 				36EE19ED1901F06F004CDE57 /* ComponentModalViewController.h */,
 				36EE19EE1901F06F004CDE57 /* ComponentModalViewController.m */,
+				A358095B190C242B00F2AB63 /* TextBlockModalViewController.h */,
+				A358095C190C242B00F2AB63 /* TextBlockModalViewController.m */,
+				A358095E190C244400F2AB63 /* LInkModalViewController.h */,
+				A358095F190C244400F2AB63 /* LInkModalViewController.m */,
+				A3580961190C246700F2AB63 /* FormModalViewController.h */,
+				A3580962190C246700F2AB63 /* FormModalViewController.m */,
+				A3580964190C275D00F2AB63 /* CalculatorModalViewController.h */,
+				A3580965190C275D00F2AB63 /* CalculatorModalViewController.m */,
 				A3D0D8461908832400CEBA0E /* ComponentPropertyCell */,
 			);
 			name = ModalViews;
@@ -553,6 +598,8 @@
 		A3D0D8461908832400CEBA0E /* ComponentPropertyCell */ = {
 			isa = PBXGroup;
 			children = (
+				A35809581909F54400F2AB63 /* BasePropertyCell.h */,
+				A35809591909F54400F2AB63 /* BasePropertyCell.m */,
 				A3D0D84A190887AD00CEBA0E /* TextAreaPropertyCell.h */,
 				A3D0D84B190887AD00CEBA0E /* TextAreaPropertyCell.m */,
 				A3D0D84D190887C400CEBA0E /* SwitchPropertyCell.h */,
@@ -725,6 +772,7 @@
 				8976C4B818FDE2A200DECF27 /* FormComponentView.m in Sources */,
 				8976C4BC18FDE58200DECF27 /* RadioButton.m in Sources */,
 				A3B2755F18F8C773001C5027 /* MedRefBaseDetailViewController.m in Sources */,
+				A358095A1909F54400F2AB63 /* BasePropertyCell.m in Sources */,
 				A324B2E518E24A4600261C57 /* AppDelegate.m in Sources */,
 				A324B32A18E4E4E000261C57 /* ProtocolDataController.m in Sources */,
 				89AC2BB218F9E17300BC4BC2 /* CalculatorView.m in Sources */,
@@ -732,20 +780,25 @@
 				89AC2BAF18F9E16100BC4BC2 /* LinkView.m in Sources */,
 				A324B31F18E4D29000261C57 /* ProtocolMasterViewController.m in Sources */,
 				36BCFF6719087AF60095161D /* LoginViewController.m in Sources */,
+				A3580966190C275D00F2AB63 /* CalculatorModalViewController.m in Sources */,
+				A358095D190C242B00F2AB63 /* TextBlockModalViewController.m in Sources */,
+				A37DCAAE1909B5D1001AFF37 /* TextEditableProperty.m in Sources */,
 				36EE19EF1901F06F004CDE57 /* ComponentModalViewController.m in Sources */,
 				36AD8E331909B39E006210B8 /* BaseMasterTableViewController.m in Sources */,
 				A3EBEB2618F732C50016613C /* SVProgressHUD.m in Sources */,
+				A37DCAA51909AF45001AFF37 /* EditableProperty.m in Sources */,
 				A3A1159B19072F540072E184 /* ComponentCell.m in Sources */,
 				89AC2BA918F9D5B700BC4BC2 /* ComponentView.m in Sources */,
 				A3D0D84F190887C400CEBA0E /* SwitchPropertyCell.m in Sources */,
 				A3689B7F18E94EE60040D6F2 /* TextBlock.m in Sources */,
 				A3689B8C18E952BA0040D6F2 /* FormNumber.m in Sources */,
+				A3580963190C246700F2AB63 /* FormModalViewController.m in Sources */,
 				8946CCA81908D0590015ABF3 /* FormAlgorithm.m in Sources */,
 				A3689B8818E94F0D0040D6F2 /* Form.m in Sources */,
+				A3580960190C244400F2AB63 /* LInkModalViewController.m in Sources */,
 				8976C4AF18FDDBD500DECF27 /* FormNumberView.m in Sources */,
 				A3D0D84C190887AD00CEBA0E /* TextAreaPropertyCell.m in Sources */,
 				89AC2BBE18F9FBE400BC4BC2 /* TextBlockView.m in Sources */,
-				A3D0D852190887F600CEBA0E /* TextFieldPropertyCell.m in Sources */,
 				A3689B8F18E952C90040D6F2 /* FormSelection.m in Sources */,
 				8976C4B518FDDF6900DECF27 /* FormComponent.m in Sources */,
 				A324B2E118E24A4600261C57 /* main.m in Sources */,
@@ -755,6 +808,7 @@
 				A3EBEAE618F08F610016613C /* ParseDataSource.m in Sources */,
 				A3533FAD18F9A3A300715D2A /* MedRefFirstDetailViewViewController.m in Sources */,
 				A3689B8218E94EF00040D6F2 /* Link.m in Sources */,
+				A37DCAB11909B8D0001AFF37 /* BoolEditableProperty.m in Sources */,
 				A302F60818ECDC830065D42E /* StepMasterViewController.m in Sources */,
 				A3FA341418E8AEBA000D64F8 /* MedProtocol.m in Sources */,
 				A3689B7A18E94D0B0040D6F2 /* Component.m in Sources */,

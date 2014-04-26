@@ -7,14 +7,16 @@
 //
 
 #import "TextBlock.h"
+#import "TextEditableProperty.h"
+#import "TextEditableProperty.h"
 
 @implementation TextBlock
 -(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber componentType:ComponentTypeTextBlock];
     if (self) {
         _title = title;
         _content = content;
-        _printable = printable;
+        _printable = printable; 
     }
     return self;
 }
@@ -22,5 +24,21 @@
 {
     return [self initWithTitle:@"" content:@"" printable:NO objectId:[[[NSUUID alloc] init] UUIDString]  stepId:@"" orderNumber:-1];
 }
-
+-(NSMutableArray *)editableProperties{
+    NSMutableArray* editableProperties = super.editableProperties;
+    if(!editableProperties){
+        editableProperties = [[NSMutableArray alloc] init];
+        TextEditableProperty* textProperty = [[TextEditableProperty alloc] init];
+        textProperty.name = @"Title";
+        textProperty.isTextArea = NO;
+        [editableProperties addObject:textProperty];
+        
+        TextEditableProperty* textAreaProperty = [[TextEditableProperty alloc] init];
+        textAreaProperty.name = @"Content";
+        textAreaProperty.isTextArea = YES;
+        [editableProperties addObject:textAreaProperty];
+        
+    }
+    return editableProperties;
+}
 @end

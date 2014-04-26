@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasePropertyCell.h"
 
-@interface TextAreaPropertyCell : UITableViewCell
+@interface TextAreaPropertyCell : BasePropertyCell <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITextView *textArea;
 

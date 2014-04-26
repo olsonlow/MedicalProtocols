@@ -13,7 +13,6 @@
 #import "Calculator.h"
 
 @interface Component()
-
 @end
 
 @implementation Component
@@ -59,12 +58,13 @@
     }
     return comonentName;
 }
--(id)initWithObjectId:(NSString*)objectId StepId:(NSString*)stepId OrderNumber:(int)orderNumber{
+-(id)initWithObjectId:(NSString*)objectId StepId:(NSString*)stepId OrderNumber:(int)orderNumber componentType:(ComponentType)componentType{
     self = [super init];
     if (self) {
         _objectId = objectId;
         _stepId = stepId;
         _orderNumber = orderNumber;
+        _componentType = componentType;
     }
     return self;
 }
@@ -90,11 +90,11 @@
     component.stepId = stepId;
     return component;
 }
-+(int)numberOfEditablePropertiesForComponent:(Component*)component{
-    if(TRUE){
-        
-    }
-    return 0;
+-(int)countEditableProperties{
+    return [self.editableProperties count];
+}
+-(EditableProperty*)editablePropertyAtIndex:(int)index{
+    return [self.editableProperties objectAtIndex:index];
 }
 +(void)DeleteComponentWithId:(NSString*)objectId{
     

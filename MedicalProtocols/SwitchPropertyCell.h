@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasePropertyCell.h"
 
-@interface SwitchPropertyCell : UITableViewCell
+@interface SwitchPropertyCell : BasePropertyCell
 @property (weak, nonatomic) IBOutlet UILabel *label;
-- (IBAction)switchValueChanged:(id)sender;
+- (IBAction)switchValueChanged:(UISwitch*)sender;
 
 @end

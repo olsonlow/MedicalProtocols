@@ -21,7 +21,8 @@
     int componentToDeleteIndex;
     bool editable;
 }
-
+@property(nonatomic,strong) Component* selectedComponent;
+@property(nonatomic,strong) ComponentCell* wobblingComponent;
 - (void)configureView;
 @end
 
@@ -66,9 +67,12 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.wobblingComponent stopWobble];
+    self.wobblingComponent = nil;
 
-    if([PFUser currentUser])
+    if([PFUser currentUser]){
         editable = YES;
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -103,7 +107,8 @@
 }
 -(void)longPress:(UILongPressGestureRecognizer*)longPress{
     if(editable){
-        [(ComponentCell*)longPress.view startWobble];
+        self.wobblingComponent = (ComponentCell*)longPress.view;
+        [self.wobblingComponent startWobble];
     }
 }
 
@@ -126,19 +131,26 @@
     return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height/5);
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    ComponentCell* componentCell = (ComponentCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-    if(!componentCell.wobbling){
-        Component *component = [self.step componentAtIndex:indexPath.row];
-        if(editable)
-            [self displayModalViewWithComponent:component];
+    if(!self.wobblingComponent){
+        self.selectedComponent = [self.step componentAtIndex:indexPath.row];
+        if(editable){
+            [self performSegueWithIdentifier:@"ModalView" sender:self];
+        }
     } else {
-        [componentCell stopWobble];
+        [self.wobblingComponent stopWobble];
+        self.wobblingComponent = nil;
     }
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.wobblingComponent stopWobble];
+    self.wobblingComponent = nil;
 }
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
 //    return UIEdgeInsetsMake(20, 20, 20, 20);
 //}
 -(void)insertComponentOfComponentType:(ComponentType)componentType IntoCollectionViewAtLocation:(CGPoint)location{
+    [self.wobblingComponent stopWobble];
+    self.wobblingComponent = nil;
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:location];
     if(indexPath){
         //insert at index path
@@ -152,7 +164,10 @@
 
 #pragma mark - Segue
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-
+    if([segue.identifier isEqualToString:@"ModalView"]){
+        ComponentModalViewController* modalView = [segue destinationViewController];
+        modalView.component = self.selectedComponent;
+    }
 }
 - (IBAction)unwindToProtocolDetailViewController:(UIStoryboardSegue *)sender {
     if([sender.identifier isEqualToString:@"FormSheetUnwindCancel"]){
@@ -160,16 +175,6 @@
     }else if([sender.identifier isEqualToString:@"FormSheetUnwindSave"]){
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-}
-- (void)displayModalViewWithComponent:(Component*) component {
-    [self performSegueWithIdentifier:@"ModalView" sender:self];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
-//    ComponentModalViewController *modalViewController = [storyboard instantiateViewControllerWithIdentifier:@"ModalView"];
-//    modalViewController.view.backgroundColor = [UIColor clearColor];
-//    modalViewController.component = component;
-//    modalViewController.delegate = self;
-//    modalViewController.modalPresentationStyle= UIModalPresentationCustom;
-//    [self presentViewController:modalViewController animated:YES completion:nil];
 }
 -(void)deleteCellAtindex:(int)index{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"Do you wish to permanently delete this component?" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Delete",nil];
