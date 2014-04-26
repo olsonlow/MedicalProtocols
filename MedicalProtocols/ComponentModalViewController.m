@@ -12,9 +12,17 @@
 #import "BoolEditableProperty.h"
 #import "TextEditableProperty.h"
 
+#import "BasePropertyCell.h"
 #import "TextFieldPropertyCell.m"
 #import "TextAreaPropertyCell.h"
 #import "SwitchPropertyCell.h"
+
+#import "TextBlock.h"
+#import "Link.h"
+#import "Calculator.h"
+#import "Form.h"
+
+#import "DataSource.h"
 
 @interface ComponentModalViewController ()
 
@@ -41,6 +49,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"FormSheetUnwindSave"]){
+        [self saveComponentProperties];
+    }
 }
 
 #pragma mark TableView Data Source
@@ -73,6 +87,7 @@
         switchCell.label.text = boolProperty.name;
         cell = switchCell;
     }
+    cell.tag = indexPath.row;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -96,8 +111,51 @@
 }
 */
 
-- (IBAction)saveComponentProperties:(id)sender {
+- (void)saveComponentProperties {
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (NSInteger j = 0; j < [self.tableView numberOfSections]; ++j)
+    {
+        for (NSInteger i = 0; i < [self.tableView numberOfRowsInSection:j]; ++i)
+        {
+            [cells addObject:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+        }
+    }
+    NSMutableArray *values = [[NSMutableArray alloc] init];
+    for (BasePropertyCell *cell in cells)
+    {
+        [values addObject:cell.value];
+    }
+    switch (self.component.componentType) {
+        case ComponentTypeTextBlock:
+            [self insertValues:values IntoTextBlock:(TextBlock*)self.component];
+            break;
+        case ComponentTypeLink:
+            [self insertValues:values IntoLink:(Link*)self.component];
+            break;
+        case ComponentTypeForm:
+            [self insertValues:values IntoForm:(Form*)self.component];
+            break;
+        case ComponentTypeCalculator:
+            [self insertValues:values IntoCalculator:(Calculator*)self.component];
+            break;
+        default:
+            break;
+    }
+    [[DataSource sharedInstance] updateObjectWithDataType:DataTypeComponent withId:self.component.objectId withObject:self.component];
+}
+-(void)insertValues:(NSMutableArray*)values IntoTextBlock:(TextBlock*)textBlock{
+    textBlock.title = [values objectAtIndex:0];
+    textBlock.content = [values objectAtIndex:1];
+    textBlock.printable = [[values objectAtIndex:2] boolValue];
+}
+-(void)insertValues:(NSMutableArray*)values IntoForm:(Form*)form{
     
-    
+}
+-(void)insertValues:(NSMutableArray*)values IntoLink:(Link*)link{
+    link.label = [values objectAtIndex:0];
+    link.url = [values objectAtIndex:1];
+}
+-(void)insertValues:(NSMutableArray*)values IntoCalculator:(Calculator*)calculator{
+
 }
 @end

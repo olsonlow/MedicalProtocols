@@ -19,10 +19,13 @@
     }
     return self;
 }
-
+-(id)value{
+    return self.textArea.text;
+}
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    self.value = @"";
     _textArea.layer.BorderColor = [[UIColor lightGrayColor] CGColor];
     _textArea.layer.BorderWidth = 2;
     _textArea.layer.CornerRadius = 5;

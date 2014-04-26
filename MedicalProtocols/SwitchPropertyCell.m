@@ -21,9 +21,13 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    self.value = [NSNumber numberWithBool:NO];
     // Initialization code
 }
-
+-(id)value{
+    return self.label.text;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

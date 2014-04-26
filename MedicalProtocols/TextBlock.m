@@ -8,7 +8,8 @@
 
 #import "TextBlock.h"
 #import "TextEditableProperty.h"
-#import "TextEditableProperty.h"
+#import "BoolEditableProperty.h"
+
 
 @implementation TextBlock
 -(id)initWithTitle:(NSString*)title content:(NSString*)content printable:(bool)printable objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
@@ -31,13 +32,19 @@
         TextEditableProperty* textProperty = [[TextEditableProperty alloc] init];
         textProperty.name = @"Title";
         textProperty.isTextArea = NO;
+        textProperty.value = self.title;
         [editableProperties addObject:textProperty];
         
         TextEditableProperty* textAreaProperty = [[TextEditableProperty alloc] init];
         textAreaProperty.name = @"Content";
         textAreaProperty.isTextArea = YES;
+        textAreaProperty.value = self.content;
         [editableProperties addObject:textAreaProperty];
         
+        BoolEditableProperty* boolProperty = [[BoolEditableProperty alloc] init];
+        boolProperty.name = @"Printable";
+        boolProperty.value = self.printable;
+        [editableProperties addObject:boolProperty];
     }
     return editableProperties;
 }

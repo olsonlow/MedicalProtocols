@@ -11,7 +11,7 @@
 
 @implementation Link
 -(id)initWithLabel:(NSString*)label url:(NSString*)url objectId:(NSString*)objectId stepId:(NSString*)stepId orderNumber:(int)orderNumber{
-    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber componentType:ComponentTypeForm];
+    self = [super initWithObjectId:objectId StepId:stepId OrderNumber:orderNumber componentType:ComponentTypeLink];
     if (self) {
         _label = label;
         _url = url;
@@ -28,11 +28,13 @@
         TextEditableProperty* labelProperty = [[TextEditableProperty alloc] init];
         labelProperty.name = @"Label";
         labelProperty.isTextArea = NO;
+        labelProperty.value = self.label;
         [editableProperties addObject:labelProperty];
         
         TextEditableProperty* urlProperty = [[TextEditableProperty alloc] init];
         urlProperty.name = @"url";
         urlProperty.isTextArea = NO;
+        urlProperty.value = self.url;
         [editableProperties addObject:urlProperty];
         
     }

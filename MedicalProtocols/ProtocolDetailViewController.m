@@ -157,6 +157,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }else if([sender.identifier isEqualToString:@"FormSheetUnwindSave"]){
         [self dismissViewControllerAnimated:YES completion:nil];
+        [self.collectionView reloadData];
     }
 }
 -(void)deleteCellAtindex:(int)index{

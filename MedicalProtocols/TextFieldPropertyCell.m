@@ -18,9 +18,13 @@
     }
     return self;
 }
-
+-(id)value{
+    return self.textField.text;
+}
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    self.value = @"";
     // Initialization code
 }
 
