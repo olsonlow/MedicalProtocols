@@ -85,6 +85,7 @@
         BoolEditableProperty* boolProperty = (BoolEditableProperty*)editableProperty;
         SwitchPropertyCell* switchCell = [self.tableView dequeueReusableCellWithIdentifier:@"SwitchPropertyCell" forIndexPath:indexPath];
         switchCell.label.text = boolProperty.name;
+        switchCell.value = [NSNumber numberWithBool:boolProperty.value];
         cell = switchCell;
     }
     cell.tag = indexPath.row;

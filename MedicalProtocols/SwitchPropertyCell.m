@@ -28,6 +28,9 @@
 -(id)value{
     return self.label.text;
 }
+-(void)setValue:(id)value{
+    self.switchControl.on = [value boolValue];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
