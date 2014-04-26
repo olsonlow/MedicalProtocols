@@ -22,7 +22,7 @@
         <!--Navigation Controller-->
         <scene sceneID="oTS-jN-cn2">
             <objects>
-                <navigationController definesPresentationContext="YES" toolbarHidden="NO" id="ZXl-F4-TqO" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="ZXl-F4-TqO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b29-YP-42P">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -139,6 +139,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="label" destination="xY3-Z9-SIR" id="ls5-Gj-Qqv"/>
+                                            <outlet property="switchControl" destination="GiE-qw-XBZ" id="UTV-tE-lyC"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextAreaPropertyCell" rowHeight="134" id="el4-zU-LBr" customClass="TextAreaPropertyCell">

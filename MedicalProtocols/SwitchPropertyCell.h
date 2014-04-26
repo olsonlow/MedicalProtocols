@@ -9,6 +9,8 @@
 #import "BasePropertyCell.h"
 
 @interface SwitchPropertyCell : BasePropertyCell
+
+@property (weak, nonatomic) IBOutlet UISwitch *switchControl;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 - (IBAction)switchValueChanged:(UISwitch*)sender;
 
