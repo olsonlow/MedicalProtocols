@@ -27,7 +27,7 @@
     int origin = 0;
     for(int i = 0; i < [form countFormComonents]; i++)
     {
-        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10 + origin, frame.size.width, 150);
+        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10 + origin, frame.size.width, 150);//height used to be set to 150
         FormComponent *formComponent = [form formComponentAtIndex:i];
         FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
         [self addSubview:formComponentView];

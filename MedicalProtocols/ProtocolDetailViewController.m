@@ -114,21 +114,18 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Component* component = [self.step componentAtIndex:indexPath.row];
     
+    //This is the broken bit I'm working on***********************************
+    Component* component = [self.step componentAtIndex:indexPath.row];
     if([component isKindOfClass:[Form class]]){
         Form* form = (Form*)component;
         int height = 40;
         for(int i = 0; i < [form countFormComonents];i++){
             height = height+100;
         }
-        return CGSizeMake(self.collectionView.frame.size.width, height);
+        return CGSizeMake(self.collectionView.frame.size.width/1.05, height);
     }
-//    else if([component isKindOfClass:[TextBlock class]]){
-//        TextBlock* textBlock = (TextBlock*)component;
-//        int height = textBlock.content.le
-//    }
-    return CGSizeMake(self.collectionView.frame.size.width, self.collectionView.frame.size.height/5);
+    return CGSizeMake(self.collectionView.frame.size.width/2.2, self.collectionView.frame.size.height/6);
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(!self.wobblingComponent){
