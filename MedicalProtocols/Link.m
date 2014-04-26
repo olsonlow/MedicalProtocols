@@ -18,6 +18,15 @@
     }
     return self;
 }
+-(void)setUrl:(NSString *)url{
+    NSRange range = [url rangeOfString:@"http://"];
+    
+    if (range.location == NSNotFound) {
+        _url = [NSString stringWithFormat:@"http://%@",url];
+    } else {
+        _url = url;
+    }
+}
 -(instancetype)init{
     return [self initWithLabel:@"" url:@"" objectId:[[[NSUUID alloc] init] UUIDString] stepId:@"" orderNumber:-1];
 }

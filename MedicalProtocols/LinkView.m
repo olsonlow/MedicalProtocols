@@ -27,7 +27,7 @@
     
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
     CGSize stringSize = [self.link.label sizeWithAttributes:@{NSFontAttributeName:linkButton.titleLabel.font}];
-    [linkButton setFrame:CGRectMake(frame.origin.x, frame.origin.y, stringSize.width, stringSize.height)];
+    [linkButton setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
     [linkButton setCenter: CGPointMake(frame.size.width/2, frame.size.height/2)];
     [linkButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [linkButton setTitleColor:[UIColor purpleColor] forState:UIControlStateSelected];

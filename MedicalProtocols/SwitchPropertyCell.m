@@ -26,7 +26,7 @@
     // Initialization code
 }
 -(id)value{
-    return self.label.text;
+    return [NSNumber numberWithBool:self.switchControl.on];
 }
 -(void)setValue:(id)value{
     self.switchControl.on = [value boolValue];
