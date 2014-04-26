@@ -92,7 +92,7 @@ selectionComponent4[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [selectionComponent4 saveInBackground];
 
 PFObject *linkObject = [PFObject objectWithClassName:@"Link"];
-linkObject[@"orderNumber"] = [NSNumber numberWithInt:1];
+linkObject[@"orderNumber"] = [NSNumber numberWithInt:5];
 linkObject[@"label"] = @"Calculator link";
 linkObject[@"url"] = @"http://www.mdcalc.com/chads2-score-for-atrial-fibrillation-stroke-risk/";
 linkObject[@"parentUUID"] = stepObject[@"UUID"];
@@ -101,7 +101,7 @@ linkObject[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 
 //All objects below are associated with the Rate Control Med step.
 PFObject *stepObject2 = [PFObject objectWithClassName:@"Step"];
-stepObject2[@"orderNumber"] = [NSNumber numberWithInt:1];
+stepObject2[@"orderNumber"] = [NSNumber numberWithInt:2];
 stepObject2[@"description"] = @"Rate Control Med.:";
 stepObject2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 stepObject2[@"parentUUID"] = protocol[@"UUID"];
@@ -109,7 +109,7 @@ stepObject2[@"parentUUID"] = protocol[@"UUID"];
 
 PFObject *textBlockObject2 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject2[@"title"] = @"AFIB";
-textBlockObject2[@"orderNumber"] = [NSNumber numberWithInt:2];
+textBlockObject2[@"orderNumber"] = [NSNumber numberWithInt:1];
 textBlockObject2[@"content"] = @"Afib Rate Control";
 textBlockObject2[@"printable"] = [NSNumber numberWithBool:NO];
 textBlockObject2[@"parentUUID"] = stepObject2[@"UUID"];
@@ -118,14 +118,14 @@ textBlockObject2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 
 PFObject *formComponent2 = [PFObject objectWithClassName:@"Form"];
 formComponent2[@"label"] = @"Rate vs Rhythm Decision";
-formComponent2[@"orderNumber"] = [NSNumber numberWithInt:3];
+formComponent2[@"orderNumber"] = [NSNumber numberWithInt:2];
 formComponent2[@"parentUUID"] = stepObject2[@"UUID"];
 formComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [formComponent2 saveInBackground];
 
 PFObject *textBlockObject3 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject3[@"title"] = @"Atenol";
-textBlockObject3[@"orderNumber"] = [NSNumber numberWithInt:4];
+textBlockObject3[@"orderNumber"] = [NSNumber numberWithInt:3];
 textBlockObject3[@"content"] = @"25 Mgb:d";
 textBlockObject3[@"printable"] = [NSNumber numberWithBool:YES];
 textBlockObject3[@"parentUUID"] = stepObject2[@"UUID"];
@@ -134,7 +134,7 @@ textBlockObject3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 
 PFObject *textBlockObject4 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject4[@"title"] = @"Atenol";
-textBlockObject4[@"orderNumber"] = [NSNumber numberWithInt:5];
+textBlockObject4[@"orderNumber"] = [NSNumber numberWithInt:4];
 textBlockObject4[@"content"] = @"50 Mgb:d";
 textBlockObject4[@"printable"] = [NSNumber numberWithBool:NO];
 textBlockObject4[@"parentUUID"] = stepObject2[@"UUID"];
@@ -153,7 +153,7 @@ selectionComponent5[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 
 //All objects below are associated with Rate vs Rhythm step.
 PFObject *stepObject3 = [PFObject objectWithClassName:@"Step"];
-stepObject3[@"orderNumber"] = [NSNumber numberWithInt:1];
+stepObject3[@"orderNumber"] = [NSNumber numberWithInt:3];
 stepObject3[@"description"] = @"Rate vs Rhythm:";
 stepObject3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 stepObject3[@"parentUUID"] = protocol[@"UUID"];
@@ -161,7 +161,7 @@ stepObject3[@"parentUUID"] = protocol[@"UUID"];
 
 PFObject *textBlockObject5 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject5[@"title"] = @"Rate vs Rhythm";
-textBlockObject5[@"orderNumber"] = [NSNumber numberWithInt:2];
+textBlockObject5[@"orderNumber"] = [NSNumber numberWithInt:1];
 textBlockObject5[@"content"] = @"This will help decide whether to controll heart rate or controll rhythm.";
 textBlockObject5[@"printable"] = [NSNumber numberWithBool:NO];
 textBlockObject5[@"parentUUID"] = stepObject3[@"UUID"];
@@ -171,13 +171,13 @@ textBlockObject5[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 //This may or may not need to be a calculator, this object is where the
 //dial like knob would go in Jitesh's drawing.
 PFObject *calculatorComponent2 = [PFObject objectWithClassName:@"Calculator"];
-calculatorComponent2[@"orderNumber"] = [NSNumber numberWithInt:3];
+calculatorComponent2[@"orderNumber"] = [NSNumber numberWithInt:4];
 calculatorComponent2[@"parentUUID"] = stepObject3[@"UUID"];
 calculatorComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [calculatorComponent2 saveInBackground];
 
 PFObject *stepObject4 = [PFObject objectWithClassName:@"Step"];
-stepObject4[@"orderNumber"] = [NSNumber numberWithInt:1];
+stepObject4[@"orderNumber"] = [NSNumber numberWithInt:4];
 stepObject4[@"description"] = @"When to Report:";
 stepObject4[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 stepObject4[@"parentUUID"] = protocol[@"UUID"];
@@ -185,7 +185,7 @@ stepObject4[@"parentUUID"] = protocol[@"UUID"];
 
 PFObject *textBlockObject6 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject6[@"title"] = @"Referring to Cardiology";
-textBlockObject6[@"orderNumber"] = [NSNumber numberWithInt:2];
+textBlockObject6[@"orderNumber"] = [NSNumber numberWithInt:1];
 textBlockObject6[@"content"] = @"Refer to cardiology based on output of calculator above.";
 textBlockObject6[@"printable"] = [NSNumber numberWithBool:YES];
 textBlockObject6[@"parentUUID"] = stepObject4[@"UUID"];
@@ -209,14 +209,14 @@ stepObject5[@"parentUUID"] = protocol2[@"UUID"];
 
 PFObject *formComponent3 = [PFObject objectWithClassName:@"Form"];
 formComponent3[@"label"] = @"Protocol for Chest Pain";
-formComponent3[@"orderNumber"] = [NSNumber numberWithInt:2];
+formComponent3[@"orderNumber"] = [NSNumber numberWithInt:1];
 formComponent3[@"parentUUID"] = stepObject5[@"UUID"];
 formComponent3[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [formComponent3 saveInBackground];
 
 PFObject *selectionComponent6 = [PFObject objectWithClassName:@"FormSelection"];
 selectionComponent6[@"orderNumber"] = [NSNumber numberWithInt:1];
-selectionComponent6[@"label"] = @"Dull, Achy, not shatp, Diaphoresis, Nausia";
+selectionComponent6[@"label"] = @"Dull, Achy, not sharp, Diaphoresis, Nausia";
 selectionComponent6[@"choiceA"] = @"Yes";
 selectionComponent6[@"choiceB"] = @"No";
 selectionComponent6[@"parentUUID"] = formComponent3[@"UUID"];
@@ -262,7 +262,7 @@ selectionComponent9[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 
 PFObject *textBlockObject7 = [PFObject objectWithClassName:@"TextBlock"];
 textBlockObject7[@"title"] = @"Probability for Coronary Artery Disease";
-textBlockObject7[@"orderNumber"] = [NSNumber numberWithInt:6];
+textBlockObject7[@"orderNumber"] = [NSNumber numberWithInt:2];
 textBlockObject7[@"content"] = @"This is currently a placeholder for a calculation based on the form input.";
 textBlockObject7[@"printable"] = [NSNumber numberWithBool:YES];
 textBlockObject7[@"parentUUID"] = stepObject5[@"UUID"];
