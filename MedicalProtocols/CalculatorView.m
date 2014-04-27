@@ -24,7 +24,7 @@
     self = [super initWithFrame:frame];
     self.calculator = calculator;
     self.backgroundColor = [UIColor colorWithRed:193.0/255.0 green:205.0/255.0 blue:193.0/255.0 alpha:1.0];
-   
+    
     UILabel *name = [[UILabel alloc]init];
     name.text = @"Calculator";
     CGSize nameStringSize = [name.text sizeWithAttributes:@{NSFontAttributeName:name.font}];
@@ -32,8 +32,9 @@
     
     UILabel *calcId = [[UILabel alloc]init];
     calcId.numberOfLines = 0;
-    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, 200, 200);
+    calcId.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
     calcId.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    calcId.textAlignment = NSTextAlignmentCenter;
     calcId.text = self.calculator.objectId;
     
     [self addSubview:calcId];
