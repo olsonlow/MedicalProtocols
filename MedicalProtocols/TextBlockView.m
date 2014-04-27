@@ -28,12 +28,14 @@
     CGSize titleStringSize = [self.textBlock.title sizeWithAttributes:@{NSFontAttributeName:title.font}];
     title.frame = CGRectMake(frame.origin.x, frame.origin.y, titleStringSize.width, titleStringSize.height);
     title.text = self.textBlock.title;
+    title.textAlignment = NSTextAlignmentCenter;
     
     UILabel *content = [[UILabel alloc]init];
     content.numberOfLines = 0;
     content.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width , frame.size.height);
     content.text = self.textBlock.content;
     content.center = CGPointMake(frame.size.width/2, frame.size.height/2);
+    content.textAlignment = NSTextAlignmentCenter;
     
     content.text = self.textBlock.content;
     
