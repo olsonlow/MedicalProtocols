@@ -37,6 +37,11 @@
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedRight:)];
     swipe.direction = UISwipeGestureRecognizerDirectionRight;
     
+    if ([PFUser currentUser]) {
+        self.logoView.image = [UIImage imageNamed:@"sprotocolsRed.png"];
+    }else{
+        self.logoView.image = [UIImage imageNamed:@"sprotocols.png"];
+    }
     //TODO
     //swipe.numberOfTouchesRequired = 5; //uncomment for testing on Ipad.
     swipe.numberOfTouchesRequired = 2;
@@ -44,9 +49,7 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-
     [super viewDidAppear:animated];
-    [self refreshView];
     
 }
 -(void)refreshView{
@@ -58,9 +61,20 @@
     
     if([PFUser currentUser]){
         self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)]];
+            [self fadeToNewLogo:[UIImage imageNamed:@"sprotocolsRed.png"]];
     } else {
         self.navigationItem.rightBarButtonItems = nil;
+        [self fadeToNewLogo:[UIImage imageNamed:@"sprotocols.png"]];
     }
+}
+
+-(void)fadeToNewLogo:(UIImage*)newLogo{
+    [UIView transitionWithView:self.logoView
+                      duration:1.0f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.logoView.image = newLogo;
+                    } completion:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -114,6 +128,7 @@
 // Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:NULL];
+    [self refreshView];
 }
 
 // Sent to the delegate when the log in attempt fails.

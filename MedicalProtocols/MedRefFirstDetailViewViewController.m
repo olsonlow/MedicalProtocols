@@ -10,6 +10,7 @@
 #import "StepMasterViewController.h"
 #import "ProtocolDetailViewController.h"
 #import "LoginViewController.h"
+#import <Parse/Parse.h>
 
 @interface MedRefFirstDetailViewViewController ()
 
@@ -29,15 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self refreshView];
     // Do any additional setup after loading the view.
 }
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

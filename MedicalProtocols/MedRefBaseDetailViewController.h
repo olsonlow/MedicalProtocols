@@ -10,8 +10,9 @@
 #import <Parse/Parse.h>
 
 @interface MedRefBaseDetailViewController : UIViewController <UISplitViewControllerDelegate, PFLogInViewControllerDelegate>
-
+@property (weak, nonatomic) IBOutlet UIImageView *logoView;
 -(void)displayProgressHudWithMessage:(NSString*)message;
 -(void)cancelProgressHud;
 -(void)logout;
+-(void)refreshView;
 @end
