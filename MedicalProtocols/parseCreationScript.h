@@ -49,7 +49,7 @@ formNumberComponent2[@"orderNumber"] = [NSNumber numberWithInt:2];
 formNumberComponent2[@"label"] = @"EF(%)";
 formNumberComponent2[@"defaultValue"] = [NSNumber numberWithInt:0];
 formNumberComponent2[@"minValue"] = [NSNumber numberWithInt:0];
-formNumberComponent2[@"maxValue"] = [NSNumber numberWithInt:110];
+formNumberComponent2[@"maxValue"] = [NSNumber numberWithInt:100];
 formNumberComponent2[@"parentUUID"] = formComponent[@"UUID"];
 formNumberComponent2[@"UUID"] = [[[NSUUID alloc] init] UUIDString];
 [formNumberComponent2 saveInBackground];
