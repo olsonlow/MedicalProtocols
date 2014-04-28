@@ -78,6 +78,7 @@
 }
 -(bool)updateObjectWithDataType:(DataType)dataType withId:(NSString*)objectId withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];
+    [[ParseDataSource sharedInstance]updateObjectWithDataType:dataType withId:objectId withObject:object];
     return [dataSource updateObjectWithDataType:dataType withId:objectId withObject:object];
 }
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
@@ -87,6 +88,7 @@
 }
 -(bool)insertObjectWithDataType:(DataType)dataType withObject:(id)object{
     id<MedRefDataSource> dataSource = [self getDataSource];
+    [[ParseDataSource sharedInstance]insertObjectWithDataType:dataType withObject:object];
     return [dataSource insertObjectWithDataType:dataType withObject:object];
 }
 -(id)getObjectWithDataType:(DataType)dataType withId:(NSString*)objectId{
