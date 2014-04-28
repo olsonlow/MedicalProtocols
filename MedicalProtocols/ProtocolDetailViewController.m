@@ -62,6 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self refreshView];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
@@ -70,7 +71,7 @@
     [self.wobblingComponent stopWobble];
     self.wobblingComponent = nil;
 
-    if([PFUser currentUser]){
+    if(self.loggedIn){
         editable = YES;
     }
 }
@@ -119,6 +120,9 @@
     if([component isKindOfClass:[Form class]]){
         Form* form = (Form*)component;
         int height = 40;
+        if([form countFormComonents] == 0){
+            return CGSizeMake(self.collectionView.frame.size.width/2.2, self.collectionView.frame.size.height/6);
+        }
         for(int i = 0; i < [form countFormComonents];i++){
             height = height+100;
         }
@@ -129,7 +133,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(!self.wobblingComponent){
         self.selectedComponent = [self.step componentAtIndex:indexPath.row];
-        if(editable){
+        if(self.loggedIn){
             [self performSegueWithIdentifier:@"ModalView" sender:self];
         }
     } else {
@@ -197,12 +201,14 @@
         [componentCell stopWobble];
     }
 }
--(void)logout{
-    [super logout];
+-(void)refreshView{
+    [super refreshView];
     if(self.step){
-       self.step = nil;
+        self.step = nil;
         [((UINavigationController*)[self.splitViewController.viewControllers firstObject]) popViewControllerAnimated:YES];
     }
-    
+}
+-(void)logout{
+    [super logout];
 }
 @end
