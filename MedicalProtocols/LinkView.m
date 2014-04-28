@@ -7,7 +7,7 @@
 //
 
 #import "LinkView.h"
-
+#import <Parse/Parse.h>
 @implementation LinkView
 
 - (id)initWithFrame:(CGRect)frame
@@ -26,7 +26,6 @@
     self.backgroundColor = [UIColor colorWithRed:230.0 green:249.0 blue:200.0 alpha:1];
     
     UIButton *linkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGSize stringSize = [self.link.label sizeWithAttributes:@{NSFontAttributeName:linkButton.titleLabel.font}];
     [linkButton setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height)];
     [linkButton setCenter: CGPointMake(frame.size.width/2, frame.size.height/2)];
     [linkButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -34,6 +33,9 @@
     [linkButton setBackgroundColor:[UIColor whiteColor]];
     [linkButton setTitle:self.link.label forState:UIControlStateNormal];
     [linkButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    if([PFUser currentUser]){
+        linkButton.enabled = NO;
+    }
     [self addSubview:linkButton];
     return self;
 }

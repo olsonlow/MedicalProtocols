@@ -37,7 +37,7 @@
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedRight:)];
     swipe.direction = UISwipeGestureRecognizerDirectionRight;
     
-    if ([PFUser currentUser]) {
+    if (self.loggedIn) {
         self.logoView.image = [UIImage imageNamed:@"sprotocolsRed.png"];
     }else{
         self.logoView.image = [UIImage imageNamed:@"sprotocols.png"];
@@ -50,7 +50,14 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
+    if (self.loggedIn) {
+        self.logoView.image = [UIImage imageNamed:@"sprotocolsRed.png"];
+    }else{
+        self.logoView.image = [UIImage imageNamed:@"sprotocols.png"];
+    }
+}
+-(BOOL)loggedIn{
+    return [PFUser currentUser]!=nil;
 }
 -(void)refreshView{
     if(self.showProgressHud){
@@ -59,7 +66,7 @@
         [self cancelProgressHud];
     }
     
-    if([PFUser currentUser]){
+    if(self.loggedIn){
         self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)]];
             [self fadeToNewLogo:[UIImage imageNamed:@"sprotocolsRed.png"]];
     } else {
@@ -70,7 +77,7 @@
 
 -(void)fadeToNewLogo:(UIImage*)newLogo{
     [UIView transitionWithView:self.logoView
-                      duration:1.0f
+                      duration:2.0f
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
                         self.logoView.image = newLogo;
@@ -144,7 +151,7 @@
 
 - (IBAction)swipedRight:(id)sender {
     
-    if (![PFUser currentUser]) { // No user logged in
+    if (!self.loggedIn) { // No user logged in
         // Create the log in view controller
         LoginViewController *logInViewController = [[LoginViewController alloc] init];
         logInViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsDismissButton;

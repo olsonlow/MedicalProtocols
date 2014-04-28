@@ -11,6 +11,7 @@
 
 @interface MedRefBaseDetailViewController : UIViewController <UISplitViewControllerDelegate, PFLogInViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *logoView;
+@property (nonatomic,assign,readonly) BOOL loggedIn;
 -(void)displayProgressHudWithMessage:(NSString*)message;
 -(void)cancelProgressHud;
 -(void)logout;
