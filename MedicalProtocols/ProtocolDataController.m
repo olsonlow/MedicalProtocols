@@ -55,4 +55,5 @@
     [self.protocols addObjectsFromArray:[_dataSource getAllObjectsWithDataType:DataTypeProtocol]];
     [self.medRefDataSourceDelegate dataSourceReadyForUse];
 }
+
 @end

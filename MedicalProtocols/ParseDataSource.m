@@ -319,7 +319,7 @@
     {
         MedProtocol *protocol = (MedProtocol*)object;
         query = [PFQuery queryWithClassName:@"Protocol"];
-        [query whereKey:@"databaseId" equalTo:objectId];
+        [query whereKey:@"UUID" equalTo:objectId];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseProtocolObject, NSError *error) {
             {
                 if(!error){
@@ -341,6 +341,7 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseStepObject, NSError *error) {
                 if(!error){
                     parseStepObject[@"UUID"] = step.objectId;
+                    parseStepObject[@"description"] = step.description;
                     parseStepObject[@"orderNumber"] = [NSNumber numberWithInt:step.orderNumber];
                     parseStepObject[@"parentUUID"] = step.protocolId;
                     [parseStepObject saveInBackground];
@@ -352,7 +353,7 @@
     {
         Form* form = (Form*)object;
         query = [PFQuery queryWithClassName:@"Form"];
-        [query whereKey:@"databaseId" equalTo:objectId];
+        [query whereKey:@"UUID" equalTo:objectId];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseFormObject, NSError *error) {
             {
                 if(!error){
@@ -377,6 +378,7 @@
                     parseTextBlockObject[@"UUID"] = textBlock.objectId;
                     parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:[textBlock printable]];
                     parseTextBlockObject[@"title"] = textBlock.title;
+                    parseTextBlockObject[@"content"] = textBlock.content;
                     parseTextBlockObject[@"parentUUID"] = textBlock.stepId;
                     parseTextBlockObject[@"orderNumber"] = [NSNumber numberWithInt:textBlock.orderNumber];
                     [parseTextBlockObject saveInBackground];
@@ -649,12 +651,14 @@
         MedProtocol* protocol = (MedProtocol*)object;
         PFObject *parseProtocolObject = [PFObject objectWithClassName:@"Protocol"];
         parseProtocolObject[@"name"] = protocol.name;
+        parseProtocolObject[@"UUID"] = protocol.objectId;
         [parseProtocolObject saveInBackground];
         success = YES;
     }
     if([object isKindOfClass:[ProtocolStep class]]){
         ProtocolStep* step = (ProtocolStep*)object;
         PFObject *parseStepObject = [PFObject objectWithClassName:@"Step"];
+        parseStepObject[@"UUID"] = step.objectId;
         parseStepObject[@"orderNumber"] = [NSNumber numberWithInt:step.orderNumber];
         parseStepObject[@"parentUUID"] = step.protocolId; //Parse refers to protocolId as protocol this is the foreign key in Step
         parseStepObject[@"description"] = step.description;
@@ -664,9 +668,11 @@
     if([object isKindOfClass:[TextBlock class]]){
         TextBlock* textBlock = (TextBlock*)object;
         PFObject *parseTextBlockObject = [PFObject objectWithClassName:@"TextBlock"];
+        parseTextBlockObject[@"UUID"] = textBlock.objectId;
         parseTextBlockObject[@"printable"] = [NSNumber numberWithBool:textBlock.printable];
         parseTextBlockObject[@"orderNumber"] = [NSNumber numberWithInt:textBlock.orderNumber];
         parseTextBlockObject[@"title"] = textBlock.title;
+        parseTextBlockObject[@"content"] = textBlock.content;
         parseTextBlockObject[@"parentUUID"] = textBlock.stepId;  //Parse refers to stepId as step this is the foreign key in TextBlock
         [parseTextBlockObject saveInBackground];
         success = YES;
@@ -674,6 +680,7 @@
     if([object isKindOfClass:[Calculator class]]){
         Calculator* calculator = (Calculator*)object;
         PFObject *parseCalculatorObject = [PFObject objectWithClassName:@"Calculator"];
+        parseCalculatorObject[@"UUID"] = calculator.objectId;
         parseCalculatorObject[@"orderNumber"] = [NSNumber numberWithInt:calculator.orderNumber];
         parseCalculatorObject[@"parentUUID"] = calculator.stepId;
         [parseCalculatorObject saveInBackground];
@@ -682,6 +689,7 @@
     if([object isKindOfClass:[Link class]]){
         Link* link = (Link*)object;
         PFObject *parseLinkObject = [PFObject objectWithClassName:@"Link"];
+        parseLinkObject[@"UUID"] = link.objectId;
         parseLinkObject[@"url"] = link.url;
         parseLinkObject[@"label"] = link.label;
         parseLinkObject[@"parentUUID"] = link.stepId;
@@ -692,6 +700,7 @@
     if([object isKindOfClass:[Form class]]){
         Form* form = (Form*)object;
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
+        parseFormObject[@"UUID"] = form.objectId;
         parseFormObject[@"parentUID"] = form.stepId;
         parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
         parseFormObject[@"label"] = form.label;
@@ -701,6 +710,7 @@
     if([object isKindOfClass:[FormSelection class]]){
         FormSelection* formSelection = (FormSelection*)object;
         PFObject *parseFormSelectionObject = [PFObject objectWithClassName:@"FormSelection"];
+        parseFormSelectionObject[@"UUID"] = formSelection.objectId;
         parseFormSelectionObject[@"label"] = formSelection.label;
         parseFormSelectionObject[@"parentUUID"] = formSelection.formId;
         parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
@@ -712,6 +722,7 @@
     if([object isKindOfClass:[FormNumber class]]){
         FormNumber* formNumber = (FormNumber*)object;
         PFObject *parseFormNumberObject = [PFObject objectWithClassName:@"FormNumber"];
+        parseFormNumberObject[@"UUID"] = formNumber.objectId;
         parseFormNumberObject[@"defaultValue"] = [NSNumber numberWithInt:formNumber.defaultValue];
         parseFormNumberObject[@"minValue"] = [NSNumber numberWithInt:formNumber.minValue];
         parseFormNumberObject[@"maxValue"] = [NSNumber numberWithInt:formNumber.maxValue];
