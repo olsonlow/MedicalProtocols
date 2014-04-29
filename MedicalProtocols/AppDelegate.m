@@ -19,7 +19,9 @@
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
     }
-    
+    // The ParseApplicationId and clientKeys are received from Parse.com when you create an account and create a new app
+    // in the parse databrowser.  They are unique to the parse interface.  If for some reason you have difficulty with parse
+    // check to be sure the key's below match the keys in your Parse.com account.
     [Parse setApplicationId:@"dPZh0fgDg0NMoIitsS0nbsvkr6LRCRmFfUnVOvuC"
                   clientKey:@"mdFku5EbsXU6D5pGd2nYG62zaFewptNrbjqd4aWt"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

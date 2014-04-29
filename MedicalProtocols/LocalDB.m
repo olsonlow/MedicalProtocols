@@ -5,6 +5,11 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson, Zach Dahlgren, and Lowell Olson on 3/30/14.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+//  This file maintains the onboard Sqlite database.  Any modification of this file will likely require similar
+//  modifications to the ParseDataSource.m file and possibly modifications to the objects themselves.
+//  When debugging code, keep in mind that there are many possibilities for false problems due to data corruption.
+//  There is a file called ParseCreationScript.h where there are two hardcoded protocols stored.  If the database
+//  needs to be wiped and reloaded, you should follow the instructions in that file to reload the Parse and local databases.
 
 //NOTE: TO RECREATE medRef.db FROM COMMAND LINE:  cat medRef.sql | sqlite3 medRef.db
 #import "LocalDB.h"

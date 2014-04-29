@@ -5,6 +5,8 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 5/04/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+// This datasource interfaces with parse.com to store and share protocols created by this app, see documentation
+// in ParseDataSource.m file for more details
 
 #import <Foundation/Foundation.h>
 #import "DataSourceProtocols.h"
