@@ -439,7 +439,7 @@
             {
                 if(!error){
                     parseFormSelectionObject[@"UUID"] = formSelection.objectId;
-                    parseFormSelectionObject[@"parentUUID"] = formSelection.objectId;
+                    parseFormSelectionObject[@"parentUUID"] = formSelection.formId;
                     parseFormSelectionObject[@"label"] = formSelection.label;
                     parseFormSelectionObject[@"choiceA"] = formSelection.choiceA;
                     parseFormSelectionObject[@"choiceB"] = formSelection.choiceB;
