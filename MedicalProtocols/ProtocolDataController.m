@@ -42,7 +42,12 @@
     [self.protocols removeObjectAtIndex:index];
 }
 -(MedProtocol*)protocolAtIndex:(int)index{
-    return [self.protocols objectAtIndex:index];
+    if(index < [self.protocols count]){
+        return [self.protocols objectAtIndex:index];
+    } else {
+        NSLog(@"debug this out of bounds");
+        return nil;
+    }
 }
 -(void)createNewProtocol{
     MedProtocol* newProtocol = [[MedProtocol alloc] initWithName:@"New Protocol" objectId:[[[NSUUID alloc] init] UUIDString]];

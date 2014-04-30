@@ -165,6 +165,10 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.protocolData removeStepAtIndex:indexPath.row];
+        UITableViewCell* tableViewCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        if([self.editedCells containsObject:tableViewCell]){
+            [self.editedCells removeObject:tableViewCell];
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
