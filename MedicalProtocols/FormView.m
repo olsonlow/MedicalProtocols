@@ -14,7 +14,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self) {        
         // Initialization code
     }
     return self;
@@ -26,22 +26,31 @@
     self.form = form;
     self.backgroundColor = [UIColor whiteColor];
     int origin = 0;
-    for(int i = 0; i < [form countFormComonents]; i++)
-    {
-        CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10 + origin, frame.size.width, 150);//height used to be set to 150
-        FormComponent *formComponent = [form formComponentAtIndex:i];
-        FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
-        [self addSubview:formComponentView];
-        origin += 100;
+    if([form countFormComonents] > 0){
+        for(int i = 0; i < [form countFormComonents]; i++)
+        {
+            CGRect compFrame = CGRectMake(frame.origin.x-10,frame.origin.y-10 + origin, frame.size.width, 150);//height used to be set to 150
+            FormComponent *formComponent = [form formComponentAtIndex:i];
+            FormComponentView *formComponentView = [[FormComponentView alloc]initWithFrame:compFrame Object:formComponent];
+            [self addSubview:formComponentView];
+            origin += 100;
+        }
+        
+        UIButton *done =  [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [done addTarget:self action:@selector(didClick:) forControlEvents:UIControlEventTouchUpInside];
+        [done setTitle:@"DONE" forState:UIControlStateNormal];
+        done.frame = CGRectMake(frame.size.width-50, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
+        
+        [self addSubview:done];
+        NSLog(@"%d",self.userInteractionEnabled);
+    }else{
+        CGRect formFrame = CGRectMake(0, 0, frame.size.width, frame.size.height/3);
+        UIView *blankForm = [[UIView alloc] initWithFrame:formFrame];
+        UILabel *formLabel = [[UILabel alloc]initWithFrame:CGRectMake(formFrame.origin.x+10, formFrame.origin.y+5, formFrame.size.width/3, formFrame.size.height/3)];
+        formLabel.text = @"Blank Form";
+        [blankForm addSubview:formLabel];
+        [self addSubview:blankForm];
     }
-    
-    UIButton *done =  [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [done addTarget:self action:@selector(didClick:) forControlEvents:UIControlEventTouchUpInside];
-    [done setTitle:@"DONE" forState:UIControlStateNormal];
-    done.frame = CGRectMake(frame.size.width-50, frame.origin.y, 50,20); done.titleLabel.text= @"DONE";
-
-    [self addSubview:done];
-    NSLog(@"%d",self.userInteractionEnabled);
 
     return self;
 }

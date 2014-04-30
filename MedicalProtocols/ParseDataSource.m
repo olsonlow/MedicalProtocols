@@ -5,6 +5,13 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 5/04/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+// ParseDataSource interfaces with parse.com to store and retreive protocol data created by and used by this app.
+// All queries run by this file are custom Parse API queries and you should see the Parse.com documentation for
+// iOS to understand how they work and syntax.  The supporting framework is the Parse.framework located in the Frameworks file.
+// Whenever modifying this file, keep in mind that there is an onboard Sqlite database that will likely require similar modifications.
+// Also, keep in mind that any modification to data elements in either database will also require modification to the objects as well.
+// The onboard Sqlite database is maintained by the LocalDB files and a third party library FMDatabase.  Please see these files for further
+// documentation regarding data operations.
 
 #import "ParseDataSource.h"
 #import <Parse/Parse.h>
@@ -701,7 +708,7 @@
         Form* form = (Form*)object;
         PFObject *parseFormObject = [PFObject objectWithClassName:@"Form"];
         parseFormObject[@"UUID"] = form.objectId;
-        parseFormObject[@"parentUID"] = form.stepId;
+        parseFormObject[@"parentUUID"] = form.stepId;
         parseFormObject[@"orderNumber"] = [NSNumber numberWithInt:form.orderNumber];
         parseFormObject[@"label"] = form.label;
         [parseFormObject saveInBackground];

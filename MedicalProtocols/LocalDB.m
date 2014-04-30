@@ -5,6 +5,11 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson, Zach Dahlgren, and Lowell Olson on 3/30/14.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+//  This file maintains the onboard Sqlite database.  Any modification of this file will likely require similar
+//  modifications to the ParseDataSource.m file and possibly modifications to the objects themselves.
+//  When debugging code, keep in mind that there are many possibilities for false problems due to data corruption.
+//  There is a file called ParseCreationScript.h where there are two hardcoded protocols stored.  If the database
+//  needs to be wiped and reloaded, you should follow the instructions in that file to reload the Parse and local databases.
 
 //NOTE: TO RECREATE medRef.db FROM COMMAND LINE:  cat medRef.sql | sqlite3 medRef.db
 #import "LocalDB.h"
@@ -315,6 +320,15 @@
     if(success)
     {
         [db open];
+        FMResultSet *formResults;
+        formResults = [db executeQuery:@"SELECT * FROM form WHERE stepId = (:stepId)", stepId];
+        while([formResults next])
+        {
+            Form *form = [[Form alloc]initWithObjectId:[formResults stringForColumn:@"objectId"] label:[formResults stringForColumn:@"label"] stepId:[formResults stringForColumn:@"stepId"] orderNumber:[formResults intForColumn:@"orderNumber"]];
+            [components addObject:form];
+        }
+        [formResults close];
+  
         FMResultSet *textBlockResults;
         textBlockResults= [db executeQuery:@"SELECT * FROM textBlock WHERE stepId = (:stepId)", stepId];
         while([textBlockResults next])
@@ -449,11 +463,6 @@
 -(bool)deleteObjectWithDataType:(DataType)dataType withId:(NSString*)objectId isChild:(bool)isChild{
     //isChild flag determines whether we are deleting an object explicitly or deleting an object as a byproduct of a need to do so before deleting its parent
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
-    //[db open];
-    
-    //NSArray *steps = [self getStepsForProtocolId:objectId];
-   // NSArray *components = [self getComponentsForStepId:objectId];
-   // NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
     bool protocol = NO, step = NO, textBlock = NO, link = NO, form = NO, calculator = NO, formNumber = NO, formSelection = NO;
     
     switch (dataType) {
@@ -486,29 +495,32 @@
             if(!isChild)
             {
                 [db open];
-                form = [db executeUpdate:@"DELETE FROM form WHERE objectId = (:objectId)", objectId];
                 textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE objectId = (:objectId)", objectId];
                 link = [db executeUpdate:@"DELETE FROM link WHERE objectId = (:objectId)", objectId];
                 calculator =[db executeUpdate:@"DELETE FROM calculator WHERE objectId = (:objectId)", objectId];
+                [self deleteObjectWithDataType:DataTypeFormComponent withId:objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
+                form = [db executeUpdate:@"DELETE FROM form WHERE objectId = (:objectId)", objectId];
                 [db close];
             }
             else
             {
                 NSArray *components = [self getComponentsForStepId:objectId];
-                for(int i = 0; i < [components count]; i++)
+                for(Component *c in components)
                 {
-                    if([[components objectAtIndex:i] isKindOfClass:[Form class]])
+                    if([c isKindOfClass:[Form class]])
                     {
-                        Form *formObject = (Form *) [components objectAtIndex:i];
-                        [self deleteObjectWithDataType:DataTypeFormComponent withId:formObject.objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
+                        [self deleteObjectWithDataType:DataTypeFormComponent withId:c.objectId isChild:YES];//recursive call to delete formComponents associated with this particular form
+                        [db open];
+                        form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
+                        [db close];
                     }
+                }
+            
                     [db open];
-                    form = [db executeUpdate:@"DELETE FROM form WHERE stepId = (:stepId)", objectId];
                     textBlock = [db executeUpdate:@"DELETE FROM textBlock WHERE stepId = (:stepId)", objectId];
                     link = [db executeUpdate:@"DELETE FROM link WHERE stepId = (:stepId)", objectId];
                     calculator = [db executeUpdate:@"DELETE FROM calculator WHERE stepId = (:stepId)", objectId];
                     [db close];
-                }
             }
             break;
         case DataTypeFormComponent:
@@ -521,14 +533,14 @@
             }
             else
             {
-//                NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
-//                for(FormComponent *formComponentObject in formComponents)
-//                {
+                NSArray *formComponents = [self getAllFormComponentsWithParentID:objectId];
+                for(int i = 0; i < [formComponents count]; i++)
+                {
                     [db open];
                     formNumber = [db executeUpdate:@"DELETE FROM formNumber WHERE formId = (:formId)", objectId];
                     formSelection = [db executeUpdate:@"DELETE FROM formSelection WHERE formId = (:formId)", objectId];
                     [db close];
-//                }
+                }
             }
             break;
         default:

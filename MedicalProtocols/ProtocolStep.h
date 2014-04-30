@@ -5,6 +5,8 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 30/03/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+//  See MedProtocol.m file for information regarding all sprotocol objects.
+
 
 #import <Foundation/Foundation.h>
 #import "DataSourceProtocols.h"

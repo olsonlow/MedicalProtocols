@@ -1,3 +1,14 @@
+//  If you need to rebuild the parse and local databases please see the steps below.
+//  1) Delete all the parse objects at Parse.com from the databrowser
+//  2) Delete the local database from the simulator
+//  3) Copy the code below into the ProtocolDataController.m file in the initWithDelegate function below
+//     the self = [super.init]; statement.
+//  4) Run the app.
+//  5) remove the copied code from the ProtocolDataController
+//  6) Your database should be rebuilt.  Verify by refreshing the databrowser at Parse.com
+
+
+
 //TODO update parse backend by re-running below code
 PFObject *protocol = [PFObject objectWithClassName:@"Protocol"];
 protocol[@"name"] = @"Atrial Fibrillation";

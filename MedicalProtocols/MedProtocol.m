@@ -5,6 +5,11 @@
 //  Created by Luke Vergos, Zach Dahlgren, and Lowell Olson on 30/03/2014.
 //  Copyright (c) 2014 Luke Vergos. All rights reserved.
 //
+//  Med Protocol and other sprotocol objects should only be modified if the object requires
+//  A new property, or if the parent object needs to be able to modify a child object.
+//  Any modifications made to any sprotocol object, especially any new properties or any
+//  additional information that will be stored in the databases will require modifications to the database
+//  files.  Proceed with caution before making any modifications to these objects.
 
 #import "MedProtocol.h"
 #import "ProtocolStep.h"

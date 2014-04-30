@@ -61,7 +61,6 @@
     return [LocalDB sharedInstance];
 }
 -(void)getParseUpdates{
-    //TODO Compmplete parse updates
     self.dataSourceReady = true;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSDate date] forKey:@"dbLastUpdated"];
