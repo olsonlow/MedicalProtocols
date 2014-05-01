@@ -54,6 +54,7 @@
         self.logoView.image = [UIImage imageNamed:@"sprotocolsRed.png"];
     }else{
         self.logoView.image = [UIImage imageNamed:@"sprotocols.png"];
+        self.navigationItem.rightBarButtonItems = nil;
     }
 }
 -(BOOL)loggedIn{
@@ -74,7 +75,6 @@
         [self fadeToNewLogo:[UIImage imageNamed:@"sprotocols.png"]];
     }
 }
-
 -(void)fadeToNewLogo:(UIImage*)newLogo{
     [UIView transitionWithView:self.logoView
                       duration:2.0f
