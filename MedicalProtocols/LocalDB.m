@@ -151,7 +151,7 @@
                 }
                 while([stepResults next])
                 {
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults stringForColumn:@"objectId"] orderNumber:[stepResults intForColumn:@"orderNumber"] description:[stepResults stringForColumn:@"description"] protocolId:[stepResults stringForColumn:@"protocolId"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults stringForColumn:@"objectId"] orderNumber:[stepResults intForColumn:@"orderNumber"] descript:[stepResults stringForColumn:@"description"] protocolId:[stepResults stringForColumn:@"protocolId"]];
                     [steps addObject:step];
                 }
                 if ([db hadError]) {
@@ -300,7 +300,7 @@
         
         while([results next])
         {
-            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectId"] orderNumber:[results intForColumn:@"orderNumber"] description:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolId"]];
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectId"] orderNumber:[results intForColumn:@"orderNumber"] descript:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolId"]];
             [steps addObject:step];
         }
         if ([db hadError]) {

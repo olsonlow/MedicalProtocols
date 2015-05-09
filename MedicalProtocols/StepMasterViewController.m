@@ -69,7 +69,7 @@
     if(!editing){
         for(EditableTableViewCell* cell in self.editedCells){
             ProtocolStep* step = [self.protocolData stepAtIndex:cell.tag];
-            step.description = cell.textField.text;
+            step.descript = cell.textField.text;
             [[DataSource sharedInstance] updateObjectWithDataType:DataTypeStep withId:step.objectId withObject:step];
         }
         [self.tableView reloadData];
@@ -113,11 +113,11 @@
         EditableTableViewCell *editableCell = [tableView dequeueReusableCellWithIdentifier:@"StepEditableCell" forIndexPath:indexPath];
         editableCell.delegate = self;
         ProtocolStep *step = [self.protocolData stepAtIndex:indexPath.row];
-        editableCell.textField.text = step.description;
+        editableCell.textField.text = step.descript;
         cell =  editableCell;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"StepCell" forIndexPath:indexPath];
-        cell.textLabel.text = step.description;
+        cell.textLabel.text = step.descript;
     }
     cell.tag = indexPath.row;
     return cell;

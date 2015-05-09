@@ -10,29 +10,29 @@
 	<string>MedicalProtocols</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9328DEB4-71D3-4168-A78F-22E3AF6BD19B</key>
-		<string>https://github.com/lvergos/MedicalProtocols.git</string>
+		<key>5886E5AB4540BC8C7755FC25EB337558FF5A2924</key>
+		<string>https://github.com/olsonlow/MedicalProtocols.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MedicalProtocols.xcodeproj/project.xcworkspace</string>
+	<string>MedicalProtocols.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9328DEB4-71D3-4168-A78F-22E3AF6BD19B</key>
+		<key>5886E5AB4540BC8C7755FC25EB337558FF5A2924</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/lvergos/MedicalProtocols.git</string>
+	<string>https://github.com/olsonlow/MedicalProtocols.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9328DEB4-71D3-4168-A78F-22E3AF6BD19B</string>
+	<string>5886E5AB4540BC8C7755FC25EB337558FF5A2924</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9328DEB4-71D3-4168-A78F-22E3AF6BD19B</string>
+			<string>5886E5AB4540BC8C7755FC25EB337558FF5A2924</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MedicalProtocols</string>
 		</dict>

@@ -16,10 +16,10 @@
 @property (nonatomic,strong) NSMutableArray* components;
 @end
 @implementation ProtocolStep
--(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber description:(NSString*)description protocolId:(NSString*)protocolId{
+-(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber descript:(NSString*)descript protocolId:(NSString*)protocolId{
     self = [super init];
     if (self) {
-        _description = description;
+        _descript = descript;
         _orderNumber = orderNumber;
         _objectId = objectId;
         _protocolId = protocolId;

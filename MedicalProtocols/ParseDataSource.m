@@ -77,7 +77,7 @@
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] description:object[@"description"] protocolId:object[@"parentUUID"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] descript:object[@"description"] protocolId:object[@"parentUUID"]];
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){

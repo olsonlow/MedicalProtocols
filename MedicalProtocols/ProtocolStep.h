@@ -16,9 +16,9 @@
 @property(nonatomic,copy) NSString* objectId;
 @property(nonatomic,assign) int orderNumber;
 @property(nonatomic,copy) NSString* protocolId;
-@property(nonatomic,strong) NSString* description;
+@property(nonatomic,strong) NSString* descript;
 
--(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber description:(NSString*)description protocolId:(NSString*)protocolId;
+-(id)initWithId:(NSString*)objectId orderNumber:(int)orderNumber descript:(NSString*)descript protocolId:(NSString*)protocolId;
 -(int)countComponents;
 -(Component*)componentAtIndex:(int)index;
 -(void)removeComponents;

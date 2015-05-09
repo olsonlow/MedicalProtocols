@@ -50,7 +50,7 @@
 }
 
 -(void)addNewStep{
-    ProtocolStep* newStep = [[ProtocolStep alloc] initWithId:[[[NSUUID alloc] init] UUIDString] orderNumber:-1 description:@"New Step" protocolId:self.objectId];
+    ProtocolStep* newStep = [[ProtocolStep alloc] initWithId:[[[NSUUID alloc] init] UUIDString] orderNumber:-1 descript:@"New Step" protocolId:self.objectId];
     [self.steps addObject:newStep];
     newStep.orderNumber = [self.steps indexOfObject:newStep];
     [[DataSource sharedInstance] insertObjectWithDataType:DataTypeProtocol withObject:newStep];
