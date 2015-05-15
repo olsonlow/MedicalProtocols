@@ -26,9 +26,9 @@
 {
     [super awakeFromNib];
     self.value = @"";
-    _textArea.layer.BorderColor = [[UIColor lightGrayColor] CGColor];
-    _textArea.layer.BorderWidth = 2;
-    _textArea.layer.CornerRadius = 5;
+    _textArea.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _textArea.layer.borderWidth = 2;
+    _textArea.layer.cornerRadius = 5;
     self.textArea.delegate = self;
 }
 

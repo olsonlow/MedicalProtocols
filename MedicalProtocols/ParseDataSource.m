@@ -77,7 +77,7 @@
                     [parseObjects addObject:protocol];
                 }
                 else if([className isEqualToString:@"Step"]){
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] descript:object[@"description"] protocolId:object[@"parentUUID"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:object[@"UUID"] orderNumber:[object[@"orderNumber"]intValue] descriptionString:object[@"description"] protocolId:object[@"parentUUID"]];
                     [parseObjects addObject:step];
                 }
                 else if([className isEqualToString:@"Form"]){
@@ -348,7 +348,7 @@
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *parseStepObject, NSError *error) {
                 if(!error){
                     parseStepObject[@"UUID"] = step.objectId;
-                    parseStepObject[@"description"] = step.description;
+                    parseStepObject[@"description"] = step.descriptionString;
                     parseStepObject[@"orderNumber"] = [NSNumber numberWithInt:step.orderNumber];
                     parseStepObject[@"parentUUID"] = step.protocolId;
                     [parseStepObject saveInBackground];

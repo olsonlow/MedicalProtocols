@@ -151,7 +151,7 @@
                 }
                 while([stepResults next])
                 {
-                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults stringForColumn:@"objectId"] orderNumber:[stepResults intForColumn:@"orderNumber"] descript:[stepResults stringForColumn:@"description"] protocolId:[stepResults stringForColumn:@"protocolId"]];
+                    ProtocolStep *step = [[ProtocolStep alloc] initWithId:[stepResults stringForColumn:@"objectId"] orderNumber:[stepResults intForColumn:@"orderNumber"] descriptionString:[stepResults stringForColumn:@"description"] protocolId:[stepResults stringForColumn:@"protocolId"]];
                     [steps addObject:step];
                 }
                 if ([db hadError]) {
@@ -300,7 +300,7 @@
         
         while([results next])
         {
-            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectId"] orderNumber:[results intForColumn:@"orderNumber"] descript:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolId"]];
+            ProtocolStep *step = [[ProtocolStep alloc] initWithId:[results stringForColumn:@"objectId"] orderNumber:[results intForColumn:@"orderNumber"] descriptionString:[results stringForColumn:@"description"] protocolId:[results stringForColumn:@"protocolId"]];
             [steps addObject:step];
         }
         if ([db hadError]) {
@@ -374,7 +374,7 @@
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep *)object;
-        success = [db executeUpdate:@"UPDATE step SET orderNumber = (:orderNumber), description = (:description) WHERE objectId = (:objectId)", [NSNumber numberWithInt:step.orderNumber], step.description, objectId];
+        success = [db executeUpdate:@"UPDATE step SET orderNumber = (:orderNumber), description = (:description) WHERE objectId = (:objectId)", [NSNumber numberWithInt:step.orderNumber], step.descriptionString, objectId];
     }
     else if([object isKindOfClass:[Form class]])
     {
@@ -421,7 +421,7 @@
     else if([object isKindOfClass:[ProtocolStep class]])
     {
         ProtocolStep *step = (ProtocolStep*)object;
-        success =  [db executeUpdate:@"INSERT INTO step (objectId, orderNumber, protocolId, description) VALUES (:objectId,:orderNumber,:protocolId,:description)",step.objectId, [NSNumber numberWithInt:step.orderNumber], step.protocolId, step.description];
+        success =  [db executeUpdate:@"INSERT INTO step (objectId, orderNumber, protocolId, description) VALUES (:objectId,:orderNumber,:protocolId,:description)",step.objectId, [NSNumber numberWithInt:step.orderNumber], step.protocolId, step.descriptionString];
     }
     
     else if([object isKindOfClass:[Form class]])
