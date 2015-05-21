@@ -1,5 +1,6 @@
 # MedicalProtocols
-CS 470 Senior Design Project
+CS 470 Senior Design Project:
+
 This application was designed to allow a medical doctor, specialist, to design and publish "Protocols"
 for specialized treatment plans.  These protocols would then be used by general practicioners to treat
 and recommend action plans to patients.  It was designed and built under the guidance of a cardiologist and
