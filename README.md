@@ -1,5 +1,6 @@
 # MedicalProtocols
 CS 470 Senior Design Project:
+Authors: Luke Vergos, Zach Dahlgren, Lowell Olson
 
 This application was designed to allow a medical doctor, specialist, to design and publish "Protocols"
 for specialized treatment plans.  These protocols would then be used by general practicioners to treat
